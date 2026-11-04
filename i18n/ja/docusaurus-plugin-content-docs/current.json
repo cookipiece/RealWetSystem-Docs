@@ -1,0 +1,14 @@
+{
+  "sidebar.docsSidebar.category.시작하기": {
+    "message": "はじめに"
+  },
+  "sidebar.docsSidebar.category.사용법": {
+    "message": "使い方"
+  },
+  "sidebar.docsSidebar.category.문제 해결": {
+    "message": "トラブル解決"
+  },
+  "sidebar.docsSidebar.category.고급·참고": {
+    "message": "上級・参考"
+  }
+}

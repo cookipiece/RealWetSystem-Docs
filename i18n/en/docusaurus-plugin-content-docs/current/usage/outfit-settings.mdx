@@ -1,0 +1,143 @@
+---
+id: outfit-settings
+title: Outfit settings
+description: How to register and remove outfits, where to place them, parts, mixing pieces from several products, EditorOnly, and layer order.
+---
+
+# Outfit settings
+
+<ProductName /> makes clothes wet **one outfit at a time**. This page covers how to register and remove outfits, and the parts and layer order inside an outfit. The wet look (fabric, strength, see-through) is covered in [Wetness settings](./wet-settings.mdx).
+
+## The outfit root sets what gets wet
+
+**The meshes under a registered outfit root** get wet as part of that outfit.
+
+- If you move one piece of an outfit (such as glasses) out of the outfit root, only that piece stays dry. The rest still gets wet. When you build, the Console shows the name of the moved piece on one line.
+- RealWet does not delete the wet settings of the moved piece. Move it back under the outfit root and it gets wet again.
+- If you move it under another <ProductName /> outfit, it gets wet as part of that outfit. Each part gets wet with the settings of the nearest outfit above it.
+- If you delete some of an outfit's meshes, the rest still gets wet.
+
+## Add or remove outfits
+
+Please start from **RealWet > Outfit Management**.
+
+{/* SHOT U15: RealWet inspector, Outfit Management tab */}
+
+- **Right after install:** When you close the install message, the **RealWet: Choose Outfits** window opens and shows **Found N outfit(s). Choose the outfits that should get wet.** You choose outfits there the same way as in **Add clothes the avatar already wears** below. The [Beginner tutorial](../tutorial.mdx#outfit-chooser) explains it too.
+- **Add Outfit Manually:** Put the outfit's top-level object from the Hierarchy into the **Add Outfit Manually** field at the top, then press **Add**. You can also right-click the outfit and use **CookiTools > RealWetSystem Add／Update Clothing**.
+  - If you put in a single mesh of an outfit that is not registered yet, RealWet asks once. **Register the whole outfit '…'** (the default button) registers that whole outfit, **Register '…' only** registers only the mesh you put in, and **Cancel** changes nothing. One Ctrl+Z undoes it.
+- **Add clothes the avatar already wears:** Press **Find Outfits Automatically > Find Now** to open a list of outfits that don't have <ProductName /> yet. It is the same window as the one right after install, and it does not block Unity.
+  - The **Add Recommended (N)** button adds only the outfits <ProductName /> is sure about. To choose yourself, check the outfits that should get wet in the **Choose Yourself** list and press **Add Selected Outfits**.
+  - Press **Find** on a row to select that outfit in the Hierarchy. One Ctrl+Z undoes every outfit you added, and **Later** adds nothing.
+- **Clothes you add later:** When **Detect new outfits automatically** is on, RealWet finds and registers outfits you add to the avatar after install. It does not automatically register outfits the avatar already wore at install time.
+- **Unclear candidates:** Please check the reason, then add or ignore the candidate. You can bring back an ignored candidate with **Stop Ignoring** in **Ignored Candidates**.
+- **Keep clothes dry for now:** Turn off **Use Wetness** at the top of **This Outfit's Settings** or **Outfit Part Settings**. Your settings are kept. Turning it off for a whole outfit also excludes that outfit's parts. Another <ProductName /> outfit placed inside it follows its own **Use Wetness**.
+- **Remove a registration:** Press the **×** on the outfit's row and confirm. The clothes themselves stay, and automatic detection won't add the outfit again. To use it again, please add it manually.
+- **Outfits whose settings were removed:** If a prefab Revert or similar removes an outfit's <ProductName /> settings, RealWet tells you in the Console and in **Outfit Management**. <ProductName /> never puts the settings back on its own. To make the outfit wet again, please add it with **Add Outfit Manually**.
+
+:::note[Hiding clothes is not the same as turning off wetness]
+Clothes that you toggle with a wardrobe menu are still prepared, even while they are turned off in the Hierarchy. To exclude them from <ProductName />, please turn off **Use Wetness**.
+:::
+
+## Where do outfits go?
+
+**Don't keep an outfit root inside a body or face mesh object.** We recommend placing outfits directly under the avatar, or under an empty object that is separate from the body meshes.
+
+```text
+Avatar
+├─ Body · Face       ← body meshes
+├─ Outfits           ← optional: empty object
+│  ├─ Shirt outfit
+│  └─ Mask outfit
+└─ RealWet
+```
+
+- What matters is not whether the object is named `Body`, but **whether it holds an actual body mesh**. If you put an outfit inside a body mesh that drives mouth shapes or eyelids, RealWet treats the outfit as part of the face and may refuse even a manual add.
+- The shirt, ribbon, lining and outfit-only Armature inside one outfit can stay where they are. Keep the outfit creator's install layout, and please add the **root that contains only the clothes**.
+- Don't move the avatar's Body, main Armature or bones.
+- Don't use the **RealWet** object as a place to store outfits. Anything under it is cleaned up when you uninstall.
+
+## Mixing pieces from several products (kitbashed outfits)
+
+When you wear pieces from several outfits, please register **one outfit per product**. For example, if you wear the top from product A and the skirt from product B, register the root of product A and the root of product B as separate outfits.
+
+- You can drag an outfit that has <ProductName /> into another outfit. Each part gets wet with the settings of **the nearest outfit above it**. The outer outfit does not take over the inner outfit's parts.
+- Turning off **Use Wetness** on the outer outfit does not affect the inner outfit; it follows its own setting. Turning off (deactivating) the outer outfit's object hides both.
+- You can add an outer outfit even when an inner outfit is already registered. The outer outfit takes only the meshes that are not under the inner outfit. The inner outfit and its settings stay as they are.
+- If you remove the inner outfit's <ProductName /> component, its parts get wet with the outer outfit's settings.
+- If every mesh under the object you chose is already registered in another <ProductName /> outfit, RealWet shows that outfit's name and does not add it.
+- If you deleted the meshes of pieces you don't wear, only the remaining pieces get wet.
+- The preview and the upload use the same rules.
+- Layer order is calculated separately for each outfit. If an outer layer from another product is drawn before the inner clothes, please see [Layer order](#layer-order) below.
+
+## EditorOnly outfits
+
+Outfits tagged `EditorOnly` (or outfits under a parent object that is `EditorOnly`) are left out of the upload.
+
+- By default, outfit search skips them. If you mean to upload the outfit, please check that the tag is what you intended.
+- To set up outfits that you keep as `EditorOnly` for a wardrobe in advance, turn on **Detect EditorOnly Wardrobe Outfits**. It does not change the tag. If the outfit is still `EditorOnly` when you build, NDMF removes the outfit together with its <ProductName /> settings. Remove the tag and the saved settings are used as they are.
+- Turning on **Hide EditorOnly outfits** in the outfit list hides them from the list only. It changes neither the settings nor what gets uploaded.
+
+## Outfit Part Settings
+
+To make only some of an outfit different, open **Outfit Part Settings** on that mesh. If a mesh uses several materials, you can set each slot separately.
+
+- For example, you can set the top to **Natural See-Through** and the ribbon to **No See-Through**.
+- If the ribbon doesn't need a wet color or gloss either, please turn off **Use Wetness** for that part.
+- **This Material's Wet Look (%)** on the slot card scales the wet color, gloss and see-through of that material together. 100% shows the look as you set it, and 0% hides the wet look. It does not change the wet range or protection regions.
+- The buttons and sliders in **This Outfit's Settings** apply to all enabled parts at once. If parts have different values, the number field shows `—`. When you change a value, only that item is set to the same value on all enabled parts.
+
+{/* SHOT U20: Outfit Part Settings slot card */}
+
+- Parts that use a shader <ProductName /> doesn't support are added unchecked when you register the outfit. The part card shows **RealWet does not support this shader (…), so this part does not get wet.**, and the build reports it on one line in the Console.
+- Hair and head-worn parts such as hats and glasses stay at **No See-Through** even with see-through settings applied to many slots at once. If any parts were skipped, **Hair and head-worn parts were not made see-through. If needed, change it in that part's slot.** appears.
+
+## Layer order {/* #layer-order */}
+
+If underwear or decorations vanish at some angles when clothes turn see-through, please check the draw order.
+
+Open **This Outfit's Settings > Outfit Parts > Outfit Render Queue**. RealWet calculates this outfit's inside-to-outside order even if you haven't started the preview.
+
+{/* SHOT U21: layer order list with a same-queue mark */}
+
+- The top of the list is the inside (drawn first), and the bottom is the outside (drawn later).
+- A **same queue** mark means two parts touch or overlap but have no set front-to-back order. Please drag one of them to set the order.
+- You can undo or redo a drag with Ctrl+Z / Ctrl+Y. You can also press **Recalculate Clothing Order** to calculate it again.
+- The numbers in the list match the upload result. The numbers on your original materials do not change.
+
+**Order is calculated separately for each outfit.** RealWet does not order separate outfits against each other, so an outer layer or hair registered as its own outfit may be drawn before the clothes underneath. In that case, please use one of these:
+
+- Switch the outer outfit's slot to **Manual: Set Draw Priority** and give it a high number (for example, 20).
+- Register the outer layer together with the clothes underneath as one outfit.
+
+| Slot ordering method | Use |
+| --- | --- |
+| **Automatic from Clothing Surfaces** | The default. Follows the actual inside and outside layering first. |
+| **Manual: Set Draw Priority** | Sets the order in the 0–39 range. Use low numbers for the inside and high numbers for the outside (for example, underwear 10, shirt 20). |
+| **Direct: Set Render Queue** | Enter an exact number. Please use this only when manual order doesn't solve the problem. |
+| **Preserve Material Queue** | An older setting. Keeps the order of the original material. |
+
+If **RealWet: check the clothing draw order** appears in the NDMF results window after a build, please drag the named parts in that outfit's order list. This message does not stop the build.
+
+:::tip[If the body is missing where the clothes show through]
+Before the draw order, please check whether the outfit creator hid the body with MA Shape Changer. Turn on **Restore MA-Hidden Body for This Outfit** on the outfit or part, and the body shows when the clothes turn see-through. It is off by default. When it's on, the body also stays while the clothes are dry, so it may poke out through the clothes. In Build & Test, please check both the dry state and the wet state.
+:::
+
+## Outfits that change materials with a wardrobe
+
+Materials that change through animations or MA Material Setter or Material Swap are included in preparation too.
+
+- If only the replacement material stays dry, please add that material to **This Outfit's Settings > Troubleshooting > Additional Replacement Materials**. It is included in the next preparation or build.
+- **Apply Wet to Animated Material Swaps** is on by default (**This Outfit's Settings > Wet Look > This Outfit's Wet Look > Advanced Look Settings**). When it's off, materials changed by an animation stay dry and keep their original look. If the build results ask you to turn this option on, please turn it on for that outfit.
+- The regular preview alone does not check every wardrobe state. Please try your wardrobe choices and material changes in Build & Test.
+
+## Prepare ahead of time
+
+**Outfit Management > Prepare Needed Outfits** gathers only the outfits that need preparing and processes them. You don't have to press a prepare button. The preview, Play and the build also do any preparation they need on their own.
+
+When **Prepare after 1 minute of Unity idle** is on, RealWet prepares the needed outfits one at a time when there has been no keyboard or mouse input for 1 minute and Unity is in the background (while you use another window). It doesn't start while the Unity window is in front and you are only looking at it, so Unity won't freeze with a **Hold on** window while you edit. Any input stops it right away, and it continues once you are idle again.
+
+- It prepares **the outfits the avatar is wearing first**. With **Also Automatically Prepare Inactive Outfits** on, outfits that are turned off are prepared after them.
+- `EditorOnly` outfits are not prepared, because they are left out of the upload.
+- On Windows, keyboard and mouse input in other programs counts too. It doesn't start while you use streaming software or chat.
+- Shader preparation that can't be interrupted midway starts only when Unity has been in the background for more than 3 minutes with no input.

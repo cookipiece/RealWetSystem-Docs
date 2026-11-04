@@ -1,0 +1,122 @@
+/**
+ * RealWet docs: home page data. The shared home page (src/pages/index.tsx)
+ * and the family switcher read this file. Edit freely; it is per site.
+ */
+import type {ProductData} from '@site/src/cookitools';
+
+const product: ProductData = {
+  key: 'rws',
+  name: 'RealWetSystem',
+  version: '1.0.0',
+  // Store thumbnail (the BOOTH main image), square. The only place its path is written.
+  image: '/img/home/thumbnail.webp',
+  links: {
+    quickStart: '/docs/quick-start',
+    troubleshooting: '/docs/troubleshooting',
+    booth: '',
+    gumroad: '',
+    // Purchase activation summary; it links to the shared CookiTools guide.
+    purchaseVerification: '/docs/license-activation',
+  },
+  fallbackLocale: 'ko',
+  copy: {
+    ko: {
+      kicker: 'CookiTools · VRChat PC 아바타용',
+      sentence: 'VRChat PC 아바타의 옷에 젖은 색, 광택, 비침을 더하는 도구입니다.',
+      quickStart: '빠른 시작',
+      troubleshooting: '문제 해결',
+      docsVersion: 'v{version} 기준 문서',
+      purchase: '구매',
+      purchaseVerification: '구매 인증',
+      pending: '준비 중',
+      imageAlt: 'RealWetSystem 상품 썸네일: 왼쪽은 마르고 오른쪽은 젖은 같은 의상',
+      imageCaption: '',
+      imagePlaceholder: '상품 썸네일 자리 (출시 때 넣습니다)',
+      stepsTitle: '처음 설치하는 순서',
+      steps: [
+        {title: '필요한 패키지 확인', text: 'Unity 2022.3 아바타 프로젝트에 VRChat SDK, NDMF, Modular Avatar와 의상이 쓰는 셰이더를 준비하고, RealWetSystem 패키지를 가져옵니다.', to: '/docs/quick-start'},
+        {title: '구매 인증', text: 'CookiTools > RealWetSystem > Purchase Activation에서 BOOTH 주문번호(또는 Gumroad 라이선스 키)를 넣습니다. PC마다 한 번이면 됩니다.', to: '/docs/license-activation'},
+        {title: '설치하기', text: '아바타 최상위 오브젝트를 고르고 CookiTools > RealWetSystem > Setup／Uninstall에서 기본값 그대로 설치하기를 누릅니다.', to: '/docs/tutorial'},
+        {title: '젖게 할 의상 고르기', text: '설치 뒤 열리는 창에서 추천대로 넣기를 누르거나, 직접 고르기에서 체크하고 선택한 의상 넣기를 누릅니다.', to: '/docs/tutorial'},
+        {title: '미리보기로 확인하고 업로드', text: '젖음을 0% → 50% → 100%로 바꿔 보고, Build & Test로 확인한 뒤 업로드합니다.', to: '/docs/quick-start'},
+      ],
+      requirementsTitle: '필요한 것',
+      requirements: [
+        ['Unity', '2022.3 (VRChat 아바타 프로젝트)'],
+        ['VRChat SDK', 'Avatars SDK 3.10.0 이상, 4.0 미만'],
+        ['NDMF', '1.13.1 이상, 2.0 미만'],
+        ['Modular Avatar', '1.14.0 이상, 2.0 미만'],
+        ['셰이더', '의상에 맞게 lilToon 2.3.0 이상 또는 Poiyomi Toon / Pro'],
+        ['에디터', 'Windows 전용입니다. 구매 인증이 Windows에서만 동작합니다.'],
+        ['아바타', 'Humanoid 아바타'],
+        ['플랫폼', 'PC 전용 (Quest·모바일 미지원)'],
+      ],
+    },
+    ja: {
+      kicker: 'CookiTools · VRChat PC アバター用',
+      sentence: 'VRChat PC アバターの衣装に、濡れた色・つや・透けを加えるツールです。',
+      quickStart: 'クイックスタート',
+      troubleshooting: 'トラブル解決',
+      docsVersion: 'v{version} 対応ドキュメント',
+      purchase: '購入',
+      purchaseVerification: '購入認証',
+      pending: '準備中',
+      imageAlt: 'RealWetSystem の商品サムネイル：左半分が乾いた状態、右半分が濡れた状態の同じ衣装',
+      imageCaption: '',
+      imagePlaceholder: '商品サムネイルの場所（発売時に入れます）',
+      stepsTitle: 'はじめての導入手順',
+      steps: [
+        {title: '必要なパッケージを確認', text: 'Unity 2022.3 のアバタープロジェクトに VRChat SDK、NDMF、Modular Avatar と衣装が使うシェーダーを用意し、RealWetSystem のパッケージをインポートします。', to: '/docs/quick-start'},
+        {title: '購入認証', text: 'CookiTools > RealWetSystem > Purchase Activation で BOOTH の注文番号（または Gumroad のライセンスキー）を入力します。PCごとに一度で済みます。', to: '/docs/license-activation'},
+        {title: 'インストール', text: 'アバターの一番上のオブジェクトを選び、CookiTools > RealWetSystem > Setup／Uninstall で初期設定のままインストールを押します。', to: '/docs/tutorial'},
+        {title: '濡らす衣装を選ぶ', text: 'インストール後に開く画面で、おすすめどおり追加を押すか、自分で選ぶでチェックして選んだ衣装を追加を押します。', to: '/docs/tutorial'},
+        {title: 'プレビューで確認してアップロード', text: '濡れを 0% → 50% → 100% に変えて確かめ、Build & Test で確認してからアップロードします。', to: '/docs/quick-start'},
+      ],
+      requirementsTitle: '必要なもの',
+      requirements: [
+        ['Unity', '2022.3（VRChat アバタープロジェクト）'],
+        ['VRChat SDK', 'Avatars SDK 3.10.0 以上、4.0 未満'],
+        ['NDMF', '1.13.1 以上、2.0 未満'],
+        ['Modular Avatar', '1.14.0 以上、2.0 未満'],
+        ['シェーダー', '衣装に合わせて lilToon 2.3.0 以上、または Poiyomi Toon / Pro'],
+        ['エディター', 'Windows専用です。購入認証がWindowsでのみ動作します。'],
+        ['アバター', 'Humanoid アバター'],
+        ['プラットフォーム', 'PC 専用（Quest・モバイル非対応）'],
+      ],
+    },
+    en: {
+      kicker: 'CookiTools · For VRChat PC avatars',
+      sentence: 'Adds a wet look to clothing on VRChat PC avatars: deeper color, gloss and see-through.',
+      quickStart: 'Quick start',
+      troubleshooting: 'Troubleshooting',
+      docsVersion: 'Docs for v{version}',
+      purchase: 'Buy',
+      purchaseVerification: 'Purchase activation',
+      pending: 'coming soon',
+      imageAlt: 'RealWetSystem store thumbnail: the same outfit, dry on the left and wet on the right',
+      imageCaption: '',
+      imagePlaceholder: 'Product thumbnail (added at release)',
+      stepsTitle: 'First install',
+      steps: [
+        {title: 'Check the packages', text: 'Use a Unity 2022.3 avatar project with the VRChat SDK, NDMF, Modular Avatar and the shaders your outfits use, then import the RealWetSystem package.', to: '/docs/quick-start'},
+        {title: 'Activate your purchase', text: 'In CookiTools > RealWetSystem > Purchase Activation, enter your BOOTH order number (or Gumroad license key). Once per PC is enough.', to: '/docs/license-activation'},
+        {title: 'Install', text: 'Select the avatar root object and press Install in CookiTools > RealWetSystem > Setup／Uninstall, keeping the defaults.', to: '/docs/tutorial'},
+        {title: 'Choose outfits to wet', text: 'In the window that opens after installing, press Add Recommended, or tick outfits under Choose Yourself and press Add Selected Outfits.', to: '/docs/tutorial'},
+        {title: 'Preview, then upload', text: 'Move wetness from 0% to 50% to 100%, check with Build & Test, then upload.', to: '/docs/quick-start'},
+      ],
+      requirementsTitle: 'Requirements',
+      requirements: [
+        ['Unity', '2022.3 (VRChat avatar project)'],
+        ['VRChat SDK', 'Avatars SDK 3.10.0 or later, below 4.0'],
+        ['NDMF', '1.13.1 or later, below 2.0'],
+        ['Modular Avatar', '1.14.0 or later, below 2.0'],
+        ['Shaders', 'lilToon 2.3.0 or later, or Poiyomi Toon / Pro, to match your outfits'],
+        ['Editor', 'Windows only. Purchase activation works only on Windows.'],
+        ['Avatar', 'Humanoid avatar'],
+        ['Platform', 'PC only (no Quest or mobile)'],
+      ],
+    },
+  },
+};
+
+export default product;

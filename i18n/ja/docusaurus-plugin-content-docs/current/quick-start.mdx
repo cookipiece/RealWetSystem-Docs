@@ -1,0 +1,94 @@
+---
+id: quick-start
+title: クイックスタート
+description: RealWetSystemをいちばん少ない手順でインストールし、おすすめどおりに衣装を追加してから、プレビューで確認してアップロードするまでの流れです。
+---
+
+# クイックスタート
+
+このページは、おすすめの設定のままインストールしてアップロードするまでの、いちばん短い手順です。各オプションの意味は、[初心者チュートリアル](./tutorial.mdx)で説明します。
+
+:::note[最初の1回は時間がかかります]
+初めてプレビューするときや初めてビルドするときは、濡れシェーダーを作ってUnityがコンパイルするため、時間がかかります。衣装が多いと、数十分かかることがあります。2回目からは、ずっと速くなります。詳しくは[パフォーマンス](./performance.mdx#build-time)を確認してください。
+:::
+
+## 1. 準備
+
+- アバターとプロジェクトをバックアップします。
+- VCCの**Manage Project**で、**VRChat Avatars SDK**、**NDMF**、**Modular Avatar**がインストールされているか確認します。
+- 衣装が使うシェーダー（lilToon 2.3.0以上またはPoiyomi Toon / Pro）がプロジェクトにあるか確認します。Poiyomiの衣装だけを使う場合は、lilToonは必要ありません。
+- Consoleに赤いコンパイルエラーがないか確認します。
+
+## 2. パッケージをインポート
+
+<ProductName />の`.unitypackage`をインポートします。Unityのインポートとコンパイルが終わるまで待ってください。
+
+{/* SHOT U01: Unity top menu CookiTools > RealWetSystem */}
+[![Unity 上部メニューの CookiTools > RealWetSystem](/img/guide/U01-en.png)](/img/guide/U01-en.png)
+
+## 3. 購入認証
+
+1. Unity上部のメニューから、**CookiTools > RealWetSystem > Purchase Activation**を開きます。
+2. BOOTHの注文番号（Gumroadで購入した場合はGumroadのライセンスキー）を入力して、**認証する**を押します。
+3. <strong>認証が完了しました。</strong>と表示されれば完了です。
+
+{/* SHOT U02: Purchase Activation window */}
+
+PCごとに一度だけで済みます。詳しくは[購入認証](./license-activation.mdx)を確認してください。
+
+## 4. インストール
+
+1. アバターを配置したシーンを保存します。
+2. Hierarchyで**アバターの最上位オブジェクト**（VRC Avatar Descriptorがあるオブジェクト）を選択します。
+3. **CookiTools > RealWetSystem > Setup／Uninstall**を開きます。
+4. 何も変えずに、いちばん下の**インストール**を押します。
+5. **インストール完了**の案内が出たら、**OK**を押します。
+
+{/* SHOT U03: Setup window, new install, defaults */}
+
+初期値のままインストールすると、次の内容が入ります。
+
+- 汗をかく所（脇・胸・背中など）から濡れ、最大の濡れ範囲は40%です。
+- 胸と股に、透け保護の範囲が4つ、体に合わせて入ります。
+- 新しく追加する衣装は、上着だけが透け、下着は透けません。生地は綿・ニット・デニム、強さは標準です。
+- アバターのメインメニューに、**濡れ**メニューが入ります（おすすめ構成、同期パラメーター87ビット）。
+
+## 5. 濡らす衣装を追加する
+
+インストールの案内を閉じると、**RealWet 衣装を選ぶ**ウィンドウが開きます。いちばん上の<strong>おすすめどおり追加（N着）</strong>を押します。
+
+{/* SHOT U14: outfit chooser */}
+
+- <ProductName />が衣装だと確信した衣装だけが追加されます。
+- 漏れた衣装がある場合は、下の**自分で選ぶ**の一覧でチェックを入れて、**選んだ衣装を追加**を押します。
+- 追加した衣装は、Ctrl+Zを1回押すと、すべて元に戻せます。
+
+## 6. プレビューで確認する
+
+1. Hierarchyで衣装を1つ（衣装ルート）選択します。
+2. Inspectorの**衣装全体の濡れプレビューを開始**を押します。
+3. プレビューの濡れを<strong>0% → 50% → 100%</strong>に変えてみます。
+4. 終わったら、**衣装全体のプレビューを停止**を押します。
+
+{/* SHOT U19: outfit inspector with the preview */}
+
+プレビューが始まらない場合は、Unity上部の**Tools > NDM Framework > Enable Previews**がオンになっているか確認してください。
+
+## 7. アップロードする
+
+シーンを保存して、VRChat SDKで**Build & Test**またはアップロードを行います。準備ができていない衣装は、ビルドするときに自動で準備します。
+
+VRChatでは、メインのラジアルメニューの**濡れ**を開いて、**濡れ量**を上げます。RealSweatSystemと一緒に使う場合は、汗の量に合わせて服も濡れます。
+
+{/* SHOT M01: in-game main Wet page */}
+
+:::info[ビルドは止まりません]
+濡れを入れられなかった衣装だけが乾いたままアップロードされ、残りはそのまま濡れます。このとき、NDMFの結果ウィンドウに衣装名と理由が警告として残ります。[トラブルシューティング](./troubleshooting.mdx#ndmf-warnings)を確認してください。
+:::
+
+## 次のステップ
+
+- オプション1つ1つの意味: [初心者チュートリアル](./tutorial.mdx)
+- VRChatのメニューの各ボタン: [ゲーム内メニュー](./usage/in-game-menu.mdx)
+- 透けを防ぐ調整: [透け保護](./usage/see-through-protection.mdx)
+- 濡れない、警告が出るとき: [トラブルシューティング](./troubleshooting.mdx)

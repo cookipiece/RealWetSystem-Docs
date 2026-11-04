@@ -1,0 +1,94 @@
+---
+id: quick-start
+title: 빠른 시작
+description: RealWetSystem을 가장 적은 단계로 설치하고, 추천대로 의상을 넣은 뒤 미리보기로 확인하고 업로드하는 순서입니다.
+---
+
+# 빠른 시작
+
+이 페이지는 추천 설정 그대로 설치해서 업로드하기까지의 가장 짧은 순서입니다. 각 옵션의 뜻은 [초보자 튜토리얼](./tutorial.mdx)에서 설명합니다.
+
+:::note[처음 한 번은 시간이 걸립니다]
+처음 미리보기하거나 처음 빌드할 때는 젖음 셰이더를 만들고 Unity가 컴파일하므로 오래 걸립니다. 의상이 많으면 수십 분이 걸릴 수 있습니다. 두 번째부터는 훨씬 빨라집니다. 자세한 내용은 [성능](./performance.mdx#build-time)을 확인해 주십시오.
+:::
+
+## 1. 준비
+
+- 아바타와 프로젝트를 백업합니다.
+- VCC의 **Manage Project**에서 **VRChat Avatars SDK**, **NDMF**, **Modular Avatar**가 설치되어 있는지 확인합니다.
+- 의상이 쓰는 셰이더(lilToon 2.3.0 이상 또는 Poiyomi Toon / Pro)가 프로젝트에 있는지 확인합니다. Poiyomi 의상만 쓴다면 lilToon은 필요하지 않습니다.
+- Console에 빨간 컴파일 오류가 없는지 확인합니다.
+
+## 2. 패키지 가져오기
+
+<ProductName />의 `.unitypackage`를 가져옵니다. Unity의 가져오기와 컴파일이 끝날 때까지 기다려 주십시오.
+
+{/* SHOT U01: Unity top menu CookiTools > RealWetSystem */}
+[![Unity 상단 메뉴 CookiTools > RealWetSystem](/img/guide/U01-en.png)](/img/guide/U01-en.png)
+
+## 3. 구매 인증
+
+1. Unity 상단 메뉴에서 **CookiTools > RealWetSystem > Purchase Activation**을 엽니다.
+2. BOOTH 주문번호(Gumroad에서 구매했다면 Gumroad 라이선스 키)를 넣고 **인증하기**를 누릅니다.
+3. <strong>인증이 끝났습니다.</strong>가 나오면 됩니다.
+
+{/* SHOT U02: Purchase Activation window */}
+
+PC마다 한 번이면 됩니다. 자세한 내용은 [구매 인증](./license-activation.mdx)을 확인해 주십시오.
+
+## 4. 설치하기
+
+1. 아바타를 둔 씬을 저장합니다.
+2. Hierarchy에서 **아바타 최상위 오브젝트**(VRC Avatar Descriptor가 있는 오브젝트)를 선택합니다.
+3. **CookiTools > RealWetSystem > Setup／Uninstall**을 엽니다.
+4. 아무것도 바꾸지 않고 맨 아래의 **설치하기**를 누릅니다.
+5. **설치 완료** 안내가 나오면 **확인**을 누릅니다.
+
+{/* SHOT U03: Setup window, new install, defaults */}
+
+기본값 그대로 설치하면 다음이 들어갑니다.
+
+- 땀나는 곳(겨드랑이·가슴·등 등)부터 젖고, 최대 젖는 범위는 40%입니다.
+- 가슴과 사타구니에 비침 보호 영역 4개가 몸에 맞춰 들어갑니다.
+- 새로 넣는 의상은 겉옷만 비치고 속옷은 비치지 않습니다. 옷감은 면·니트·데님, 강도는 기본입니다.
+- 아바타 메인 메뉴에 **젖음** 메뉴가 들어갑니다(추천 구성, 동기화 파라미터 87비트).
+
+## 5. 젖게 할 의상 넣기
+
+설치 안내를 닫으면 **RealWet 의상 고르기** 창이 열립니다. 맨 위의 <strong>추천대로 넣기 (N벌)</strong>를 누릅니다.
+
+{/* SHOT U14: outfit chooser */}
+
+- <ProductName />이 의상이라고 확신한 의상만 들어갑니다.
+- 빠진 의상이 있으면 아래 **직접 고르기** 목록에서 체크하고 **선택한 의상 넣기**를 누릅니다.
+- 넣은 의상은 Ctrl+Z 한 번으로 모두 되돌릴 수 있습니다.
+
+## 6. 미리보기로 확인하기
+
+1. Hierarchy에서 의상 하나(의상 루트)를 선택합니다.
+2. Inspector의 **이 의상 전체 젖음 미리보기 시작**을 누릅니다.
+3. 미리보기 젖음을 <strong>0% → 50% → 100%</strong>로 바꿔 봅니다.
+4. 끝나면 **이 의상 전체 미리보기 중지**를 누릅니다.
+
+{/* SHOT U19: outfit inspector with the preview */}
+
+미리보기가 시작하지 않으면 Unity 상단의 **Tools > NDM Framework > Enable Previews**가 켜져 있는지 확인해 주십시오.
+
+## 7. 업로드하기
+
+씬을 저장하고 VRChat SDK에서 **Build & Test** 또는 업로드를 합니다. 준비되지 않은 의상은 빌드할 때 자동으로 준비합니다.
+
+VRChat에서는 메인 원형 메뉴의 **젖음**을 열고 **젖음 양**을 올립니다. RealSweatSystem과 함께 쓰면 땀 수치를 따라 옷도 젖습니다.
+
+{/* SHOT M01: in-game main Wet page */}
+
+:::info[빌드는 멈추지 않습니다]
+젖음을 넣지 못한 의상만 마른 채로 올라가고, 나머지는 그대로 젖습니다. 이때 NDMF 결과 창에 의상 이름과 이유가 경고로 남습니다. [문제 해결](./troubleshooting.mdx#ndmf-warnings)을 확인해 주십시오.
+:::
+
+## 다음 단계
+
+- 옵션 하나하나의 뜻: [초보자 튜토리얼](./tutorial.mdx)
+- VRChat 메뉴의 각 버튼: [인게임 메뉴](./usage/in-game-menu.mdx)
+- 비침 막기 조절: [비침 보호](./usage/see-through-protection.mdx)
+- 안 젖거나 경고가 나올 때: [문제 해결](./troubleshooting.mdx)

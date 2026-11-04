@@ -1,0 +1,35 @@
+{
+  "link.title.문서": {
+    "message": "ドキュメント"
+  },
+  "link.title.제품": {
+    "message": "製品"
+  },
+  "link.title.프로젝트": {
+    "message": "プロジェクト"
+  },
+  "link.item.label.빠른 시작": {
+    "message": "クイックスタート"
+  },
+  "link.item.label.초보자 튜토리얼": {
+    "message": "初心者向けチュートリアル"
+  },
+  "link.item.label.호환성": {
+    "message": "互換性"
+  },
+  "link.item.label.문제 해결": {
+    "message": "トラブル解決"
+  },
+  "link.item.label.업데이트 내역": {
+    "message": "更新履歴"
+  },
+  "link.item.label.구매 인증": {
+    "message": "購入認証"
+  },
+  "link.item.label.이용 조건 및 라이선스": {
+    "message": "利用条件とライセンス"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub"
+  }
+}

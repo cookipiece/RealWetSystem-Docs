@@ -1,0 +1,60 @@
+---
+id: update-changelog
+title: Changelog
+description: The main changes in each RealWetSystem version, and how to update.
+---
+
+# Changelog
+
+This page lists the main changes in each version of <ProductName />, newest first. Before you switch to a new version, please read how to update below.
+
+## How to update {/* #how-to-update */}
+
+1. Please back up your avatar and project before you update.
+2. Don't delete the `Assets/CookiTools/RealWetSystem` folder. Please import the new package right over it. You don't need to uninstall first.
+3. When you import, <ProductName /> moves files that only existed in older versions to the system trash and reports it on one line in the Console. It doesn't touch files you added yourself or files the new package uses.
+4. If red errors remain in the Console right after importing, please restart Unity once.
+5. In **CookiTools > RealWetSystem > Setup／Uninstall**, press **Update** for each avatar. If the saved start point layout differs from the new recommended layout, you are asked to choose **Reset Wet Start Points** or **Keep Current Settings**. If you're not sure, please choose **Keep Current Settings**.
+
+{/* SHOT U13: update dialog Reset Wet Start Points / Keep Current Settings */}
+
+6. The first preview or build after an update takes longer once, because the wet shaders are prepared again.
+7. If a version changes the in-game menu's names or items, press **Update** or **Apply / Update Runtime Menu**, then please build again. An avatar you already uploaded gets the new version only after you upload it again.
+
+- Your saved settings, start points and protection regions stay as they are. To use the new recommended protection shape, see [Protection regions after an update](./usage/see-through-protection.mdx#after-update).
+- Only old default looks you never touched switch once to the new default look. When that happens, a notice and **Revert...** appear in **RealWet > Outfit Management**. If you update with **Switch it to the new default while updating** turned off in the setup window, nothing is switched.
+- The menu files made for each avatar are in `Assets/CookiTools/Generated/RealWet`, outside the package folder, so overwriting the package doesn't delete them.
+- Updating doesn't need purchase activation. However, uploads from a PC that is not activated leave the effects out, so please complete [purchase activation](./license-activation.mdx) on the PC you upload from.
+
+## 1.0.0 — First public release {/* #100 */}
+
+The first public release of <ProductName />.
+
+### What's included
+
+- **Setup window:** In **CookiTools > RealWetSystem > Setup／Uninstall**, choose the body meshes, the maximum wet range, where wetness starts and how new outfits look when wet, then press **Install**. The [Beginner tutorial](./tutorial.mdx#setup-options) explains what each option means.
+- **Purchase activation:** A new install needs purchase activation once per PC. The menu is **CookiTools > RealWetSystem > Purchase Activation**. Uploads from a PC that is not activated leave the effects out, but the build never stops, and the preview and Play still show them. [Purchase activation](./license-activation.mdx)
+- **Outfit chooser window:** When you close the install message, a window opens for choosing the outfits that should get wet. **Add Recommended (N)** adds every outfit RealWet is sure about in one go, and **Choose Yourself** lets you pick them one by one. This window doesn't block Unity.
+- **Wet look:** Clothes get wet starting where you sweat or where they touch the body. Wet areas take on a deeper color with a watery gloss along the folds, and thin clothes show through. You choose the fabric (cotton · knit · denim, polyester · satin · swimwear, latex · vinyl · enamel, in between) and the strength (subtle, standard, strong). **Even Wet Look for Every Outfit (New Look)** is on by default.
+- **lilToon and Poiyomi:** lilToon 2.3.0 or later and Poiyomi Toon / Pro (locked materials included) get wet with the same look.
+- **See-Through Protection:** A new install places 4 recommended protection regions on the chest and groin, fitted to the body. Protection regions get wet too; they block only the see-through caused by wetness. They find their spot from the nipple shape key, then the breast bones, then the torso, so they are placed on flat-chested avatars too. [See-through protection](./usage/see-through-protection.mdx)
+- **In-game menu:** A **Wet** menu (젖음 in Korean, 濡れ in Japanese) goes into the avatar's main menu. It has **Wetness Amount**, **Show Clothing Wetness**, **Whole Area**, **Fast Dry**, **Hold Current State (For Photos)**, the dials in **Wet Tuning**, and, on the **See-Through Protection** page, the **Private Area Protection** switch and the **See-Through Protection Range** and **See-Through Protection Strength** dials. The recommended set uses 87 bits of synced parameters. [In-game menu](./usage/in-game-menu.mdx)
+- **Wet start point and protection region editor:** With **Edit wet / protection regions…**, you move spheres, change their size and spread, and create left-right pairs. The selected sphere's influence shows as color on the body and clothes. [Wet start points](./usage/wet-start-points.mdx)
+- **RealSweatSystem linking:** Used together, the clothes get wet following the sweat level on the skin. RealSweatSystem's sweat display applies only to the sweat on the skin; clothing wetness is hidden with **Show Clothing Wetness**.
+- **RealRainSystem linking:** Used together, clothes hit by the rain get wet too, and raindrops and streaks are drawn on the same clothes.
+- **Builds never stop:** Only the parts RealWet could not apply wetness to are uploaded with their original dry materials, and the NDMF results window shows a warning with the outfit name and the reason. During the upload, the <ProductName /> steps appear in the progress bar.
+- **Optimization tools:** The wetness is kept when you build together with AAO, d4rk Avatar Optimizer, TexTransTool and VRCFury. Settings that could remove the wetness are reported ahead of time in the **Other avatar tools** card of the setup window. [Compatibility](./compatibility.mdx#optimizers)
+- **Experimental features:** Outfits that use PCSS4VRC (lilToon) or lilSSRT can get wet too. You turn them on per avatar in **Advanced settings > Experimental** in the setup window (off by default). [Advanced features](./advanced.mdx#experimental)
+- **Fewer freezes while editing:** Advance preparation runs only while Unity is in the background. Calculations are split up so that Unity doesn't freeze for seconds at a time while you edit registered outfits.
+- **Language:** You can choose English / 한국어 / 日本語 for the windows and the in-game menu names.
+
+### Known limitations
+
+- PC only. Quest and mobile are not supported.
+- Purchase activation is possible only on Windows. Uploading from Unity on Mac or Linux leaves the <ProductName /> effects out.
+- New installs are possible only on Humanoid avatars.
+- The layer draw order is not set between separate outfits. Please see [Layer order](./usage/outfit-settings.mdx#layer-order).
+- Semi-transparent hair copies whose shader SeeThroughHair changes during the build don't get wet. The rest of the hair gets wet.
+- Setups that swap a renderer's mesh itself with an animation are not supported.
+
+Other limitations are listed in [Technical specifications](./technical-specifications.mdx#known-limits).

@@ -1,0 +1,172 @@
+---
+id: advanced
+title: Advanced features
+description: Covers per-outfit settings, see-through strength and dark-color see-through, layered clothes and render queues, Whole Area, experimental features (PCSS4VRC and lilSSRT), using RealSweatSystem and RealRainSystem, optimization tools, parameters and upload size.
+---
+
+# Advanced features
+
+The default settings are enough for everyday use. This page gathers features for people who want to fine-tune further. If this is your first install, please read the [Beginner tutorial](./tutorial.mdx) first.
+
+## Per-outfit settings {/* #per-outfit */}
+
+The rules for the whole avatar are in **RealWet**, and you can make one outfit different in **This Outfit's Settings** on the outfit root and in **Outfit Part Settings** on its parts.
+
+| What you want to change | Where |
+| --- | --- |
+| Keep only this outfit dry | Turn off **Use Wetness** at the top of **This Outfit's Settings**. Your settings are kept. |
+| A different start mode for this outfit only | Choose it in the wet start mode of the outfit or part settings. **Inherit Setup** on a part uses that outfit's mode as it is. When you choose a mode in the setup window, every outfit goes back to the same mode. |
+| This outfit's fabric, strength and see-through | **This Outfit's Settings > Wet Look > This Outfit's Wet Look** |
+| Keep only the ribbon from showing through | Choose the see-through for each slot in **Outfit Part Settings** on the ribbon mesh. |
+| Weaken the wet look of one part only | **This Material's Wet Look (%)** on the slot card. 0% hides the wet look. |
+| Make a loose part get wetter | Switch that part's **Fit Preset** to **Tight** (**Tight** / **Regular** / **Loose** / **Custom**). |
+| A different body for this outfit only | You can set a body separately for each outfit. If you don't, the body meshes in RealWet are used. |
+
+Kitbashed outfits that mix pieces from several products, `EditorOnly` outfits, and materials changed by a wardrobe are explained in [Outfit settings](./usage/outfit-settings.mdx).
+
+## See-through strength and dark-color see-through {/* #see-through-strength */}
+
+See-through is set in three places.
+
+| Where | What it sets |
+| --- | --- |
+| The part's see-through method | **No See-Through (Thick Fabric)**, **Natural See-Through**, **Dark Colors Also Show Through** |
+| The part's **How Much It Shows Through (%)** and **Dark Areas Show Through (%)** | How much the clothes show through when fully wet, and how much black areas show through |
+| The in-game **See-Through Strength (50% = Standard)** and **Wet See-Through Mode** | Changes the see-through of all outfits at once in game |
+
+- With **Natural See-Through**, dark fabric shows through less. To make black clothes show through too, choose **Dark Colors Also Show Through**. When newly chosen, **How Much It Shows Through** starts at 60% (35% for the other methods).
+- If only black patterns show through too much with **Natural See-Through**, lower **Dark Areas Show Through (%)**.
+- The in-game **See-Through Strength** at 100% makes clothes show through strongly on purpose. Less-wet areas and dark clothes show through sooner too.
+- **Force See-Through When Wet** makes wet areas show through even on **No See-Through** parts. Protection regions still block.
+- No setting changes the original material's transparency or holes.
+
+{/* SHOT R04: See-Through Strength 0 / 50 / 100 % */}
+
+## Layered clothes and render queues {/* #render-queue */}
+
+Clothes that turn see-through when wet look natural only when their draw order matches the underwear and decorations. <ProductName /> changes only the render queue (the number that sets the draw order) of its wet copies.
+
+- Within one outfit, RealWet looks at how the clothes actually overlap and draws the inner clothes first and the outer clothes later. You can change this by dragging in the order list in **This Outfit's Settings > Outfit Parts**.
+- For each slot, choose **Automatic from Clothing Surfaces** (default), **Manual: Set Draw Priority** (0–39), **Direct: Set Render Queue** or **Preserve Material Queue**.
+- Separate outfits are not ordered against each other. If an outer layer registered on its own is drawn before the inner clothes, give the outer layer's slot a high number (for example, 20) with **Manual: Set Draw Priority**, or register them together as one outfit.
+- It does not change the render queues of your original materials, the body or RealSweat's sweat.
+
+For how to use it, see [Layer order](./usage/outfit-settings.mdx#layer-order). For the number rules, see [Technical specifications](./technical-specifications.mdx#render-queue).
+
+## Whole Area {/* #whole-area */}
+
+Turn on the in-game **Whole Area** and the whole garment gets wet evenly, regardless of the start points. Use it for a rained-on look, a just-out-of-the-water look, or photos.
+
+{/* SHOT R03: Whole Area OFF / ON */}
+
+- How wet it gets is decided by the wetness amount (the sweat level when linked to RealSweat).
+- While it is on, **Maximum Wet Range**, **Spread Wetness Wider**, **Reduce Outfit Differences** and **Wet Edge** have no effect.
+- See-through clothes may show through all over. Protection regions still block.
+- RealRain's raindrops, streaks and rain spread stay the same whatever this toggle says.
+
+For details, see [In-game menu](./usage/in-game-menu.mdx#whole-area).
+
+## Experimental features: PCSS4VRC (lilToon) and lilSSRT {/* #experimental */}
+
+Outfits that use PCSS4VRC (lilToon) or lilSSRT can also get wet with experimental features. Both are **off by default**, and you turn them on per avatar in **Advanced settings > Experimental** in the setup window. This card appears only when those shaders are on this PC.
+
+{/* SHOT U09: Advanced settings with the Experimental card */}
+
+| State | PCSS4VRC (lilToon) | lilSSRT |
+| --- | --- | --- |
+| **Off** (default) | Parts that PCSS4VRC changes in the first build step are not wet in the upload. They look wet in the preview, but a **This part does not get wet when uploaded** notice and a button to turn the feature on right away appear above it, and an NDMF warning reports it too. | lilSSRT parts stay as an unsupported shader and don't get wet. A notice and a button to turn the feature on right away appear above the preview. |
+| **On** | PCSS4lilToon outfits get wet too. See-through works the same as on regular lilToon outfits, and the render queue stays at 2499 or below to keep the PCSS shadows. | Outfits using the lilSSRT, lilSSRT/RTAO and lilSSRT/GTAO shaders of lilSSRT 1.4.3, and the AOTessellation shader for AO, get wet. The lilSSRT settings (AO quality and so on) stay as they are. |
+| Verified version | 10.1.5 | 1.4.3. With other versions, lilSSRT parts are built dry and a notice appears once. |
+
+Good to know for both:
+
+- When you turn it on, <ProductName /> creates separate wet shaders from the files of that shader installed on this PC (in the Generated folder). **Please do not export these shaders or share them with others.**
+- The <ProductName /> package contains no PCSS4VRC or lilSSRT code. It does not change those shaders' files or your original materials.
+- RealRainSystem's rain does not fall on these parts. With a RealRain version that can skip such parts, rain still falls on the other outfits.
+- If those shaders are present at the first install, RealWet asks once whether to turn the feature on. It doesn't block the install, and you can change it later.
+- When you upload with lilSSRT on, shader compile errors (X8000, `SINGLE_PASS_STEREO`) may appear in the Console. The original lilSSRT shaders show the same errors, and they don't change the upload result.
+- PCSS4VRC also makes copies (`_pcss`) of lilSSRT materials, but it leaves their shader as lilSSRT. So lilSSRT parts follow the lilSSRT experimental feature.
+- For problems when using <ProductName /> with lilSSRT, please contact Cooki, not the lilSSRT author. lilSSRT ©MeltzzZ
+
+## Using it with RealSweatSystem {/* #realsweat */}
+
+[![Linked with Real Sweat System, the clothes get wet to match sweat at 0%, 50% and 100%](/img/booth/booth-with-realsweat.jpg)](/img/booth/booth-with-realsweat.jpg)
+
+*<small>The clothes getting wet to match RealSweatSystem's sweat at 0%, 50% and 100%. RealSweatSystem is sold separately.</small>*
+
+If the same avatar has RealSweatSystem, <ProductName /> detects it. A new install starts with **Link RealSweat** on, so the clothes follow the final sweat level on the skin too.
+
+| The look you want | Setting |
+| --- | --- |
+| The clothes get wet too as you move and sweat | Turn on RSS auto mode and **Link RealSweat**. |
+| Keep the skin dry and make only the clothes wet | Turn off **Link RealSweat** and raise **Wetness Amount (Unlinked)**. |
+| Follow the skin sweat again | Turn on **Link RealSweat**. |
+
+{/* SHOT M04: main page with RealSweat linked */}
+
+- To change the starting value in Unity, choose **Link** or **Unlink** in the **Input Mode** row of **RealWet**.
+- RealSweatSystem's **Sweat Display** and **Only Visible to Me** apply only to the sweat on the skin. Clothing wetness is hidden only with **Show Clothing Wetness** and the outfit visibility toggles.
+- The **Wet** menu goes into the avatar's main menu on its own, not inside the RSS menu.
+- The sweat shaders of RealSweatSystem 2.0.0 (Late Queue included) are recognized as skin sweat too, and wet clothes are drawn after the body and the sweat.
+- If the selected avatar's RealSweatSystem is 1.x, the setup window shows a one-line update notice.
+- The two tools are sold separately, and purchase activation is done separately for each tool.
+
+## Using it with RealRainSystem {/* #realrain */}
+
+When you use it with RealRainSystem (RealRain), <ProductName /> also wets clothes hit by the rain, and the raindrops, streaks and gloss are drawn together on top of the <ProductName /> wet shaders. You change the rain settings in RealRain.
+
+- <ProductName /> draws the look of clothes getting wet in the rain. With RealRain alone, the weather (clouds, rain, rain sound) works, but the clothes don't get wet.
+- If the <ProductName /> effects are left out of an upload (on a PC without purchase activation, for example), the rain-wet clothes are left out too. RealRain's weather depends only on RealRain's activation.
+- RealRain does not draw raindrops or gloss on the **Cotton · Knit · Denim (Recommended)** fabric, because it is fabric that soaks up water.
+- When **Wet Look Strength** is **Strong Appearance** and the fabric is smooth, the raindrop gloss gets a little brighter too.
+- lilToon **Multi** and **Refraction** material slots, and parts with experimental-feature shaders, get no rain effect; only the regular wetness applies.
+- <ProductName /> writes a number into UV6 for each clothing vertex that receives rain. If the mesh already has UV6 data, it turns off only the rain on that renderer and tells you.
+- If something goes wrong in RealRain, <ProductName /> turns off only the rain and keeps the wetness. The build doesn't stop.
+
+## Optimization tools {/* #optimizers */}
+
+<ProductName /> is made to keep the wetness when you build together with AAO (Avatar Optimizer), TexTransTool, d4rk Avatar Optimizer and VRCFury.
+
+- If there are no errors, you don't need to exclude whole outfits from optimization in advance.
+- Settings that could remove the wetness are reported ahead of time in the **Other avatar tools** card of the setup window.
+- If another tool changes the <ProductName /> output, RealWet doesn't let it pass silently; it reports it in the NDMF results window.
+
+For how each tool behaves, see [Compatibility](./compatibility.mdx#optimizers).
+
+## Parameters and sync bits {/* #parameters */}
+
+- Synced parameter names start with `Cooki/ClothWet…`. Only the menu items you choose use them.
+- Each dial uses 8 bits, and each toggle uses 1 bit. The recommended menu is 87 bits, and every item together is 94 bits (VRChat's limit is 256 bits).
+- Features not in the menu work with the values set in Unity and use no sync bits.
+
+The parameter list is in [Technical specifications](./technical-specifications.mdx#parameters).
+
+## Upload size {/* #upload-size */}
+
+Each wet material adds wet shaders and data to the avatar, so the upload size grows. On an example avatar, it was about +32 MiB before compression and about +21 MiB after compression.
+
+- Turning off **Use Wetness** on parts that don't need to get wet (accessories, shoes and so on) reduces the size.
+- If you use d4rk, keeping its shader-rewriting settings off adds fewer materials.
+
+For detailed measurements, see [Performance](./performance.mdx#upload-size).
+
+## Showing a body hidden with MA again {/* #ma-hidden-body */}
+
+On outfits where the creator hid the body under the clothes with MA Shape Changer, there is no body inside, so the clothes look empty when they turn see-through.
+
+- Turn on **Restore MA-Hidden Body for This Outfit** in **Advanced Settings > MA Body Restoration (Advanced Compatibility)** on the outfit or part, and RealWet removes that body hiding from the copy made for upload. It is off by default.
+- When it's on, the body stays **even while the clothes are dry**, so skin may poke out through the clothes or overlap them when you move.
+- Press **Check affected Shape Keys** below the checkbox to see which shape keys are affected.
+- It doesn't change the MA settings in the scene or the original mesh. Please check both the dry state and the wet state in Build & Test.
+
+## Blendshape-driven wetness {/* #pose-driven */}
+
+This feature changes the wetness layout to match blendshapes that pull clothes down or open. You set the target shape keys in the part's advanced settings. It is off by default.
+
+- It shows the wetness to match the current shape of the clothes. It doesn't separately remember marks left where the clothes were before they moved.
+- It stores the data for the second state in the mesh's UV3/UV4. If those channels are already used, only this feature turns off, and the NDMF results window tells you.
+- If another tool deletes or merges the target shape keys, please check the build results.
+
+## Write Defaults {/* #write-defaults */}
+
+For **Write Defaults** in the setup window's **Advanced settings**, please use **Auto** unless you have specific instructions. It reads the avatar's FX and the animations MA will merge to decide the <ProductName /> value, and checks again at build time. If everything it checks is ON, it uses ON; if they are mixed or it can't tell, it uses OFF. It doesn't change the avatar's existing Write Defaults or other controllers.

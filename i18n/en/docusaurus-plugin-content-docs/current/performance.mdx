@@ -1,0 +1,106 @@
+---
+id: performance
+title: Performance
+description: Upload size, build time for the first and later builds, the preparation cache, and in-game load.
+---
+
+# Performance
+
+<ProductName /> calculates wetness ahead of time in Unity, and in VRChat a shader draws the result. This page covers upload size, build time and in-game load, in that order.
+
+## Upload size {/* #upload-size */}
+
+Each wet material adds a wet shader and data to the avatar, so the upload size grows.
+
+| What grows | What sets its size |
+| --- | --- |
+| Wet shaders | The number of wet materials. More materials means a bigger size. |
+| Wetness data (where clothes get wet, protection masks, how close clothes are to the body) | The vertex count of the wet meshes, and the protection regions |
+| In-game menu icons | The number of items in the menu |
+| RealRain rain data | When used with RealRain, the vertex count of the clothes that receive rain |
+
+- **Even Wet Look for Every Outfit (New Look)** is on by default and adds a little more to the upload size.
+- If your avatar is close to its size limit, turn off **Use Wetness** for parts that don't need to get wet (accessories, shoes and so on). Parts that are turned off are left out of wetness processing.
+
+### Example measurement
+
+These are approximate values measured on one example avatar with about 100 wet material slots in the upload (145 renderers) and d4rk Avatar Optimizer on, using a <ProductName /> 1.0.0 build made before release. "Without" is the same build with only <ProductName /> left out.
+
+|  | Uncompressed (checked against VRChat's 500 MB PC limit) | Compressed (LZ4, close to the download size) |
+| --- | --- | --- |
+| Without <ProductName /> | 380.7 MiB | 162.6 MiB |
+| With <ProductName /> | 412.6 MiB | 183.6 MiB |
+| Difference | +31.9 MiB | +21.0 MiB |
+
+VRChat checks the uncompressed size against the PC limit; what other players download is the compressed size.
+
+The extra 31.9 MiB uncompressed breaks down like this:
+
+| Item | Increase |
+| --- | --- |
+| Shaders | 23.5 MiB (about 0.23 MiB per wet material slot) |
+| Meshes | 4.1 MiB |
+| Textures | 3.8 MiB |
+| Animations | 0.9 MiB |
+| Materials | -0.4 MiB |
+
+- How much one outfit adds depends on its textures and meshes, not only on the shaders.
+- These values include **Even Wet Look for Every Outfit (New Look)** (on by default) and the new menu icons.
+- Your numbers will differ with your outfits, shaders and optimizer tools.
+- VRChat's upload size limit applies to the whole avatar, not just to <ProductName />.
+
+## Build time {/* #build-time */}
+
+### First build and later builds
+
+| Situation | How long it takes |
+| --- | --- |
+| The first build or the first preview | Takes a long time, because RealWet builds wet shaders and Unity compiles them. With many materials, it can take tens of minutes. |
+| Rebuilding with the same settings | Much shorter. RealWet reuses the shader cache from the first build, so almost all wet-shader compilation is skipped. |
+| After updating a shader (Poiyomi or lilToon) or <ProductName /> | Only the changed shaders are prepared again. The first time can take a long while again. |
+| After changing where clothes get wet, the regions, or the shape of an outfit | Only the changed outfits are calculated again. |
+
+The first build takes longer when your PC is busy, for example while streaming or recording. It's best to do the first build ahead of time, while your PC is idle.
+
+- During the upload, the progress bar shows the <ProductName /> step, the count and the outfit name, such as `RealWet: Calculating outfit shape (3/22) · outfit name`.
+- Even if the progress bar stays the same for a long time, Unity is compiling shaders as long as it is using the CPU. Please wait. See [The first build takes a long time](./troubleshooting.mdx#long-first-build).
+
+### Prepare ahead of time
+
+- When **Prepare after 1 minute of Unity idle** is on, RealWet prepares the needed outfits one at a time when there has been no keyboard or mouse input for 1 minute and Unity is in the background. It prepares the outfits the avatar is wearing first, and never prepares `EditorOnly` outfits.
+- To prepare right away, press **RealWet > Outfit Management > Prepare Needed Outfits**. Outfits that are already prepared or in progress are skipped.
+- Turn on **Also Automatically Prepare Inactive Outfits** to prepare outfits you turned off with a wardrobe as well. When it's off, turned-off outfits are prepared only when you upload.
+
+### Where prepared results are stored
+
+| What is stored | Location |
+| --- | --- |
+| Calculations for where clothes get wet and how wetness spreads | `Library/RealWet` in your project |
+| Prepared wet shaders | `Assets/CookiTools/RealWetSystem/Generated` |
+
+- Even after you restart Unity, the results are reused if nothing has changed. Right after reopening Unity, an outfit may show as not yet checked. That doesn't mean the cache is gone.
+- If the cache is missing or damaged, RealWet runs the needed calculations again. You don't need to edit cache files yourself or delete the folder first.
+
+### When you press Play
+
+If an outfit the avatar is wearing is not prepared yet when you press Play, <ProductName /> holds Play for a moment and prepares that outfit.
+
+- While it waits, the Game and Scene views show **Preparing N outfit(s). Play starts automatically when they are ready. To start Play now, press Play again.**
+- When preparation finishes, Play starts automatically. After 10 minutes, Play starts even if some outfits are left.
+- Press Play again to start right away. Outfits that are not prepared then stay dry for that Play only, and RealWet prepares them first after you stop Play.
+- Outfits turned off in the Hierarchy (such as hair you turn on with a toggle) are prepared before Play too, after the outfits the avatar is wearing. Turn off **Also Automatically Prepare Inactive Outfits** and Play does not wait for outfits that are turned off.
+- Wet shaders not yet drawn in this Unity session are compiled before Play, two at a time. Shaders are no longer compiled all at once during the first Play, so it uses much less memory. Shaders already compiled are not compiled again.
+- Each wet shader is compiled without the features its slot does not use. It looks the same, and the shader is smaller and compiles faster.
+
+## In-game load
+
+- The shader draws wetness by reading data calculated ahead of time. Start points and protection regions are for editing in Unity only. They add no Colliders, PhysBones or Contacts in game.
+- The in-game menu uses synced parameters for each item you choose. The recommended menu of a new install uses 87 bits, and every item on uses 94 bits (VRChat allows 256). A dial uses 8 bits and a toggle uses 1 bit. The full table is in [In-game menu](./usage/in-game-menu.mdx#sync-cost).
+- If you turn on **Reduce Outfit Differences** and put the **Maximum Wet Range (%)** dial in the menu, the FX gets more precalculated correction clips. Synced bits and in-game calculation do not increase.
+
+## How to reduce size and time
+
+1. Turn off **Use Wetness** for parts that don't need to get wet.
+2. Remove in-game menu items you don't use in **RealWet > In-Game Menu**, press **Apply / Update Runtime Menu**, and rebuild.
+3. Before the first build, prepare ahead of time with **Prepare Needed Outfits**.
+4. If you use d4rk Avatar Optimizer, turn off the settings that rewrite shaders. When wet parts are left out of d4rk's merging, the number of materials goes up. For details, see [Compatibility](./compatibility.mdx#optimizers).

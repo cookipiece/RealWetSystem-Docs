@@ -1,0 +1,94 @@
+---
+id: quick-start
+title: Quick start
+description: The fewest steps to install RealWetSystem, add outfits as recommended, check them in the preview and upload.
+---
+
+# Quick start
+
+This page is the shortest path from installing with the recommended settings to uploading. The [Beginner tutorial](./tutorial.mdx) explains what each option means.
+
+:::note[The first time takes a while]
+The first preview or the first build takes a long time, because RealWet creates the wet shaders and Unity compiles them. With many outfits, it can take tens of minutes. From the second time on, it is much faster. For details, see [Performance](./performance.mdx#build-time).
+:::
+
+## 1. Prepare
+
+- Back up your avatar and project.
+- In **Manage Project** in VCC, check that **VRChat Avatars SDK**, **NDMF** and **Modular Avatar** are installed.
+- Check that the shaders your outfits use (lilToon 2.3.0 or later, or Poiyomi Toon / Pro) are in the project. If you only use Poiyomi outfits, you don't need lilToon.
+- Check that the Console shows no red compile errors.
+
+## 2. Import the package
+
+Import the <ProductName /> `.unitypackage`. Please wait until Unity finishes importing and compiling.
+
+{/* SHOT U01: Unity top menu CookiTools > RealWetSystem */}
+[![Unity top menu CookiTools > RealWetSystem](/img/guide/U01-en.png)](/img/guide/U01-en.png)
+
+## 3. Purchase activation
+
+1. From the Unity menu bar, open **CookiTools > RealWetSystem > Purchase Activation**.
+2. Enter your BOOTH order number (or your Gumroad license key if you bought it on Gumroad) and press **Activate**.
+3. When **Activation complete.** appears, you're done.
+
+{/* SHOT U02: Purchase Activation window */}
+
+You only need to do this once per PC. For details, see [Purchase activation](./license-activation.mdx).
+
+## 4. Install
+
+1. Save the scene that contains your avatar.
+2. In the Hierarchy, select the **avatar's top-level object** (the object with the VRC Avatar Descriptor).
+3. Open **CookiTools > RealWetSystem > Setup／Uninstall**.
+4. Without changing anything, press **Install** at the very bottom.
+5. When the **Installation Complete** message appears, press **OK**.
+
+{/* SHOT U03: Setup window, new install, defaults */}
+
+Installing with the defaults sets up the following.
+
+- Clothes get wet starting from the sweat spots (armpits, chest, back and so on), with a maximum wet range of 40%.
+- Four see-through protection regions are placed on the chest and groin, fitted to the body.
+- New outfits you add show through only on the outerwear, not on the underwear. The fabric is cotton · knit · denim, and the strength is standard.
+- A **Wet** menu goes into the avatar's main menu (recommended set, 87 bits of synced parameters).
+
+## 5. Add the outfits that should get wet
+
+When you close the install message, the **RealWet: Choose Outfits** window opens. Press **Add Recommended (N)** at the top.
+
+{/* SHOT U14: outfit chooser */}
+
+- Only the outfits <ProductName /> is sure are outfits are added.
+- If an outfit is missing, check it in the **Choose Yourself** list below and press **Add Selected Outfits**.
+- One Ctrl+Z undoes every outfit you added.
+
+## 6. Check with the preview
+
+1. In the Hierarchy, select one outfit (the outfit root).
+2. In the Inspector, press **Start Whole Outfit Wetness Preview**.
+3. Change the preview wetness to **0% → 50% → 100%**.
+4. When you're done, press **Stop Whole Outfit Preview**.
+
+{/* SHOT U19: outfit inspector with the preview */}
+
+If the preview does not start, please check that **Tools > NDM Framework > Enable Previews** is turned on in the Unity menu bar.
+
+## 7. Upload
+
+Save the scene, then run **Build & Test** or upload from the VRChat SDK. Outfits that are not prepared yet are prepared automatically when you build.
+
+In VRChat, open **Wet** in the main radial menu and raise **Wetness Amount**. If you use RealSweatSystem too, the clothes also get wet following the sweat level.
+
+{/* SHOT M01: in-game main Wet page */}
+
+:::info[Builds never stop]
+Only the outfits RealWet could not apply wetness to are uploaded dry, and everything else gets wet as usual. In that case, the NDMF results window shows a warning with the outfit name and the reason. See [Troubleshooting](./troubleshooting.mdx#ndmf-warnings).
+:::
+
+## Next steps
+
+- What each option means: [Beginner tutorial](./tutorial.mdx)
+- Each button in the VRChat menu: [In-game menu](./usage/in-game-menu.mdx)
+- Adjusting the see-through blocking: [See-through protection](./usage/see-through-protection.mdx)
+- When clothes don't get wet or a warning appears: [Troubleshooting](./troubleshooting.mdx)

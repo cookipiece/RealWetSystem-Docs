@@ -1,0 +1,11 @@
+{
+  "logo.alt": {
+    "message": "CookiTools"
+  },
+  "item.label.문서": {
+    "message": "ドキュメント"
+  },
+  "item.label.문제 해결": {
+    "message": "トラブル解決"
+  }
+}

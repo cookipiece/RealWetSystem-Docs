@@ -1,0 +1,172 @@
+---
+id: wet-start-points
+title: Wet start points
+description: What the spheres where sweat starts (wet start points) are, how wetness spreads, how to move them and change their size and spread, and the rules of the automatic layout.
+---
+
+# Wet start points
+
+**Wet start points** are spheres that mark where sweat starts. They are also called sweat points. They sit where people sweat easily, such as the armpits, chest and back, and clothes start to get wet around these spheres, then spread outward.
+
+{/* SHOT S01: Scene, default start points, one selected with influence colours, front */}
+
+## When are they used? {/* #when */}
+
+| Wet start mode | Start points |
+| --- | --- |
+| **From Sweat Spots (Recommended)** | Used. Clothes get wet from around the spheres. |
+| **Both** | Used. Wetness starts at the spheres and spreads along the areas that touch the body. |
+| **From Where It Touches the Body** | Not used. Moving the spheres doesn't change where clothes get wet. |
+
+Start points are also not used while the in-game **Whole Area** is on. The whole garment gets wet evenly.
+
+## How wetness spreads {/* #spread */}
+
+1. As sweat (the wetness amount) rises, the clothes inside a sphere get wet first. This area is called the **start area**.
+2. As sweat rises further, the wetness spreads along the clothes beyond the start area.
+3. How far it spreads is decided together by each sphere's **Distance beyond start area** and the whole avatar's **Maximum Wet Range (%)**.
+
+### How it relates to the maximum wet range {/* #max-range */}
+
+**Maximum Wet Range (%)** (40% in a new install) sets how far wetness can travel from the start points when sweat is at 100%.
+
+- When **Reduce Outfit Differences** is on (the new install default) and the maximum wet range is M%, at 100% sweat each outfit looks wet over **roughly M% of the area water can reach from the start points**. At 40%, that is roughly 40% of the reachable area; at 100%, it is the whole reachable area.
+- Areas too far from the start points for water to reach stay dry even at 100%. That's why this value is not a share of the whole clothing area.
+- With Reduce Outfit Differences off, this value is not an area share but a limit on how far wetness can spread. It looks different depending on the distance between the clothes and the body.
+- If sleeve ends or skirt hems don't get wet, raise the range, add a start point near them, or use the in-game **Whole Area**.
+
+{/* SHOT R02: Maximum Wet Range 20 / 40 / 70 / 100 % */}
+
+## Automatic layout {/* #auto-layout */}
+
+On a new install, <ProductName /> places start points fitted to this avatar's body.
+
+- They go in places such as the back of the neck, the back (upper, middle and lower), the chest, cleavage and underbust, the armpits, the inner upper arms, the inner elbows, the belly, the groin, the buttocks, the (inner) thighs, the backs of the knees and calves, and the feet.
+- The bones decide the body part and direction, and RealWet finds the skin surface of the registered body meshes to place each sphere. It is normal for a sphere to sit slightly inside the skin. That keeps the sphere's range touching the skin.
+- The chest, armpits, inner upper arms, inner elbows, inner thighs, groin and backs of the knees are located from the body mesh's **bone weights**. For example, the lower edge of the breast bone weights is taken as the underbust crease, and the lowest point where the upper arm and torso weights mix is taken as the armpit.
+- On a **flat chest** without breast bones (such as a male body), the sphere goes on the lower line of the pectoral muscles.
+- Parts that couldn't be confirmed from the weights, parts found on only one side, and parts that fall on an edge where the body was deleted under the clothes are placed with the older bone-based layout, for those parts only. Start points that need a check are named in the install results.
+- For kitbashed bodies merged with MA Merge Armature, RealWet links the bones by name to judge them.
+- Bones such as fingers or a jaw scaled to 0 to hide them don't block the layout. If the bone a sphere would attach to, or its parent, has a scale of 0, RealWet names that bone and does not create that sphere.
+
+{/* SHOT S05: flat-chest avatar, start points under the pectoral line */}
+
+## Open the editor {/* #editor */}
+
+1. Select the `RealWet` object in the Hierarchy.
+2. In the **Wetness Settings** tab, press **Edit wet / protection regions…**. You can also open it with the same button on the outfit screen.
+3. When the **Wet / Protection Region Editor** opens, choose the **Wet start points** tab.
+
+{/* SHOT U22: region editor, start point tab, armpit selected */}
+
+- Pick a sphere in **Selected region** at the top, or open **List / search** to find one. You can also click a name label or dot in the Scene.
+- The influence of the selected sphere shows as color on the body and clothes. Blue is weak influence, going through cyan and yellow up to red for strong influence. It updates right away, even while you drag the sphere.
+- In **Display settings**, choose **Body weights · default**, **Clothing weights** or **Body + clothing**, and change **All point names** and **Color opacity**.
+- The color shows **the widest range one sphere can reach**. It is not the final wetness at the current sweat level. To see the real wet look, press **Start clothing preview** in **Check wet clothing…** at the bottom of the editor. To go back, press **← Back to region editing**.
+- In the Scene, move with W and resize with R. Move the small panel in the Scene by dragging its title bar.
+
+## Sphere properties {/* #properties */}
+
+The properties on the right are split into **Range / strength**, **Spread / pattern** and **Advanced**.
+
+### Range / strength
+
+| Item | Meaning | Range |
+| --- | --- | --- |
+| **Use this wet start** | When off, this sphere doesn't wet the clothes. The sphere stays. | — |
+| **Ball size (radius cm)** | The size of the start area. Clothes inside the sphere get wet first. | 0.5–15 cm |
+| **Distance beyond start area (cm)** | How far wetness can spread beyond the start area. Widen it and clothes get wet farther out. | 0.5 cm–2 m |
+| **Center concentration (%)** | Raise it and the area near the sphere gets wetter while the outside gets lighter. The outer limit of the influence stays the same. | 0–100% |
+| **Wetness strength (%)** | The strength of the wetness coming from this sphere. 100% is the default. | 0–200% |
+| **Starts at sweat (%)** | This sphere starts wetting only when sweat goes above this value. At 0%, it wets from the start. | 0–90% |
+
+### Spread / pattern
+
+| Item | Meaning | Range |
+| --- | --- | --- |
+| **Horizontal spread** / **Vertical spread** | Multipliers for how far wetness spreads horizontally and vertically, relative to the avatar. They don't change the sphere size. Example: to make armpit wetness spread a long way down the side, raise vertical. | 0.25–2× |
+| **Spread rotation (degrees)** | Rotates the direction of the horizontal and vertical spread around the avatar's forward axis. Use it to make wetness spread at a slant. | -180 to 180 degrees |
+| **Spread progress (slow / fast)** | How fast this sphere's wetness spreads at the same sweat level. | 0.25–2× |
+| **Outer spread irregularity (%)** | Makes the spreading edge blotchy. 0% is smooth. | 0–100% |
+| **Irregular pattern size (cm)** | The size of one blotch. | 2–30 cm |
+
+**Wetness strength** and the spread / pattern values are used for a sphere when **Customize this point's wetting** is on. When it's off, the sphere wets with the defaults (strength 100%, spread 1×, irregularity 0%, rotation 0 degrees). Changing the horizontal or vertical spread or the rotation yourself turns the customization on automatically. Some spheres in the recommended layout (such as the armpits) have custom values from the start.
+
+With **By property ▾**, you can reset items one at a time to their defaults (strength 100%, spread progress 1×, irregularity 0%, pattern 8 cm, center 50%, starting sweat 0%, horizontal and vertical 1×, rotation 0 degrees).
+
+### Shape: ball, line, curve {/* #shape */}
+
+Choose under **Shape** in **Shape and pattern**.
+
+{/* SHOT U23: Shape = Curve, Advanced coordinates with Start / End / Middle */}
+{/* SHOT S06: curve start point handles */}
+
+| Shape | Meaning |
+| --- | --- |
+| **Ball** | A sphere centered on one point. This is the default shape. |
+| **Line** | A thick rod (capsule) joining two points, **Start** and **End**. Its radius is the same as the ball size. Use it for areas that get wet in a long strip, such as the sides of the body. |
+| **Curve** | A rod bent by adding a **Middle** point to a line. Use it for areas that get wet in a curve, such as the underbust. |
+
+- When you choose Line or Curve, the sphere becomes a line about 10 cm long. In the Scene, move the start and end points (and the middle point for a curve) to shape it.
+- The start and end points each have a joint (bone) they follow. In **Advanced (coordinates / linking)**, you can edit the **Anchor** and the **Start** / **End** / **Middle** positions as numbers.
+- Choose **Ball** again and it turns back into a single sphere at the middle of that shape.
+
+### Advanced
+
+| Item | Meaning |
+| --- | --- |
+| **Name** | The name shown in the list, the Scene and the Hierarchy. Leave it empty to go back to the automatic name. |
+| **Mirror partner** | The sphere that forms its left-right pair. When **Symmetry** is on, changing one side changes its partner too. |
+| **Point behavior** | **Sweat focus** gathers wetness near the sphere. **Center concentration (%)** is used only with this behavior. **Legacy spread range** is the older behavior. You can switch spheres that use the older behavior with **Convert existing points to Sweat Focus…**. |
+
+## Create, duplicate and delete spheres {/* #create */}
+
+| Button | What it does |
+| --- | --- |
+| **+ Add start point** | Creates a new sphere next to the selected one. In a narrow window, it shows as **+ Add region**. |
+| **+ Left/right pair** | Creates two linked spheres at mirrored positions on the left and right. |
+| **Make opposite side** | For a side sphere with no partner, creates one on the opposite side with the same settings and links the two. A sphere in the center doesn't need a partner. |
+| **From a body part ▼** | Pick a part such as an elbow, a knee or the chest to create a start point on that bone. Parts that already have one show **(added)**. It appears only on Humanoid avatars. |
+| **Duplicate / delete / reset > Duplicate this point** / **Duplicate pair** | Duplicates the selected sphere (or pair). |
+| **Delete…** or the Delete key | Deletes after a confirmation dialog. For a pair, choose **This point only** or **Both linked points**. |
+
+Adding, duplicating and deleting can all be undone with Ctrl+Z.
+
+## Reset and re-layout {/* #reset */}
+
+{/* SHOT U24: Duplicate / delete / reset section and the layout buttons */}
+
+| Button | What it does |
+| --- | --- |
+| **Position** / **Size** / **Position + size** | Resets the position or size of the selected sphere (or the pair, with symmetry) to the default. Size includes the spread distance. |
+| **Save current position as default…** | Makes the current position and size this sphere's defaults. Resetting later returns it here. |
+| **Reset wetting properties** | Resets wetting properties such as strength, spread and pattern. |
+| **Reset all start points** | A menu that resets the position, size and properties of all spheres at once (**All positions…**, **All sizes…**, **All positions + sizes…**, **Reset wetting properties for all points…**). |
+| **Natural sweat layout…** | Replaces all current spheres with the recommended layout of the current version. Spheres you edited yourself change too, so please read the confirmation dialog before you run it. |
+| **Add Missing Sweat Points** | Keeps the current layout and adds only the spheres from the recommended layout that are missing. It appears only when spheres are missing. |
+
+- All of these can be undone with Ctrl+Z.
+- Spheres that are saved or that you moved yourself don't move just because you update. If the saved layout differs from the new recommended layout when you update, the setup window asks you to choose **Reset Wet Start Points** or **Keep Current Settings**.
+
+## Common adjustments {/* #tips */}
+
+| What you want | How |
+| --- | --- |
+| Stretch armpit sweat down to the sides | Raise the armpit sphere's **Vertical spread**, or change its shape to **Line** and move the end point down to the side. |
+| Make the middle of the back get wet faster | Raise **Wetness strength** or **Spread progress** on the middle-back sphere. |
+| Make some areas get wet only with heavy sweat | Raise that sphere's **Starts at sweat (%)** (for example, to 50%). |
+| Make the wetness under the chest curved | Change the underbust sphere to **Curve** and bend it with the middle point. |
+| Keep just one area dry | Turn off **Use this wet start** on that sphere. It isn't deleted, so you can turn it on again later. |
+| Loose clothes barely get wet | Rather than enlarging the sphere, try switching that part's **Fit Preset** to **Tight**. Water then reaches fabric that sits far from the body. |
+| Edit left and right together | Turn on **Symmetry** and edit one side only. |
+| You moved a sphere but nothing changed | Check whether the wet start mode is **From Where It Touches the Body**, and whether the in-game **Whole Area** is on. |
+
+{/* SHOT R11: armpit point default vs enlarged / moved */}
+
+:::tip[Change one thing at a time]
+After editing one sphere, check the preview at 50% and 100%, then please move on to the next sphere. If you change several at once, it's hard to tell which change made the difference.
+:::
+
+- There is no menu to turn individual start point spheres on or off in game. You edit start points in Unity.
+- Start points are for editing in Unity. They add no Colliders, PhysBones or Contacts to the game, and they don't add in-game calculation.
+- Changing a sphere prepares that outfit's wetness calculation again. The preview may briefly show the previous look.

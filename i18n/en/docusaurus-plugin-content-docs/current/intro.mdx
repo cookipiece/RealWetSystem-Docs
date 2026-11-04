@@ -1,0 +1,89 @@
+---
+id: intro
+title: RealWetSystem documentation
+slug: /
+description: The official RealWetSystem guide to installation, use, compatibility and troubleshooting.
+---
+
+# RealWetSystem
+
+<ProductName /> is a tool that adds a wet color, gloss and see-through effect to the clothes on VRChat PC avatars. You preview the wet look in Unity, and you adjust the wetness amount from the **Wet** menu in VRChat.
+
+:::info[Documented version]
+These docs are written for **<ProductName /> v1.0.0**. They describe a new install. An avatar you updated may still have settings from an earlier version.
+:::
+
+{/* SHOT R01: dry · 50 % · 100 %, default mode (replaces the BOOTH image below when it arrives) */}
+[![The same outfit dry, at 50% wetness and at 100% wetness](/img/booth/booth-dry-50-100.jpg)](/img/booth/booth-dry-50-100.jpg)
+
+*<small>The same outfit compared dry, at 50% wetness and at 100% wetness. This picture was taken with **Whole Area**, which makes the whole garment wet evenly. Click any image in this guide to see it larger.</small>*
+
+## What it does
+
+- Clothes get wet naturally, starting where you sweat or where they touch the body.
+- Wet areas take on a deeper version of their original color, with a watery gloss along the folds.
+- Thin clothes turn see-through where they are wet. On the chest and groin, **See-Through Protection** blocks only the see-through. Protected areas still get wet like everywhere else.
+- The wet look changes with the fabric type (cotton · knit · denim, polyester · satin · swimwear, or latex · vinyl · enamel).
+- You adjust the wetness amount, gloss, see-through strength and see-through protection right from the **Wet** menu in VRChat. Turn on **Whole Area** and the whole garment gets wet evenly, as if in the rain.
+- lilToon clothes and Poiyomi clothes (locked materials included) get wet with the same look.
+- What you see in the preview is what gets uploaded. It works with shaders only, so it adds no particles, PhysBones or Contacts.
+
+<ProductName /> works on its own. Use it with RealSweatSystem and the clothes get wet to match the sweat level on the skin. Use it with RealRainSystem and the rain-wet look is drawn on the same clothes too.
+
+## Before you start
+
+<ProductName /> needs the following.
+
+| Item | Supported |
+| --- | --- |
+| Editor | The Unity Editor on Windows. Purchase activation works only on Windows. |
+| Unity | Unity 2022.3 project for VRChat |
+| VRChat Avatars SDK | 3.10.0 or later, below 4.0 |
+| NDMF | 1.13.1 or later, below 2.0 |
+| Modular Avatar | 1.14.0 or later, below 2.0 |
+| Shaders | lilToon 2.3.0 or later, or Poiyomi Toon / Pro, to match your outfits |
+| Avatar | A Humanoid avatar. PC only; Quest and mobile are not supported. |
+| Purchase activation | [Purchase activation](./license-activation.mdx), done once per PC |
+
+For the full details, see [Compatibility](./compatibility.mdx).
+
+## Find what you need
+
+- **Install the fastest way:** [Quick start](./quick-start.mdx)
+- **Follow along step by step from the start:** [Beginner tutorial](./tutorial.mdx). It explains every option in the setup window, choosing outfits, the preview and the in-game menu.
+- **Activate your purchase:** [Purchase activation](./license-activation.mdx)
+- **Add and remove outfits, layer order:** [Outfit settings](./usage/outfit-settings.mdx)
+- **Change how and how far clothes get wet, the fabric and the see-through:** [Wetness settings](./usage/wet-settings.mdx)
+- **Move the spheres where sweat starts:** [Wet start points](./usage/wet-start-points.mdx)
+- **Block the see-through on the chest and groin:** [See-through protection](./usage/see-through-protection.mdx)
+- **Buttons you use in VRChat:** [In-game menu](./usage/in-game-menu.mdx)
+- **Clothes don't get wet, a warning appears, or a build takes a long time:** [Troubleshooting](./troubleshooting.mdx)
+- **Using it with optimization tools, RealSweat and RealRain; experimental features:** [Advanced features](./advanced.mdx), [Compatibility](./compatibility.mdx)
+- **Upload size and build time:** [Performance](./performance.mdx)
+- **Parameters, render queues, mesh data:** [Technical specifications](./technical-specifications.mdx), [What this tool changes on your avatar](./avatar-changes.mdx)
+
+If this is your first install, start with [Quick start](./quick-start.mdx). To learn what each option means, please read the [Beginner tutorial](./tutorial.mdx) as well.
+
+## There are three places to set things up
+
+| What you want to change | What to select |
+| --- | --- |
+| Adding and removing outfits; where and how much the whole avatar gets wet; start points and protection regions; the in-game menu | The **RealWet** object in the Hierarchy |
+| The wet look of one outfit, such as a shirt or a skirt | **This Outfit's Settings** on the outfit root |
+| Within one outfit, making only the ribbon less wet or only the top see-through | **Outfit Part Settings** on that mesh |
+
+These docs call them **RealWet**, **This Outfit's Settings** and **Outfit Part Settings**. **RealWet** has the **Outfit Management**, **Wetness Settings**, **In-Game Menu** and **Status** tabs.
+
+{/* SHOT U15: RealWet inspector, Outfit Management tab */}
+
+:::info[Builds never stop]
+<ProductName /> never stops a build or an upload. Only the parts it could not apply wetness to are uploaded with their original dry materials, and everything else gets wet as usual. For each part uploaded dry, the NDMF results window shows a warning with the outfit name and the reason.
+:::
+
+:::warning[Back up first]
+Please back up your avatar and project before you install or update.
+:::
+
+:::warning[Uninstall from the setup window]
+To remove <ProductName />, don't delete the `RealWet` object yourself. Please use the **Uninstall** tab in **CookiTools > RealWetSystem > Setup／Uninstall**. See [Uninstalling](./troubleshooting.mdx#uninstall).
+:::

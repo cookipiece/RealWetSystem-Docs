@@ -1,0 +1,299 @@
+---
+id: troubleshooting
+title: Troubleshooting
+description: A guide from symptoms to causes and fixes. Covers outfits that don't get wet, NDMF warnings, pink materials, purchase activation, long first builds, menus and parameters, updating and uninstalling.
+---
+
+# Troubleshooting
+
+Please start by finding your symptom in the table below. If a problem keeps coming back, testing with a single outfit makes the cause easier to find than changing several settings at once.
+
+## Quick symptom finder {/* #quick-find */}
+
+| Symptom | Where to look first |
+| --- | --- |
+| One outfit doesn't get wet at all | [An outfit doesn't get wet](#outfit-dry) |
+| Only part of an outfit stays dry | [Only some parts don't get wet](#partly-dry) |
+| The uploaded avatar shows none of the <ProductName /> effects | [Uploaded without purchase activation](#not-activated) |
+| A warning starting with `RealWet:` appears in the NDMF results window | [NDMF warnings](#ndmf-warnings) |
+| Clothes look pink | [Pink materials](#pink) |
+| Clothes get wet in the preview, but some lilToon outfits are dry in the upload | [PCSS4VRC replaced the materials](#pcss) |
+| Only Poiyomi outfits don't get wet | [Unsupported or unverified shaders](#shaders) |
+| The second avatar doesn't get wet | [Several avatars in one scene](#multiple-avatars) |
+| **Save the scene and try again** appears when you install or preview | [A new, unsaved scene](#unsaved-scene) |
+| The first build takes a long time with no window and seems frozen | [The first build takes a long time](#long-first-build) |
+| The first upload takes a long time | [The first upload takes a long time](#first-upload) |
+| Unity shows a **Hold on** window | [The Hold on window](#hold-on) |
+| The menu or synced parameters go over the limit | [The menu or parameters go over the limit](#over-limit) |
+| The **Wet** menu is missing in game | [The menu is missing](#menu-missing) |
+| Some outfits don't get wet when you press Play | [Some outfits don't get wet in Play](#play-not-ready) |
+| In the preview, only some materials keep their original look, with a texture limit message | [Texture limit](#texture-limit) |
+| 0 outfits registered after install | [0 outfits registered](#no-outfits) |
+| With RealSweat, the wetness amount snaps back when you change it | To adjust only the clothes, turn off **Link RealSweat**. [In-game menu](./usage/in-game-menu.mdx#items) |
+| Clothes still look wet after turning off RealSweat's **Sweat Display** | RealSweat's Sweat Display applies only to the sweat on the skin. Hide the clothes' wetness with **Show Clothing Wetness**. |
+| Underwear or decorations vanish at some angles | [Layer order](./usage/outfit-settings.mdx#layer-order) |
+| Dark shading remains where clothes show through | Check that part's shading relief and the in-game **SSAO Relief**. |
+| The body is missing where clothes show through | The outfit creator may have hidden the body with MA Shape Changer. [Advanced features](./advanced.mdx#ma-hidden-body) |
+| The chest or groin shows through | [See-through protection](./usage/see-through-protection.mdx#checking) |
+| You don't know what changed after an update | [Updating over an earlier version](#updating) |
+| You want to remove <ProductName /> | [Uninstalling](#uninstall) |
+
+## An outfit doesn't get wet {/* #outfit-dry */}
+
+| Cause | Fix |
+| --- | --- |
+| The outfit is not registered. | Check whether the outfit is in the list in **RealWet > Outfit Management**. If it isn't, add it with **Find Now** or **Add Outfit Manually**. |
+| **Use Wetness** is off on the outfit or part. | Turn on the check at the top of **This Outfit's Settings** and **Outfit Part Settings**. |
+| It's a part away from the body, such as hair or a prop. | With **From Sweat Spots**, only areas near the start points get wet. It's normal for hair not to get wet. To make it wet, turn on the in-game **Whole Area** or add a [start point](./usage/wet-start-points.mdx) near it. |
+| **Maximum Wet Range (%)** is low, or **This Material's Wet Look (%)** is 0%. | Check [Wetness settings](./usage/wet-settings.mdx#range) and the part's slot card. |
+| The shader is not supported. | The part card shows **RealWet does not support this shader (…), so this part does not get wet.** See [Compatibility](./compatibility.mdx#shaders). |
+| It is dry only in builds. | Look at the warning in the NDMF results window. See [NDMF warnings](#ndmf-warnings). |
+| The whole uploaded avatar has no effects. | See [Uploaded without purchase activation](#not-activated). |
+
+On **No See-Through** outfits, it is normal that the body doesn't show through. Please check the wetness by whether the color and gloss change. Protection regions don't block wetness; they block only the see-through.
+
+## Only some parts don't get wet {/* #partly-dry */}
+
+| Cause | Fix |
+| --- | --- |
+| The spot is out of sweat's reach (sleeve ends, skirt hems and so on). | This is normal. Raise the range, add a start point near it, or use **Whole Area**. |
+| It's loose fabric far from the body. | Switch that part's **Fit Preset** to **Tight**. |
+| Only that part's material uses an unsupported shader. | That part keeps its original look. Switch to a supported shader, or leave it as it is. |
+| Only materials switched by a wardrobe animation stay dry. | Add that material to **This Outfit's Settings > Troubleshooting > Additional Replacement Materials**. |
+| An optimization tool merged or copied parts. | **RealWet: only some outfit parts remain dry** appears in the NDMF results window. See the table below. |
+| You moved one piece of the outfit out of the outfit root. | Move it back under the outfit root and it gets wet again. When you build, the Console shows the name of the moved piece. |
+
+## NDMF warnings {/* #ndmf-warnings */}
+
+<ProductName /> never stops a build. Only the parts it could not apply wetness to are uploaded with their original dry materials, and a warning is left in the NDMF results window. The full error is in the Unity Console. Your saved wet settings and original materials don't change, and RealWet tries again on the next build.
+
+{/* SHOT U27: NDMF window with a RealWet warning */}
+
+| NDMF warning | Meaning | What to do |
+| --- | --- | --- |
+| **RealWet: some clothing remains dry** (while uploading, **RealWet: some clothing is uploaded without wetness**; during Play, **RealWet: some clothing is shown without wetness in this Play**) | Only the named outfits are uploaded without wetness and without rain. The other outfits are fine. | Look at the reason in the warning. If Unity was compiling when you built, build again after it finishes. If you can't tell the reason, copy the diagnostic report and contact us. |
+| **RealWet: only some outfit parts remain dry** | Another tool created, copied, split or merged parts, or an animation switches to a material that doesn't get wet. Only that part (or that state) is dry. | Check the settings of the tool named in the warning. If an optimizer merged several outfits into one mesh, leave that mesh out of the merge or group them as one outfit. |
+| **RealWet: some parts may appear magenta (pink) to everyone** | Some parts can't be put back to their original materials. RealWet doesn't hide them; it leaves them as the build left them. | See [Pink materials](#pink). |
+| **RealWet: Poiyomi … has not been verified yet** | The structure of the installed Poiyomi differs from what <ProductName /> knows. Outfits using that shader are built dry. | You can use this build as it is. Wait for a <ProductName /> update, or use a verified Poiyomi version. |
+| **RealWet: Poiyomi with an added shader module ('…') is not supported yet** | A module turned on in Poiyomi's **Poi > Installed Modules** is included in the shader. Poiyomi outfits are built dry. | Turn that module off and build again. |
+| **RealWet: parts whose materials PCSS4VRC replaced are uploaded dry** | PCSS4VRC replaced lilToon materials with `_pcss` materials in the first build step. | See [PCSS4VRC replaced the materials](#pcss). |
+| **RealWet: check the clothing draw order** | Some layered parts have no set front-to-back order. The build did not stop. | In that outfit's **Planned order · inside → outside** list, drag one of the named parts. [Layer order](./usage/outfit-settings.mdx#layer-order) |
+| **RealWet: some renderers were kept out of AAO automatic mesh merging** | For information. RealWet left one of them out so that AAO doesn't merge parts it can't process together. | Nothing to fix. The mesh count may grow a little. |
+| **RealWet: d4rk Avatar Optimizer rewrote wet parts that RealWet could not put back** | A d4rk setting that rewrites shaders changed wet parts. | Turn off that d4rk setting or add the parts to d4rk's Exclusions, then upload again. |
+| **RealWet: rain wetness is off on some clothing** | RealRain's rain data couldn't be used on that slot. The regular wetness stays. | Follow the `[vertex order changed]`, `[no vertex index]` or `[not verified]` explanation in the warning. Usually, updating RealWet and RealRain to the latest versions fixes it. |
+| **RealWet: a wetness feature was turned off for some parts** | Just one feature, such as pose wetness, was turned off for this build. The regular wetness stays. | Follow the reason in the warning (for example, a blendshape was changed by another tool). |
+| **RealWet: a later upload step changed RealWet's output** | A tool that runs at the very end of the upload (for example, VRCFury Parameter Compressor) changed the wet materials or parameters. | Check in game, and if something looks wrong, copy the diagnostic report and contact us. |
+| **RealWet: a renderer was left without wetness because its outfit is unclear** | For information. The part was made by another tool, so RealWet couldn't tell which outfit it belongs to. | If the part should get wet, check the tool that made it. |
+| **RealWet: the last upload check could not run** / **RealWet: the final wetness coverage check could not finish** | The earlier checks passed, and the upload continues. Changes after that point could not be checked. | Check the outfits on the uploaded avatar. |
+| `Could not check the D3D11 texture limit` | The shader's texture count could not be checked. | See [Texture limit](#texture-limit). |
+
+- These warnings don't stop the build. If the build did stop, please check the **first red error** in the Console separately. The final `Build was aborted` alone doesn't tell you the cause.
+- If an outfit that shows the body again (**Restore MA-Hidden Body for This Outfit**) is uploaded dry, the body may show through the clothes when you move. The warning says so. To hide the body, please turn off that option and build again.
+
+## Pink materials {/* #pink */}
+
+| Cause | Fix |
+| --- | --- |
+| The original material itself has no shader (Missing) or is pink. | This is unrelated to <ProductName />. First install or restore the shader the outfit creator specified. |
+| One shader pass uses more than 64 textures. | Reduce the texture features that material doesn't use (MatCap, emission, decals and so on), then build again. [Texture limit](#texture-limit) |
+| d4rk merged and rewrote the wet shaders. | Turn off d4rk's **Write Properties as Static Values**, **Shader Toggles**, **Merge Different Property Materials** and **Merge Same Dimension Textures**, or add those parts to d4rk's Exclusions. |
+| The cache doesn't match right after a shader update. | Run the preview or build once more. The needed shaders are prepared again automatically. You don't need to delete the cache folder first. |
+
+<ProductName /> doesn't hide parts that may turn pink, because hiding clothes could expose the body. Instead, it leaves a warning in the NDMF results window.
+
+## Uploaded without purchase activation {/* #not-activated */}
+
+If you upload from a PC that is not activated, the <ProductName /> effects are quietly left out of the upload. The build doesn't fail, and no window appears.
+
+- The wet look still shows in Unity's preview and in Play. It is left out only on the uploaded avatar.
+- A one-line warning starting with `RealWetSystem: this PC is not activated, so the … effects are left out when you upload.` appears in the Console.
+- A notice and an **Open activation window** button appear right below the Avatar field of the setup window.
+- <ProductName /> also draws clothes getting wet in RealRain's rain, so that is left out too.
+
+**Fix:** Please activate in **CookiTools > RealWetSystem > Purchase Activation**, then upload again. [Purchase activation](./license-activation.mdx)
+
+## PCSS4VRC replaced the materials {/* #pcss */}
+
+On avatars that use PCSS4VRC, PCSS4VRC replaces lilToon materials with `_pcss` materials in the first build step. So parts that are wet in the preview may not be wet in the upload.
+
+- For these parts, a **This part does not get wet when uploaded** notice and a button to turn the feature on right away appear above the outfit or part preview, and a single NDMF warning reports it when you build.
+- **Fix:** In **Advanced settings > Experimental** in the setup window, turn on **PCSS4VRC (lilToon)** support and press **Update**. PCSS outfits then get wet too. It is an experimental feature, so please read [Advanced features](./advanced.mdx#experimental) first.
+- Parts that use lilToon custom shaders, which PCSS4VRC doesn't replace, get wet in the upload too.
+
+## Unsupported or unverified shaders {/* #shaders */}
+
+| Case | Result and fix |
+| --- | --- |
+| Other shader families such as Sunao, UnityChanToon and UTS | No wetness is added; they are uploaded with their original look. |
+| Poiyomi Fur, Grab Pass, Poiyomi copied outside its package, custom shaders with merely similar names | Left with their original look. |
+| lilToon Fur, Gem, lilToon modified by the user | Left with their original look. |
+| lilToon Refraction / RefractionBlur | Adds only the wet color and gloss. No extra see-through is added. |
+| A Poiyomi version that hasn't been verified yet | Only outfits that use that shader are built dry, and an NDMF warning appears. Please wait for a <ProductName /> update. |
+| Locked Poiyomi materials | They get wet if the original shader information can be found. If not, a notice appears. |
+| You turned on the <ProductName /> internal module in Poiyomi 11's **Poi > Installed Modules** | Don't turn it on. If you do, Poiyomi clothes don't get wet. |
+
+The tested shader versions are listed in [Compatibility](./compatibility.mdx#shaders).
+
+## Several avatars in one scene {/* #multiple-avatars */}
+
+<ProductName /> works separately for each avatar. Even with several avatars in the same scene, they don't use each other's settings.
+
+- You need to install separately on each avatar. Please check that the **Avatar** field in the setup window shows the avatar you mean.
+- If one avatar has two or more `RealWet` objects, **Duplicate Error** appears. Please keep only one.
+- If an outfit copied from another avatar points to that avatar's body or bones, the preview tells you what points to which avatar and how to fix it.
+- Please make sure the first thing you checked on the second avatar isn't a part that rarely gets wet anyway, such as hair. Checking clothes that touch the body, such as a shirt, first makes the difference easier to see.
+- NDMF and Modular Avatar were verified with their stable releases. If you use a pre-release (beta), please switch to the stable release and check again.
+
+## A new, unsaved scene {/* #unsaved-scene */}
+
+If **The avatar does not have a stable scene identity. Save the scene and try again.** appears, the avatar is in a new scene (Untitled) that has never been saved.
+
+**Fix:** Save the scene with **File > Save**, then please install or preview again.
+
+## The first build takes a long time {/* #long-first-build */}
+
+On the first build or the first preview, RealWet creates the wet shaders and Unity compiles them. An avatar with many materials can take **tens of minutes**. During this time, the Unity window barely moves, so it can look frozen.
+
+{/* SHOT U28: build progress bar */}
+
+1. **Please wait.** During the upload, the progress bar shows the step, the count and the outfit name, such as `RealWet: Calculating outfit shape (3/22) · outfit name`. While Unity itself compiles shaders, the progress bar may stay the same for a long time.
+2. **Check the CPU in Task Manager.** If Unity or `UnityShaderCompiler` is using the CPU, it is still working. Please don't close it; wait.
+3. Treat it as frozen only when the CPU stays near 0% for several minutes and the progress bar doesn't change. In that case, please note the first red error in the Console and how long you waited, and contact us.
+
+- From the second build on, the shader cache made in the first build is reused, so it is much shorter.
+- It takes longer when the PC is busy, such as while streaming or recording. It's best to do the first build ahead of time, while the PC is idle.
+- You can prepare ahead of the build with **RealWet > Outfit Management > Prepare Needed Outfits**.
+
+For typical times, see [Performance](./performance.mdx#build-time).
+
+## The first upload takes a long time {/* #first-upload */}
+
+The first upload takes long because, on top of the same shader preparation as the first build, the VRChat SDK compiles shaders and compresses the upload file.
+
+- Each wet material includes wet shaders, so the upload file gets bigger and compression takes time too. See [Performance](./performance.mdx#upload-size).
+- The time Poiyomi takes to lock materials during upload is added too.
+- From the second upload with the same settings, it gets shorter.
+
+## The Hold on window {/* #hold-on */}
+
+Unity's **Hold on** window means Unity is asking you to wait until it finishes its work.
+
+| When | Cause and fix |
+| --- | --- |
+| The first preview, the first build, right after a shader update | The wet shaders are being prepared. Please wait. |
+| Right after importing a package | Unity is importing scripts and shaders. Please wait. |
+| While Unity is in front and you're doing nothing | <ProductName /> prepares ahead only while Unity is in the background. If the window still appears, it may be work by another tool or by Unity itself. |
+| When you come back to Unity from another app | It is the short moment while the advance preparation stops. Shader preparation that can't be interrupted midway starts only when Unity has been in the background for more than 3 minutes. |
+
+If **Hold on** keeps appearing for a long time on the same action, please note that action and the Console contents, and contact us.
+
+## The menu or parameters go over the limit {/* #over-limit */}
+
+VRChat allows up to **256 bits** of synced parameters per avatar. The <ProductName /> recommended menu is 87 bits. If the total goes over the limit together with RealSweatSystem or other tools, the VRChat SDK blocks the upload.
+
+1. Check how much <ProductName /> uses in **Runtime Parameter Cost** in **RealWet > In-Game Menu**.
+2. Uncheck dials you don't use. Each dial is 8 bits, and each toggle is 1 bit. For example, removing **Spread Wetness Wider**, **Wet Edge** and **Wet Appearance** saves 24 bits.
+3. Press **Apply / Update Runtime Menu** and build again.
+
+- Features whose buttons you removed keep working with the values set in Unity.
+- One menu page has 8 slots. When there aren't enough slots, <ProductName /> creates a **Next** page and doesn't add to the main menu.
+- You can also use a parameter compression tool such as VRCFury Parameter Compressor. If the compression tool changes the wet parameters, the NDMF results window tells you.
+
+## The menu is missing {/* #menu-missing */}
+
+1. Look for **Wet** in the main menu (**젖음** in Korean, **濡れ** in Japanese).
+2. If you moved the menu, look inside the menu set in the **MA Menu Installer** on the `RealWet` object.
+3. In **RealWet > In-Game Menu**, press **Apply / Update Runtime Menu**.
+4. Build again and check that avatar. If the build failed, you may be looking at the previous avatar.
+
+- If the menu files are gone, <ProductName /> recreates and reconnects them when you open a saved scene. The Console shows **RealWet's in-game menu file was missing, so RealWet made it again and linked it. Save the scene to keep it.**, so please save the scene.
+- If you moved the menu yourself or replaced it with another menu, <ProductName /> leaves that menu alone. To recreate it, delete the **MA Menu Installer** on the `RealWet` object, then please press **Repair Runtime Menu** in the **In-Game Menu** tab.
+- If the menu shows in another language, choose the language you want in Unity, update the menu, and please build again.
+- If the menu buttons are there but the icons are missing, please import the package's `Icons` folder again, then update the menu. The features still work.
+
+## Some outfits don't get wet in Play {/* #play-not-ready */}
+
+If an outfit is not prepared yet when you press Play, <ProductName /> holds Play for a moment and prepares that outfit. When preparation finishes, Play starts automatically.
+
+{/* SHOT U29: Game view overlay before Play */}
+
+- Press Play again while it waits to start right away. Outfits that are not prepared then stay dry for that Play only.
+- After you stop Play, RealWet prepares those outfits first, and they get wet from the next Play.
+- An avatar that was turned off when Play started and turned on during Play doesn't get wet in that Play. Please keep the avatar turned on and press Play again.
+
+## Texture limit {/* #texture-limit */}
+
+On PC, Unity and VRChat can draw only up to 64 textures used by one shader pass. Poiyomi materials with many features turned on use the unlocked shader in the preview, so adding wetness can go over this limit.
+
+- Those slots are previewed with their original look instead of turning pink, and a message appears.
+- VRChat PC uploads lock the shader first, so these slots are usually uploaded wet.
+- If the final shader in the upload also goes over the limit, only that material goes back to its original dry material. The upload doesn't stop.
+- To keep the wetness, please reduce the texture features that material doesn't use (MatCap, emission, decals and so on), then build again.
+
+## 0 outfits registered {/* #no-outfits */}
+
+1. Check that you selected the `RealWet` under the avatar you installed on.
+2. Press **Outfit Management > Find Outfits Automatically > Find Now**.
+3. For clothes that are missing, put the outfit root from the Hierarchy into **Add Outfit Manually** and press **Add**.
+
+- `EditorOnly` outfits are not searched by default.
+- If an outfit root is inside a body or face mesh object, it may not be registered. See [Outfit settings](./usage/outfit-settings.mdx).
+- Outfits you removed with **×** are not added again automatically. Please add them manually.
+
+## Preview problems
+
+| Symptom | Fix |
+| --- | --- |
+| It doesn't start at all | Check that **Tools > NDM Framework > Enable Previews** is on and that you are in Edit Mode. |
+| It takes a long time | Check the current step in the Inspector. The first time takes long because of shader preparation. You don't need to press the button again. |
+| **Paused - return to Unity** | You only switched to another app. It continues when you return to Unity. |
+| It turns off midway | It ends when you select an unrelated object, or when Play, a build or a script reload happens. Just start it again. |
+| It keeps saying preparation is needed | Changing the start mode, regions, the outfit's shape or shaders needs preparation again. If it repeats even though you changed nothing, note the outfit name and the reason, and contact us. |
+
+## Updating over an earlier version {/* #updating */}
+
+1. Please back up your project before updating.
+2. Don't delete the `Assets/CookiTools/RealWetSystem` folder; please import the new package right over it. You don't need to uninstall first.
+3. If red errors remain in the Console right after importing, please restart Unity once.
+4. In the setup window, press **Update** for each avatar.
+5. The first preview or build prepares the wet shaders again, so it takes long once.
+
+- Your saved settings, start points and protection regions stay as they are.
+- Only old default looks you never touched switch once to the new default look. When that happens, a notice and **Revert...** appear in **RealWet > Outfit Management**.
+- If the saved start point layout differs from the new recommended layout, updating asks you to choose **Reset Wet Start Points** or **Keep Current Settings**. If you're not sure, please choose **Keep Current Settings**.
+- To use the new recommended protection shape, see [Protection regions after an update](./usage/see-through-protection.mdx#after-update).
+
+The detailed steps are in the [Changelog](./update-changelog.mdx#how-to-update).
+
+## Uninstalling {/* #uninstall */}
+
+- **Remove just one outfit:** Press **×** on that outfit's row in **RealWet > Outfit Management**, or turn off **Use Wetness**. The clothes themselves stay.
+- **Remove everything from the avatar:** Press **Uninstall — Remove** in the **Uninstall** tab of **CookiTools > RealWetSystem > Setup／Uninstall**. It cleans up the `RealWet` object and everything under it, the <ProductName /> components on your outfits, and this install's menu files. Your outfits, body and original materials stay.
+- Don't put other outfits or tools under the `RealWet` object. They are deleted along with it when you uninstall.
+- The first install, full uninstall, and creating, updating or deleting the in-game menu cannot be undone with Ctrl+Z.
+- To remove the package from the project too, first run **Uninstall — Remove** on every avatar, then please delete the `Assets/CookiTools/RealWetSystem` folder.
+
+## Contact us {/* #support */}
+
+Press **Copy Diagnostic Report** in **RealWet > Status > Troubleshooting** to copy, all at once, the versions of <ProductName />, Unity, related tools and shaders, this avatar's settings, the status of each outfit, and recent Console logs.
+
+{/* SHOT U18: Status tab, Copy Diagnostic Report */}
+
+- Nothing is sent automatically. Personal folder paths are replaced with `<Project>` and `<User>`.
+- If the build stopped, please also send the whole first red error from the Console.
+- For purchase activation problems, please press **Copy report** in the activation window and send that. Your order number is not included.
+- You don't need to edit code or delete the whole `Generated` folder.
+
+Please contact Cooki through the store where you bought it (such as BOOTH's shop messages). You can copy and use the template below.
+
+```text
+RealWetSystem version:
+Unity / VRChat SDK / NDMF / Modular Avatar versions:
+Shaders and versions (lilToon / Poiyomi):
+Avatar and outfit names:
+Tools used together (RealSweat, RealRain, AAO, d4rk, TTT, VRCFury, etc.):
+Which stage (install / preview / Play / build / in game):
+Steps to reproduce:
+Diagnostic report:
+First red error in the Console:
+```

@@ -1,0 +1,195 @@
+---
+id: see-through-protection
+title: See-through protection
+description: The protection regions that block see-through on the chest and groin, the recommended layout, shapes and properties, reset buttons, and the in-game range and strength dials.
+---
+
+# See-through protection
+
+Thin clothes show through when wet. **See-Through Protection** is a feature that blocks only that see-through in areas that must not show through, such as the chest and groin. This page explains what protection regions are, how they are placed, how to fine-tune them, and how to adjust them in game.
+
+{/* SHOT S03: Scene, the four recommended protection capsules, front */}
+
+## What protection regions do {/* #what-it-does */}
+
+- A protection region is an area shaped as a sphere, capsule or box. It is a marker used only in Unity, and it adds no objects, Colliders or PhysBones to the game.
+- **Protected areas get wet like everywhere else.** The wet color, gloss, spread and wetting time stay the same. Protection blocks **only the see-through** that <ProductName /> adds through wetness.
+- It does not fill in parts that are transparent in the original material (lace, holes, dissolve). The original transparency stays as it is.
+- On clothes that don't show through (**No See-Through (Thick Fabric)**), or while see-through is off, there is no see-through to block, so protected areas look the same as everywhere else.
+- Protection regions keep protecting even when you turn on the in-game **Force See-Through When Wet** and **Whole Area**.
+
+## Global and per-outfit protection regions {/* #global-and-per-outfit */}
+
+| Type | Where it is | What it applies to |
+| --- | --- | --- |
+| **Global protection regions** (avatar-wide) | **RealWet > Wetness Settings > Private Area Protection** and the **See-through protection** tab of the **Wet / Protection Region Editor** | Applies to every outfit on this avatar. Follows the in-game **Private Area Protection** switch and dials. The 4 recommended regions of a new install go here. |
+| **Per-outfit protection regions** (older method) | **RealWet > Wetness Settings > Additional Settings > Legacy Outfit Compatibility** | Applies only to that outfit. These are regions made separately for each outfit in the past. They always apply, regardless of the in-game switch. |
+
+- Every protection region you create now is a global protection region. Usually, global protection regions are all you need.
+- You can move per-outfit protection regions to global by pressing **Move to avatar-wide protection…** in the legacy editor. Please read the confirmation dialog before you run it. You can undo it with Ctrl+Z.
+
+## The 4 recommended protection regions {/* #recommended */}
+
+On a new install, if **Add Chest & Groin See-Through Protection Regions** is checked in the setup window (the default), <ProductName /> creates the following 4 regions, fitted to this avatar's body.
+
+| Name | What it covers |
+| --- | --- |
+| **Chest See-Through Protection (Left)** / **Chest See-Through Protection (Right)** | The areola and the area around it |
+| **Groin See-Through Protection (Front)** / **Groin See-Through Protection (Back)** | The middle of the crotch |
+
+{/* SHOT S04: Scene, recommended capsules, side view */}
+
+- All of them are **small capsules** facing the front of the avatar. Seen from the front, each is a round area, and its edge fades smoothly regardless of clothing folds or front-to-back distance.
+- The chest capsules reach deep front to back, so they cover loose tops too. The front groin capsule reaches the outermost clothes worn in front of the groin (such as a skirt).
+- They are deliberately small. To block a wider area on very see-through clothes, please raise the in-game **See-Through Protection Range** or make them bigger in the editor.
+
+### How they are placed automatically {/* #placement */}
+
+The chest protection regions find their spot in the following order. Each method is used only when the one before it can't be used.
+
+1. **Nipple shape key:** If the body mesh has a nipple shape key, RealWet uses the two spots that key moves. It uses them only when the two spots are small, mirror each other left and right, and sit on the front of the chest. Shrink and hide keys made for clothing are not used.
+2. **Breast bones:** If there is no such key, RealWet uses the frontmost skin moved by the breast bones. When there are breast bones, the protection regions move with them.
+3. **Torso:** If there are no breast bones either, RealWet sets the spot at 70% of the height from the hips to the shoulders, using the torso width without the arms and the front skin. Avatars with a flat chest (such as male bodies) are placed this way too.
+
+{/* SHOT S05: flat-chest avatar, torso fallback placement */}
+
+- For a body mesh with no chest skin because the body under the clothes was deleted, the region goes midway between the torso layers (innermost and outermost) of the outfits being worn.
+- The less certain the method, the slightly larger the protection region.
+- The groin protection regions are fitted to the groin crease and crotch skin found from the body mesh's bone weights. If those can't be found, the regions are placed relative to the Hips bone.
+- If the body mesh can't be read, the regions are placed relative to the bones.
+
+:::tip[The automatic layout is a starting point]
+The automatic layout fits most avatars, but it may be slightly off depending on the body shape. After installing, please preview see-through clothes at 100% at least once and check them from the front, side and back.
+:::
+
+## Edit protection regions {/* #editing */}
+
+1. Open **RealWet > Wetness Settings > Private Area Protection**.
+2. Press **Edit Protection...**. The **Wet / Protection Region Editor** opens on the **See-through protection** tab. **Edit Protection...** on the outfit screen opens the same editor.
+3. Pick a region in **Selected region** at the top, or open **List / search** to find one. You can also click a name label in the Scene.
+4. In the Scene, move with W, rotate with E and resize with R.
+
+{/* SHOT U25: region editor, See-through protection tab, Shape popup open */}
+
+### Properties
+
+| Item | Meaning |
+| --- | --- |
+| **Name** | The name shown in the list, the Scene and the Hierarchy. Leave it empty to go back to the automatic name. |
+| **Use this protection** | When off, this region doesn't protect the clothes. The region stays. |
+| **Shape** | Choose from **Sphere**, **Capsule** and **Box**. A sphere has no rotation, and a capsule stretches along its local Y axis. |
+| **Radius (cm)** | The radius of a sphere or capsule. Inside it, see-through is fully blocked. |
+| **Total height (cm)** | The length of a capsule, including the rounded parts at both ends. |
+| **Box size (cm)** | The width, height and depth of a box. |
+| **Soft edge (cm)** | The width outside the shape over which protection fades out. 0–5 cm. The wider it is, the less the protected spot stands out. |
+| **Edge blotches (%)** | 0% gives a smooth border. Raise it and only the outer faded part becomes irregular. The fully blocked inside doesn't shrink. The recommended regions use 0%. |
+| **Advanced (coordinates / linking)** | Edit the **Anchor** (the bone the region moves with), **Local position (m)**, **Local rotation** and **Mirror partner** yourself. |
+
+- Sizes are shown in cm and ratios in % on every screen.
+- A newly added region starts as a **Sphere** with a 4 cm radius, **Soft edge** 1.2 cm and **Edge blotches** 65%.
+- Spheres, capsules and boxes all block see-through in the same way. There is no separate protection method to choose.
+
+### Create, duplicate and delete
+
+| Button | What it does |
+| --- | --- |
+| **+ Add protection region** | Creates a new region next to the selected one. |
+| **+ Left/right pair** | Creates two linked regions at mirrored positions on the left and right. |
+| **Make opposite side** | For a side region with no partner, creates one on the opposite side with the same settings and links the two. |
+| **Symmetry** | When on, moving or changing one side changes the other side too. The switch in the editor and the switch in the Scene panel are the same switch. |
+| **Duplicate / delete / reset > Duplicate this region** / **Duplicate pair** | Duplicates the selected region (or pair). |
+| **Delete…** or the Delete key | Deletes after a confirmation dialog. For a pair, choose **This region only** or **Both linked regions**. You can undo it with Ctrl+Z. |
+
+### Reset buttons {/* #reset */}
+
+Open **Duplicate / delete / reset** to find the reset buttons.
+
+| Button | What it resets |
+| --- | --- |
+| **Reset position** | Only the position and rotation. |
+| **Reset size** | The radius, height, box size and **Soft edge**. The fade width is part of the size, so resetting the position alone doesn't change it. |
+| **Position + size** | Both. |
+| **Save current position as default…** | Makes the current position and size this region's defaults. Resetting later returns it to this position and size. |
+
+- Recommended regions go back to the recommended layout found again on the current body. Regions you made yourself go back to the position and size saved when you made them.
+- When **Symmetry** is on, both linked sides go back to their own defaults.
+- Every reset can be undone with Ctrl+Z.
+
+### Recreate missing recommended regions {/* #add-missing */}
+
+{/* SHOT U26: create regions hint and add-missing button */}
+
+- If you deleted some of the recommended regions, press **Add Missing Global Recommended Regions** in **RealWet > Wetness Settings > Private Area Protection**. It recreates only the missing ones and leaves the remaining regions as they are. When all 4 are there, the button is grayed out.
+- If the in-game switch exists but there are no protection regions at all, the same place shows **There are no chest & groin see-through protection regions.** and a **Create Chest & Groin See-Through Protection Regions** button. Press it to create the 4 recommended regions. You can undo it with Ctrl+Z.
+
+## On from the start in game {/* #start-value */}
+
+**Private Area Protection On from the Start in Game** in **RealWet > Wetness Settings > Private Area Protection** decides whether protection is on when the avatar loads.
+
+- It is on in a new install.
+- The in-game **Private Area Protection** switch does not save your choice. Every time the avatar loads, it starts at this value.
+- If the in-game menu has no switch, protection stays at this value.
+- This setting never creates or deletes protection regions. The Unity preview follows the same value.
+- When you change the value, <ProductName /> updates the starting value in its own in-game menu right away. To include it in the upload, please build again.
+
+## In-game dials: range and strength {/* #dials */}
+
+New installs and the recommended set include the **Wet > See-Through Protection** page. The page has the **Private Area Protection** switch and two dials.
+
+{/* SHOT M03: See-Through Protection page */}
+
+### See-Through Protection Range (50% = Standard) {/* #range-dial */}
+
+Changes **how wide** an area protection blocks.
+
+| Value | Result |
+| --- | --- |
+| **0%** | Blocks almost nothing. No area is fully blocked, and only a faint trace remains at the center of the region. |
+| **50%** (default) | Blocks exactly the protection regions you see in Unity. |
+| **100%** | Blocks a wide area beyond the region. It fully blocks out to 0.8 times the **Soft edge** width beyond the shape, and fades out at 2.9 times. Use it for very see-through clothes. |
+
+{/* SHOT R06: protection range 0 / 50 / 100 %, worst case, inner layer under the shirt */}
+
+- Values in between blend smoothly.
+- A region with **Soft edge** at 0 doesn't get wider even at 100%.
+
+### See-Through Protection Strength (100% = Full Block) {/* #strength-dial */}
+
+Changes **how strongly** protection blocks.
+
+| Value | Result |
+| --- | --- |
+| **100%** (default) | Blocks fully. |
+| **50%** | Only about one third of the unblocked see-through shows. |
+| **0%** | Doesn't block. This is the same as turning the switch off. |
+
+{/* SHOT R07: protection strength 0 / 50 / 100 % */}
+
+- The strength follows a curve, not a straight line. Halving the blocking brings back much more than half of the see-through, so it is tuned so that 50% gives about one third.
+
+### What both dials have in common
+
+- Both dials change only the see-through that protection regions block. They don't change the wet color, gloss or how clothes get wet.
+- When the **Private Area Protection** switch is off, nothing is protected, whatever the dial values.
+- Both dials are saved and synced, and each uses 8 bits.
+- Avatars without the dials, and the default values (range 50%, strength 100%), block exactly the protection regions you placed. The Unity preview uses these defaults too.
+- On avatars with neither protection regions nor the switch (installed with **Add Chest & Groin See-Through Protection Regions** turned off in the setup window), the dials are not created.
+- If an avatar you already installed has no dials, please turn on the two items in **RealWet > In-Game Menu**, press **Apply / Update Runtime Menu**, then build again.
+
+## Protection regions after an update {/* #after-update */}
+
+- Updating **keeps the position, size and shape of saved protection regions**. Values you changed yourself stay too.
+- To use the new version's recommended shape (small capsules facing forward), please select the recommended regions one at a time and press **Reset size**. To also move them to the new recommended spots, press **Position + size**. With symmetry on, the pair changes together.
+- Updating does not create new protection regions. If the in-game switch exists but there are no regions, please see [Recreate missing recommended regions](#add-missing) above.
+
+## How to check {/* #checking */}
+
+1. Select a see-through outfit and press **Start Whole Outfit Wetness Preview**.
+2. Raise the preview wetness to **100%**.
+3. Check **Whole Area (in-game menu)** to see the most see-through state, with the whole garment wet.
+4. Check the chest and groin from the front, side and back.
+5. If protection falls short, move or enlarge the region, then check again.
+
+:::note[Clothes can show through more in game]
+If you raise the in-game **See-Through Strength** to 100% or choose **Force See-Through When Wet**, clothes show through more than in the Unity preview. Protection regions still block then, but areas outside them look more see-through. After uploading, please check once in game too.
+:::

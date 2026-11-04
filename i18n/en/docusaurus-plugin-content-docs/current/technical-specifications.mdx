@@ -1,0 +1,131 @@
+---
+id: technical-specifications
+title: Technical specifications and known limitations
+description: Supported environment, synced parameters, render queues, mesh data, limits and known limitations of RealWetSystem v1.0.0.
+---
+
+# Technical specifications and known limitations
+
+This page sums up, in numbers, what <ProductName /> v1.0.0 adds to an avatar and how. You don't need to read it for everyday use.
+
+## Supported environment {/* #environment */}
+
+| Item | Supported |
+| --- | --- |
+| Editor | The Unity Editor on Windows (purchase activation is Windows only) |
+| Unity | Unity 2022.3 for VRChat |
+| VRChat Avatars SDK | 3.10.0 or later, below 4.0 |
+| NDMF | 1.13.1 or later, below 2.0 |
+| Modular Avatar | 1.14.0 or later, below 2.0 |
+| Shaders | lilToon 2.3.0 or later (tested with 2.3.4), Poiyomi Toon / Pro (tested versions in [Compatibility](./compatibility.mdx#shaders)) |
+| Avatar | Humanoid avatars. A new install is blocked if the avatar is not Humanoid. |
+| Platform | PC avatars using Direct3D 11. Quest and mobile are not supported. |
+
+## How it works {/* #how-it-works */}
+
+- Where clothes get wet, the spread, the protection mask and the distance to the body are calculated ahead of time in Unity and stored in meshes and textures.
+- In game, the wet shaders read that data and the menu values to draw the look. No particles, PhysBones, Colliders or Contacts are added.
+- The preview and the upload use the same settings and the same calculation.
+- The NDMF plugin name is **RealWetSystem**.
+
+## Synced parameters {/* #parameters */}
+
+Only the parameters of the menu items you choose are added to the avatar.
+
+| Menu | Parameter | Sync | Saved | Starting value |
+| --- | --- | --- | --- | --- |
+| Wetness Amount (standalone) | `Cooki/ClothWetAmount` | 8 bits | Saved | 0% |
+| Show Clothing Wetness | `Cooki/ClothWetEnable` | 1 bit | Saved | On |
+| Link RealSweat | `Cooki/ClothWetSweatLink` | 1 bit | Saved | On |
+| Wetness Amount (Unlinked) | `Cooki/ClothWetManualAmount` | 8 bits | Saved | 0% |
+| Maximum Wet Range (%) | `Cooki/ClothWetProgressLimit` | 8 bits | Saved | Unity setting |
+| Spread Wetness Wider (Advanced) | `Cooki/ClothWetRangeExpansion` | 8 bits | Saved | 0% |
+| Wet Appearance (50% = Standard) | `Cooki/ClothWetAppearance` | 8 bits | Saved | 50% |
+| Wet Gloss (50% = Standard) | `Cooki/ClothWetGloss` | 8 bits | Saved | 50% |
+| Wet Edge | `Cooki/ClothWetEdgeSoftness` | 8 bits | Saved | 50% |
+| See-Through Strength (50% = Standard) | `Cooki/ClothWetSeeThroughStrength` | 8 bits | Saved | 50% |
+| Wet See-Through Mode | `Cooki/ClothWetSeeThroughModeV2` | 8 bits | Saved | As Configured |
+| See-Through Protection Range (50% = Standard) | `Cooki/ClothWetProtectRange` | 8 bits | Saved | 50% |
+| See-Through Protection Strength (100% = Full Block) | `Cooki/ClothWetProtectStrength` | 8 bits | Saved | 100% |
+| Private Area Protection | `Cooki/ClothWetProtect/All` | 1 bit | Not saved | Unity setting (on in a new install) |
+| Whole Area | `Cooki/ClothWetWhole` | 1 bit | Saved | Off |
+| SSAO Relief | `Cooki/ClothWetSsaoRelief` | 1 bit | Saved | On |
+| Reduce Outfit Differences | `Cooki/ClothWetOutfitCorrection` | 1 bit | Saved | Unity setting (on in a new install) |
+| Hold Current State (For Photos) | `Cooki/ClothWetHold` | 1 bit | Not saved | Off |
+| Fast Dry | `Cooki/ClothWetFastDry` | 1 bit | Not saved | Off |
+| Only Visible to Me (standalone) | `Cooki/ClothWetLocalOnly` | 1 bit | Saved | Off |
+| Outfit visibility groups | `Cooki/ClothWetGroup…` | 1 bit per group | — | On |
+
+- The recommended menu is 87 bits, and with every item, including 6 outfit visibility groups, it is 94 bits. VRChat's limit is 256 bits for the whole avatar.
+- When linked to RealSweatSystem, RealWet only reads RSS's sweat parameters (`Cooki/SweatAmount` and so on). It doesn't change RSS's parameters.
+- Features not in the menu work with the values set in Unity and add no parameters.
+- One menu page has 8 slots. If **Wet Tuning** has 9 or more items, a **Next** page appears after 7 of them.
+
+## Animator {/* #animator */}
+
+- On upload, layers whose names start with `Cooki Clothing Wetness/` are added to the FX. The number of layers depends on the menu items you choose.
+- MA Merge Animator is not used. The avatar's other FX layers and original controllers don't change.
+- With Write Defaults set to **Auto**, RealWet reads the avatar's FX and matches it.
+- When you add both **Reduce Outfit Differences** and the **Maximum Wet Range** dial, the FX gains precalculated correction clips for each output group. Sync bits and in-game calculation don't increase. The maximum wet range uses the exact calculated values at 0, 5, 10, 20, 40, 60, 80 and 100% and at the Unity default; values in between are approximated by blending the two nearest steps.
+
+## Render queues {/* #render-queue */}
+
+The render queue is the number that sets the draw order. Lower values are drawn first, and higher values later. <ProductName /> changes only the render queue of its wet copies.
+
+| Original queue | Queue of the wet copy |
+| --- | --- |
+| 2500 or below (opaque, cutout and so on) | Between "the body or skin sweat queue + 1" and 2499 |
+| 2501–2999 (transparent) | Moved later, only within the same range |
+| 3000–3099 (transparent) | Moved later, only within the same range |
+| Anything else (3100 or above and so on) | Unchanged |
+
+- For example, if RealSweatSystem 2.0.0's sweat is at 2350, the range is 2351–2499; with only a body at 2000, it is 2001–2499.
+- If the body's queue can't be read, RealWet uses 2460–2499 and tells you.
+- Queues are never moved across the boundary between opaque and transparent. If there isn't enough room, RealWet doesn't move them and reports it in the NDMF results window.
+- Parts that use the PCSS4VRC (lilToon) experimental feature stay at 2499 or below to keep the PCSS shadows.
+- The manual order (**Manual: Set Draw Priority**) uses the 0–39 range.
+
+## Mesh and texture data {/* #mesh-data */}
+
+| Data | Where it goes |
+| --- | --- |
+| Wetness data (position, spread, protection) | Whichever of the mesh's TEXCOORD2 and TEXCOORD3 (UV3 and UV4 in the settings screens) is empty. If both are used, it is stored in a texture. |
+| RealRain rain vertex numbers | TEXCOORD6 (UV6). On meshes that already use UV6, only the rain on that renderer is turned off. |
+| Second state of blendshape-driven wetness | UV3/UV4 |
+| Protection mask | A texture (it stores the distance to the protection regions, and the shader fades it smoothly) |
+
+- For wet parts, RealWet makes a copy of the mesh and adds the data to it. The original mesh, the FBX and its import settings don't change.
+- Meshes saved by <ProductName /> are not compressed. For outfits with Mesh Compression turned on in the FBX, only those meshes are uploaded at their uncompressed size.
+- On PC (D3D11), one shader pass can use up to 64 textures. If the final shader in the upload goes over this limit, only that material goes back to its dry original.
+
+## Limits {/* #limits */}
+
+| Item | Limit |
+| --- | --- |
+| Avatar-wide wet start points | 64 |
+| Avatar-wide protection regions | 64 |
+| In-game outfit visibility groups | 6 |
+| Protection region **Soft edge** | 0–5 cm |
+| Start point **Ball size** | Radius 0.5–15 cm |
+
+## Generated files {/* #generated-files */}
+
+| File | Location |
+| --- | --- |
+| Wet shaders | `Assets/CookiTools/RealWetSystem/Generated` (`Assets/RWGen` if the path is too long) |
+| Per-avatar menu files | `Assets/CookiTools/Generated/RealWet/RuntimeMenus` |
+| Calculation cache | `Library/RealWet` in the project |
+
+- If they are deleted, they are made again when needed. You don't need to delete the cache folder first.
+- The shaders that the experimental features create are built from other creators' shaders installed on this PC. Please don't export or share them.
+
+## Known limitations {/* #known-limits */}
+
+- Wetness is not added to unsupported shaders (Sunao, UnityChanToon, UTS, Poiyomi Fur and Grab Pass, lilToon Fur and Gem, shaders modified by the user).
+- lilToon Refraction / RefractionBlur get only the wet color and gloss, with no extra see-through.
+- Layer order is not set between separate outfits.
+- Setups that swap **the mesh itself** on a Renderer with an animation are not supported.
+- There is no way to turn individual wet start point spheres on or off in game.
+- Blendshape-driven wetness shows only the current shape of the clothes; it doesn't remember the wetness where the clothes were before they moved.
+- lilToon mode switches that animate only the `_TransparentMode` number are not guaranteed.
+- With separate export tools that don't call the SDK preprocess callbacks, the texture-limit recovery at the end of the upload may not apply.

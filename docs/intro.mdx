@@ -1,0 +1,89 @@
+---
+id: intro
+title: RealWetSystem 문서
+slug: /
+description: RealWetSystem 공식 설치, 사용, 호환성 및 문제 해결 가이드입니다.
+---
+
+# RealWetSystem
+
+<ProductName />은 VRChat PC 아바타의 옷에 젖은 색, 광택, 비침을 더하는 도구입니다. Unity에서 젖은 모습을 미리 보고, VRChat의 **젖음** 메뉴에서 젖음 양을 조절합니다.
+
+:::info[문서 기준 버전]
+이 문서는 **<ProductName /> v1.0.0**을 기준으로 작성되었습니다. 새 설치를 기준으로 설명합니다. 업데이트한 아바타에는 이전 설정이 남아 있을 수 있습니다.
+:::
+
+{/* SHOT R01: dry · 50 % · 100 %, default mode (replaces the BOOTH image below when it arrives) */}
+[![같은 의상의 마른 모습, 젖음 50%, 젖음 100%](/img/booth/booth-dry-50-100.jpg)](/img/booth/booth-dry-50-100.jpg)
+
+*<small>같은 의상을 마른 상태, 젖음 50%, 젖음 100%로 비교한 모습입니다. 이 그림은 옷 전체가 고르게 젖는 **전체 영역 젖음**으로 찍었습니다. 이 가이드의 이미지는 누르면 크게 볼 수 있습니다.</small>*
+
+## 할 수 있는 것
+
+- 옷이 땀나는 곳이나 몸에 닿는 곳부터 자연스럽게 젖습니다.
+- 젖은 부분은 원래 색이 더 깊어지고, 주름을 따라 물기 광택이 생깁니다.
+- 얇은 옷은 젖은 부분이 비칩니다. 가슴과 사타구니는 **비침 보호**가 비침만 막습니다. 보호한 곳도 다른 곳처럼 젖습니다.
+- 옷감 종류(면·니트·데님, 폴리·새틴·수영복, 라텍스·비닐·에나멜)에 따라 젖은 느낌이 달라집니다.
+- VRChat의 **젖음** 메뉴에서 젖음 양, 광택, 비침 강도, 비침 보호를 바로 조절합니다. **전체 영역 젖음**을 켜면 비를 맞은 것처럼 옷 전체가 고르게 젖습니다.
+- lilToon 옷과 Poiyomi 옷(잠긴 머티리얼 포함)이 같은 모습으로 젖습니다.
+- 미리보기에서 본 모습이 그대로 업로드됩니다. 셰이더로만 동작하므로 파티클, PhysBone, Contact를 더하지 않습니다.
+
+<ProductName />만 설치해도 사용할 수 있습니다. RealSweatSystem과 함께 쓰면 피부의 땀 수치에 맞춰 옷도 젖습니다. RealRainSystem과 함께 쓰면 비에 젖는 모습도 같은 옷 위에 그려집니다.
+
+## 시작하기 전에
+
+<ProductName />에는 다음이 필요합니다.
+
+| 항목 | 지원 범위 |
+| --- | --- |
+| 에디터 | Windows의 Unity 에디터. 구매 인증이 Windows에서만 동작합니다. |
+| Unity | VRChat용 Unity 2022.3 프로젝트 |
+| VRChat Avatars SDK | 3.10.0 이상, 4.0 미만 |
+| NDMF | 1.13.1 이상, 2.0 미만 |
+| Modular Avatar | 1.14.0 이상, 2.0 미만 |
+| 셰이더 | 의상에 맞게 lilToon 2.3.0 이상 또는 Poiyomi Toon / Pro |
+| 아바타 | Humanoid 아바타. PC 전용이며 Quest·모바일은 지원하지 않습니다. |
+| 구매 인증 | PC마다 한 번 하는 [구매 인증](./license-activation.mdx) |
+
+자세한 지원 범위는 [호환성](./compatibility.mdx)을 확인해 주십시오.
+
+## 목적별로 찾기
+
+- **가장 빨리 설치하기:** [빠른 시작](./quick-start.mdx)
+- **처음부터 하나씩 따라 하기:** [초보자 튜토리얼](./tutorial.mdx). 설치창의 옵션, 의상 고르기, 미리보기, 인게임 메뉴를 모두 설명합니다.
+- **구매 인증하기:** [구매 인증](./license-activation.mdx)
+- **의상을 넣고 빼기, 겹옷 순서:** [의상 설정](./usage/outfit-settings.mdx)
+- **젖는 방식·범위·옷감·비침 바꾸기:** [젖음 설정](./usage/wet-settings.mdx)
+- **땀이 시작되는 공 옮기기:** [젖음 시작점](./usage/wet-start-points.mdx)
+- **가슴·사타구니의 비침 막기:** [비침 보호](./usage/see-through-protection.mdx)
+- **VRChat에서 쓰는 버튼:** [인게임 메뉴](./usage/in-game-menu.mdx)
+- **안 젖거나, 경고가 나오거나, 빌드가 오래 걸릴 때:** [문제 해결](./troubleshooting.mdx)
+- **최적화 도구·RealSweat·RealRain과 함께 쓰기, 실험 기능:** [고급 기능](./advanced.mdx), [호환성](./compatibility.mdx)
+- **업로드 용량과 빌드 시간:** [성능](./performance.mdx)
+- **파라미터, 렌더큐, 메쉬 데이터:** [기술 사양](./technical-specifications.mdx), [이 툴이 아바타에서 바꾸는 것](./avatar-changes.mdx)
+
+처음 설치한다면 [빠른 시작](./quick-start.mdx)부터 보면 됩니다. 옵션의 뜻을 알고 싶다면 [초보자 튜토리얼](./tutorial.mdx)을 함께 봐 주십시오.
+
+## 설정하는 곳은 세 군데입니다
+
+| 바꾸고 싶은 것 | 선택할 곳 |
+| --- | --- |
+| 의상 추가·삭제, 아바타 전체의 젖는 위치·양, 시작점·보호 영역, 인게임 메뉴 | Hierarchy의 **RealWet** 오브젝트 |
+| 셔츠·치마 등 한 벌의 젖은 모습 | 의상 루트의 **이 의상 설정** |
+| 한 벌 안에서 리본만 덜 젖게 하거나 상의만 비치게 하기 | 그 메쉬의 **의상 파츠 설정** |
+
+이 문서에서는 각각 **RealWet**, **이 의상 설정**, **의상 파츠 설정**이라고 부릅니다. **RealWet**에는 **의상 관리**, **젖음 설정**, **인게임 메뉴**, **상태** 탭이 있습니다.
+
+{/* SHOT U15: RealWet inspector, Outfit Management tab */}
+
+:::info[빌드는 멈추지 않습니다]
+<ProductName /> 때문에 빌드나 업로드가 멈추지 않습니다. 젖음을 넣지 못한 부분만 원래 마른 머티리얼로 올라가고, 나머지는 그대로 젖습니다. 마른 채로 올라간 부분은 NDMF 결과 창에 의상 이름과 이유가 경고로 남습니다.
+:::
+
+:::warning[백업해 두십시오]
+설치하거나 업데이트하기 전에 아바타와 프로젝트를 백업해 주십시오.
+:::
+
+:::warning[제거는 설치창에서 해 주십시오]
+<ProductName />을 뺄 때는 `RealWet` 오브젝트를 직접 지우지 말고, **CookiTools > RealWetSystem > Setup／Uninstall**의 **제거** 탭을 사용해 주십시오. [제거하기](./troubleshooting.mdx#uninstall)를 확인해 주십시오.
+:::

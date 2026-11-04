@@ -1,0 +1,119 @@
+---
+id: compatibility
+title: Compatibility
+description: Supported Unity, SDK, NDMF and Modular Avatar versions, shaders (Poiyomi and lilToon), optimization tools, and how to use RealWetSystem with RealSweatSystem and RealRain.
+---
+
+# Compatibility
+
+<ProductName /> checks the required package versions and features when you install it. Even in a supported setup, results can vary with your mix of outfits, wardrobe and optimization settings. Before you upload, check the outfits and material changes you actually use in Build & Test.
+
+[![RealWetSystem compatibility at a glance: Poiyomi and lilToon support, builds with AAO, d4rk and TexTransTool, and builds never stop](/img/booth/booth-compatibility.jpg)](/img/booth/booth-compatibility.jpg)
+
+*<small>A compatibility summary. For details, please see the tables below.</small>*
+
+## Required packages {/* #requirements */}
+
+| Item | Supported |
+| --- | --- |
+| Unity | Unity 2022.3 project for VRChat |
+| VRChat Avatars SDK | 3.10.0 or later, below 4.0 |
+| NDMF | 1.13.1 or later, below 2.0 |
+| Modular Avatar | 1.14.0 or later, below 2.0 |
+| Editor | The Unity Editor on Windows (purchase activation works only on Windows) |
+| Avatar | Humanoid avatars |
+| Platform | PC only (Direct3D 11). Quest and mobile are not supported. |
+
+- Pre-release versions of the next major version of a required package are not supported.
+- If a version doesn't match, the setup window tells you which package is missing or needs an update. <ProductName /> does not update other packages automatically.
+
+## Shaders {/* #shaders */}
+
+You only need the shaders your outfits actually use. If you only use Poiyomi outfits, you don't need lilToon.
+
+### Poiyomi Toon / Pro
+
+| Item | Details |
+| --- | --- |
+| Supported variants | Standard, **Outline Early**, **Two Pass** and **Fade** modes |
+| Tested versions | Poiyomi 9.3, 10.0.9, 10.0.24, Pro 11.0.0, 11.0.18, 11.0.22, 11.0.24, 11.0.29, 11.0.32, 11.0.34, 11.0.35, 11.0.36, 11.0.38 |
+| Locked materials | Get wet as long as RealWet can read the original shader information. The same goes for materials Thry locks during upload. |
+| Not supported | Fur, Grab Pass, custom extensions that only have a similar name, shaders copied out of the package, Poiyomi with other shader modules added |
+
+- <ProductName /> checks the shader's structure directly, not its version number. So versions not listed above still get wet if their structure is the same. If the installed version's structure differs from what <ProductName /> knows, the NDMF results window shows a warning such as **RealWet: Poiyomi Pro … has not been verified yet**, one for each version. Outfits that use that shader are built without wetness, and the build continues.
+- Don't turn on the <ProductName /> internal module listed in Poiyomi 11's **Poi > Installed Modules**. If you turn it on, Poiyomi clothes won't get wet.
+- When VRCFury copies materials during upload, it may lock unlocked Poiyomi materials in your project. This is VRCFury's behavior and doesn't affect wetness. To keep editing, unlock them in the Poiyomi Inspector.
+
+### lilToon
+
+| Item | Details |
+| --- | --- |
+| Supported versions | Official lilToon 2.3.0 or later (tested with 2.3.4) |
+| Supported modes | Normal, **Multi / MultiOutline** (opaque, cutout, transparent) |
+| Limited support | **Refraction / RefractionBlur**: adds only the wet color and gloss. The original transparency, refraction and render queue stay as they are, and no extra see-through is added. |
+| Not supported | Fur, Gem, shaders modified by the user |
+
+Even on lilToon materials with Reflection and Metallic turned on, the wet gloss is not erased.
+
+### Experimental: PCSS4VRC (lilToon) and lilSSRT {/* #experimental */}
+
+PCSS4VRC (lilToon, checked with 10.1.5) and lilSSRT (1.4.3) clothing can get wet as an experimental option. Turn it on per avatar in the setup window under **Advanced settings > Experimental**; it is off by default. For the difference between on and off, please see [Advanced features](./advanced.mdx#experimental).
+
+### Unsupported shaders
+
+Shaders from other families, such as Sunao, UnityChanToon and UTS, don't get wetness. Those parts are uploaded with their original look. <ProductName /> does not switch the shader of your original materials to another family.
+
+## Modular Avatar and NDMF {/* #ma-ndmf */}
+
+- Regular outfit setup and menu merging work as usual. <ProductName /> adds wetness to outfits during the build.
+- The in-game menu is installed with the MA Parameters and MA Menu Installer on the **RealWet** object. Menu files are created for each avatar in `Assets/CookiTools/Generated/RealWet/RuntimeMenus`.
+- For an outfit that hides the body inside it with MA Shape Changer, turn on **Restore MA-Hidden Body for This Outfit** to show the body when the clothes turn see-through. It is off by default. When it's on, the body also stays while the clothes are dry.
+- The Unity preview uses NDMF previews. **Tools > NDM Framework > Enable Previews** must be on.
+
+### Write Defaults
+
+Unless you have specific instructions, use **Auto** for **Write Defaults** in the setup window. It reads the avatar's FX to set the <ProductName /> value. Choose ON or OFF yourself only when the avatar's creator asks for a specific value.
+
+## Optimization tools {/* #optimizers */}
+
+When another tool merges or changes outfits during the build, <ProductName /> checks the final outfits too. If there are no errors, you don't need to exclude whole outfits from optimization in advance. The **Other avatar tools** section in the setup window warns you ahead of time about settings that can remove wetness.
+
+| Tool | When you use it together |
+| --- | --- |
+| **AAO (Avatar Optimizer)** | You can keep using Trace and Optimize. Only when automatic mesh merging would combine parts that can't be processed together does <ProductName /> automatically leave one of them out of the merge and tell you. Wetness toggles keep working even when **Optimize Animator** changes the parameter type. If **Merge Skinned Mesh** merges parts from different outfits, or merges the body, that mesh won't get wet. The setup window tells you when an outfit's body gets merged. Merge each outfit separately and leave the body out of merging. |
+| **TexTransTool (TTT)** | Poiyomi materials whose textures TTT changed also get wet in the upload. When **Atlas Texture** merges materials into one, the slots of the base material get wet, and only the slots merged into another material stay dry (the NDMF results window tells you). To make those slots wet too, leave that material out of the merge group. |
+| **d4rk Avatar Optimizer** | With the default settings (Basic), leave it as it is. If settings that rewrite shaders are on (**Write Properties as Static Values**, **Shader Toggles**, **Merge Different Property Materials**, **Merge Same Dimension Textures**), RealWet automatically excludes only the wet parts from d4rk when you upload. It doesn't change your saved settings. The setup window recommends turning these settings off. |
+| **VRCFury** | Toggles and material swaps work as usual. Materials set by toggles that start on and by **Apply During Upload** also get wet. If a swapped material doesn't get wet, a message appears in the NDMF results window. |
+| **Tools that move bones** | Even if another tool moves bones during the build (for example NDExtensions Rebake Humanoid), the upload gets wet in the same places as the preview. |
+
+Setups that use animations to swap a Renderer's **mesh itself** are not supported. Remove the mesh-swap animation, or move the swapped mesh to a separate Renderer that is excluded from <ProductName />.
+
+## Using it with RealSweatSystem {/* #realsweat */}
+
+If the same avatar has RealSweatSystem, <ProductName /> detects it. A new install starts with **Link RealSweat** on, so the clothes follow the final sweat level on the skin.
+
+| What you want | Setting |
+| --- | --- |
+| Clothes get wet as you sweat from moving | Turn on RSS auto mode and **Link RealSweat**. |
+| Keep the skin dry and make only the clothes wet | Turn off **Link RealSweat** and raise **Wetness Amount (Unlinked)**. |
+| Follow the skin's sweat again | Turn on **Link RealSweat**. |
+
+- To change the initial value in Unity, choose **Link** or **Unlink** in the **Input Mode** row of **RealWet**.
+- Changing the link in <ProductName /> does not change the sweat level on the skin.
+- RealSweatSystem's **Sweat Display** and **Only Visible to Me** apply only to the sweat on the skin. Clothing wetness is hidden only with <ProductName />'s **Show Clothing Wetness** and Outfit Visibility.
+- The **Wet** menu is installed on its own in the avatar's main menu, not inside the RSS menu.
+- The Late Queue sweat shaders of RealSweatSystem 2.0.0 are also treated as skin sweat, so wet clothes are drawn after the body and the sweat.
+- If the selected avatar has an old RealSweatSystem (1.x), the setup window shows a one-line update notice.
+
+## Using it with RealRainSystem {/* #realrain */}
+
+With RealRainSystem (RealRain), raindrops, streaks and gloss are drawn together on top of the <ProductName /> wet shader. You change rain settings in RealRain.
+
+- Clothes getting wet from rain are drawn by <ProductName />. With only RealRain installed, the weather (clouds, rain, rain sound) works, but clothes don't get wet.
+- The two tools are sold separately, and each is activated separately.
+- If something goes wrong on the RealRain side, <ProductName /> turns off only the rain and keeps the wetness. The build never stops.
+- For each clothing vertex that receives rain, <ProductName /> writes a number into UV6. So the rain stays in place even when an optimization tool renumbers the vertices. If a mesh already has UV6 data, RealWet turns off the rain only for that renderer and tells you.
+
+- RealRain does not draw raindrops or gloss on **Cotton · Knit · Denim (Recommended)** fabric, because that fabric absorbs water.
+- When **Wet Look Strength** is **Strong Appearance** and the fabric is a smooth type, the raindrop gloss gets a little brighter too.
+- lilToon **Multi** and **Refraction** material slots don't get rain effects. Only regular wetness applies.

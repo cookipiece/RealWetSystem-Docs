@@ -1,0 +1,4 @@
+/* RealWet docs: the only per-site style value. See theme README. */
+:root {
+  --ct-accent: var(--ct-rws);
+}

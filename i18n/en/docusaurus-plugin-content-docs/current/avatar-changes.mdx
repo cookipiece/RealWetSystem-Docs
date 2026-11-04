@@ -1,0 +1,103 @@
+---
+id: avatar-changes
+title: What This Tool Changes on Your Avatar
+description: The materials, render queues, meshes, depth and shadows, and animator content RealWetSystem changes in the preview and the upload, and what it leaves alone.
+---
+
+# What This Tool Changes on Your Avatar
+
+<ProductName /> builds the wet look in the preview and in the upload copy of your avatar (the NDMF build). This page lists what it changes there and what it leaves alone.
+
+## Materials
+
+- Wet clothing slots get <ProductName />'s wet copy of their material. The preview and the upload work the same way.
+- Your original materials (`.mat`) and shaders are not changed.
+- Wet shaders are made on your PC from the Poiyomi and lilToon you have installed. They are stored in `Assets/CookiTools/RealWetSystem/Generated`, or in `Assets/RWGen` if that path would be too long.
+- The calculation cache is in `Library/RealWet`, and each avatar's menu files are in `Assets/CookiTools/Generated/RealWet`. If they are deleted, they are made again when needed.
+
+## Render queue (draw order) {/* #render-queue */}
+
+The render queue is the number that sets the draw order. Lower numbers draw first, higher numbers draw later.
+
+- Only the render queue of the wet copies changes. Your original materials, the body and RealSweat's skin sweat keep their render queues.
+
+| Original queue | Queue of the wet copy |
+| --- | --- |
+| 2500 or lower (opaque, cutout and so on) | Between "body/skin sweat queue + 1" and 2499 |
+| 2501–2999 (transparent) | Later, but only inside the same range |
+| 3000–3099 (transparent) | Later, but only inside the same range |
+| Anything else (2500, 3100 and above, etc.) | Unchanged |
+
+- For example, 2351–2499 when RealSweatSystem 2.0.0's sweat is at 2350, or 2001–2499 with only a body at 2000.
+- If a part <ProductName /> does not wet uses a queue below 2460, the range starts after that part.
+- If the body's queue cannot be read, the old default 2460–2499 is used, and you are told.
+- Nothing is moved across the opaque/transparent boundary. If there is not enough room, the queue is left as it is and the NDMF result tells you.
+- Parts using the experimental PCSS4VRC (lilToon) support stay at 2499 or below, to keep PCSS shadows.
+
+### Layer order
+
+- Inside one outfit, the tool looks at how the parts actually overlap and draws inner clothing first and outer clothing last.
+- Parts that are off at upload and turned on in game get the same order.
+- Orders you set yourself are kept: dragging in the list, **Manual: Set Draw Priority** (0–39), **Direct: Set Render Queue** and **Preserve Material Queue**. Automatic parts skip the numbers you set.
+- Separate outfits are not ordered against each other. Each outfit counts from the same start number.
+
+:::tip[When a separately registered jacket draws before the clothing under it]
+Give the jacket's slots a high manual number (e.g. 20), or register the jacket together with the clothing under it as one outfit. See [Layer order](./usage/outfit-settings.mdx#layer-order).
+:::
+
+## Meshes
+
+- Each wet part gets a copy of its mesh with the wet data added. Your original meshes, FBX files and their import settings are not changed.
+- The wet data goes into whichever of TEXCOORD2 / TEXCOORD3 (UV3 / UV4 in the settings) is free. A channel already in use is never overwritten. If both are in use, the data goes into a texture instead.
+- With RealRainSystem, parts that receive rain also get a vertex number in TEXCOORD6. If a mesh already uses TEXCOORD6, only the rain on that part is turned off, and you are told.
+- Meshes saved by <ProductName /> are not compressed. Clothing whose FBX has Mesh Compression on is uploaded with that mesh at its uncompressed size.
+
+## Depth and shadows
+
+- Where wet clothing turns see-through, it drops out of the depth pass as far as it is see-through. So less dark SSAO shading is left on the body behind see-through clothing.
+- Each see-through slot may add up to one depth-only draw. Dry clothing is unchanged.
+- Turning off **SSAO Relief** in game (on by default) turns off only the extra relief <ProductName /> adds. The original shader's SSAO and shadow settings are not changed.
+
+## Avatar and animator
+
+- In the scene, the tool adds:
+  - a **RealWet** object under the avatar: settings, start point and protection markers, **MA Parameters** and **MA Menu Installer**;
+  - in a new install with **Add Chest & Groin See-Through Protection Regions** checked (the default), the 4 recommended protection regions on the chest and groin. Start points and protection regions are for editing in Unity and add no objects to the upload;
+  - **This Outfit's Settings** on each outfit root, and **Outfit Part Settings** on parts you adjust separately.
+- These RealWet components are not uploaded.
+- At upload, it adds FX layers whose names start with `Cooki Clothing Wetness/`. The number depends on the menu items you choose.
+- It does not use MA Merge Animator. Your other FX layers and original controllers are not changed.
+- Synced parameters (named `Cooki/ClothWet…`) are used only for the menu items you choose. The recommended menu of a new install uses 87 bits. See [Sync cost](./usage/in-game-menu.mdx#sync-cost).
+- Outfits you add to the avatar after installing are registered automatically. You can turn this off in **RealWet > Outfit Management > Detect new outfits automatically**.
+- Your own menus, MA components and hierarchy are never edited or deleted. If you move RealWet's menu or remove its MA components, the tool treats that as your choice and leaves it.
+- Only for outfits where you turn on **Restore MA-Hidden Body for This Outfit** (off by default), the upload copy skips MA Shape Changer's body hiding. The MA settings in your scene are not changed.
+
+## Build
+
+- The tool runs as the NDMF plugin **RealWetSystem**.
+- Only outfits or parts that could not get the wet look are uploaded with their original dry materials, with one NDMF warning per outfit. <ProductName /> never stops your build.
+- **AAO:** only when automatic mesh merging would join parts that cannot be processed together does the tool keep one of them out of the merge for that upload, and it tells you.
+- **d4rk Avatar Optimizer:** when a shader-rewriting setting is on, only the wet parts are added to the exclusion list, for this upload only. Your saved d4rk settings are not changed.
+- **TexTransTool:** the tool wets the materials as TTT left them.
+
+## Experimental: PCSS4VRC (lilToon) and lilSSRT {/* #experimental */}
+
+Both are turned on per avatar in the setup window under **Advanced settings > Experimental**. They are off by default.
+
+- When on, the tool makes wet shaders on your PC, in its Generated folder, from that shader's files installed there and <ProductName />'s own files. Please do not export these shaders or share them with others.
+- The <ProductName /> package contains no PCSS4VRC or lilSSRT code. That shader's files and your original materials are not changed.
+- RealRainSystem's rain does not fall on these parts.
+- **PCSS4VRC (lilToon):** checked with 10.1.5. These parts stay at render queue 2499 or below. While the option is off, parts that PCSS4VRC replaces do not get wet in the upload; the preview and the NDMF result tell you.
+- **lilSSRT:** supports the lilSSRT, lilSSRT/RTAO and lilSSRT/GTAO shaders of 1.4.3, and the AOTessellation shaders used when AO is on. With any other version, lilSSRT parts are built dry and the build does not stop. The render queue is the same as for normal lilToon clothing.
+- Please report problems with RealWet and lilSSRT used together to RealWet, not to the lilSSRT author. lilSSRT ©MeltzzZ
+
+## Hair
+
+- Hair and head-worn parts such as hats and glasses are never made see-through by the new-outfit defaults or by see-through settings applied to many slots at once.
+- You can still make one see-through by choosing its see-through mode in that part's own slot.
+
+## What it leaves alone
+
+- Your original materials, shaders, meshes and FBX files. The only exception is when you run **Wet See-Through Material Conversion** in the advanced settings, which changes the original, and approve it in the confirmation window. Ctrl+Z undoes that conversion.
+- The body's and RealSweatSystem's materials, and Poiyomi's lock cache.
+- Saved settings are never changed without telling you. When an update switches an untouched old default look to the new default, **RealWet > Outfit Management** shows a notice and <strong>Revert...</strong>.

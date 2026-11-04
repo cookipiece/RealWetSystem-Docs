@@ -1,0 +1,14 @@
+{
+  "sidebar.docsSidebar.category.시작하기": {
+    "message": "Getting started"
+  },
+  "sidebar.docsSidebar.category.사용법": {
+    "message": "Usage"
+  },
+  "sidebar.docsSidebar.category.문제 해결": {
+    "message": "Troubleshooting"
+  },
+  "sidebar.docsSidebar.category.고급·참고": {
+    "message": "Advanced & Reference"
+  }
+}

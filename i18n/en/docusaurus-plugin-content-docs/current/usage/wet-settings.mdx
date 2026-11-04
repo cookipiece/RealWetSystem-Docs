@@ -1,0 +1,196 @@
+---
+id: wet-settings
+title: Wetness settings
+description: How to set where clothes start to get wet, the maximum wet range and wetness amount, Reduce Outfit Differences, body meshes, see-through, and the fabric and wet look.
+---
+
+# Wetness settings
+
+You set the rules for the whole avatar in **RealWet > Wetness Settings**, and the wet look of one outfit in **This Outfit's Settings > Wet Look**. To start, open the preview for one outfit and please change one item at a time.
+
+{/* SHOT U16: RealWet inspector, Wetness Settings tab */}
+
+Not covered on this page:
+
+- The spheres where sweat starts: [Wet start points](./wet-start-points.mdx)
+- Blocking the see-through on the chest and groin: [See-through protection](./see-through-protection.mdx)
+- Registering outfits, parts, layer order: [Outfit settings](./outfit-settings.mdx)
+
+## Where clothes start to get wet {/* #start-mode */}
+
+| Option | What you see | Choose it when |
+| --- | --- | --- |
+| **From Sweat Spots (Recommended)** | Wetness spreads out from around the [wet start points](./wet-start-points.mdx) such as the armpits, chest and back. This is the new install default. | You want a sweat-soaked look |
+| **From Where It Touches the Body** | The parts of the clothes that sit against the skin get wet first. | You want to bring out how tight clothes cling to the body |
+| **Both** | Wetness starts at the sweat points and spreads along the areas that touch the body. | You want to combine both methods |
+
+{/* SHOT R12: Sweat spots / Body contact / Both */}
+
+- Making the whole garment wet evenly, as if in the rain, is not this choice; it is the in-game [Whole Area](./in-game-menu.mdx#whole-area).
+- To use a different method for an outfit, you can choose it separately on the outfit screen. When you choose a method in the setup window, every outfit uses the same method.
+
+## How far clothes get wet {/* #range */}
+
+### Maximum wet range and wetness amount
+
+| Setting | What it sets |
+| --- | --- |
+| **Maximum Wet Range (%)** | Sets **how far** wetness can spread when sweat (the wetness amount) is at 100%. A new install uses 40%. |
+| **Wetness Amount** (in game) | Sets **how fully** clothes get wet within that range. Even with a narrow range, at 100% the area inside the range gets fully wet and goes all the way to the see-through you set. |
+
+- When **Reduce Outfit Differences** is on and the maximum wet range is M%, at 100% wetness amount **roughly M%** of the area water can reach gets wet on each outfit. At 50%, roughly half of the reachable area gets wet.
+- Areas far from sweat, which water never reaches, stay dry even at 100%. That's why this value is not a share of the whole clothing area.
+- Lowering the range does not lower the maximum strength of the see-through. To reduce only the see-through, use the in-game **See-Through Strength**.
+
+{/* SHOT R02: Maximum Wet Range 20 / 40 / 70 / 100 % */}
+
+### Wetness Preset
+
+You can also pick one of **Narrow (Subtle)**, **Standard (Balanced)**, **Wide (Heavy)** and **Maximum (Drenched)** in **Wetness Preset**.
+
+- Picking a level changes not only the range but also how long clothes take to get wet, how far wetness spreads, how far it reaches, and how much it passes to layered clothes.
+- To change only the range, please type the percentage yourself. When you change it yourself, it shows as **Custom**.
+- The 40% of a new install is not a level but a value set directly.
+
+### Reduce Outfit Differences {/* #reduce-differences */}
+
+**Reduce Outfit Differences** narrows the difference in wet area between outfits. It is on in a new install.
+
+- It slows down outfits that cling to the body and get wet fast, and speeds up loose outfits that get wet slowly.
+- It adjusts each outfit as a whole, so the order of parts within one outfit stays the same.
+- It does not widen parts that are too far from the skin to get wet in the first place. It also doesn't change how wet the area within the range gets, or the see-through.
+- Please compare the look with it on and off at the same values in the preview. Outfits that need no correction show little or no difference.
+- Its in-game button is not in the default menu. To add it, choose it in **RealWet > In-Game Menu**.
+
+For parts that water can't reach, such as an outer layer that sits far from the skin, switch that part's **Fit Preset** to **Tight** to increase the distance water can reach. The default is **Regular**.
+
+:::note[Spreading wider is not the same as softening the edge]
+**Spread Wetness Wider (Advanced)** in the in-game menu spreads light wetness farther at the same wetness amount. **Wet Edge: Sharp to Soft** changes only the transition between dry and wet areas. The difference is easiest to see when you compare both midway, while the wetness is still spreading.
+:::
+
+## Body meshes {/* #body-meshes */}
+
+In **RealWet > Wetness Settings > Body Meshes**, you register the skin meshes used to calculate wetness. It is the same list as **1. Body meshes** in the setup window.
+
+- If the torso, hands or feet are not part of the main body, please add them as additional skin meshes. **Add RealSweat Candidates** brings in the candidates registered in RealSweatSystem.
+- Don't add clothing or hair.
+- Meshes you register yourself are used in the calculation even when they are turned off. Don't add spare bodies you don't use.
+- The bodies you add are also used for skin-proximity wetness, SSAO relief and the layer order calculation. RealWet does not merge or modify your original body meshes.
+
+## See-through {/* #see-through */}
+
+### Default see-through for new outfits
+
+For see-through, **New Outfits' Wet Look** offers **No See-Through (All)**, **See-Through (All)** and **Outerwear Only (Not Underwear) (Recommended)**. A new install uses **Outerwear Only**. When you register a new outfit, RealWet checks the actual inside and outside layering within that outfit once.
+
+- The innermost parts, standalone parts, parts that are turned off, and parts that are hard to judge start with **No See-Through**.
+- Parts that are clearly outside other parts start with **Natural See-Through**.
+- Hair and head-worn parts such as hats and glasses are not made see-through by any default. To make one see-through, please choose it in that part's slot yourself.
+- Outfits you already registered and your original materials do not change.
+
+### Outfit see-through settings
+
+Choose in **See-Through When Wet** under **This Outfit's Settings > Wet Look > This Outfit's Wet Look**.
+
+| Setting | Result |
+| --- | --- |
+| **No See-Through (Thick Fabric)** | Adds only the wet color and gloss. |
+| **Natural See-Through** | Gradually shows through as the wetness deepens. Black fabric shows through relatively less. |
+| **Dark Colors Also Show Through** | Dark patterns and black fabric show through well too. When newly chosen, **How Much It Shows Through** starts at 60% (35% for the other methods). |
+| **Separate per Part** | Uses the see-through method and amount saved on each part as they are. |
+| **How Much It Shows Through (%)** | Sets how much the clothes show through when fully wet. |
+| **Dark Areas Show Through (%)** | Lower it if black areas show through too much with **Natural See-Through**. |
+
+[![The back of a T-shirt compared with No See-Through and Natural See-Through](/img/booth/booth-see-through.jpg)](/img/booth/booth-see-through.jpg)
+
+*<small>The back of a T-shirt at 100% wetness, compared with **No See-Through (Thick Fabric)** and **Natural See-Through**.</small>*
+
+- **No See-Through** turns off only the see-through that <ProductName /> adds. It does not fill the holes in lace that was transparent to begin with.
+- In game, you can change the see-through with the **See-Through Strength** dial and **Wet See-Through Mode**. See [In-game menu](./in-game-menu.mdx#see-through).
+- [See-through protection](./see-through-protection.mdx) blocks the see-through on the chest and groin.
+
+{/* SHOT R04: See-Through Strength 0 / 50 / 100 % */}
+
+## Wet look {/* #look */}
+
+### Even wet look for every outfit
+
+**Even Wet Look for Every Outfit (New Look)** in **RealWet** makes white clothes, clothes with a strong matcap, and tight see-through clothes look wet in a similar way to other clothes. It applies to both sweat and RealRain's rain wetness.
+
+- It is on by default on every avatar.
+- If you prefer the previous look, please turn it off in **RealWet > Wetness Settings > Wetness Level**. Once you turn it off, it stays off from then on.
+- Turning it on builds new wet shaders, so the first preview or build takes longer once.
+- Colored clothes and hair keep their saturation even as they darken when wet, so they don't fade to gray.
+
+### This Outfit's Wet Look card
+
+Open **This Outfit's Settings > Wet Look** on the outfit root. The **This Outfit's Wet Look** card has, from top to bottom, **Fabric Type** → **Wet Look Strength** → **See-Through When Wet** → **Private Area Protection**. The values you choose are saved right away and applied to all enabled parts. You can undo them with Ctrl+Z.
+
+{/* SHOT U19: outfit inspector, wet look card */}
+
+Wet areas take on a deeper, richer version of their original color, with a broad, soft watery gloss along the folds facing the main light. The gloss never gets brighter than the white of that scene. lilToon clothes and Poiyomi clothes get wet with the same look.
+
+### Fabric Type
+
+Please pick the one closest to your clothes. The darkening order below is based on dark-colored clothes.
+
+| Fabric Type | Wet look |
+| --- | --- |
+| **Cotton · Knit · Denim (Recommended)** | Fabric that soaks up water. On dark clothes, the color darkens the most, and the gloss is subtle. |
+| **Polyester · Satin · Swimwear** | Smooth fabric. It darkens a little, and a broad, bright watery shine shows clearly along the folds. |
+| **Latex · Vinyl · Enamel** | Material that water doesn't soak into. The color changes the least, and a thin film of water gloss forms on the surface. |
+| **In Between** | Pick this when you're not sure. It darkens a little, about as much as polyester and satin, and the gloss sits between cotton and polyester. |
+
+{/* SHOT R08: fabric types */}
+
+On light-colored clothes, this order can differ. For light clothes, please don't go by the names alone: compare them in the preview, then choose.
+
+### Wet Look Strength
+
+| Option | Wet Colour Depth | Colour Vividness | Water Shine |
+| --- | --- | --- | --- |
+| **Subtle Appearance** | 63% | 50% | 40% |
+| **Standard Appearance** (new installs) | 100% | 100% | 100% |
+| **Strong Appearance** | 129% | 143% | 200% |
+
+{/* SHOT R09: Subtle / Standard / Strong */}
+
+**Strong Appearance** doubles the gloss, so on smooth fabrics the clothes may not look any darker on screen.
+
+### Advanced Look Settings
+
+Open **Advanced Look Settings** below the card to see every number. For the three color and gloss values, 100% equals the **Standard Appearance** strength.
+
+| Setting | What it does |
+| --- | --- |
+| **Wet Colour Depth (%)** | Darkens the color of wet areas. |
+| **Colour Vividness (%)** | Higher values make the colors more vivid. White and gray clothes change little. |
+| **Water Shine (%)** | The strength of the wet gloss. At 0%, only the color change remains, with no gloss. |
+| **Darken Later (%)** | Higher values make light wetness spread first, with the deep wetness following later from the inside. |
+| **Light-to-Dark Blend (%)** | How wide the blend between light and deep areas inside the wet area is. Please raise it if the wetness looks split into bands. |
+| **Blotchiness (%)** | Sets how blotchy the wet edge is. 0% is smooth. |
+| **Blotch Density** | Low values make large blotches, and high values make small, dense ones. |
+| **Wet Edge Softness (%)** | How soft the edge is between dry areas and lightly wet areas. |
+| **Every Material's Wet Look (%)** | Scales the wet color, gloss and see-through of all enabled materials together. 0% hides the wet look. |
+
+- If parts have different values, the number field shows `—`. When you change a value, only that item is set to the same value on all enabled parts.
+- If the gloss on black clothes is too wide or too bright, try lowering **Water Shine (%)**. If the clothes look shiny like vinyl, try switching **Fabric Type** to **Cotton · Knit · Denim (Recommended)**.
+
+### Reset to defaults
+
+| Target | Button |
+| --- | --- |
+| The whole outfit | **Reset This Outfit's Look to Default...** at the very bottom of the card |
+| One material | **Advanced Settings > Reset This Slot's Look to Default...** on the slot card in the part screen |
+| All slots of one part | **Reset This Part's Look to Default...** in the part screen |
+| All outfits | **Reset Every Outfit's Look to the New Default...** in **RealWet > Outfit Management** |
+
+- What changes: the fabric type, the wet look strength, and the blotch and edge values.
+- What stays: see-through, protection, the maximum wet range, the layer order, and the original materials.
+- If you pressed it by mistake, one Ctrl+Z undoes it.
+
+## After you make changes
+
+- Look values such as color and gloss show up right away in a running preview.
+- Settings that need preparation, such as the see-through method, show after preparation finishes. You may briefly see the previous look.
+- Settings you change in Unity are not applied to an avatar you already uploaded. Please check them, then build and upload again.

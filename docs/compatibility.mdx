@@ -1,0 +1,119 @@
+---
+id: compatibility
+title: 호환성
+description: 지원하는 Unity·SDK·NDMF·Modular Avatar 버전, 셰이더(Poiyomi·lilToon), 최적화 도구, RealSweatSystem·RealRain과 함께 쓰는 방법입니다.
+---
+
+# 호환성
+
+<ProductName />은 설치할 때 필요한 패키지 버전과 기능을 확인합니다. 지원 환경에서도 의상·옷장·최적화 설정의 조합에 따라 결과가 달라질 수 있으므로, 업로드 전에는 Build & Test에서 실제로 쓰는 의상과 머티리얼 전환을 확인해 주십시오.
+
+[![RealWetSystem의 호환성 요약: Poiyomi·lilToon 지원, AAO·d4rk·TexTransTool과 함께 빌드, 빌드가 멈추지 않음](/img/booth/booth-compatibility.jpg)](/img/booth/booth-compatibility.jpg)
+
+*<small>호환성 요약입니다. 자세한 내용은 아래 표를 확인해 주십시오.</small>*
+
+## 필수 패키지 {/* #requirements */}
+
+| 항목 | 지원 범위 |
+| --- | --- |
+| Unity | VRChat용 Unity 2022.3 프로젝트 |
+| VRChat Avatars SDK | 3.10.0 이상, 4.0 미만 |
+| NDMF | 1.13.1 이상, 2.0 미만 |
+| Modular Avatar | 1.14.0 이상, 2.0 미만 |
+| 에디터 | Windows의 Unity 에디터(구매 인증이 Windows에서만 동작) |
+| 아바타 | Humanoid 아바타 |
+| 플랫폼 | PC 전용(Direct3D 11). Quest·모바일은 지원하지 않습니다. |
+
+- 필수 패키지의 다음 메이저 버전 시험판은 지원 범위에 들어가지 않습니다.
+- 버전이 맞지 않으면 설치창이 어떤 패키지가 없거나 업데이트가 필요한지 알려 줍니다. <ProductName />이 다른 패키지를 자동으로 업데이트하지는 않습니다.
+
+## 셰이더 {/* #shaders */}
+
+셰이더는 의상이 실제로 쓰는 것만 설치하면 됩니다. Poiyomi 의상만 쓴다면 lilToon은 필요하지 않습니다.
+
+### Poiyomi Toon / Pro
+
+| 항목 | 내용 |
+| --- | --- |
+| 지원 변형 | 기본형, **Outline Early**, **Two Pass**, **Fade** 모드 |
+| 시험한 버전 | Poiyomi 9.3, 10.0.9, 10.0.24, Pro 11.0.0, 11.0.18, 11.0.22, 11.0.24, 11.0.29, 11.0.32, 11.0.34, 11.0.35, 11.0.36, 11.0.38 |
+| 잠긴 머티리얼 | 원본 셰이더 정보를 확인할 수 있으면 젖습니다. 업로드 때 Thry가 잠그는 경우도 같습니다. |
+| 지원하지 않는 것 | Fur, Grab Pass, 이름만 비슷한 커스텀 확장본, 패키지 밖으로 복사한 셰이더, 다른 셰이더 모듈을 넣은 Poiyomi |
+
+- <ProductName />은 버전 번호가 아니라 셰이더 구조를 직접 확인합니다. 그래서 위에 없는 버전도 구조가 같으면 젖습니다. 설치된 버전의 구조가 <ProductName />이 아는 것과 다르면, NDMF 결과 창에 **아직 확인되지 않은 Poiyomi 버전**이라는 경고가 버전마다 하나씩 나옵니다. 그 셰이더를 쓰는 의상은 젖음 없이 빌드되고, 빌드는 계속됩니다.
+- Poiyomi 11의 **Poi > Installed Modules**에 보이는 <ProductName /> 내부 모듈은 켜지 마십시오. 켜면 Poiyomi 옷이 젖지 않습니다.
+- VRCFury가 업로드 중에 머티리얼을 복사할 때, 프로젝트의 잠기지 않은 Poiyomi 머티리얼을 잠글 수 있습니다. 이것은 VRCFury의 동작이며 젖음에는 영향이 없습니다. 계속 편집하려면 Poiyomi 인스펙터에서 잠금을 풀어 주십시오.
+
+### lilToon
+
+| 항목 | 내용 |
+| --- | --- |
+| 지원 버전 | 정식 lilToon 2.3.0 이상 (2.3.4에서 시험) |
+| 지원 모드 | 일반, **Multi / MultiOutline**(불투명·컷아웃·투명) |
+| 제한 지원 | **Refraction / RefractionBlur**: 젖은 색·광택만 더합니다. 원래 투명도·굴절·렌더큐는 그대로이며, 추가 비침은 넣지 않습니다. |
+| 지원하지 않는 것 | Fur, Gem, 사용자가 수정한 셰이더 |
+
+lilToon에서 반사(Reflection)와 메탈릭을 켠 머티리얼도 젖은 광택이 지워지지 않습니다.
+
+### 실험 기능: PCSS4VRC(lilToon)·lilSSRT {/* #experimental */}
+
+PCSS4VRC(lilToon, 10.1.5에서 확인)와 lilSSRT(1.4.3) 의상도 실험 기능으로 적실 수 있습니다. 설치창 **고급 설정 > 실험 기능**에서 아바타마다 켜며, 기본은 꺼짐입니다. 켜고 끌 때의 차이는 [고급 기능](./advanced.mdx#experimental)을 확인해 주십시오.
+
+### 지원하지 않는 셰이더
+
+Sunao, UnityChanToon, UTS 같은 다른 계열 셰이더에는 젖음을 넣지 않습니다. 그 부분은 원래 모습으로 업로드됩니다. <ProductName />은 원본 머티리얼의 셰이더를 다른 계열로 바꾸지 않습니다.
+
+## Modular Avatar와 NDMF {/* #ma-ndmf */}
+
+- 일반적인 의상 설치와 메뉴 합치기는 그대로 쓸 수 있습니다. <ProductName />은 빌드 과정에서 의상에 젖음을 붙입니다.
+- 인게임 메뉴는 **RealWet** 오브젝트의 MA Parameters와 MA Menu Installer로 설치합니다. 메뉴 파일은 `Assets/CookiTools/Generated/RealWet/RuntimeMenus`에 아바타마다 만듭니다.
+- 옷 안의 몸을 MA Shape Changer로 숨긴 의상은, **이 의상에서 MA Shape Changer로 숨긴 바디 다시 보이기**를 켜면 젖어 비칠 때 몸이 보입니다. 기본은 꺼짐입니다. 켜면 마른 상태에서도 몸이 남습니다.
+- Unity의 미리보기는 NDMF 미리보기를 씁니다. **Tools > NDM Framework > Enable Previews**가 켜져 있어야 합니다.
+
+### Write Defaults
+
+설치창의 **Write Defaults**는 특별한 지시가 없다면 **Auto**를 사용해 주십시오. 아바타의 FX를 읽어 <ProductName />의 값을 정합니다. 아바타 제작자가 특정 값을 요구할 때만 ON 또는 OFF를 직접 골라 주십시오.
+
+## 최적화 도구 {/* #optimizers */}
+
+다른 도구가 빌드 중에 의상을 합치거나 바꾸면, <ProductName />도 최종 의상에 맞춰 확인합니다. 오류가 없다면 의상 전체를 최적화에서 미리 뺄 필요는 없습니다. 젖음을 없앨 수 있는 설정은 설치창의 **다른 아바타 툴** 칸에서 미리 알려 줍니다.
+
+| 도구 | 함께 쓸 때 |
+| --- | --- |
+| **AAO (Avatar Optimizer)** | Trace and Optimize는 그대로 써도 됩니다. 자동 메쉬 병합이 함께 처리할 수 없는 파츠끼리 합칠 때만, <ProductName />이 한쪽을 자동으로 병합에서 빼고 알려 줍니다. **Optimize Animator**가 파라미터 형식을 바꿔도 젖음 토글이 그대로 동작합니다. **Merge Skinned Mesh**로 서로 다른 의상의 파츠나 바디를 합치면 그 메쉬는 젖지 않습니다. 의상의 바디가 합쳐지면 설치창이 알려 줍니다. 의상마다 따로 합치고, 바디는 병합에서 빼 주십시오. |
+| **TexTransTool (TTT)** | TTT로 텍스처를 바꾼 Poiyomi 머티리얼도 업로드에서 젖습니다. **Atlas Texture**가 머티리얼을 하나로 합치면 기준 머티리얼의 슬롯은 젖고, 다른 머티리얼에 합쳐진 슬롯만 젖지 않습니다(NDMF 결과 창에 알립니다). 그 슬롯도 젖게 하려면 그 머티리얼을 병합 그룹에서 빼 주십시오. |
+| **d4rk Avatar Optimizer** | 기본 설정(Basic)이면 그대로 둡니다. 셰이더를 다시 쓰는 설정(**Write Properties as Static Values**, **Shader Toggles**, **Merge Different Property Materials**, **Merge Same Dimension Textures**)이 켜져 있으면, 업로드할 때 젖는 파츠만 d4rk에서 자동으로 뺍니다. 저장된 설정은 바꾸지 않습니다. 설치창은 이 설정을 끄는 것을 추천합니다. |
+| **VRCFury** | 토글과 머티리얼 교체는 그대로 쓸 수 있습니다. 처음부터 켜진 토글과 **Apply During Upload**가 넣는 머티리얼도 젖습니다. 교체되는 머티리얼이 젖지 않는 경우 NDMF 결과 창에 안내가 나옵니다. |
+| **본을 옮기는 도구** | 빌드 중에 다른 도구가 본을 옮겨도(예: NDExtensions Rebake Humanoid) 업로드에서 미리보기와 같은 자리에서 젖습니다. |
+
+애니메이션으로 Renderer의 **메쉬 자체**를 바꾸는 구성은 지원하지 않습니다. 메쉬 교체 애니메이션을 빼거나, 바뀌는 메쉬를 <ProductName />에서 제외한 별도 Renderer로 나눠 주십시오.
+
+## RealSweatSystem과 함께 쓰기 {/* #realsweat */}
+
+같은 아바타에 RealSweatSystem이 있으면 <ProductName />이 감지합니다. 새 설치는 **RealSweat 연동**이 켜진 상태로 시작해, 피부의 최종 땀 수치를 옷도 따릅니다.
+
+| 원하는 모습 | 설정 |
+| --- | --- |
+| 움직여 땀이 나면 옷도 젖기 | RSS 자동 모드와 **RealSweat 연동**을 켭니다. |
+| 피부는 마르게 두고 옷만 젖기 | **RealSweat 연동**을 끄고 <strong>젖음 양 (연동 해제 시)</strong>를 올립니다. |
+| 다시 피부 땀을 따라가기 | **RealSweat 연동**을 켭니다. |
+
+- Unity에서 초기값을 바꾸려면 **RealWet**의 **입력 모드** 행에서 **연동하기** 또는 **연동 해제**를 고릅니다.
+- <ProductName />에서 연동을 바꿔도 피부의 땀 수치는 바뀌지 않습니다.
+- RealSweatSystem의 **땀 표시**와 **나에게만 보이기**는 피부 땀에만 적용됩니다. 의상 젖음은 <ProductName />의 **의상 젖음 보이기**와 의상별 표시로만 숨깁니다.
+- **젖음** 메뉴는 RSS 메뉴 안이 아니라 아바타 메인 메뉴에 따로 설치됩니다.
+- RealSweatSystem 2.0.0의 Late Queue 땀 셰이더도 피부 땀으로 인식해, 젖은 옷을 바디와 땀 뒤에 그립니다.
+- 선택한 아바타의 RealSweatSystem이 구버전(1.x)이면 설치창에 업데이트 안내가 한 줄 나옵니다.
+
+## RealRainSystem과 함께 쓰기 {/* #realrain */}
+
+RealRainSystem(RealRain)과 함께 쓰면 빗방울·물줄기·광택이 <ProductName />의 젖음 셰이더 위에 함께 그려집니다. 비 설정은 RealRain에서 바꿉니다.
+
+- 비에 의상이 젖는 효과는 <ProductName />이 그립니다. RealRain만 설치하면 날씨(구름·비·빗소리)는 동작하지만 의상은 젖지 않습니다.
+- 두 툴은 따로 판매하고, 구매 인증도 툴마다 따로 합니다.
+- RealRain에서 문제가 생기면 <ProductName />은 비만 끄고 젖음은 그대로 둡니다. 빌드는 멈추지 않습니다.
+- 비를 받는 옷 정점마다 <ProductName />이 UV6에 번호를 적어 둡니다. 그래서 최적화 도구가 정점을 다시 매겨도 비가 제자리에 보입니다. 메쉬에 이미 UV6 데이터가 있으면 그 렌더러의 비만 끄고 알립니다.
+
+- **면·니트·데님 (추천)** 옷감에는 RealRain이 빗방울과 광택을 그리지 않습니다(물을 흡수하는 천이기 때문입니다).
+- **젖은 느낌 강도**가 **강하게**이고 옷감이 매끈한 종류면, 빗방울의 광택도 조금 더 밝아집니다.
+- lilToon **Multi**와 **Refraction** 머티리얼 칸은 비 효과를 받지 않고 일반 젖음만 적용됩니다.
