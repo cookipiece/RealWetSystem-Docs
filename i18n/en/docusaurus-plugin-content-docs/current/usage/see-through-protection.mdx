@@ -49,7 +49,9 @@ The chest protection regions find their spot in the following order. Each method
 
 1. **Nipple shape key:** If the body mesh has a nipple shape key, RealWet uses the two spots that key moves. It uses them only when the two spots are small, mirror each other left and right, and sit on the front of the chest. Shrink and hide keys made for clothing are not used.
 2. **Breast bones:** If there is no such key, RealWet uses the frontmost skin moved by the breast bones. When there are breast bones, the protection regions move with them.
-3. **Torso:** If there are no breast bones either, RealWet sets the spot at 70% of the height from the hips to the shoulders, using the torso width without the arms and the front skin. Avatars with a flat chest (such as male bodies) are placed this way too.
+3. **Torso:** If there are no breast bones either, RealWet looks at the torso.
+   - If the chest stands out (at least 10% of the torso height in front of the belly), each region goes on the most forward skin of that breast. Avatars with breasts but no breast bones and no nipple shape keys are placed this way.
+   - A truly flat chest (such as a male body) gets the spot at 70% of the height from the hips to the shoulders, using the torso width without the arms and the front skin.
 
 {/* SHOT S05: flat-chest avatar, torso fallback placement */}
 
@@ -70,6 +72,7 @@ The automatic layout fits most avatars, but it may be slightly off depending on 
 4. In the Scene, move with W, rotate with E and resize with R.
 
 {/* SHOT U25: region editor, See-through protection tab, Shape popup open */}
+[![Editing a protection region](/img/guide/U25-en.png)](/img/guide/U25-en.png)
 
 ### Properties
 
@@ -137,6 +140,7 @@ Open **Duplicate / delete / reset** to find the reset buttons.
 New installs and the recommended set include the **Wet > See-Through Protection** page. The page has the **Private Area Protection** switch and two dials.
 
 {/* SHOT M03: See-Through Protection page */}
+[![The See-Through Protection page](/img/guide/M03-en.png)](/img/guide/M03-en.png)
 
 ### See-Through Protection Range (50% = Standard) {/* #range-dial */}
 

@@ -24,7 +24,9 @@ The first preview or the first build takes a long time, because RealWet creates 
 Import the <ProductName /> `.unitypackage`. Please wait until Unity finishes importing and compiling.
 
 {/* SHOT U01: Unity top menu CookiTools > RealWetSystem */}
-[![Unity top menu CookiTools > RealWetSystem](/img/guide/U01-en.png)](/img/guide/U01-en.png)
+[![The RealWetSystem items in the Unity top menu](/img/guide/U01-en.png)](/img/guide/U01-en.png)
+
+*<small>The Unity top menu. **CookiTools > RealWetSystem** has **Setup／Uninstall**, **Purchase Activation** and **Add or Update Clothing**. **Add or Update Clothing** adds or updates the outfit selected in the Hierarchy.</small>*
 
 ## 3. Purchase activation
 
@@ -33,6 +35,7 @@ Import the <ProductName /> `.unitypackage`. Please wait until Unity finishes imp
 3. When **Activation complete.** appears, you're done.
 
 {/* SHOT U02: Purchase Activation window */}
+[![The Purchase Activation window, not activated yet](/img/guide/U02-en.png)](/img/guide/U02-en.png)
 
 You only need to do this once per PC. For details, see [Purchase activation](./license-activation.mdx).
 
@@ -45,6 +48,7 @@ You only need to do this once per PC. For details, see [Purchase activation](./l
 5. When the **Installation Complete** message appears, press **OK**.
 
 {/* SHOT U03: Setup window, new install, defaults */}
+[![The whole Setup window](/img/guide/U03-en.png)](/img/guide/U03-en.png)
 
 Installing with the defaults sets up the following.
 
@@ -58,6 +62,7 @@ Installing with the defaults sets up the following.
 When you close the install message, the **RealWet: Choose Outfits** window opens. Press **Add Recommended (N)** at the top.
 
 {/* SHOT U14: outfit chooser */}
+[![The outfit chooser](/img/guide/U14-en.png)](/img/guide/U14-en.png)
 
 - Only the outfits <ProductName /> is sure are outfits are added.
 - If an outfit is missing, check it in the **Choose Yourself** list below and press **Add Selected Outfits**.
@@ -71,6 +76,9 @@ When you close the install message, the **RealWet: Choose Outfits** window opens
 4. When you're done, press **Stop Whole Outfit Preview**.
 
 {/* SHOT U19: outfit inspector with the preview */}
+[![The outfit's own settings](/img/guide/U19-en.png)](/img/guide/U19-en.png)
+
+*<small>An example picture. The see-through was set by hand for each part, so **See-Through When Wet** shows **Separate per Part**.</small>*
 
 If the preview does not start, please check that **Tools > NDM Framework > Enable Previews** is turned on in the Unity menu bar.
 
@@ -81,6 +89,9 @@ Save the scene, then run **Build & Test** or upload from the VRChat SDK. Outfits
 In VRChat, open **Wet** in the main radial menu and raise **Wetness Amount**. If you use RealSweatSystem too, the clothes also get wet following the sweat level.
 
 {/* SHOT M01: in-game main Wet page */}
+[![The in-game Wet menu](/img/guide/M01-en.png)](/img/guide/M01-en.png)
+
+*<small>The menu of the recommended set with RealWetSystem only. With RealSweatSystem linked, the main page has **Link RealSweat** and **Wetness Amount (Unlinked)** instead.</small>*
 
 :::info[Builds never stop]
 Only the outfits RealWet could not apply wetness to are uploaded dry, and everything else gets wet as usual. In that case, the NDMF results window shows a warning with the outfit name and the reason. See [Troubleshooting](./troubleshooting.mdx#ndmf-warnings).

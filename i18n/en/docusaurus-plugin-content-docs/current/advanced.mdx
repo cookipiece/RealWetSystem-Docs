@@ -58,6 +58,7 @@ For how to use it, see [Layer order](./usage/outfit-settings.mdx#layer-order). F
 Turn on the in-game **Whole Area** and the whole garment gets wet evenly, regardless of the start points. Use it for a rained-on look, a just-out-of-the-water look, or photos.
 
 {/* SHOT R03: Whole Area OFF / ON */}
+[![Whole Area off and on](/img/renders/R03.jpg)](/img/renders/R03.jpg)
 
 - How wet it gets is decided by the wetness amount (the sweat level when linked to RealSweat).
 - While it is on, **Maximum Wet Range**, **Spread Wetness Wider**, **Reduce Outfit Differences** and **Wet Edge** have no effect.
@@ -70,13 +71,17 @@ For details, see [In-game menu](./usage/in-game-menu.mdx#whole-area).
 
 Outfits that use PCSS4VRC (lilToon) or lilSSRT can also get wet with experimental features. Both are **off by default**, and you turn them on per avatar in **Advanced settings > Experimental** in the setup window. This card appears only when those shaders are on this PC.
 
-{/* SHOT U09: Advanced settings with the Experimental card */}
+{/* SHOT U09b: Advanced settings with the Experimental card (needs a project with PCSS4VRC or lilSSRT) */}
 
 | State | PCSS4VRC (lilToon) | lilSSRT |
 | --- | --- | --- |
 | **Off** (default) | Parts that PCSS4VRC changes in the first build step are not wet in the upload. They look wet in the preview, but a **This part does not get wet when uploaded** notice and a button to turn the feature on right away appear above it, and an NDMF warning reports it too. | lilSSRT parts stay as an unsupported shader and don't get wet. A notice and a button to turn the feature on right away appear above the preview. |
 | **On** | PCSS4lilToon outfits get wet too. See-through works the same as on regular lilToon outfits, and the render queue stays at 2499 or below to keep the PCSS shadows. | Outfits using the lilSSRT, lilSSRT/RTAO and lilSSRT/GTAO shaders of lilSSRT 1.4.3, and the AOTessellation shader for AO, get wet. The lilSSRT settings (AO quality and so on) stay as they are. |
 | Verified version | 10.1.5 | 1.4.3. With other versions, lilSSRT parts are built dry and a notice appears once. |
+
+:::note[Families PCSS4VRC (lilToon) support does not cover]
+This feature wets only lilToon's standard families. Parts whose lilToon **Multi** or **MultiOutline** (and Tessellation or Lite) materials PCSS4VRC replaces stay dry in the upload even with the feature on, and an NDMF warning appears. In 1.0.0 that warning may tell you to turn the feature on. If it is already on, the part is in one of these families and does not get wet. To make it wet, switch that material to a standard lilToon shader, or leave it out of PCSS4VRC's conversion.
+:::
 
 Good to know for both:
 

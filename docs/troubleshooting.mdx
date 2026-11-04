@@ -119,6 +119,7 @@ PCSS4VRC를 쓰는 아바타에서는 PCSS4VRC가 빌드 첫 단계에서 lilToo
 - 이런 파츠는 의상·파츠 미리보기 위에 **업로드 때 이 부분은 젖지 않습니다** 안내와 바로 켜는 버튼이 나오고, 빌드할 때 NDMF 경고 하나로 알립니다.
 - **해결:** 설치창 **고급 설정 > 실험 기능**에서 **PCSS4VRC(lilToon)** 지원을 켜고 **업데이트하기**를 누릅니다. 그러면 PCSS 의상도 젖습니다. 실험 기능이므로 [고급 기능](./advanced.mdx#experimental)을 먼저 읽어 주십시오.
 - PCSS4VRC가 셰이더를 바꾸지 않는 lilToon 사용자 셰이더를 쓰는 파츠는 업로드에서도 젖습니다.
+- 실험 기능을 켜도 lilToon **Multi**·**MultiOutline**(그리고 Tessellation·Lite) 계열을 PCSS4VRC가 바꾼 파츠는 젖지 않고, NDMF 경고가 나옵니다. 1.0.0의 경고는 기능을 켜라고 안내할 수 있지만, 이미 켜져 있다면 이 계열 때문입니다. 그 머티리얼을 lilToon 표준 셰이더로 바꾸거나 PCSS4VRC의 변환 대상에서 빼 주십시오.
 
 ## 지원하지 않거나 확인되지 않은 셰이더 {/* #shaders */}
 
@@ -278,6 +279,7 @@ PC용 Unity와 VRChat은 셰이더 한 패스가 쓰는 텍스처를 64개까지
 **RealWet > 상태 > 문제 해결**의 **진단 보고서 복사**를 누르면 <ProductName />·Unity·관련 도구와 셰이더의 버전, 이 아바타의 설정, 의상별 상태, 최근 콘솔 기록을 한 번에 복사합니다.
 
 {/* SHOT U18: Status tab, Copy Diagnostic Report */}
+[![문제 해결과 진단 보고서 복사](/img/guide/U18-ko.png)](/img/guide/U18-ko.png)
 
 - 자동으로 보내지 않습니다. 개인 폴더 경로는 `<Project>`, `<User>`로 바꿉니다.
 - 빌드가 멈췄다면 Console의 첫 번째 빨간 오류 전체도 함께 보내 주십시오.

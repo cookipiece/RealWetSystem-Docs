@@ -119,6 +119,7 @@ On avatars that use PCSS4VRC, PCSS4VRC replaces lilToon materials with `_pcss` m
 - For these parts, a **This part does not get wet when uploaded** notice and a button to turn the feature on right away appear above the outfit or part preview, and a single NDMF warning reports it when you build.
 - **Fix:** In **Advanced settings > Experimental** in the setup window, turn on **PCSS4VRC (lilToon)** support and press **Update**. PCSS outfits then get wet too. It is an experimental feature, so please read [Advanced features](./advanced.mdx#experimental) first.
 - Parts that use lilToon custom shaders, which PCSS4VRC doesn't replace, get wet in the upload too.
+- Even with the feature on, parts whose lilToon **Multi** or **MultiOutline** (and Tessellation or Lite) materials PCSS4VRC replaces stay dry, and an NDMF warning appears. In 1.0.0 the warning may tell you to turn the feature on; if it is already on, this family is the reason. Switch that material to a standard lilToon shader, or leave it out of PCSS4VRC's conversion.
 
 ## Unsupported or unverified shaders {/* #shaders */}
 
@@ -278,6 +279,7 @@ The detailed steps are in the [Changelog](./update-changelog.mdx#how-to-update).
 Press **Copy Diagnostic Report** in **RealWet > Status > Troubleshooting** to copy, all at once, the versions of <ProductName />, Unity, related tools and shaders, this avatar's settings, the status of each outfit, and recent Console logs.
 
 {/* SHOT U18: Status tab, Copy Diagnostic Report */}
+[![Troubleshooting and Copy Diagnostic Report](/img/guide/U18-en.png)](/img/guide/U18-en.png)
 
 - Nothing is sent automatically. Personal folder paths are replaced with `<Project>` and `<User>`.
 - If the build stopped, please also send the whole first red error from the Console.

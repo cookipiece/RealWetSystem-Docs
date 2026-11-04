@@ -44,7 +44,9 @@ On a new install, <ProductName /> places start points fitted to this avatar's bo
 - They go in places such as the back of the neck, the back (upper, middle and lower), the chest, cleavage and underbust, the armpits, the inner upper arms, the inner elbows, the belly, the groin, the buttocks, the (inner) thighs, the backs of the knees and calves, and the feet.
 - The bones decide the body part and direction, and RealWet finds the skin surface of the registered body meshes to place each sphere. It is normal for a sphere to sit slightly inside the skin. That keeps the sphere's range touching the skin.
 - The chest, armpits, inner upper arms, inner elbows, inner thighs, groin and backs of the knees are located from the body mesh's **bone weights**. For example, the lower edge of the breast bone weights is taken as the underbust crease, and the lowest point where the upper arm and torso weights mix is taken as the armpit.
-- On a **flat chest** without breast bones (such as a male body), the sphere goes on the lower line of the pectoral muscles.
+- On a **flat chest** without breast bones (such as a male body), the sphere goes on the lower line of the pectoral muscles. That line sits 10% of the torso height below the nipple line (70% of the torso), so it never passes the nipple height.
+- Chibi bodies whose arm bones sit inside the torso, and bodies with sparse meshes, also get their armpit and side points on the skin.
+- These rules apply only to a new install, **Natural sweat layout…** and resets. Saved start points do not change.
 - Parts that couldn't be confirmed from the weights, parts found on only one side, and parts that fall on an edge where the body was deleted under the clothes are placed with the older bone-based layout, for those parts only. Start points that need a check are named in the install results.
 - For kitbashed bodies merged with MA Merge Armature, RealWet links the bones by name to judge them.
 - Bones such as fingers or a jaw scaled to 0 to hide them don't block the layout. If the bone a sphere would attach to, or its parent, has a scale of 0, RealWet names that bone and does not create that sphere.
@@ -58,6 +60,7 @@ On a new install, <ProductName /> places start points fitted to this avatar's bo
 3. When the **Wet / Protection Region Editor** opens, choose the **Wet start points** tab.
 
 {/* SHOT U22: region editor, start point tab, armpit selected */}
+[![Editing a wet start point](/img/guide/U22-en.png)](/img/guide/U22-en.png)
 
 - Pick a sphere in **Selected region** at the top, or open **List / search** to find one. You can also click a name label or dot in the Scene.
 - The influence of the selected sphere shows as color on the body and clothes. Blue is weak influence, going through cyan and yellow up to red for strong influence. It updates right away, even while you drag the sphere.
@@ -99,6 +102,7 @@ With **By property ▾**, you can reset items one at a time to their defaults (s
 Choose under **Shape** in **Shape and pattern**.
 
 {/* SHOT U23: Shape = Curve, Advanced coordinates with Start / End / Middle */}
+[![A curve start point](/img/guide/U23-en.png)](/img/guide/U23-en.png)
 {/* SHOT S06: curve start point handles */}
 
 | Shape | Meaning |
@@ -135,6 +139,7 @@ Adding, duplicating and deleting can all be undone with Ctrl+Z.
 ## Reset and re-layout {/* #reset */}
 
 {/* SHOT U24: Duplicate / delete / reset section and the layout buttons */}
+[![Duplicate, delete and reset](/img/guide/U24-en.png)](/img/guide/U24-en.png)
 
 | Button | What it does |
 | --- | --- |

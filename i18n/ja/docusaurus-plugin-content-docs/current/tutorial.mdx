@@ -32,6 +32,7 @@ description: 購入認証から、インストール画面のすべてのオプ�
 5. **CookiTools > RealWetSystem > Purchase Activation**を開き、BOOTHの注文番号（またはGumroadのライセンスキー）を入力してから、**認証する**を押します。
 
 {/* SHOT U02: Purchase Activation window */}
+[![購入認証ウィンドウ（未認証）](/img/guide/U02-ja.png)](/img/guide/U02-ja.png)
 
 - 認証はPCごとに1回です。インターネットは、認証するときと、自動更新のために3週間に1回以上必要です。
 - 認証が必要なのは、新しいアバターで**インストール**を押すことだけです。衣装の追加、設定の変更、更新、アンインストールには必要ありません。
@@ -44,7 +45,9 @@ description: 購入認証から、インストール画面のすべてのオプ�
 3. Unity上部のメニューから**CookiTools > RealWetSystem > Setup／Uninstall**を開きます。
 
 {/* SHOT U01: Unity top menu CookiTools > RealWetSystem */}
-[![Unity 上部メニューの CookiTools > RealWetSystem](/img/guide/U01-en.png)](/img/guide/U01-en.png)
+[![Unity上部メニューのRealWetSystem項目](/img/guide/U01-en.png)](/img/guide/U01-en.png)
+
+*<small>Unity上部のメニューです。**CookiTools > RealWetSystem**に**Setup／Uninstall**、**Purchase Activation**、**Add or Update Clothing**があります。**Add or Update Clothing**は、Hierarchyで選んだ衣装を追加または更新します。</small>*
 
 ウィンドウの上部には、**インストール** / **アンインストール**のタブと、**アバター**の欄があります。アバターの欄が空なら、**検出**を押すか、アバターをドラッグ＆ドロップします。アバターの欄の下に、現在の状態が1行で表示されます。
 
@@ -60,18 +63,21 @@ description: 購入認証から、インストール画面のすべてのオプ�
 - このPCで購入認証をしていない場合は、アバターの欄のすぐ下に、案内と**認証ウィンドウを開く**ボタンが表示されます。
 
 {/* SHOT U10: Setup window notice on a PC that is not activated */}
+[![認証前の案内と認証ウィンドウを開くボタン](/img/guide/U10-ja.png)](/img/guide/U10-ja.png)
 
 ## 3. インストール画面のオプション {/* #setup-options */}
 
 インストールタブは、上から**1. 身体の登録**、**2. どこまで濡らしますか？**、**3. どこから濡らしますか？**、**4. 新しい衣装の濡れた見た目**の4つの欄と、折りたたまれた**連携とゲーム内メニュー**、**詳細設定**でできています。
 
 {/* SHOT U03: Setup window, new install, defaults */}
+[![インストール画面の全体](/img/guide/U03-ja.png)](/img/guide/U03-ja.png)
 
 ### 3.1 身体の登録 {/* #body */}
 
 濡れの計算に使う**肌メッシュ**を決めます。服が肌にどれだけ近いか、重ね着をどの順序で描画するかを計算するときに使います。
 
 {/* SHOT U04: card 1. Body meshes */}
+[![1. 身体の登録カード](/img/guide/U04-ja.png)](/img/guide/U04-ja.png)
 
 | オプション | 意味 | 初期値 |
 | --- | --- | --- |
@@ -88,6 +94,7 @@ description: 購入認証から、インストール画面のすべてのオプ�
 ### 3.2 どこまで濡らしますか？ {/* #range */}
 
 {/* SHOT U05: card 2. How far should it get wet? */}
+[![2. 濡れる範囲カード](/img/guide/U05-ja.png)](/img/guide/U05-ja.png)
 
 | オプション | 意味 | 初期値 |
 | --- | --- | --- |
@@ -105,6 +112,7 @@ description: 購入認証から、インストール画面のすべてのオプ�
 説明の付いた大きなボタン3つのうち、1つを押します。
 
 {/* SHOT U06: card 3. Where should wetness start? */}
+[![3. 濡れ始める場所カード](/img/guide/U06-ja.png)](/img/guide/U06-ja.png)
 
 | 選択 | 見える結果 | こんなときに選びます |
 | --- | --- | --- |
@@ -122,6 +130,7 @@ description: 購入認証から、インストール画面のすべてのオプ�
 これから新しく入れる衣装が、どのように濡れるかを決めます。登録済みの衣装は変わりません。
 
 {/* SHOT U07: card 4. How new outfits look when wet, popup open */}
+[![4. 新しい衣装の濡れた見た目カード](/img/guide/U07-ja.png)](/img/guide/U07-ja.png)
 
 | オプション | 選択肢 | 初期値 |
 | --- | --- | --- |
@@ -137,6 +146,9 @@ description: 購入認証から、インストール画面のすべてのオプ�
 折りたたまれた**連携とゲーム内メニュー**を押すと開きます。VRChatのメニューに入れるボタンを選びます。新規インストールでは、おすすめ構成に最初からチェックが入っているので、変えなくてもかまいません。
 
 {/* SHOT U08: Linking & in-game menu expanded */}
+[![連携とゲーム内メニュー](/img/guide/U08-ja.png)](/img/guide/U08-ja.png)
+
+*<small>この画像はRealSweatSystemと連動したテスト用アバターで撮影したため、開始時の入力が連動になっていて、合計は79ビットです。合計は選んだ項目によって変わります。RealWetSystemだけを使う新規インストールのおすすめ構成は87ビットです。</small>*
 
 | オプション | 意味 | 新規インストールの初期値 | 同期容量 |
 | --- | --- | --- | --- |
@@ -170,6 +182,9 @@ description: 購入認証から、インストール画面のすべてのオプ�
 折りたたまれた**詳細設定**を押すと開きます。ふつうは変える必要はありません。
 
 {/* SHOT U09: Advanced settings expanded */}
+[![詳細設定とインストール前の確認](/img/guide/U09-ja.png)](/img/guide/U09-ja.png)
+
+*<small>この画像のプロジェクトにはPCSS4VRCもlilSSRTもないため、**実験機能**の欄は表示されていません。</small>*
 
 | オプション | 意味 | 初期値 |
 | --- | --- | --- |
@@ -201,6 +216,7 @@ description: 購入認証から、インストール画面のすべてのオプ�
 インストールの案内を閉じると、**RealWet 衣装を選ぶ**ウィンドウが開きます。アバターで見つかった衣装の一覧が表示されます。
 
 {/* SHOT U14: outfit chooser */}
+[![衣装選択ウィンドウ](/img/guide/U14-ja.png)](/img/guide/U14-ja.png)
 
 | ボタン | すること |
 | --- | --- |
@@ -235,6 +251,10 @@ description: 購入認証から、インストール画面のすべてのオプ�
 5. 終えるときは、**衣装全体のプレビューを停止**を押します。
 
 {/* SHOT U19: outfit inspector with the preview running */}
+[![この衣装の設定](/img/guide/U19-ja.png)](/img/guide/U19-ja.png)
+
+*<small>例の画像です。パーツごとに透け方を手で設定してあるため、**濡れると透ける**が**パーツごとに個別**になっています。</small>*
+
 {/* SHOT R01: dry · 50 % · 100 %, default mode */}
 
 確認すること:
@@ -254,6 +274,9 @@ Unity上部の**Tools > NDM Framework > Enable Previews**がオンになって�
 インストールすると、アバターのメインのラジアルメニューに**濡れ**メニューが入ります。おすすめ構成のメニューは、次のとおりです。
 
 {/* SHOT M01: main Wet page */}
+[![ゲーム内の濡れメニュー](/img/guide/M01-ja.png)](/img/guide/M01-ja.png)
+
+*<small>RealWetSystemだけをインストールしたおすすめ構成のメニューです。RealSweatSystemと連動すると、メインページに**RealSweat連動**と<strong>濡れ量（連動OFF時）</strong>が入ります。</small>*
 
 ### 濡れ（メインページ）
 
@@ -273,6 +296,7 @@ Unity上部の**Tools > NDM Framework > Enable Previews**がオンになって�
 ### 濡れ > 濡れ調整
 
 {/* SHOT M02: Wet Tuning page */}
+[![濡れ調整ページ](/img/guide/M02-ja.png)](/img/guide/M02-ja.png)
 
 | ダイヤル | VRChatでの働き | 最初の値 |
 | --- | --- | --- |
@@ -288,6 +312,7 @@ Unity上部の**Tools > NDM Framework > Enable Previews**がオンになって�
 ### 濡れ > 透け防止
 
 {/* SHOT M03: See-Through Protection page */}
+[![透け防止ページ](/img/guide/M03-ja.png)](/img/guide/M03-ja.png)
 
 | ボタン | VRChatでの働き | 最初の値 |
 | --- | --- | --- |

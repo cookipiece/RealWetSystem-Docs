@@ -58,6 +58,7 @@ description: 의상별 설정, 비침 세기와 어두운 색 비침, 겹옷과 
 인게임 **전체 영역 젖음**을 켜면 시작점과 상관없이 옷 전체가 고르게 젖습니다. 비를 맞은 모습, 물에 들어간 모습, 사진 촬영에 씁니다.
 
 {/* SHOT R03: Whole Area OFF / ON */}
+[![전체 영역 젖음 끔·켬](/img/renders/R03.jpg)](/img/renders/R03.jpg)
 
 - 얼마나 젖는지는 젖음 양(RealSweat 연동이면 땀 수치)이 정합니다.
 - 켜 둔 동안 **최대 젖는 범위**, **젖는 범위만 넓히기**, **의상별 편차 줄이기**, **젖음 경계**는 효과가 없습니다.
@@ -70,13 +71,17 @@ description: 의상별 설정, 비침 세기와 어두운 색 비침, 겹옷과 
 
 PCSS4VRC(lilToon)와 lilSSRT를 쓰는 의상도 실험 기능으로 적실 수 있습니다. 두 기능 모두 **기본은 꺼짐**이며, 설치창 **고급 설정 > 실험 기능**에서 아바타마다 켭니다. 이 칸은 그 셰이더가 이 PC에 있을 때만 나옵니다.
 
-{/* SHOT U09: Advanced settings with the Experimental card */}
+{/* SHOT U09b: Advanced settings with the Experimental card (needs a project with PCSS4VRC or lilSSRT) */}
 
 | 상태 | PCSS4VRC(lilToon) | lilSSRT |
 | --- | --- | --- |
 | **꺼짐** (기본) | PCSS4VRC가 빌드 첫 단계에서 바꾸는 파츠는 업로드에서 젖지 않습니다. 미리보기에서는 젖어 보이지만, 그 위에 **업로드 때 이 부분은 젖지 않습니다** 안내와 바로 켜는 버튼이 나오고, NDMF 경고로도 알립니다. | lilSSRT 파츠는 지원하지 않는 셰이더로 남아 젖지 않습니다. 미리보기 위에 안내와 바로 켜는 버튼이 나옵니다. |
 | **켜짐** | PCSS4lilToon 의상도 젖습니다. 비침은 일반 lilToon 의상과 같고, PCSS 그림자를 지키도록 렌더큐는 2499를 넘지 않습니다. | lilSSRT 1.4.3의 lilSSRT, lilSSRT/RTAO, lilSSRT/GTAO 셰이더와 AO용 AOTessellation 셰이더의 의상이 젖습니다. lilSSRT 설정(AO 품질 등)은 그대로입니다. |
 | 확인한 버전 | 10.1.5 | 1.4.3. 다른 버전이면 lilSSRT 파츠는 젖지 않은 채 빌드되고 안내가 한 번 나옵니다. |
+
+:::note[PCSS4VRC(lilToon) 지원이 적시지 않는 계열]
+이 기능은 lilToon 표준 계열만 적십니다. PCSS4VRC가 lilToon **Multi**·**MultiOutline**(그리고 Tessellation·Lite) 머티리얼을 바꾼 파츠는 기능을 켜 두어도 업로드에서 마르고, NDMF 경고가 나옵니다. 1.0.0에서는 이 경고가 기능을 켜라고 안내할 수 있습니다. 이미 켜져 있다면 그 파츠는 이 계열이라 젖지 않는 것입니다. 젖게 하려면 그 머티리얼을 lilToon 표준 셰이더로 바꾸거나, PCSS4VRC의 변환 대상에서 빼 주십시오.
+:::
 
 공통으로 알아 둘 것:
 

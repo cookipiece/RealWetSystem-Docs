@@ -24,7 +24,9 @@ description: RealWetSystemをいちばん少ない手順でインストールし
 <ProductName />の`.unitypackage`をインポートします。Unityのインポートとコンパイルが終わるまで待ってください。
 
 {/* SHOT U01: Unity top menu CookiTools > RealWetSystem */}
-[![Unity 上部メニューの CookiTools > RealWetSystem](/img/guide/U01-en.png)](/img/guide/U01-en.png)
+[![Unity上部メニューのRealWetSystem項目](/img/guide/U01-en.png)](/img/guide/U01-en.png)
+
+*<small>Unity上部のメニューです。**CookiTools > RealWetSystem**に**Setup／Uninstall**、**Purchase Activation**、**Add or Update Clothing**があります。**Add or Update Clothing**は、Hierarchyで選んだ衣装を追加または更新します。</small>*
 
 ## 3. 購入認証
 
@@ -33,6 +35,7 @@ description: RealWetSystemをいちばん少ない手順でインストールし
 3. <strong>認証が完了しました。</strong>と表示されれば完了です。
 
 {/* SHOT U02: Purchase Activation window */}
+[![購入認証ウィンドウ（未認証）](/img/guide/U02-ja.png)](/img/guide/U02-ja.png)
 
 PCごとに一度だけで済みます。詳しくは[購入認証](./license-activation.mdx)を確認してください。
 
@@ -45,6 +48,7 @@ PCごとに一度だけで済みます。詳しくは[購入認証](./license-ac
 5. **インストール完了**の案内が出たら、**OK**を押します。
 
 {/* SHOT U03: Setup window, new install, defaults */}
+[![インストール画面の全体](/img/guide/U03-ja.png)](/img/guide/U03-ja.png)
 
 初期値のままインストールすると、次の内容が入ります。
 
@@ -58,6 +62,7 @@ PCごとに一度だけで済みます。詳しくは[購入認証](./license-ac
 インストールの案内を閉じると、**RealWet 衣装を選ぶ**ウィンドウが開きます。いちばん上の<strong>おすすめどおり追加（N着）</strong>を押します。
 
 {/* SHOT U14: outfit chooser */}
+[![衣装選択ウィンドウ](/img/guide/U14-ja.png)](/img/guide/U14-ja.png)
 
 - <ProductName />が衣装だと確信した衣装だけが追加されます。
 - 漏れた衣装がある場合は、下の**自分で選ぶ**の一覧でチェックを入れて、**選んだ衣装を追加**を押します。
@@ -71,6 +76,9 @@ PCごとに一度だけで済みます。詳しくは[購入認証](./license-ac
 4. 終わったら、**衣装全体のプレビューを停止**を押します。
 
 {/* SHOT U19: outfit inspector with the preview */}
+[![この衣装の設定](/img/guide/U19-ja.png)](/img/guide/U19-ja.png)
+
+*<small>例の画像です。パーツごとに透け方を手で設定してあるため、**濡れると透ける**が**パーツごとに個別**になっています。</small>*
 
 プレビューが始まらない場合は、Unity上部の**Tools > NDM Framework > Enable Previews**がオンになっているか確認してください。
 
@@ -81,6 +89,9 @@ PCごとに一度だけで済みます。詳しくは[購入認証](./license-ac
 VRChatでは、メインのラジアルメニューの**濡れ**を開いて、**濡れ量**を上げます。RealSweatSystemと一緒に使う場合は、汗の量に合わせて服も濡れます。
 
 {/* SHOT M01: in-game main Wet page */}
+[![ゲーム内の濡れメニュー](/img/guide/M01-ja.png)](/img/guide/M01-ja.png)
+
+*<small>RealWetSystemだけをインストールしたおすすめ構成のメニューです。RealSweatSystemと連動すると、メインページに**RealSweat連動**と<strong>濡れ量（連動OFF時）</strong>が入ります。</small>*
 
 :::info[ビルドは止まりません]
 濡れを入れられなかった衣装だけが乾いたままアップロードされ、残りはそのまま濡れます。このとき、NDMFの結果ウィンドウに衣装名と理由が警告として残ります。[トラブルシューティング](./troubleshooting.mdx#ndmf-warnings)を確認してください。
