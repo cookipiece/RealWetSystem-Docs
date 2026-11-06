@@ -12,6 +12,7 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 
 | Symptom | Where to look first |
 | --- | --- |
+| The **Install** button is gray and can't be clicked | [Install button is gray](#install-gray) |
 | One outfit doesn't get wet at all | [An outfit doesn't get wet](#outfit-dry) |
 | Only part of an outfit stays dry | [Only some parts don't get wet](#partly-dry) |
 | The uploaded avatar shows none of the <ProductName /> effects | [Uploaded without purchase activation](#not-activated) |
@@ -39,6 +40,18 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 | The chest or groin shows through | [See-through protection](./usage/see-through-protection.mdx#checking) |
 | You don't know what changed after an update | [Updating over an earlier version](#updating) |
 | You want to remove <ProductName /> | [Uninstalling](#uninstall) |
+
+## Install button is gray {/* #install-gray */}
+
+In 1.0.0, the **Install** button turns gray in the cases below, and the window doesn't say why. From 1.0.1, the reason appears above the button, and the first case installs without unpacking.
+
+| Cause | Fix |
+| --- | --- |
+| The avatar is the FBX (model file) placed directly in the scene. Unity treats such an avatar as a model it can't edit. | Save your scene first. In the Hierarchy, right-click the avatar → **Prefab > Unpack Completely**, then press **Refresh** in the setup window. |
+| The **Avatar** field holds the prefab file from the Project window. | Click your avatar in the Hierarchy, then press **Detect** in the setup window. |
+| Unity is in Play mode. | Stop Play and try again. |
+
+If it is still gray, please send a screenshot of the whole Unity window, including the Hierarchy, through BOOTH messages.
 
 ## An outfit doesn't get wet {/* #outfit-dry */}
 
