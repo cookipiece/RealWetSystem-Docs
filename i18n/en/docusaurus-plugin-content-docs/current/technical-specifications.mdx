@@ -34,32 +34,34 @@ Only the parameters of the menu items you choose are added to the avatar.
 
 | Menu | Parameter | Sync | Saved | Starting value |
 | --- | --- | --- | --- | --- |
-| Wetness Amount (standalone) | `Cooki/ClothWetAmount` | 8 bits | Saved | 0% |
 | Show Clothing Wetness | `Cooki/ClothWetEnable` | 1 bit | Saved | On |
+| Wetness Amount (without RealSweatSystem) | `Cooki/ClothWetAmount` | 8 bits | Saved | 0% |
 | Link RealSweat | `Cooki/ClothWetSweatLink` | 1 bit | Saved | On |
 | Wetness Amount (Unlinked) | `Cooki/ClothWetManualAmount` | 8 bits | Saved | 0% |
-| Maximum Wet Range (%) | `Cooki/ClothWetProgressLimit` | 8 bits | Saved | Unity setting |
-| Spread Wetness Wider (Advanced) | `Cooki/ClothWetRangeExpansion` | 8 bits | Saved | 0% |
-| Wet Appearance (50% = Standard) | `Cooki/ClothWetAppearance` | 8 bits | Saved | 50% |
-| Wet Gloss (50% = Standard) | `Cooki/ClothWetGloss` | 8 bits | Saved | 50% |
-| Wet Edge | `Cooki/ClothWetEdgeSoftness` | 8 bits | Saved | 50% |
-| See-Through Strength (50% = Standard) | `Cooki/ClothWetSeeThroughStrength` | 8 bits | Saved | 50% |
-| Wet See-Through Mode | `Cooki/ClothWetSeeThroughModeV2` | 8 bits | Saved | As Configured |
+| Whole Area | `Cooki/ClothWetWhole` | 1 bit | Saved | Off |
+| Fast Dry | `Cooki/ClothWetFastDry` | 1 bit | Not saved | Off |
+| Hold Current State (For Photos) | `Cooki/ClothWetHold` | 1 bit | Not saved | Off |
+| Only Visible to Me (without RealSweatSystem) | `Cooki/ClothWetLocalOnly` | 1 bit | Saved | Off |
+| Private Area Protection | `Cooki/ClothWetProtect/All` | 1 bit | Not saved | Unity setting (on in a new install) |
 | See-Through Protection Range (50% = Standard) | `Cooki/ClothWetProtectRange` | 8 bits | Saved | 50% |
 | See-Through Protection Strength (100% = Full Block) | `Cooki/ClothWetProtectStrength` | 8 bits | Saved | 100% |
-| Private Area Protection | `Cooki/ClothWetProtect/All` | 1 bit | Not saved | Unity setting (on in a new install) |
-| Whole Area | `Cooki/ClothWetWhole` | 1 bit | Saved | Off |
-| SSAO Relief | `Cooki/ClothWetSsaoRelief` | 1 bit | Saved | On |
+| Maximum Wet Range (%) | `Cooki/ClothWetProgressLimit` | 8 bits | Saved | Unity setting |
+| Wet Appearance (50% = Standard) | `Cooki/ClothWetAppearance` | 8 bits | Saved | 50% |
+| Wet Gloss (50% = Standard) | `Cooki/ClothWetGloss` | 8 bits | Saved | 50% |
+| See-Through Strength (50% = Standard) | `Cooki/ClothWetSeeThroughStrength` | 8 bits | Saved | 50% |
+| Wet See-Through Mode | `Cooki/ClothWetSeeThroughModeV2` | 8 bits | Saved | As Configured |
+| Wet Edge | `Cooki/ClothWetEdgeSoftness` | 8 bits | Saved | 50% |
+| Soften Wet Shadows | `Cooki/ClothWetSsaoRelief` | 1 bit | Saved | On |
 | Reduce Outfit Differences | `Cooki/ClothWetOutfitCorrection` | 1 bit | Saved | Unity setting (on in a new install) |
-| Hold Current State (For Photos) | `Cooki/ClothWetHold` | 1 bit | Not saved | Off |
-| Fast Dry | `Cooki/ClothWetFastDry` | 1 bit | Not saved | Off |
-| Only Visible to Me (standalone) | `Cooki/ClothWetLocalOnly` | 1 bit | Saved | Off |
+| Spread Wetness Wider (Advanced) | `Cooki/ClothWetRangeExpansion` | 8 bits | Saved | 0% |
 | Outfit visibility groups | `Cooki/ClothWetGroup…` | 1 bit per group | — | On |
+
+The table follows the order of the in-game menu (main page, **See-Through Protection**, **Wet Tuning**).
 
 - The recommended menu is 87 bits, and with every item, including 6 outfit visibility groups, it is 94 bits. VRChat's limit is 256 bits for the whole avatar.
 - When linked to RealSweatSystem, RealWet only reads RSS's sweat parameters (`Cooki/SweatAmount` and so on). It doesn't change RSS's parameters.
 - Features not in the menu work with the values set in Unity and add no parameters.
-- One menu page has 8 slots. If **Wet Tuning** has 9 or more items, a **Next** page appears after 7 of them.
+- One menu page has 8 slots. If **Wet Tuning** has 9 or more items, a **Next** page appears after 7 of them. **Spread Wetness Wider (Advanced)** is always the last slot.
 
 ## Animator {/* #animator */}
 
@@ -121,7 +123,9 @@ The render queue is the number that sets the draw order. Lower values are drawn 
 
 ## Known limitations {/* #known-limits */}
 
-- Wetness is not added to unsupported shaders (Sunao, UnityChanToon, UTS, Poiyomi Fur and Grab Pass, lilToon Fur and Gem, shaders modified by the user).
+- Wetness is not added to unsupported shaders (Sunao, UnityChanToon, UTS, Poiyomi 8.x and earlier, Poiyomi Fur and Grab Pass, lilToon Fur and Gem, shaders modified by the user).
+- Tools that change the vertex order, the submeshes or the mesh structure of outfit meshes during the upload (anti-ripping tools, polygon reduction tools and so on) may not be compatible. Outfits or parts that no longer match go up dry, and the NDMF build results window shows the reason. AAO, d4rk Avatar Optimizer and TexTransTool are supported.
+- With VRCFury 1.1258 or earlier, the build can show a `SweatAmount` error. Please use 1.1436.0 or later.
 - lilToon Refraction / RefractionBlur get only the wet color and gloss, with no extra see-through.
 - Layer order is not set between separate outfits.
 - Setups that swap **the mesh itself** on a Renderer with an animation are not supported.

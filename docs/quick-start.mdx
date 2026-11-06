@@ -15,8 +15,8 @@ description: RealWetSystem을 가장 적은 단계로 설치하고, 추천대로
 ## 1. 준비
 
 - 아바타와 프로젝트를 백업합니다.
-- VCC의 **Manage Project**에서 **VRChat Avatars SDK**, **NDMF**, **Modular Avatar**가 설치되어 있는지 확인합니다.
-- 의상이 쓰는 셰이더(lilToon 2.3.0 이상 또는 Poiyomi Toon / Pro)가 프로젝트에 있는지 확인합니다. Poiyomi 의상만 쓴다면 lilToon은 필요하지 않습니다.
+- VCC의 **Manage Project**에서 **VRChat Avatars SDK**, **NDMF**, **Modular Avatar**가 설치되어 있는지 확인합니다. **VRCFury**를 쓴다면 1.1436.0 이상으로 올려 주십시오. 1.1258 이하에서는 빌드할 때 `SweatAmount` 오류가 날 수 있습니다.
+- 의상이 쓰는 셰이더(lilToon 2.3.0 이상 또는 Poiyomi Toon / Pro 9 이상)가 프로젝트에 있는지 확인합니다. Poiyomi 의상만 쓴다면 lilToon은 필요하지 않습니다.
 - Console에 빨간 컴파일 오류가 없는지 확인합니다.
 
 ## 2. 패키지 가져오기
@@ -44,7 +44,7 @@ PC마다 한 번이면 됩니다. 자세한 내용은 [구매 인증](./license-
 1. 아바타를 둔 씬을 저장합니다.
 2. Hierarchy에서 **아바타 최상위 오브젝트**(VRC Avatar Descriptor가 있는 오브젝트)를 선택합니다.
 3. **CookiTools > RealWetSystem > Setup／Uninstall**을 엽니다.
-4. 아무것도 바꾸지 않고 맨 아래의 **설치하기**를 누릅니다.
+4. 아무것도 바꾸지 않고 카드 4장 아래의 **설치하기**를 누릅니다. 설치하는 동안 진행 표시줄이 나옵니다.
 5. **설치 완료** 안내가 나오면 **확인**을 누릅니다.
 
 {/* SHOT U03: Setup window, new install, defaults */}
@@ -78,7 +78,7 @@ PC마다 한 번이면 됩니다. 자세한 내용은 [구매 인증](./license-
 {/* SHOT U19: outfit inspector with the preview */}
 [![이 의상 설정](/img/guide/U19-ko.png)](/img/guide/U19-ko.png)
 
-*<small>예시 그림입니다. 파츠마다 비침을 직접 정해 두었으므로 **젖으면 비침**이 **파츠마다 따로**로 보입니다.</small>*
+*<small>새 설치 직후의 모습입니다. <strong>겉옷만 비침 (속옷은 안 비침) (권장)</strong>으로 넣은 의상은 파츠마다 비침이 달라서 **젖으면 비침**이 **파츠마다 따로**로 보입니다.</small>*
 
 미리보기가 시작하지 않으면 Unity 상단의 **Tools > NDM Framework > Enable Previews**가 켜져 있는지 확인해 주십시오.
 

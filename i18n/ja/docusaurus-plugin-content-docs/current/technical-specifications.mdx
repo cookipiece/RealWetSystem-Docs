@@ -34,32 +34,34 @@ description: RealWetSystem v1.0.0の対応環境、同期パラメーター、�
 
 | メニュー | パラメーター | 同期 | 保存 | 初期値 |
 | --- | --- | --- | --- | --- |
-| 濡れ量（単独） | `Cooki/ClothWetAmount` | 8ビット | 保存する | 0% |
 | 衣装の濡れを表示 | `Cooki/ClothWetEnable` | 1ビット | 保存する | オン |
+| 濡れ量（RealSweatSystemなしで使うとき） | `Cooki/ClothWetAmount` | 8ビット | 保存する | 0% |
 | RealSweat連動 | `Cooki/ClothWetSweatLink` | 1ビット | 保存する | オン |
 | 濡れ量（連動OFF時） | `Cooki/ClothWetManualAmount` | 8ビット | 保存する | 0% |
-| 最大の濡れ範囲 (%) | `Cooki/ClothWetProgressLimit` | 8ビット | 保存する | Unityの設定値 |
-| 濡れる範囲を広げる（上級者向け） | `Cooki/ClothWetRangeExpansion` | 8ビット | 保存する | 0% |
-| 濡れ表現（50%=標準） | `Cooki/ClothWetAppearance` | 8ビット | 保存する | 50% |
-| 濡れ光沢 (50%=標準) | `Cooki/ClothWetGloss` | 8ビット | 保存する | 50% |
-| 濡れの境界 | `Cooki/ClothWetEdgeSoftness` | 8ビット | 保存する | 50% |
-| 透け強度（50%=標準） | `Cooki/ClothWetSeeThroughStrength` | 8ビット | 保存する | 50% |
-| 濡れ透けモード | `Cooki/ClothWetSeeThroughModeV2` | 8ビット | 保存する | 設定どおり |
+| 全範囲濡れ | `Cooki/ClothWetWhole` | 1ビット | 保存する | オフ |
+| 高速乾燥 | `Cooki/ClothWetFastDry` | 1ビット | 保存しない | オフ |
+| 現在の状態を固定（撮影用） | `Cooki/ClothWetHold` | 1ビット | 保存しない | オフ |
+| 自分にだけ表示（RealSweatSystemなしで使うとき） | `Cooki/ClothWetLocalOnly` | 1ビット | 保存する | オフ |
+| 大事な部分の透け防止 | `Cooki/ClothWetProtect/All` | 1ビット | 保存しない | Unityの設定値（新規インストールはオン） |
 | 透け防止の範囲（50%=標準） | `Cooki/ClothWetProtectRange` | 8ビット | 保存する | 50% |
 | 透け防止の強さ（100%=完全に防ぐ） | `Cooki/ClothWetProtectStrength` | 8ビット | 保存する | 100% |
-| 大事な部分の透け防止 | `Cooki/ClothWetProtect/All` | 1ビット | 保存しない | Unityの設定値（新規インストールはオン） |
-| 全範囲濡れ | `Cooki/ClothWetWhole` | 1ビット | 保存する | オフ |
-| SSAO・影の軽減 | `Cooki/ClothWetSsaoRelief` | 1ビット | 保存する | オン |
+| 最大の濡れ範囲 (%) | `Cooki/ClothWetProgressLimit` | 8ビット | 保存する | Unityの設定値 |
+| 濡れ表現（50%=標準） | `Cooki/ClothWetAppearance` | 8ビット | 保存する | 50% |
+| 濡れ光沢（50%=標準） | `Cooki/ClothWetGloss` | 8ビット | 保存する | 50% |
+| 透け強度（50%=標準） | `Cooki/ClothWetSeeThroughStrength` | 8ビット | 保存する | 50% |
+| 濡れ透けモード | `Cooki/ClothWetSeeThroughModeV2` | 8ビット | 保存する | 設定どおり |
+| 濡れの境界 | `Cooki/ClothWetEdgeSoftness` | 8ビット | 保存する | 50% |
+| 濡れた服の影を軽減 | `Cooki/ClothWetSsaoRelief` | 1ビット | 保存する | オン |
 | 衣装ごとの違いを減らす | `Cooki/ClothWetOutfitCorrection` | 1ビット | 保存する | Unityの設定値（新規インストールはオン） |
-| 現在の状態を固定（撮影用） | `Cooki/ClothWetHold` | 1ビット | 保存しない | オフ |
-| 高速乾燥 | `Cooki/ClothWetFastDry` | 1ビット | 保存しない | オフ |
-| 自分にのみ表示（単独） | `Cooki/ClothWetLocalOnly` | 1ビット | 保存する | オフ |
+| 濡れる範囲を広げる（上級者向け） | `Cooki/ClothWetRangeExpansion` | 8ビット | 保存する | 0% |
 | 衣装別表示のグループ | `Cooki/ClothWetGroup…` | グループごとに1ビット | — | オン |
+
+表は、ゲーム内のメニューの順番（メインページ、**透け防止**、**濡れ調整**）に従っています。
 
 - おすすめメニューは87ビット、衣装別表示のグループ6個まですべて入れると94ビットです。VRChatの上限は、アバター全体で256ビットです。
 - RealSweatSystemと連動するときは、RSSの汗のパラメーター（`Cooki/SweatAmount`など）を読み取るだけです。RSSのパラメーターは変えません。
 - メニューに入れていない機能は、Unityで決めた値で動き、パラメーターを追加しません。
-- メニューの1ページは8枠です。**濡れ調整**に9個以上入ると、7個の後に**次へ**のページができます。
+- メニューの1ページは8枠です。**濡れ調整**に9個以上入ると、7個の後に**次へ**のページができます。<strong>濡れる範囲を広げる（上級者向け）</strong>は、いつも最後の枠です。
 
 ## アニメーター {/* #animator */}
 
@@ -102,7 +104,7 @@ description: RealWetSystem v1.0.0の対応環境、同期パラメーター、�
 
 | 項目 | 上限 |
 | --- | --- |
-| アバター共通の濡れの開始点 | 64個 |
+| アバター共通の濡れ開始点 | 64個 |
 | アバター共通の保護範囲 | 64個 |
 | ゲーム内の衣装別表示のグループ | 6個 |
 | 保護範囲の**縁をやわらかく** | 0〜5 cm |
@@ -121,11 +123,13 @@ description: RealWetSystem v1.0.0の対応環境、同期パラメーター、�
 
 ## 既知の制限 {/* #known-limits */}
 
-- 対応していないシェーダー（Sunao、UnityChanToon、UTS、PoiyomiのFur・Grab Pass、lilToonのFur・Gem、ユーザーが改変したシェーダー）には、濡れを入れません。
+- 対応していないシェーダー（Sunao、UnityChanToon、UTS、Poiyomi 8.x以下、PoiyomiのFur・Grab Pass、lilToonのFur・Gem、ユーザーが改変したシェーダー）には、濡れを入れません。
+- アップロード中に衣装メッシュの頂点の順番、サブメッシュ、メッシュの構造を変えるツール（裂け防止ツール、ポリゴン削減ツールなど）は、互換性がないことがあります。合わなくなった衣装やパーツは乾いたままアップロードされ、NDMFのビルド結果ウィンドウに理由が残ります。AAO、d4rk Avatar Optimizer、TexTransToolには対応しています。
+- VRCFury 1.1258以下では、ビルドのときに`SweatAmount`のエラーが出ることがあります。1.1436.0以上を使ってください。
 - lilToonのRefraction / RefractionBlurは、濡れた色・光沢だけを加え、追加の透けは入れません。
 - 異なる衣装どうしの重ね着の順序は決めません。
 - アニメーションでRendererの**メッシュそのもの**を切り替える構成には、対応していません。
-- 濡れの開始点の球を1つずつゲーム内でオン・オフする機能はありません。
+- 濡れ開始点の球を1つずつゲーム内でオン・オフする機能はありません。
 - ブレンドシェイプ連動の濡れは、今の服の形だけを表示し、服が動く前の位置の濡れは覚えていません。
 - `_TransparentMode`の数値だけをアニメーションで変えるlilToonのモード切り替えまでは、保証しません。
 - SDKの前処理コールバックを呼ばない別のエクスポートツールでは、アップロードの最後のテクスチャ上限の復旧が適用されないことがあります。

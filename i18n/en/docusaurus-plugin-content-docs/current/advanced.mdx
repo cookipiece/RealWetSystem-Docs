@@ -58,7 +58,7 @@ For how to use it, see [Layer order](./usage/outfit-settings.mdx#layer-order). F
 Turn on the in-game **Whole Area** and the whole garment gets wet evenly, regardless of the start points. Use it for a rained-on look, a just-out-of-the-water look, or photos.
 
 {/* SHOT R03: Whole Area OFF / ON */}
-[![Whole Area off and on](/img/renders/R03.jpg)](/img/renders/R03.jpg)
+[![Whole Area OFF vs ON. When ON, the whole outfit gets evenly wet.](/img/compare/R03-en.webp)](/img/compare/R03-en.webp)
 
 - How wet it gets is decided by the wetness amount (the sweat level when linked to RealSweat).
 - While it is on, **Maximum Wet Range**, **Spread Wetness Wider**, **Reduce Outfit Differences** and **Wet Edge** have no effect.
@@ -95,9 +95,9 @@ Good to know for both:
 
 ## Using it with RealSweatSystem {/* #realsweat */}
 
-[![Linked with Real Sweat System, the clothes get wet to match sweat at 0%, 50% and 100%](/img/booth/booth-with-realsweat.jpg)](/img/booth/booth-with-realsweat.jpg)
+[![With Link RealSweat on, Sweat 0% vs 100%. At 100% sweat the outfit gets wet too.](/img/compare/RS1-en.webp)](/img/compare/RS1-en.webp)
 
-*<small>The clothes getting wet to match RealSweatSystem's sweat at 0%, 50% and 100%. RealSweatSystem is sold separately.</small>*
+*<small>The clothes getting wet to match RealSweatSystem's sweat at 0% and 100%. RealSweatSystem is sold separately.</small>*
 
 If the same avatar has RealSweatSystem, <ProductName /> detects it. A new install starts with **Link RealSweat** on, so the clothes follow the final sweat level on the skin too.
 
@@ -108,6 +108,7 @@ If the same avatar has RealSweatSystem, <ProductName /> detects it. A new instal
 | Follow the skin sweat again | Turn on **Link RealSweat**. |
 
 {/* SHOT M04: main page with RealSweat linked */}
+[![In-game menu with RealSweat linked](/img/guide/M04-en.png)](/img/guide/M04-en.png)
 
 - To change the starting value in Unity, choose **Link** or **Unlink** in the **Input Mode** row of **RealWet**.
 - RealSweatSystem's **Sweat Display** and **Only Visible to Me** apply only to the sweat on the skin. Clothing wetness is hidden only with **Show Clothing Wetness** and the outfit visibility toggles.
@@ -130,9 +131,10 @@ When you use it with RealRainSystem (RealRain), <ProductName /> also wets clothe
 
 ## Optimization tools {/* #optimizers */}
 
-<ProductName /> is made to keep the wetness when you build together with AAO (Avatar Optimizer), TexTransTool, d4rk Avatar Optimizer and VRCFury.
+<ProductName /> is made to keep the wetness when you build together with AAO (Avatar Optimizer), TexTransTool, d4rk Avatar Optimizer and VRCFury. Please use VRCFury 1.1436.0 or later.
 
 - If there are no errors, you don't need to exclude whole outfits from optimization in advance.
+- Tools that change the vertex order, the submeshes or the mesh structure of outfit meshes during the upload (anti-ripping tools, polygon reduction tools and so on) may not be compatible. Outfits or parts that no longer match go up dry, and the NDMF build results window shows the reason.
 - Settings that could remove the wetness are reported ahead of time in the **Other avatar tools** card of the setup window.
 - If another tool changes the <ProductName /> output, RealWet doesn't let it pass silently; it reports it in the NDMF results window.
 

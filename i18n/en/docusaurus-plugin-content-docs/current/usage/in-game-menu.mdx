@@ -19,12 +19,13 @@ With the recommended set (new install), the menu looks like this. Buttons you di
 
 | Location | What goes there |
 | --- | --- |
-| **Wet** (main page) | **Show Clothing Wetness**, **Wetness Amount** (with RealSweat: **Link RealSweat** and **Wetness Amount (Unlinked)**), **Wet Tuning**, **Fast Dry**, **Hold Current State (For Photos)**, **Only Visible to Me** (standalone mode), **See-Through Protection**, **Whole Area** |
-| **Wet > Wet Tuning** | **Spread Wetness Wider (Advanced)**, **Wet Appearance (50% = Standard)**, **Wet Gloss (50% = Standard)**, **Wet Edge: Sharp to Soft**, **See-Through Strength (50% = Standard)**, **Wet See-Through Mode**, **SSAO Relief**, **Maximum Wet Range (%)** |
+| **Wet** (main page) | **Show Clothing Wetness**, **Wetness Amount** (with RealSweat: **Link RealSweat** and **Wetness Amount (Unlinked)**), **Whole Area**, **Fast Dry**, **Hold Current State (For Photos)**, **Only Visible to Me** (when used without RealSweatSystem), **See-Through Protection**, **Wet Tuning** |
 | **Wet > See-Through Protection** | **Private Area Protection**, **See-Through Protection Range (50% = Standard)**, **See-Through Protection Strength (100% = Full Block)** |
+| **Wet > Wet Tuning** | **Maximum Wet Range (%)**, **Wet Appearance (50% = Standard)**, **Wet Gloss (50% = Standard)**, **See-Through Strength (50% = Standard)**, **Wet See-Through Mode**, **Wet Edge: Sharp to Soft**, **Soften Wet Shadows**, **Spread Wetness Wider (Advanced)** |
 | **Wet > Outfit Visibility** | Toggles that hide the wet look for each outfit group (only if you made groups) |
 
-- One page has 8 slots. If **Wet Tuning** has 9 or more items, **Next** appears after 7 of them and the rest continue there.
+- The names and the order match RealSweatSystem's **Sweat** menu. The main page has **Show Clothing Wetness** and the wetness amount first, then the toggles, then the submenus.
+- One page has 8 slots. If **Wet Tuning** has 9 or more items, **Next** appears after 7 of them and the rest continue there. **Spread Wetness Wider (Advanced)** is always the last slot.
 - If the main page is full, **Whole Area** goes into the first slot of **Wet Tuning**.
 - If you don't add the see-through protection dials, the **Private Area Protection** toggle goes directly on the main page instead of the **See-Through Protection** page.
 
@@ -56,27 +57,30 @@ Please turn off **Link RealSweat** and raise **Wetness Amount (Unlinked)**. Chan
 | Button | What it does | Starting value | Saved |
 | --- | --- | --- | --- |
 | **Show Clothing Wetness** | Shows or hides the wet look on all outfits. Getting wet and drying keep going while it is hidden, so you see the leftover wetness when you turn it back on. | On | Saved |
+| **Whole Area** | When on, the whole garment gets wet evenly. See [Whole Area](#whole-area) below. | Off | Saved |
 | **Fast Dry** | While it is on, the clothes take no new sweat and are almost dry in about 4 seconds. To let them get wet again, please turn it off. | Off | Not saved |
 | **Hold Current State (For Photos)** | Freezes the current wet look as it is. | Off | Not saved |
 | **Only Visible to Me** | Appears when you use <ProductName /> alone. When it is on, only you can see the wet look on the clothes. | Off | Saved |
-| **Whole Area** | When on, the whole garment gets wet evenly. See [Whole Area](#whole-area) below. | Off | Saved |
 
-RealSweatSystem's **Sweat Display** and **Only Visible to Me** apply only to the sweat on the skin. They don't hide clothing wetness, and others can see it. To hide clothing wetness, please turn off **Show Clothing Wetness** or the outfit visibility toggles.
+RealSweatSystem's **Sweat Display** and **Only Visible to Me** apply only to the sweat on the skin. They don't hide clothing wetness, and others can see it. To hide clothing wetness, please turn off <ProductName />'s **Show Clothing Wetness** or the outfit visibility toggles.
 
 ### Dials in Wet Tuning {/* #tuning */}
+
+The dials are listed in the order they appear in the menu. **Wet See-Through Mode** and **Soften Wet Shadows** are explained separately below.
 
 | Dial | What it changes | Baseline |
 | --- | --- | --- |
 | **Maximum Wet Range (%)** | The maximum range wetness spreads to | The starting value is your Unity setting (40% in a new install). It is not a share of the whole clothing area. |
-| **Spread Wetness Wider (Advanced)** | How far light wetness spreads at the same wetness amount | 0% keeps your settings as they are, and 100% widens it the most. Areas that are already fully wet are not widened further. |
 | **Wet Appearance (50% = Standard)** | The strength of the wet color, saturation and see-through | 50% is the look as you set it. Gloss is adjusted separately. |
 | **Wet Gloss (50% = Standard)** | The wet reflection <ProductName /> adds | 0% adds no gloss, and 100% doubles it. The original material's reflection stays. |
-| **Wet Edge: Sharp to Soft** | The transition between dry and wet areas | 50% is the edge you set in Unity, 0% is much sharper, and 100% is wide and soft. It doesn't change the edges of protection regions. |
 | **See-Through Strength (50% = Standard)** | Only the see-through added by wetness | 0% adds no see-through, and 100% makes it strong on purpose (less-wet areas and dark clothes show through sooner too). |
+| **Wet Edge: Sharp to Soft** | The transition between dry and wet areas | 50% is the edge you set in Unity, 0% is much sharper, and 100% is wide and soft. It doesn't change the edges of protection regions. |
+| **Spread Wetness Wider (Advanced)** | How far light wetness spreads at the same wetness amount | 0% keeps your settings as they are, and 100% widens it the most. Areas that are already fully wet are not widened further. |
 
 **50% = Standard** does not mean the original material is shown at only 50%. 50% is the look you set in Unity.
 
-{/* SHOT R10: Wet Edge 0 / 50 / 100 % at wetness 50 % */}
+{/* SHOT R10: Wet Edge 0 / 100 % at wetness 50 % */}
+[![Wet Edge 0% vs 100% (Wetness Amount 50%). 0% gives sharp edges, 100% gives soft, blended edges.](/img/compare/R10-en.webp)](/img/compare/R10-en.webp)
 
 :::tip[Deep color, weak gloss]
 Please raise **Wet Appearance** and lower **Wet Gloss**. Changing only the gloss doesn't change the wet color, the see-through or where clothes get wet.
@@ -90,13 +94,14 @@ Please raise **Wet Appearance** and lower **Wet Gloss**. Changing only the gloss
 | **Force See-Through When Wet** | Makes wet areas show through even on thick or dark fabric. Protection regions still block. |
 | **No See-Through** | Turns off the see-through <ProductName /> adds. The wet color and gloss, and the original material's transparency, stay. |
 
-{/* SHOT R05: As Configured / Force See-Through When Wet / No See-Through */}
+{/* SHOT R05: As Configured / No See-Through */}
+[![Wet See-Through Mode: As Configured vs No See-Through. With No See-Through the belly does not show through even when wet.](/img/compare/R05-en.webp)](/img/compare/R05-en.webp)
 
 It does not fill in lace that was transparent to begin with, or parts made to disappear with a dissolve effect. In **No See-Through** mode or inside protection regions, raising the see-through strength still adds no see-through.
 
-### SSAO Relief
+### Soften Wet Shadows {/* #soften-shadows */}
 
-On by default. It uses the see-through shading relief set on each part. When off, only the relief <ProductName /> adds is turned off. The original shader's SSAO and shadow settings don't change.
+Its old name was **SSAO Relief**. It is on by default. It uses the see-through shading relief set on each part. When off, only the relief <ProductName /> adds is turned off. The original shader's SSAO and shadow settings don't change.
 
 ### See-Through Protection page {/* #protection */}
 
@@ -118,7 +123,7 @@ The **Wet > Whole Area** toggle.
 | On | The whole garment gets wet evenly. Start points and spreading are not used; the wetness amount (the sweat level when linked to RealSweat) decides how wet it gets. |
 
 {/* SHOT R03: Whole Area OFF / ON */}
-[![Whole Area off and on](/img/renders/R03.jpg)](/img/renders/R03.jpg)
+[![Whole Area OFF vs ON. When ON, the whole outfit gets evenly wet.](/img/compare/R03-en.webp)](/img/compare/R03-en.webp)
 
 - Protection regions stay protected while it is on. The see-through, gloss, wet color, and the wetting and drying times stay the same too.
 - While it is on, the whole garment gets wet, so see-through clothes show through all over as the wetness amount rises. If you don't want that, please use **No See-Through** mode or protection regions.
@@ -130,17 +135,27 @@ The **Wet > Whole Area** toggle.
 
 1. Select the `RealWet` object in the Hierarchy and open the **In-Game Menu** tab.
 2. Check the features you want to add, and uncheck the ones you want to remove.
-3. Press **Apply / Update Runtime Menu**.
+3. Press **Apply / Update Runtime Menu**. This button appears when the menu needs an update. If the menu is already up to date, the **Runtime Menu** line shows **Up to date** instead of the button.
 4. Check the result on the rebuilt avatar.
 
 {/* SHOT U17: RealWet inspector, In-Game Menu tab */}
 [![The In-Game Menu tab](/img/guide/U17-en.png)](/img/guide/U17-en.png)
 
-*<small>This picture was taken on a test avatar linked with RealSweatSystem, so the total is 64 bits. The total depends on the items you pick. The recommended set of a new RealWetSystem-only install is 87 bits.</small>*
-
-- The menu checks are **settings that add buttons**. That is not the same as whether the feature is on from the start. For example, the **Reduce Outfit Differences** feature itself is on, but its button is not in the recommended set.
+- The list uses the same names and the same order as the in-game menu, grouped by the **Wet (main page)**, **Wet > See-Through Protection** and **Wet > Wet Tuning** pages. It is the same list as in the setup window. A number such as **[8 bit]** in front of an item is the sync cost it adds when it is on.
+- **Spread Wetness Wider (Advanced)** is in the folded section below the list.
+- The menu checks are **settings that add buttons**. That is not the same as whether the feature is on from the start. For example, the **Reduce Outfit Differences** feature itself is on, but its button (**Reduce Outfit Differences (menu toggle)**) is not in the recommended set.
 - Unchecking an item only removes that in-game control; the look and protection settings you saved in Unity stay as they are. Features without a button work with the values you set in Unity.
-- To put every check back to the recommended set, press **Restore Recommended In-Game Controls** in the setup window.
+- **Natural Depth & Shadow Transition for Transparent Wet Fabric** is not an in-game menu item, so it is in **Advanced In-Game Features**.
+
+### Turn On All Recommended Items {/* #recommended */}
+
+When you press **Turn On All Recommended Items** in the **In-Game Menu** tab, it first shows the items it will turn on and the sync bits they add.
+
+- **Turn On** turns every recommended item on and updates the in-game menu right away. Menu changes cannot be undone with Ctrl+Z.
+- **Cancel** changes nothing.
+- It doesn't turn on **Reduce Outfit Differences (menu toggle)** and leaves it as it is. It doesn't turn off other items you already turned on, either.
+- If every recommended item is already on, it tells you so.
+- The same button in the setup window doesn't ask; it only changes the checks. The checks apply when you press **Install** or **Update**.
 
 ### Menu location and language
 
@@ -151,19 +166,19 @@ The **Wet > Whole Area** toggle.
 
 ## Sync cost {/* #sync-cost */}
 
-Please check the total for your current selection in the **Runtime Parameter Cost** summary in **RealWet > In-Game Menu** or in the setup window. The table below lists what <ProductName /> adds; bits used by RealSweatSystem or other tools are separate.
+Please check the total for your current selection in the **Runtime Parameter Cost** line in **RealWet > In-Game Menu** or in the setup window. Press the line to open the cost of each item. The table below lists what <ProductName /> adds; bits used by RealSweatSystem or other tools are separate.
 
 | Setup | Extra sync bits |
 | --- | --- |
-| Standalone basic controls (Wetness Amount + Show Clothing Wetness) | 9 bits |
+| Basic controls without RealSweatSystem (Show Clothing Wetness + Wetness Amount) | 9 bits |
 | Basic controls linked to RSS (Link RealSweat + Wetness Amount (Unlinked)) | 9 bits |
 | Maximum wet range, wider spread, wet appearance, wet gloss, edge, see-through strength, see-through protection range, see-through protection strength | 8 bits per dial |
 | Wet See-Through Mode | 8 bits |
-| Whole Area, hold state, Fast Dry, SSAO Relief, Reduce Outfit Differences | 1 bit each |
-| Show Clothing Wetness | 1 bit if added when linked to RSS (included in the basic controls in standalone mode) |
+| Whole Area, hold state, Fast Dry, Soften Wet Shadows, Reduce Outfit Differences | 1 bit each |
+| Show Clothing Wetness | 1 bit if added when linked to RSS (included in the basic controls when used without RealSweatSystem) |
 | Outfit visibility groups | 1 bit per group |
 | Private Area Protection | 1 bit (one toggle, even with several protection regions) |
-| Only Visible to Me | 1 bit if added in standalone mode |
+| Only Visible to Me | 1 bit if added when used without RealSweatSystem |
 
 The recommended menu of a new install is **87 bits**, both when linked to RSS and standalone. With every item, including 6 outfit visibility groups, it is 94 bits. VRChat's limit is 256 bits for the whole avatar. If you go over the limit together with other tools, please see [The menu or parameters go over the limit](../troubleshooting.mdx#over-limit).
 

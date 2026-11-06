@@ -26,8 +26,8 @@ The setup window defaults are chosen to suit most avatars. You can change every 
 ## 1. Prepare and activate your purchase
 
 1. Back up your avatar and project.
-2. In **Manage Project** in VCC, check **VRChat Avatars SDK** (3.10.0 or later), **NDMF** (1.13.1 or later) and **Modular Avatar** (1.14.0 or later).
-3. Check that the shaders your outfits use are there. lilToon outfits need lilToon 2.3.0 or later, and Poiyomi outfits need the Poiyomi they use.
+2. In **Manage Project** in VCC, check **VRChat Avatars SDK** (3.10.0 or later), **NDMF** (1.13.1 or later) and **Modular Avatar** (1.14.0 or later). If you use **VRCFury**, check that it is 1.1436.0 or later. With VRCFury 1.1258 or earlier, the build can show a `SweatAmount` error.
+3. Check that the shaders your outfits use are there. lilToon outfits need lilToon 2.3.0 or later, and Poiyomi outfits need the Poiyomi they use (9, 10 or 11). Poiyomi 8.x and earlier are not supported.
 4. Import the <ProductName /> `.unitypackage` and wait until importing and compiling finish.
 5. Open **CookiTools > RealWetSystem > Purchase Activation**, enter your BOOTH order number (or Gumroad license key), then press **Activate**.
 
@@ -67,7 +67,7 @@ At the top of the window are the **Install** / **Uninstall** tabs and the **Avat
 
 ## 3. Setup window options {/* #setup-options */}
 
-From the top, the Install tab has four cards, **1. Body meshes**, **2. How far should it get wet?**, **3. Where should wetness start?** and **4. How new outfits look when wet**, followed by the folded **Linking & in-game menu** and **Advanced settings** sections.
+From the top, the Install tab has four cards, **1. Body meshes**, **2. How far should it get wet?**, **3. Where should wetness start?** and **4. How new outfits look when wet**. The **Install** button sits right below them. The folded **Linking & in-game menu** and **Advanced settings** sections are below the button. This is the same order as in the RealSweatSystem and RealRainSystem setup windows.
 
 {/* SHOT U03: Setup window, new install, defaults */}
 [![The whole Setup window](/img/guide/U03-en.png)](/img/guide/U03-en.png)
@@ -143,43 +143,60 @@ Sets how the outfits you add from now on get wet. Outfits you already registered
 
 ### 3.5 Linking & in-game menu {/* #menu-options */}
 
-Press the folded **Linking & in-game menu** section to open it. Here you choose the buttons to put in the VRChat menu. In a new install, the recommended set is already checked, so you don't need to change anything.
+The folded **Linking & in-game menu** section sits below the **Install** button. Press it to open it. Here you choose the items to put in the VRChat menu. In a new install, the recommended set is already checked, so you don't need to change anything. If you change something, please do it before you press **Install**.
 
 {/* SHOT U08: Linking & in-game menu expanded */}
 [![Integrations and in-game menu](/img/guide/U08-en.png)](/img/guide/U08-en.png)
 
-*<small>This picture was taken on a test avatar linked with RealSweatSystem, so the starting input shows the link and the total is 79 bits. The total depends on the items you pick. The recommended set of a new RealWetSystem-only install is 87 bits.</small>*
+| Option | Meaning | New install default |
+| --- | --- | --- |
+| **Starting input** | Appears only when RealSweatSystem is installed. The current state shows as, for example, **RealSweatSystem detected · Linked**. With **Follow RealSweat sweat level** on, the clothes get wet following the sweat on the skin. With it off, you control them with the <ProductName /> wetness amount alone. | Follow |
+| **Turn On All Recommended Items** | Checks every recommended item in the list below. It leaves **Reduce Outfit Differences (menu toggle)** as it is. In the setup window, the checks apply when you press **Install** or **Update**. | — |
 
-| Option | Meaning | New install default | Sync cost |
+The list uses the same names and the same order as the in-game **Wet** menu. It is grouped by menu page, and a number such as **[8 bit]** in front of an item is the sync cost that item adds when it is on.
+
+**Wet (main page)**
+
+The grey line at the top (for example, **[9 bit] Show Clothing Wetness · Wetness Amount (always included)**) is the basic controls, which are always included. With RealSweatSystem linked, it reads **Link RealSweat · Wetness Amount (Unlinked)**.
+
+| Item | Meaning | New install default | Sync cost |
 | --- | --- | --- | --- |
-| **Starting input** | Appears only when RealSweatSystem is installed. With **Follow RealSweat sweat level** on, the clothes get wet following the sweat on the skin. With it off, you control them with the <ProductName /> wetness amount alone. | Follow | — |
-| **Restore Recommended In-Game Controls** | Puts every check back to the recommended set. | — | — |
-| **Install Global Clothing Wetness Display** | Adds the in-game **Show Clothing Wetness** toggle. | Checked | 1 bit (included in the basic controls in standalone mode) |
-| **Private Area Protection On/Off** | Adds the in-game **Private Area Protection** toggle. If you turn off **Add Chest & Groin See-Through Protection Regions**, it stays locked off. | Checked | 1 bit |
+| **Show Clothing Wetness** | A toggle that shows or hides the wet look of every outfit. | Checked | 1 bit (included in the basic controls when you use it without RealSweatSystem) |
+| **Whole Area** | A toggle that makes the whole garment wet evenly when on. | Checked | 1 bit |
+| **Fast Dry** | A toggle that, while on, takes no new sweat and makes the clothes almost dry in about 4 seconds. | Checked | 1 bit |
+| **Hold Current State (For Photos)** | A toggle that freezes the current wet look. | Checked | 1 bit |
+| **Only Visible to Me** | A toggle that, when on, makes the wet look of the clothes visible only to you. It is added only when you use it without RealSweatSystem. | Checked | 1 bit |
+
+**Wet > See-Through Protection**
+
+| Item | Meaning | New install default | Sync cost |
+| --- | --- | --- | --- |
+| **Private Area Protection** | A switch that turns the protection regions' see-through blocking on and off. If you turn off **Add Chest & Groin See-Through Protection Regions**, the three items on this page stay locked off. | Checked | 1 bit |
 | **See-Through Protection Range (50% = Standard)** | A dial that changes how wide an area the protection regions block. | Checked | 8 bits |
 | **See-Through Protection Strength (100% = Full Block)** | A dial that changes how strongly the protection regions block. | Checked | 8 bits |
-| **Install Wet State Hold Toggle** | Adds the in-game **Hold Current State (For Photos)**. It freezes the current wet look. | Checked | 1 bit |
-| **Install Fast Dry Toggle (+1bit)** | Adds the in-game **Fast Dry**. While it is on, the clothes take no new sweat and are almost dry in about 4 seconds. | Checked | 1 bit |
-| **Spread Wetness Wider (Advanced)** | A dial that spreads light wetness farther at the same wetness amount. | Checked | 8 bits |
+
+**Wet > Wet Tuning**
+
+| Item | Meaning | New install default | Sync cost |
+| --- | --- | --- | --- |
+| **Maximum Wet Range (%)** | A dial that changes the range from 3.2 above in game. | Checked | 8 bits |
 | **Wet Appearance (50% = Standard)** | A dial that changes the strength of the wet color, saturation and see-through. | Checked | 8 bits |
 | **Wet Gloss (50% = Standard)** | A dial that changes only the gloss <ProductName /> adds. | Checked | 8 bits |
-| **Wet Edge: Sharp to Soft** | A dial that changes the edge between dry and wet areas. | Checked | 8 bits |
 | **See-Through Strength (50% = Standard)** | A dial that changes only the see-through caused by wetness. | Checked | 8 bits |
-| **Maximum Wet Range (%)** | A dial that changes the range from 3.2 above in game. | Checked | 8 bits |
 | **Wet See-Through Mode** | A menu for choosing **As Configured** / **Force See-Through When Wet** / **No See-Through**. | Checked | 8 bits |
-| **SSAO Relief** | A toggle that turns on and off the feature that reduces dark shading behind see-through clothes. | Checked | 1 bit |
-| **Whole Area** | A toggle that makes the whole garment wet evenly when on. | Checked | 1 bit |
-| **Reduce Outfit Differences** | A toggle that turns the feature from 3.2 above on and off in game. | Unchecked | 1 bit |
-| **Install Standalone Only Visible to Me** | Adds the **Only Visible to Me** toggle, only when you use it without RealSweatSystem. | Checked | 1 bit |
+| **Wet Edge: Sharp to Soft** | A dial that changes the edge between dry and wet areas. | Checked | 8 bits |
+| **Soften Wet Shadows** | A toggle that turns on and off the feature that reduces dark shading behind see-through clothes. | Checked | 1 bit |
+| **Reduce Outfit Differences (menu toggle)** | A toggle that turns the feature from 3.2 above on and off in game. | Unchecked | 1 bit |
+| **Spread Wetness Wider (Advanced)** | A dial that spreads light wetness farther at the same wetness amount. | Checked | 8 bits |
 
 - The menu checks **add buttons**. That is not the same as whether the feature is on from the start. For example, the **Reduce Outfit Differences** feature itself is on, but its in-game button is not added by default.
-- Check the total in the **Runtime Parameter Cost** summary at the bottom. The recommended set is **87 bits**, and with every item including the outfit visibility groups, it is 94 bits. VRChat's limit is 256 bits for the whole avatar.
+- Check the total in the **Runtime Parameter Cost** line below the list. Press the line to open the cost of each item. Before you install, no outfit has been added yet, so **Wet See-Through Mode** (8 bits) is not in the total, and it shows 79 bits. After the outfits are added, the recommended set is **87 bits**, and with every item including the outfit visibility groups, it is 94 bits. VRChat's limit is 256 bits for the whole avatar.
 - The **Wet** menu goes into the avatar's main menu, separate from the RealSweatSystem menu. After installing, you can change its location in the **MA Menu Installer** on the `RealWet` object.
 - You can also change the menu layout after installing, in **RealWet > In-Game Menu**. [In-game menu](./usage/in-game-menu.mdx) explains what each button does.
 
 ### 3.6 Advanced settings {/* #advanced-options */}
 
-Press the folded **Advanced settings** section to open it. Usually you don't need to change anything here.
+The folded **Advanced settings** section sits below **Linking & in-game menu**. Press it to open it. Usually you don't need to change anything here.
 
 {/* SHOT U09: Advanced settings expanded */}
 [![Advanced settings and the summary before install](/img/guide/U09-en.png)](/img/guide/U09-en.png)
@@ -192,21 +209,23 @@ Press the folded **Advanced settings** section to open it. Usually you don't nee
 | **Automatically Detect New Clothing (Recommended)** | Finds and registers outfits you add to the avatar after installing. Outfits the avatar already wears at install time are chosen in the outfit chooser window. | **On** |
 | **Natural Depth & Shadow Transition for Transparent Wet Fabric (Recommended)** | Leaves less dark, SSAO-like shading on the body behind clothes that are wet and see-through. It uses no synced parameters. | **On** |
 | **Experimental** | Appears only when PCSS4VRC (lilToon) or lilSSRT is on this PC. It makes outfits that use those shaders get wet too. See [Advanced features](./advanced.mdx#experimental). | **Off** |
-| **Before you install** | Gathers and shows your current choices (body, maximum wet range, wet start, see-through for new outfits, fabric and strength). | — |
+| **Before you install** | Gathers and shows your current choices (body, maximum wet range, wet start, see-through for new outfits, fabric and strength). In a project with RealRainSystem, it also shows the RealRain lines. | — |
 
 ### 3.7 Other avatar tools {/* #other-tools */}
 
-If the avatar has settings from another tool that could remove the wetness, an **Other avatar tools** card appears above the install button. If there is nothing to report, this card doesn't appear.
+If the avatar has settings from another tool that could remove the wetness, an **Other avatar tools** card appears between the four cards and the **Install** button. If there is nothing to report, this card doesn't appear.
 
 - For example, if a d4rk Avatar Optimizer setting that rewrites shaders is on, a short notice and a **Show d4rk Settings** button appear. The button only selects and shows the d4rk component; it doesn't change any settings.
 - For details, see [Compatibility](./compatibility.mdx#optimizers).
 
 ### 3.8 Install
 
-Press **Install**. When the **Installation Complete** message appears, press **OK**.
+Press **Install** below the four cards. While it installs, a progress bar shows the current step (for example, **Placing the chest & groin see-through protection regions**). When the **Installation Complete** message appears, press **OK**.
 
 {/* SHOT U12: Installation Complete dialog */}
+[![Installation Complete dialog](/img/guide/U12-en.png)](/img/guide/U12-en.png)
 
+- On a large avatar, placing the protection regions can take a few seconds. The progress bar has no Cancel button, so that no half-finished installation is left behind.
 - Installing creates a `RealWet` object under the avatar. This object holds the settings for the whole avatar.
 - The first install, uninstalling and creating the in-game menu cannot be undone with Ctrl+Z. Settings you change after installing can be undone with Ctrl+Z.
 - If PCSS4VRC (lilToon) or lilSSRT is on this PC, the first install asks once whether to turn on the experimental feature. If you're not sure, you can choose **Don't Use**. You can change it later in **Advanced settings > Experimental**.
@@ -231,6 +250,7 @@ Outfits that need a check come with reasons like these.
 | Reason | Meaning |
 | --- | --- |
 | Body or face meshes may be mixed in. | There may be a body or face mesh under that object. |
+| An accessory named like the body or face. | An accessory whose name has a body or face word in it. If it is an outfit, please tick it. |
 | Several outfits may be grouped together. | It may be an empty object that holds several outfits. It's better to add them one at a time. |
 | Looks like an accessory. / It may not be clothing. | It may be a prop that doesn't need to get wet. |
 
@@ -253,7 +273,7 @@ Don't put an outfit root inside a body or face mesh object. We recommend placing
 {/* SHOT U19: outfit inspector with the preview running */}
 [![The outfit's own settings](/img/guide/U19-en.png)](/img/guide/U19-en.png)
 
-*<small>An example picture. The see-through was set by hand for each part, so **See-Through When Wet** shows **Separate per Part**.</small>*
+*<small>Right after a new install. An outfit added with **Outerwear Only (Not Underwear) (Recommended)** has a different see-through for each part, so **See-Through When Wet** shows **Separate per Part**.</small>*
 
 {/* SHOT R01: dry · 50 % · 100 %, default mode */}
 
@@ -286,12 +306,14 @@ Installing adds a **Wet** menu to the avatar's main radial menu. With the recomm
 | **Wetness Amount** | Sets how wet the clothes get. Raise it and they get wet at the speed you set; lower it and they dry slowly. Appears when you use it without RealSweatSystem. | 0% |
 | **Link RealSweat** | Appears when you use it with RealSweatSystem. While it is on, the clothes get wet following the sweat level on the skin. | On |
 | **Wetness Amount (Unlinked)** | Appears when you use it with RealSweatSystem. When the link is off, this dial wets only the clothes, separately. | 0% |
-| **Wet Tuning** | A submenu that collects the dials. See the table below. | — |
+| **Whole Area** | When on, the whole garment gets wet evenly, as if in the rain. When off, clothes get wet the way you set them up in Unity (from the sweat spots and so on). | Off |
 | **Fast Dry** | While it is on, the clothes take no new sweat and dry quickly. To let them get wet again, please turn it off. | Off |
 | **Hold Current State (For Photos)** | Freezes the current wet look as it is. Use it when you take photos. | Off |
 | **Only Visible to Me** | Appears when you use it without RealSweatSystem. When it is on, only you can see the wet look on the clothes. | Off |
 | **See-Through Protection** | A submenu that collects the see-through protection switch and dials. See the table below. | — |
-| **Whole Area** | When on, the whole garment gets wet evenly, as if in the rain. When off, clothes get wet the way you set them up in Unity (from the sweat spots and so on). | Off |
+| **Wet Tuning** | A submenu that collects the dials. See the table below. | — |
+
+The button order is the same as in RealSweatSystem's **Sweat** menu. **Show Clothing Wetness** and the wetness amount come first, then the toggles, and the submenus come last.
 
 ### Wet > Wet Tuning
 
@@ -300,14 +322,14 @@ Installing adds a **Wet** menu to the avatar's main radial menu. With the recomm
 
 | Dial | What it does in VRChat | Starting value |
 | --- | --- | --- |
-| **Spread Wetness Wider (Advanced)** | Spreads light wetness farther at the same wetness amount. 0% keeps your settings as they are. | 0% |
+| **Maximum Wet Range (%)** | Sets how far the clothes get wet. It starts at the value from the setup window. | 40% |
 | **Wet Appearance (50% = Standard)** | The strength of the wet color, saturation and see-through. 50% is the look you set in Unity. | 50% |
 | **Wet Gloss (50% = Standard)** | Changes only the gloss <ProductName /> adds. 0% adds no gloss, and 100% doubles it. | 50% |
-| **Wet Edge: Sharp to Soft** | The edge between dry and wet areas. 0% makes it sharp, and 100% makes it wide and soft. | 50% |
 | **See-Through Strength (50% = Standard)** | Changes only the see-through caused by wetness. 0% means no see-through, and 100% makes it show through strongly on purpose. | 50% |
 | **Wet See-Through Mode** | Choose from **As Configured**, **Force See-Through When Wet** and **No See-Through**. | As Configured |
-| **SSAO Relief** | Reduces dark shading behind see-through clothes. | On |
-| **Maximum Wet Range (%)** | Sets how far the clothes get wet. It starts at the value from the setup window. | 40% |
+| **Wet Edge: Sharp to Soft** | The edge between dry and wet areas. 0% makes it sharp, and 100% makes it wide and soft. | 50% |
+| **Soften Wet Shadows** | Reduces dark shading behind see-through clothes. | On |
+| **Spread Wetness Wider (Advanced)** | Spreads light wetness farther at the same wetness amount. 0% keeps your settings as they are. | 0% |
 
 ### Wet > See-Through Protection
 

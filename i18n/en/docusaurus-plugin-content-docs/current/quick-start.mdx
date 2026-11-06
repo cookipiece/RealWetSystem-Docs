@@ -15,8 +15,8 @@ The first preview or the first build takes a long time, because RealWet creates 
 ## 1. Prepare
 
 - Back up your avatar and project.
-- In **Manage Project** in VCC, check that **VRChat Avatars SDK**, **NDMF** and **Modular Avatar** are installed.
-- Check that the shaders your outfits use (lilToon 2.3.0 or later, or Poiyomi Toon / Pro) are in the project. If you only use Poiyomi outfits, you don't need lilToon.
+- In **Manage Project** in VCC, check that **VRChat Avatars SDK**, **NDMF** and **Modular Avatar** are installed. If you use **VRCFury**, please update it to 1.1436.0 or later. With 1.1258 or earlier, the build can show a `SweatAmount` error.
+- Check that the shaders your outfits use (lilToon 2.3.0 or later, or Poiyomi Toon / Pro 9 or later) are in the project. If you only use Poiyomi outfits, you don't need lilToon.
 - Check that the Console shows no red compile errors.
 
 ## 2. Import the package
@@ -44,7 +44,7 @@ You only need to do this once per PC. For details, see [Purchase activation](./l
 1. Save the scene that contains your avatar.
 2. In the Hierarchy, select the **avatar's top-level object** (the object with the VRC Avatar Descriptor).
 3. Open **CookiTools > RealWetSystem > Setup／Uninstall**.
-4. Without changing anything, press **Install** at the very bottom.
+4. Without changing anything, press **Install** below the four cards. A progress bar appears while it installs.
 5. When the **Installation Complete** message appears, press **OK**.
 
 {/* SHOT U03: Setup window, new install, defaults */}
@@ -78,7 +78,7 @@ When you close the install message, the **RealWet: Choose Outfits** window opens
 {/* SHOT U19: outfit inspector with the preview */}
 [![The outfit's own settings](/img/guide/U19-en.png)](/img/guide/U19-en.png)
 
-*<small>An example picture. The see-through was set by hand for each part, so **See-Through When Wet** shows **Separate per Part**.</small>*
+*<small>Right after a new install. An outfit added with **Outerwear Only (Not Underwear) (Recommended)** has a different see-through for each part, so **See-Through When Wet** shows **Separate per Part**.</small>*
 
 If the preview does not start, please check that **Tools > NDM Framework > Enable Previews** is turned on in the Unity menu bar.
 

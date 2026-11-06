@@ -20,11 +20,13 @@ description: Supported Unity, SDK, NDMF and Modular Avatar versions, shaders (Po
 | VRChat Avatars SDK | 3.10.0 or later, below 4.0 |
 | NDMF | 1.13.1 or later, below 2.0 |
 | Modular Avatar | 1.14.0 or later, below 2.0 |
+| VRCFury (if used) | 1.1436.0 or later. With 1.1258 or earlier, the build can show a `SweatAmount` error. |
 | Editor | The Unity Editor on Windows (purchase activation works only on Windows) |
 | Avatar | Humanoid avatars |
 | Platform | PC only (Direct3D 11). Quest and mobile are not supported. |
 
 - Pre-release versions of the next major version of a required package are not supported.
+- If you build the same avatar for Quest (Android), the in-game menu, synced parameters and FX layers are added, but the clothes don't get wet. The build doesn't stop. To save menu slots and parameters, please remove <ProductName /> from a separate copy of the avatar made for Quest.
 - If a version doesn't match, the setup window tells you which package is missing or needs an update. <ProductName /> does not update other packages automatically.
 
 ## Shaders {/* #shaders */}
@@ -38,8 +40,9 @@ You only need the shaders your outfits actually use. If you only use Poiyomi out
 | Supported variants | Standard, **Outline Early**, **Two Pass** and **Fade** modes |
 | Tested versions | Poiyomi 9.3, 10.0.9, 10.0.24, Pro 11.0.0, 11.0.18, 11.0.22, 11.0.24, 11.0.29, 11.0.32, 11.0.34, 11.0.35, 11.0.36, 11.0.38 |
 | Locked materials | Get wet as long as RealWet can read the original shader information. The same goes for materials Thry locks during upload. |
-| Not supported | Fur, Grab Pass, custom extensions that only have a similar name, shaders copied out of the package, Poiyomi with other shader modules added |
+| Not supported | Poiyomi 8.x and earlier, Fur, Grab Pass, custom extensions that only have a similar name, shaders copied out of the package, Poiyomi with other shader modules added |
 
+- Outfits on Poiyomi 8.x and earlier don't get wet. The outfit screen shows their shader as unsupported.
 - <ProductName /> checks the shader's structure directly, not its version number. So versions not listed above still get wet if their structure is the same. If the installed version's structure differs from what <ProductName /> knows, the NDMF results window shows a warning such as **RealWet: Poiyomi Pro … has not been verified yet**, one for each version. Outfits that use that shader are built without wetness, and the build continues.
 - Don't turn on the <ProductName /> internal module listed in Poiyomi 11's **Poi > Installed Modules**. If you turn it on, Poiyomi clothes won't get wet.
 - When VRCFury copies materials during upload, it may lock unlocked Poiyomi materials in your project. This is VRCFury's behavior and doesn't affect wetness. To keep editing, unlock them in the Poiyomi Inspector.
@@ -78,15 +81,21 @@ Unless you have specific instructions, use **Auto** for **Write Defaults** in th
 
 When another tool merges or changes outfits during the build, <ProductName /> checks the final outfits too. If there are no errors, you don't need to exclude whole outfits from optimization in advance. The **Other avatar tools** section in the setup window warns you ahead of time about settings that can remove wetness.
 
+The supported optimization tools are **AAO**, **d4rk Avatar Optimizer** and **TexTransTool** in the table below. Tools that change the vertex order, the submeshes or the mesh structure of outfit meshes during the upload (anti-ripping tools, polygon reduction tools and so on) may not be compatible. Outfits or parts that no longer match the wetness data because of such a tool go up dry, and the NDMF build results window shows the reason. The build doesn't stop. [Tools that change outfit meshes](./troubleshooting.mdx#mesh-tools)
+
 | Tool | When you use it together |
 | --- | --- |
 | **AAO (Avatar Optimizer)** | You can keep using Trace and Optimize. Only when automatic mesh merging would combine parts that can't be processed together does <ProductName /> automatically leave one of them out of the merge and tell you. Wetness toggles keep working even when **Optimize Animator** changes the parameter type. If **Merge Skinned Mesh** merges parts from different outfits, or merges the body, that mesh won't get wet. The setup window tells you when an outfit's body gets merged. Merge each outfit separately and leave the body out of merging. |
 | **TexTransTool (TTT)** | Poiyomi materials whose textures TTT changed also get wet in the upload. When **Atlas Texture** merges materials into one, the slots of the base material get wet, and only the slots merged into another material stay dry (the NDMF results window tells you). To make those slots wet too, leave that material out of the merge group. |
 | **d4rk Avatar Optimizer** | With the default settings (Basic), leave it as it is. If settings that rewrite shaders are on (**Write Properties as Static Values**, **Shader Toggles**, **Merge Different Property Materials**, **Merge Same Dimension Textures**), RealWet automatically excludes only the wet parts from d4rk when you upload. It doesn't change your saved settings. The setup window recommends turning these settings off. |
-| **VRCFury** | Toggles and material swaps work as usual. Materials set by toggles that start on and by **Apply During Upload** also get wet. If a swapped material doesn't get wet, a message appears in the NDMF results window. |
+| **VRCFury** | Please use 1.1436.0 or later. With 1.1258 or earlier, the build can show a `SweatAmount` error. Toggles and material swaps work as usual. Materials set by toggles that start on and by **Apply During Upload** also get wet. If a swapped material doesn't get wet, a message appears in the NDMF results window. |
 | **Tools that move bones** | Even if another tool moves bones during the build (for example NDExtensions Rebake Humanoid), the upload gets wet in the same places as the preview. |
 
 Setups that use animations to swap a Renderer's **mesh itself** are not supported. Remove the mesh-swap animation, or move the swapped mesh to a separate Renderer that is excluded from <ProductName />.
+
+### Other wetness tools
+
+Please don't use <ProductName /> and another wetness tool on the same outfit. If both tools use the same UV channel (UV6) of the outfit mesh, one tool's wetness can disappear or break. <ProductName /> doesn't detect other wetness tools, so please use only one wetness tool per outfit.
 
 ## Using it with RealSweatSystem {/* #realsweat */}
 

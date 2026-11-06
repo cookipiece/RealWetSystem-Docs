@@ -39,7 +39,7 @@ On a new install, if **Add Chest & Groin See-Through Protection Regions** is che
 
 {/* SHOT S04: Scene, recommended capsules, side view */}
 
-- All of them are **small capsules** facing the front of the avatar. Seen from the front, each is a round area, and its edge fades smoothly regardless of clothing folds or front-to-back distance.
+- All of them are **small capsules** facing the front of the avatar. Seen from the front, each is a round area. The inside is fully blocked, and the edge fades out softly and naturally with blotches, like a wet edge, regardless of clothing folds. The chest regions fade out wide, and the groin regions a little narrower.
 - The chest capsules reach deep front to back, so they cover loose tops too. The front groin capsule reaches the outermost clothes worn in front of the groin (such as a skirt).
 - They are deliberately small. To block a wider area on very see-through clothes, please raise the in-game **See-Through Protection Range** or make them bigger in the editor.
 
@@ -81,14 +81,15 @@ The automatic layout fits most avatars, but it may be slightly off depending on 
 | **Name** | The name shown in the list, the Scene and the Hierarchy. Leave it empty to go back to the automatic name. |
 | **Use this protection** | When off, this region doesn't protect the clothes. The region stays. |
 | **Shape** | Choose from **Sphere**, **Capsule** and **Box**. A sphere has no rotation, and a capsule stretches along its local Y axis. |
-| **Radius (cm)** | The radius of a sphere or capsule. Inside it, see-through is fully blocked. |
+| **Radius (cm)** | The radius of a sphere or capsule. The inside is blocked, and the edge fades out softly from near the surface. |
 | **Total height (cm)** | The length of a capsule, including the rounded parts at both ends. |
 | **Box size (cm)** | The width, height and depth of a box. |
-| **Soft edge (cm)** | The width outside the shape over which protection fades out. 0–5 cm. The wider it is, the less the protected spot stands out. |
-| **Edge blotches (%)** | 0% gives a smooth border. Raise it and only the outer faded part becomes irregular. The fully blocked inside doesn't shrink. The recommended regions use 0%. |
+| **Soft edge (cm)** | The width over which protection fades out. 0–5 cm. The wider it is, the less the protected spot stands out. |
+| **Edge blotches (%)** | Raise it and the edge fades out like natural blotches, while the center of the protection stays as it is. The recommended regions use 0%. |
 | **Advanced (coordinates / linking)** | Edit the **Anchor** (the bone the region moves with), **Local position (m)**, **Local rotation** and **Mirror partner** yourself. |
 
 - Sizes are shown in cm and ratios in % on every screen.
+- Even at 0% **Edge blotches**, the edge gets a few blotches like the irregular pattern of the wet start points. So a protected spot fades out like a wet edge instead of a round border. The blotches are fixed for each region, so they don't flicker when you move, and they don't make stripes across clothing folds.
 - A newly added region starts as a **Sphere** with a 4 cm radius, **Soft edge** 1.2 cm and **Edge blotches** 65%.
 - Spheres, capsules and boxes all block see-through in the same way. There is no separate protection method to choose.
 
@@ -121,6 +122,7 @@ Open **Duplicate / delete / reset** to find the reset buttons.
 ### Recreate missing recommended regions {/* #add-missing */}
 
 {/* SHOT U26: create regions hint and add-missing button */}
+[![Create protection regions and Add Missing Global Recommended Regions](/img/guide/U26-en.png)](/img/guide/U26-en.png)
 
 - If you deleted some of the recommended regions, press **Add Missing Global Recommended Regions** in **RealWet > Wetness Settings > Private Area Protection**. It recreates only the missing ones and leaves the remaining regions as they are. When all 4 are there, the button is grayed out.
 - If the in-game switch exists but there are no protection regions at all, the same place shows **There are no chest & groin see-through protection regions.** and a **Create Chest & Groin See-Through Protection Regions** button. Press it to create the 4 recommended regions. You can undo it with Ctrl+Z.
@@ -150,9 +152,10 @@ Changes **how wide** an area protection blocks.
 | --- | --- |
 | **0%** | Blocks almost nothing. No area is fully blocked, and only a faint trace remains at the center of the region. |
 | **50%** (default) | Blocks exactly the protection regions you see in Unity. |
-| **100%** | Blocks a wide area beyond the region. It fully blocks out to 0.8 times the **Soft edge** width beyond the shape, and fades out at 2.9 times. Use it for very see-through clothes. |
+| **100%** | Blocks a wide area beyond the region. It fully blocks out to 0.8 times the **Soft edge** width beyond the shape (about 1.4 times for the recommended chest regions), and fades out at 2.9 times. Use it for very see-through clothes. |
 
-{/* SHOT R06: protection range 0 / 50 / 100 %, worst case, inner layer under the shirt */}
+{/* SHOT R06: protection range 0 / 100 %, chest close-up */}
+[![See-Through Protection Range 0% vs 100%. At 100% the chest area is kept from showing through.](/img/compare/R06-en.webp)](/img/compare/R06-en.webp)
 
 - Values in between blend smoothly.
 - A region with **Soft edge** at 0 doesn't get wider even at 100%.
@@ -167,7 +170,8 @@ Changes **how strongly** protection blocks.
 | **50%** | Only about one third of the unblocked see-through shows. |
 | **0%** | Doesn't block. This is the same as turning the switch off. |
 
-{/* SHOT R07: protection strength 0 / 50 / 100 % */}
+{/* SHOT R07: protection strength 0 / 100 %, chest close-up */}
+[![See-Through Protection Strength 0% vs 100%. At 100% the chest does not show through.](/img/compare/R07-en.webp)](/img/compare/R07-en.webp)
 
 - The strength follows a curve, not a straight line. Halving the blocking brings back much more than half of the see-through, so it is tuned so that 50% gives about one third.
 
@@ -176,7 +180,7 @@ Changes **how strongly** protection blocks.
 - Both dials change only the see-through that protection regions block. They don't change the wet color, gloss or how clothes get wet.
 - When the **Private Area Protection** switch is off, nothing is protected, whatever the dial values.
 - Both dials are saved and synced, and each uses 8 bits.
-- Avatars without the dials, and the default values (range 50%, strength 100%), block exactly the protection regions you placed. The Unity preview uses these defaults too.
+- Avatars without the dials, and the default values (range 50%, strength 100%), block exactly the protection regions you placed. The inside of a region is fully blocked, and its edge fades out softly. The Unity preview uses these defaults too.
 - On avatars with neither protection regions nor the switch (installed with **Add Chest & Groin See-Through Protection Regions** turned off in the setup window), the dials are not created.
 - If an avatar you already installed has no dials, please turn on the two items in **RealWet > In-Game Menu**, press **Apply / Update Runtime Menu**, then build again.
 
@@ -193,6 +197,9 @@ Changes **how strongly** protection blocks.
 3. Check **Whole Area (in-game menu)** to see the most see-through state, with the whole garment wet.
 4. Check the chest and groin from the front, side and back.
 5. If protection falls short, move or enlarge the region, then check again.
+
+- On an avatar with protection regions, **RealWet > Wetness Settings > Private Area Protection** shows one grey line (for example, **3 outfit(s) can turn see-through when wet. Protection regions stay covered; checking each outfit is optional.**). Checking each outfit is optional.
+- If no protection region is turned on, a yellow warning appears in the same place. Please see [Recreate missing recommended regions](#add-missing) above.
 
 :::note[Clothes can show through more in game]
 If you raise the in-game **See-Through Strength** to 100% or choose **Force See-Through When Wet**, clothes show through more than in the Unity preview. Protection regions still block then, but areas outside them look more see-through. After uploading, please check once in game too.

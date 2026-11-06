@@ -58,7 +58,7 @@ description: 의상별 설정, 비침 세기와 어두운 색 비침, 겹옷과 
 인게임 **전체 영역 젖음**을 켜면 시작점과 상관없이 옷 전체가 고르게 젖습니다. 비를 맞은 모습, 물에 들어간 모습, 사진 촬영에 씁니다.
 
 {/* SHOT R03: Whole Area OFF / ON */}
-[![전체 영역 젖음 끔·켬](/img/renders/R03.jpg)](/img/renders/R03.jpg)
+[![전체 영역 젖음 끔과 켬 비교. 켜면 옷 전체가 고르게 젖습니다.](/img/compare/R03-ko.webp)](/img/compare/R03-ko.webp)
 
 - 얼마나 젖는지는 젖음 양(RealSweat 연동이면 땀 수치)이 정합니다.
 - 켜 둔 동안 **최대 젖는 범위**, **젖는 범위만 넓히기**, **의상별 편차 줄이기**, **젖음 경계**는 효과가 없습니다.
@@ -95,9 +95,9 @@ PCSS4VRC(lilToon)와 lilSSRT를 쓰는 의상도 실험 기능으로 적실 수 
 
 ## RealSweatSystem과 함께 쓰기 {/* #realsweat */}
 
-[![Real Sweat System과 연동해 땀 0%, 50%, 100%에 맞춰 옷도 젖는 모습](/img/booth/booth-with-realsweat.jpg)](/img/booth/booth-with-realsweat.jpg)
+[![RealSweat 연동을 켠 상태에서 땀 0%와 100% 비교. 땀이 100%가 되면 옷도 함께 젖습니다.](/img/compare/RS1-ko.webp)](/img/compare/RS1-ko.webp)
 
-*<small>RealSweatSystem의 땀 0%, 50%, 100%에 맞춰 옷도 젖는 모습입니다. RealSweatSystem은 따로 판매합니다.</small>*
+*<small>RealSweatSystem의 땀 0%와 100%에 맞춰 옷도 젖는 모습입니다. RealSweatSystem은 따로 판매합니다.</small>*
 
 같은 아바타에 RealSweatSystem이 있으면 <ProductName />이 감지합니다. 새 설치는 **RealSweat 연동**이 켜진 상태로 시작해, 피부의 최종 땀 수치를 옷도 따릅니다.
 
@@ -108,9 +108,10 @@ PCSS4VRC(lilToon)와 lilSSRT를 쓰는 의상도 실험 기능으로 적실 수 
 | 다시 피부 땀을 따라가기 | **RealSweat 연동**을 켭니다. |
 
 {/* SHOT M04: main page with RealSweat linked */}
+[![RealSweat 연동 시의 인게임 메뉴](/img/guide/M04-ko.png)](/img/guide/M04-ko.png)
 
 - Unity에서 처음 값을 바꾸려면 **RealWet**의 **입력 모드** 행에서 **연동하기** 또는 **연동 해제**를 고릅니다.
-- RealSweatSystem의 **땀 표시**와 **나에게만 보이기**는 피부 땀에만 적용됩니다. 의상 젖음은 **의상 젖음 보이기**와 의상별 표시로만 숨깁니다.
+- RealSweatSystem의 **땀 표시**와 **나에게만 보이기**는 피부 땀에만 적용됩니다. 의상 젖음은 **의상 젖음 표시**와 의상별 표시로만 숨깁니다.
 - **젖음** 메뉴는 RSS 메뉴 안이 아니라 아바타 메인 메뉴에 따로 들어갑니다.
 - RealSweatSystem 2.0.0의 땀 셰이더(Late Queue 포함)도 피부 땀으로 인식해, 젖은 옷을 바디와 땀 뒤에 그립니다.
 - 선택한 아바타의 RealSweatSystem이 1.x이면 설치창에 업데이트 안내가 한 줄 나옵니다.
@@ -130,9 +131,10 @@ RealRainSystem(RealRain)과 함께 쓰면 비에 맞은 옷도 <ProductName />�
 
 ## 최적화 도구 {/* #optimizers */}
 
-AAO(Avatar Optimizer), TexTransTool, d4rk Avatar Optimizer, VRCFury와 함께 빌드해도 젖음이 유지되도록 맞췄습니다.
+AAO(Avatar Optimizer), TexTransTool, d4rk Avatar Optimizer, VRCFury와 함께 빌드해도 젖음이 유지되도록 맞췄습니다. VRCFury는 1.1436.0 이상을 써 주십시오.
 
 - 오류가 없다면 의상 전체를 최적화에서 미리 뺄 필요는 없습니다.
+- 업로드하는 동안 의상 메쉬의 정점 순서, 서브메쉬, 메쉬 구조를 바꾸는 툴(찢어짐 방지 툴, 폴리곤 줄이기 툴 등)은 호환되지 않을 수 있습니다. 맞지 않게 된 의상이나 파츠는 마른 채로 올라가고, NDMF 빌드 결과 창에 이유가 남습니다.
 - 젖음을 없앨 수 있는 설정은 설치창의 **다른 아바타 툴** 칸에서 미리 알려 줍니다.
 - 다른 툴이 <ProductName />의 결과를 바꾸면 그대로 넘기지 않고 NDMF 결과 창에 알립니다.
 

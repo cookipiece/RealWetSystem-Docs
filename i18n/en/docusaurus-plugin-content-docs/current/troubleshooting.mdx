@@ -16,6 +16,8 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 | Only part of an outfit stays dry | [Only some parts don't get wet](#partly-dry) |
 | The uploaded avatar shows none of the <ProductName /> effects | [Uploaded without purchase activation](#not-activated) |
 | A warning starting with `RealWet:` appears in the NDMF results window | [NDMF warnings](#ndmf-warnings) |
+| The build shows an error that mentions `SweatAmount` | [VRCFury is too old](#vrcfury-old) |
+| Only outfits processed by an anti-ripping or polygon reduction tool stay dry | [Tools that change outfit meshes](#mesh-tools) |
 | Clothes look pink | [Pink materials](#pink) |
 | Clothes get wet in the preview, but some lilToon outfits are dry in the upload | [PCSS4VRC replaced the materials](#pcss) |
 | Only Poiyomi outfits don't get wet | [Unsupported or unverified shaders](#shaders) |
@@ -32,7 +34,7 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 | With RealSweat, the wetness amount snaps back when you change it | To adjust only the clothes, turn off **Link RealSweat**. [In-game menu](./usage/in-game-menu.mdx#items) |
 | Clothes still look wet after turning off RealSweat's **Sweat Display** | RealSweat's Sweat Display applies only to the sweat on the skin. Hide the clothes' wetness with **Show Clothing Wetness**. |
 | Underwear or decorations vanish at some angles | [Layer order](./usage/outfit-settings.mdx#layer-order) |
-| Dark shading remains where clothes show through | Check that part's shading relief and the in-game **SSAO Relief**. |
+| Dark shading remains where clothes show through | Check that part's shading relief and the in-game **Soften Wet Shadows**. |
 | The body is missing where clothes show through | The outfit creator may have hidden the body with MA Shape Changer. [Advanced features](./advanced.mdx#ma-hidden-body) |
 | The chest or groin shows through | [See-through protection](./usage/see-through-protection.mdx#checking) |
 | You don't know what changed after an update | [Updating over an earlier version](#updating) |
@@ -88,6 +90,7 @@ On **No See-Through** outfits, it is normal that the body doesn't show through. 
 | `Could not check the D3D11 texture limit` | The shader's texture count could not be checked. | See [Texture limit](#texture-limit). |
 
 - These warnings don't stop the build. If the build did stop, please check the **first red error** in the Console separately. The final `Build was aborted` alone doesn't tell you the cause.
+- If you use a tool that changes outfit meshes during the upload, that outfit or part can go up dry with this warning. Please see [Tools that change outfit meshes](#mesh-tools) below.
 - If an outfit that shows the body again (**Restore MA-Hidden Body for This Outfit**) is uploaded dry, the body may show through the clothes when you move. The warning says so. To hide the body, please turn off that option and build again.
 
 ## Pink materials {/* #pink */}
@@ -120,6 +123,21 @@ On avatars that use PCSS4VRC, PCSS4VRC replaces lilToon materials with `_pcss` m
 - **Fix:** In **Advanced settings > Experimental** in the setup window, turn on **PCSS4VRC (lilToon)** support and press **Update**. PCSS outfits then get wet too. It is an experimental feature, so please read [Advanced features](./advanced.mdx#experimental) first.
 - Parts that use lilToon custom shaders, which PCSS4VRC doesn't replace, get wet in the upload too.
 - Even with the feature on, parts whose lilToon **Multi** or **MultiOutline** (and Tessellation or Lite) materials PCSS4VRC replaces stay dry, and an NDMF warning appears. In 1.0.0 the warning may tell you to turn the feature on; if it is already on, this family is the reason. Switch that material to a standard lilToon shader, or leave it out of PCSS4VRC's conversion.
+
+## VRCFury is too old {/* #vrcfury-old */}
+
+If an avatar that uses VRCFury shows an error that mentions `SweatAmount` during the build, VRCFury may be an old version. This error has been seen with VRCFury 1.1258 and earlier.
+
+**Fix:** Please update VRCFury to **1.1436.0 or later** in VCC, then build again. Avatars without VRCFury are not affected.
+
+## Tools that change outfit meshes {/* #mesh-tools */}
+
+Tools that change the vertex order, the submeshes or the mesh structure of outfit meshes during the upload may not be compatible with <ProductName />. Anti-ripping tools and polygon reduction tools are examples.
+
+- <ProductName /> fits its wetness data to the outfit meshes. If another tool changes a mesh so that the data no longer matches, that outfit or part goes up dry, without wetness.
+- The build doesn't stop. The NDMF build results window shows the outfit (or part) name and the reason as a warning.
+- AAO (Avatar Optimizer), d4rk Avatar Optimizer and TexTransTool are supported. Please see [Compatibility](./compatibility.mdx#optimizers).
+- To make that outfit wet, please leave the wet outfits out of that tool, then build again.
 
 ## Unsupported or unverified shaders {/* #shaders */}
 
@@ -157,13 +175,14 @@ On the first build or the first preview, RealWet creates the wet shaders and Uni
 
 {/* SHOT U28: build progress bar */}
 
-1. **Please wait.** During the upload, the progress bar shows the step, the count and the outfit name, such as `RealWet: Calculating outfit shape (3/22) · outfit name`. While Unity itself compiles shaders, the progress bar may stay the same for a long time.
+1. **Please wait.** During the upload, the progress bar shows the step, the count and the outfit name, such as `RealWet: Calculating outfit shape (3/22) · outfit name`. While Unity itself compiles shaders, the progress bar may stay the same for a long time, and the work can also go on without any window.
 2. **Check the CPU in Task Manager.** If Unity or `UnityShaderCompiler` is using the CPU, it is still working. Please don't close it; wait.
 3. Treat it as frozen only when the CPU stays near 0% for several minutes and the progress bar doesn't change. In that case, please note the first red error in the Console and how long you waited, and contact us.
 
 - From the second build on, the shader cache made in the first build is reused, so it is much shorter.
 - It takes longer when the PC is busy, such as while streaming or recording. It's best to do the first build ahead of time, while the PC is idle.
 - You can prepare ahead of the build with **RealWet > Outfit Management > Prepare Needed Outfits**.
+- A progress bar also appears for **Install** and **Update** in the setup window, and the first time you enter Play. While it shows the current step, please wait.
 
 For typical times, see [Performance](./performance.mdx#build-time).
 
@@ -269,7 +288,7 @@ The detailed steps are in the [Changelog](./update-changelog.mdx#how-to-update).
 ## Uninstalling {/* #uninstall */}
 
 - **Remove just one outfit:** Press **×** on that outfit's row in **RealWet > Outfit Management**, or turn off **Use Wetness**. The clothes themselves stay.
-- **Remove everything from the avatar:** Press **Uninstall — Remove** in the **Uninstall** tab of **CookiTools > RealWetSystem > Setup／Uninstall**. It cleans up the `RealWet` object and everything under it, the <ProductName /> components on your outfits, and this install's menu files. Your outfits, body and original materials stay.
+- **Remove everything from the avatar:** Press **Uninstall — Remove** in the **Uninstall** tab of **CookiTools > RealWetSystem > Setup／Uninstall**. When you press **Uninstall** in the confirmation window, it cleans up the `RealWet` object and everything under it, the <ProductName /> components on your outfits, and this install's menu files. Your outfits, body and original materials stay. As the confirmation window says, this cannot be undone with Ctrl+Z.
 - Don't put other outfits or tools under the `RealWet` object. They are deleted along with it when you uninstall.
 - The first install, full uninstall, and creating, updating or deleting the in-game menu cannot be undone with Ctrl+Z.
 - To remove the package from the project too, first run **Uninstall — Remove** on every avatar, then please delete the `Assets/CookiTools/RealWetSystem` folder.

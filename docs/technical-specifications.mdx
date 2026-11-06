@@ -34,32 +34,34 @@ description: RealWetSystem v1.0.0의 지원 환경, 동기화 파라미터, 렌�
 
 | 메뉴 | 파라미터 | 동기화 | 저장 | 처음 값 |
 | --- | --- | --- | --- | --- |
-| 젖음 양 (단독) | `Cooki/ClothWetAmount` | 8비트 | 저장 | 0% |
-| 의상 젖음 보이기 | `Cooki/ClothWetEnable` | 1비트 | 저장 | 켜짐 |
+| 의상 젖음 표시 | `Cooki/ClothWetEnable` | 1비트 | 저장 | 켜짐 |
+| 젖음 양 (RealSweatSystem 없이 쓸 때) | `Cooki/ClothWetAmount` | 8비트 | 저장 | 0% |
 | RealSweat 연동 | `Cooki/ClothWetSweatLink` | 1비트 | 저장 | 켜짐 |
 | 젖음 양 (연동 해제 시) | `Cooki/ClothWetManualAmount` | 8비트 | 저장 | 0% |
-| 최대 젖는 범위 (%) | `Cooki/ClothWetProgressLimit` | 8비트 | 저장 | Unity 설정값 |
-| 젖는 범위만 넓히기 (고급) | `Cooki/ClothWetRangeExpansion` | 8비트 | 저장 | 0% |
-| 젖음 표현 (50%=기본) | `Cooki/ClothWetAppearance` | 8비트 | 저장 | 50% |
-| 젖은 광택 (50%=기본) | `Cooki/ClothWetGloss` | 8비트 | 저장 | 50% |
-| 젖음 경계 | `Cooki/ClothWetEdgeSoftness` | 8비트 | 저장 | 50% |
-| 비침 강도 (50%=기본) | `Cooki/ClothWetSeeThroughStrength` | 8비트 | 저장 | 50% |
-| 젖음 비침 모드 | `Cooki/ClothWetSeeThroughModeV2` | 8비트 | 저장 | 설정대로 |
+| 전체 영역 젖음 | `Cooki/ClothWetWhole` | 1비트 | 저장 | 꺼짐 |
+| 빠른 건조 | `Cooki/ClothWetFastDry` | 1비트 | 저장 안 함 | 꺼짐 |
+| 현재 상태 고정 (촬영용) | `Cooki/ClothWetHold` | 1비트 | 저장 안 함 | 꺼짐 |
+| 나에게만 보이기 (RealSweatSystem 없이 쓸 때) | `Cooki/ClothWetLocalOnly` | 1비트 | 저장 | 꺼짐 |
+| 중요 부위 비침 보호 | `Cooki/ClothWetProtect/All` | 1비트 | 저장 안 함 | Unity 설정값(새 설치 켜짐) |
 | 비침 보호 범위 (50%=기본) | `Cooki/ClothWetProtectRange` | 8비트 | 저장 | 50% |
 | 비침 보호 강도 (100%=완전히 막음) | `Cooki/ClothWetProtectStrength` | 8비트 | 저장 | 100% |
-| 중요 부위 비침 보호 | `Cooki/ClothWetProtect/All` | 1비트 | 저장 안 함 | Unity 설정값(새 설치 켜짐) |
-| 전체 영역 젖음 | `Cooki/ClothWetWhole` | 1비트 | 저장 | 꺼짐 |
-| SSAO/그림자 완화 | `Cooki/ClothWetSsaoRelief` | 1비트 | 저장 | 켜짐 |
+| 최대 젖는 범위 (%) | `Cooki/ClothWetProgressLimit` | 8비트 | 저장 | Unity 설정값 |
+| 젖음 표현 (50%=기본) | `Cooki/ClothWetAppearance` | 8비트 | 저장 | 50% |
+| 젖은 광택 (50%=기본) | `Cooki/ClothWetGloss` | 8비트 | 저장 | 50% |
+| 비침 강도 (50%=기본) | `Cooki/ClothWetSeeThroughStrength` | 8비트 | 저장 | 50% |
+| 젖음 비침 모드 | `Cooki/ClothWetSeeThroughModeV2` | 8비트 | 저장 | 설정대로 |
+| 젖음 경계 | `Cooki/ClothWetEdgeSoftness` | 8비트 | 저장 | 50% |
+| 젖은 옷 그림자 완화 | `Cooki/ClothWetSsaoRelief` | 1비트 | 저장 | 켜짐 |
 | 의상별 편차 줄이기 | `Cooki/ClothWetOutfitCorrection` | 1비트 | 저장 | Unity 설정값(새 설치 켜짐) |
-| 현재 상태 고정 (촬영용) | `Cooki/ClothWetHold` | 1비트 | 저장 안 함 | 꺼짐 |
-| 빠른 건조 | `Cooki/ClothWetFastDry` | 1비트 | 저장 안 함 | 꺼짐 |
-| 나에게만 표시 (단독) | `Cooki/ClothWetLocalOnly` | 1비트 | 저장 | 꺼짐 |
+| 젖는 범위만 넓히기 (고급) | `Cooki/ClothWetRangeExpansion` | 8비트 | 저장 | 0% |
 | 의상별 표시 그룹 | `Cooki/ClothWetGroup…` | 그룹마다 1비트 | — | 켜짐 |
+
+표는 게임 안 메뉴의 순서(메인 페이지, **비침 보호**, **젖음 조절**)를 따릅니다.
 
 - 추천 메뉴는 87비트, 의상별 표시 그룹 6개까지 모두 넣으면 94비트입니다. VRChat 한도는 아바타 전체에서 256비트입니다.
 - RealSweatSystem과 연동할 때는 RSS의 땀 파라미터(`Cooki/SweatAmount` 등)를 읽기만 합니다. RSS의 파라미터를 바꾸지 않습니다.
 - 메뉴에 넣지 않은 기능은 Unity에서 정한 값으로 동작하고, 파라미터를 더하지 않습니다.
-- 메뉴 한 페이지는 8칸입니다. **젖음 조절**에 9개 이상이 들어가면 7개 뒤에 **다음** 페이지가 생깁니다.
+- 메뉴 한 페이지는 8칸입니다. **젖음 조절**에 9개 이상이 들어가면 7개 뒤에 **다음** 페이지가 생깁니다. <strong>젖는 범위만 넓히기 (고급)</strong>은 늘 마지막 칸입니다.
 
 ## 애니메이터 {/* #animator */}
 
@@ -121,7 +123,9 @@ description: RealWetSystem v1.0.0의 지원 환경, 동기화 파라미터, 렌�
 
 ## 알려진 제한사항 {/* #known-limits */}
 
-- 지원하지 않는 셰이더(Sunao, UnityChanToon, UTS, Poiyomi Fur·Grab Pass, lilToon Fur·Gem, 사용자가 고친 셰이더)에는 젖음을 넣지 않습니다.
+- 지원하지 않는 셰이더(Sunao, UnityChanToon, UTS, Poiyomi 8.x 이하, Poiyomi Fur·Grab Pass, lilToon Fur·Gem, 사용자가 고친 셰이더)에는 젖음을 넣지 않습니다.
+- 업로드하는 동안 의상 메쉬의 정점 순서, 서브메쉬, 메쉬 구조를 바꾸는 툴(찢어짐 방지 툴, 폴리곤 줄이기 툴 등)은 호환되지 않을 수 있습니다. 맞지 않게 된 의상이나 파츠는 마른 채로 올라가고, NDMF 빌드 결과 창에 이유가 남습니다. AAO, d4rk Avatar Optimizer, TexTransTool은 지원합니다.
+- VRCFury 1.1258 이하에서는 빌드할 때 `SweatAmount` 오류가 날 수 있습니다. 1.1436.0 이상을 써 주십시오.
 - lilToon Refraction / RefractionBlur는 젖은 색·광택만 더하고, 추가 비침은 넣지 않습니다.
 - 서로 다른 의상끼리는 겹옷 순서를 정하지 않습니다.
 - 애니메이션으로 Renderer의 **메쉬 자체**를 바꾸는 구성은 지원하지 않습니다.

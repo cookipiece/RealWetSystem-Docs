@@ -15,8 +15,8 @@ description: RealWetSystemをいちばん少ない手順でインストールし
 ## 1. 準備
 
 - アバターとプロジェクトをバックアップします。
-- VCCの**Manage Project**で、**VRChat Avatars SDK**、**NDMF**、**Modular Avatar**がインストールされているか確認します。
-- 衣装が使うシェーダー（lilToon 2.3.0以上またはPoiyomi Toon / Pro）がプロジェクトにあるか確認します。Poiyomiの衣装だけを使う場合は、lilToonは必要ありません。
+- VCCの**Manage Project**で、**VRChat Avatars SDK**、**NDMF**、**Modular Avatar**がインストールされているか確認します。**VRCFury**を使う場合は、1.1436.0以上に更新してください。1.1258以下では、ビルドのときに`SweatAmount`のエラーが出ることがあります。
+- 衣装が使うシェーダー（lilToon 2.3.0以上またはPoiyomi Toon / Pro 9以上）がプロジェクトにあるか確認します。Poiyomiの衣装だけを使う場合は、lilToonは必要ありません。
 - Consoleに赤いコンパイルエラーがないか確認します。
 
 ## 2. パッケージをインポート
@@ -44,7 +44,7 @@ PCごとに一度だけで済みます。詳しくは[購入認証](./license-ac
 1. アバターを配置したシーンを保存します。
 2. Hierarchyで**アバターの最上位オブジェクト**（VRC Avatar Descriptorがあるオブジェクト）を選択します。
 3. **CookiTools > RealWetSystem > Setup／Uninstall**を開きます。
-4. 何も変えずに、いちばん下の**インストール**を押します。
+4. 何も変えずに、4つの欄の下の**インストール**を押します。インストールしている間は、進行状況バーが表示されます。
 5. **インストール完了**の案内が出たら、**OK**を押します。
 
 {/* SHOT U03: Setup window, new install, defaults */}
@@ -78,7 +78,7 @@ PCごとに一度だけで済みます。詳しくは[購入認証](./license-ac
 {/* SHOT U19: outfit inspector with the preview */}
 [![この衣装の設定](/img/guide/U19-ja.png)](/img/guide/U19-ja.png)
 
-*<small>例の画像です。パーツごとに透け方を手で設定してあるため、**濡れると透ける**が**パーツごとに個別**になっています。</small>*
+*<small>新規インストール直後の画面です。<strong>上着だけ透ける（下着は透けない）（推奨）</strong>で追加した衣装は、パーツごとに透け方が違うため、**濡れると透ける**が**パーツごとに個別**になっています。</small>*
 
 プレビューが始まらない場合は、Unity上部の**Tools > NDM Framework > Enable Previews**がオンになっているか確認してください。
 

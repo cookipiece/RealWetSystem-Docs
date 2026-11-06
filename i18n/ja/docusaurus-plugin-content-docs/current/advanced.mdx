@@ -58,7 +58,7 @@ description: 衣装ごとの設定、透けの強さと暗い色の透け、重�
 ゲーム内の**全範囲濡れ**をオンにすると、開始点に関係なく、服全体が均一に濡れます。雨に当たった姿、水に入った姿、写真撮影に使います。
 
 {/* SHOT R03: Whole Area OFF / ON */}
-[![全範囲濡れ オフ・オン](/img/renders/R03.jpg)](/img/renders/R03.jpg)
+[![全範囲濡れのオフとオンの比較。オンにすると衣装全体が均一に濡れます。](/img/compare/R03-ja.webp)](/img/compare/R03-ja.webp)
 
 - どれだけ濡れるかは、濡れ量（RealSweat連動なら汗の量）が決めます。
 - オンの間は、**最大の濡れ範囲**、**濡れる範囲を広げる**、**衣装ごとの違いを減らす**、**濡れの境界**は効果がありません。
@@ -95,9 +95,9 @@ PCSS4VRC(lilToon)とlilSSRTを使う衣装も、実験機能で濡らせます�
 
 ## RealSweatSystemと一緒に使う {/* #realsweat */}
 
-[![Real Sweat Systemと連動し、汗0%、50%、100%に合わせて服も濡れる様子](/img/booth/booth-with-realsweat.jpg)](/img/booth/booth-with-realsweat.jpg)
+[![RealSweat連動オンで汗0%と100%を比較。汗が100%になると衣装も一緒に濡れます。](/img/compare/RS1-ja.webp)](/img/compare/RS1-ja.webp)
 
-*<small>RealSweatSystemの汗0%、50%、100%に合わせて、服も濡れる様子です。RealSweatSystemは別売りです。</small>*
+*<small>RealSweatSystemの汗0%と100%に合わせて、服も濡れる様子です。RealSweatSystemは別売りです。</small>*
 
 同じアバターにRealSweatSystemがあると、<ProductName />が検出します。新規インストールでは**RealSweat連動**がオンの状態で始まり、肌の最終的な汗の量に服も従います。
 
@@ -108,6 +108,7 @@ PCSS4VRC(lilToon)とlilSSRTを使う衣装も、実験機能で濡らせます�
 | また肌の汗に従う | **RealSweat連動**をオンにします。 |
 
 {/* SHOT M04: main page with RealSweat linked */}
+[![RealSweat 連動時のゲーム内メニュー](/img/guide/M04-ja.png)](/img/guide/M04-ja.png)
 
 - Unityで最初の値を変えるには、**RealWet**の**入力モード**の行で、**連動する**または**連動解除**を選びます。
 - RealSweatSystemの**汗の表示**と**自分にだけ表示**は、肌の汗にだけ適用されます。衣装の濡れは、**衣装の濡れを表示**と衣装別表示でだけ隠せます。
@@ -130,9 +131,10 @@ RealRainSystem（RealRain）と一緒に使うと、雨に当たった服も<Pro
 
 ## 最適化ツール {/* #optimizers */}
 
-AAO（Avatar Optimizer）、TexTransTool、d4rk Avatar Optimizer、VRCFuryと一緒にビルドしても、濡れが残るように合わせてあります。
+AAO（Avatar Optimizer）、TexTransTool、d4rk Avatar Optimizer、VRCFuryと一緒にビルドしても、濡れが残るように合わせてあります。VRCFuryは1.1436.0以上を使ってください。
 
 - エラーがなければ、衣装全体を最適化から先に外す必要はありません。
+- アップロード中に衣装メッシュの頂点の順番、サブメッシュ、メッシュの構造を変えるツール（裂け防止ツール、ポリゴン削減ツールなど）は、互換性がないことがあります。合わなくなった衣装やパーツは乾いたままアップロードされ、NDMFのビルド結果ウィンドウに理由が残ります。
 - 濡れを消してしまう可能性のある設定は、インストール画面の**他のアバターツール**の欄で事前にお知らせします。
 - 他のツールが<ProductName />の結果を変えた場合は、そのまま見過ごさず、NDMFの結果ウィンドウでお知らせします。
 
