@@ -24,6 +24,7 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 | Only outfits processed by an anti-ripping or polygon reduction tool stay dry | [Tools that change outfit meshes](#mesh-tools) |
 | Clothes look pink | [Pink materials](#pink) |
 | Clothes get wet in the preview, but not in the build, Play or upload | [Wet in the preview, dry in the build, Play or upload](#preview-ok-build-dry) |
+| Wet in the preview, but one outfit is dry after upload | [Another tool changed the material during the build](#material-replaced) |
 | Clothes get wet in the preview, but some lilToon outfits are dry in the upload | [PCSS4VRC replaced the materials](#pcss) |
 | Only Poiyomi outfits don't get wet | [Unsupported or unverified shaders](#shaders) |
 | The second avatar doesn't get wet | [Several avatars in one scene](#multiple-avatars) |
@@ -146,7 +147,7 @@ If clothes get wet in the preview but not in Build & Test, Play or the upload, a
 | Some outfits are dry only in Play | Some outfits aren't prepared yet, or the avatar was off when Play started. | [Some outfits don't get wet in Play](#play-not-ready) |
 | Some lilToon parts are dry only in the upload (with PCSS4VRC) | PCSS4VRC replaced the materials at the first build step. | [PCSS4VRC replaced the materials](#pcss) |
 | Only outfits processed by an anti-ripping or polygon reduction tool are dry | That tool changed the outfit mesh. | [Tools that change outfit meshes](#mesh-tools) |
-| Only parts that went through another tool are dry | Another tool created, copied, split or merged parts, or replaced or rewrote their materials, so <ProductName /> couldn't recognize them. | In [NDMF warnings](#ndmf-warnings): **RealWet: only some outfit parts remain dry**, **RealWet: a renderer was left without wetness because its outfit is unclear**, and the d4rk row |
+| Only parts that went through another tool are dry | Another tool created, copied, split or merged parts, or replaced or rewrote their materials, so <ProductName /> couldn't recognize them. | [Another tool changed the material during the build](#material-replaced); in [NDMF warnings](#ndmf-warnings): **RealWet: only some outfit parts remain dry**, **RealWet: a renderer was left without wetness because its outfit is unclear**, and the d4rk row |
 | The wet materials or menu values are different on the uploaded avatar | A tool that runs at the very end of the upload (for example, VRCFury Parameter Compressor) changed the result. | In [NDMF warnings](#ndmf-warnings): **RealWet: a later upload step changed RealWet's output** |
 | Only materials swapped by an animation, MA Material Setter or Material Swap are dry | That replacement material wasn't prepared. | **Additional Replacement Materials** in [Only some parts don't get wet](#partly-dry) |
 | Only outfits with a certain Poiyomi version are dry | That shader version isn't verified yet. | [Unsupported or unverified shaders](#shaders) |
@@ -154,6 +155,24 @@ If clothes get wet in the preview but not in Build & Test, Play or the upload, a
 | Clothes don't get wet in a Quest (Android) build | <ProductName /> is PC only. | [Compatibility](./compatibility.mdx#requirements) |
 
 If nothing matches, please send the report copied with **Copy Diagnostic Report** together with the `RealWet:` lines from the NDMF results window. [Contact us](#support)
+
+## Another tool changed the material during the build {/* #material-replaced */}
+
+If an outfit is wet in the preview but dry after upload, another tool may have replaced or copied that outfit's material during the build. <ProductName /> only makes the materials you registered wet. It doesn't force a material made by another tool to be wet; it leaves it as it is. The build doesn't stop, and other outfits stay wet.
+
+Find the cause like this.
+
+1. Build once (or use Build & Test). Then select the avatar's `RealWet` object and click **Status > Troubleshooting > Copy Diagnostic Report** in the inspector.
+2. Paste the report into a text editor. Under `[Recent RealWet console lines]` near the end, find the line with the name of the dry outfit or part. The line also names the material.
+   - `Material 'Towel White_FSS' referenced by default on 'Bath Towel' slot 0 is unsupported`: the material that came in during the build uses a shader <ProductName /> doesn't support.
+   - `Final material 'Shirt_clone' cannot be traced to captured material 'Shirt'`: it's a copy made during the build, so <ProductName /> can't confirm that it belongs to the outfit.
+3. Compare that material name with the material on the part in the scene. If the name is different or has something added at the end (`_FSS`, `_clone`, ...), another tool changed the material during the build.
+
+How to fix it:
+
+- Find the tool that made that material, and turn it off or exclude that outfit (part) from it. Build again, and the original material gets wet.
+- That tool's effect will no longer apply to that outfit. Choose which one you want.
+- If you can't tell which tool it is, send the report through [Contact us](#support).
 
 ## Wet spots or protection don't fit the avatar {/* #placement-mismatch */}
 
