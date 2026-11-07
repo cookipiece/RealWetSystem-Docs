@@ -58,6 +58,35 @@ Avatar
 - Don't move the avatar's Body, main Armature or bones.
 - Don't use the **RealWet** object as a place to store outfits. Anything under it is cleaned up when you uninstall.
 
+### Group an avatar's base clothes into one outfit {/* #group-base-clothes */}
+
+The clothes an avatar comes with often sit as separate meshes, such as a top, a skirt and socks, right under the avatar next to Body. If you add them as they are, each mesh is registered as its own outfit. <ProductName /> doesn't register the avatar itself as an outfit, so there is no way to group them into one outfit without moving the meshes. To use them as one outfit, please group them under an empty object.
+
+Grouping gives you these benefits.
+
+- The layer order is calculated between those parts. Separately registered outfits are not ordered against each other.
+- One **This Outfit's Settings** changes the fabric, strength and see-through for all of them.
+- They show as one row in the outfit list.
+
+How to group them:
+
+1. In the Hierarchy, right-click the avatar and press **Create Empty**. An empty object appears right under the avatar.
+2. Rename it to an outfit name such as `BaseOutfit`. Avoid names that look like a box for several outfits, such as `Clothes`, `Outfit` or `Wardrobe`. With such a name, the outfit chooser may list the meshes inside it separately.
+3. Drag the clothing meshes (top, skirt, socks and so on) into that object. **Don't move Body, Face or Armature.**
+4. Add that object in **RealWet > Outfit Management**. In the outfit chooser it may appear unchecked with **Several outfits may be grouped together.** It is one outfit, so check it and add it, or add it with **Add Outfit Manually**.
+
+- If you already registered each mesh separately, remove those registrations with <strong>×</strong> on their outfit rows, then add the grouped object. A mesh whose registration is left keeps getting wet as its own outfit. Settings you changed in a removed registration are not kept.
+- Moving a registered outfit within the avatar keeps its <ProductName /> settings. You don't need to register it again.
+
+:::caution[Check the menu toggles for your clothes]
+Unity animations point to objects by their path inside the avatar (for example `Top`). Moving it under `BaseOutfit` changes the path to `BaseOutfit/Top`, so clothing on/off toggles made by the avatar creator or by you may stop working.
+
+- After moving, please press every clothing toggle in the menu in Build & Test or Play to check them.
+- For a toggle that doesn't work, the path in its animation clip needs to be changed to the new path. In Unity's Animation window, entries whose path no longer matches show as (Missing!).
+- The **MA Object Toggle** of Modular Avatar and the **Object Toggle** action of VRCFury toggles point to the object itself, so they usually keep working when you move the object within the avatar. Please check toggles that use animation clips as described above.
+- If it's hard to fix, you can undo with Ctrl+Z and keep registering each mesh separately. You can match the layer order with manual numbers in [Layer order](#layer-order).
+:::
+
 ## Mixing pieces from several products (kitbashed outfits)
 
 When you wear pieces from several outfits, please register **one outfit per product**. For example, if you wear the top from product A and the skirt from product B, register the root of product A and the root of product B as separate outfits.
@@ -112,7 +141,7 @@ Open **This Outfit's Settings > Outfit Parts > Outfit Render Queue**. RealWet ca
 **Order is calculated separately for each outfit.** RealWet does not order separate outfits against each other, so an outer layer or hair registered as its own outfit may be drawn before the clothes underneath. In that case, please use one of these:
 
 - Switch the outer outfit's slot to **Manual: Set Draw Priority** and give it a high number (for example, 20).
-- Register the outer layer together with the clothes underneath as one outfit.
+- Register the outer layer together with the clothes underneath as one outfit. For an avatar's base clothes, see [Group an avatar's base clothes into one outfit](#group-base-clothes).
 
 | Slot ordering method | Use |
 | --- | --- |
