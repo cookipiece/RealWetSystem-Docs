@@ -23,10 +23,10 @@ The render queue is the number that sets the draw order. Lower numbers draw firs
 
 | Original queue | Queue of the wet copy |
 | --- | --- |
-| 2500 or lower (opaque, cutout and so on) | Between "body/skin sweat queue + 1" and 2499 |
+| Opaque and cutout, and transparent at 2499 or lower | Between "body/skin sweat queue + 1" and 2499 |
 | 2501–2999 (transparent) | Later, but only inside the same range |
 | 3000–3099 (transparent) | Later, but only inside the same range |
-| Anything else (2500, 3100 and above, etc.) | Unchanged |
+| Other transparent (2500, 3100 and above) | Unchanged |
 
 - For example, 2351–2499 when RealSweatSystem 2.0.0's sweat is at 2350, or 2001–2499 with only a body at 2000.
 - If a part <ProductName /> does not wet uses a queue below 2460, the range starts after that part.
@@ -42,7 +42,7 @@ The render queue is the number that sets the draw order. Lower numbers draw firs
 - Separate outfits are not ordered against each other. Each outfit counts from the same start number.
 
 :::tip[When a separately registered jacket draws before the clothing under it]
-Give the jacket's slots a high manual number (e.g. 20), or register the jacket together with the clothing under it as one outfit. See [Layer order](./usage/outfit-settings.mdx#layer-order).
+Give the jacket's slots a high manual number (e.g. 20), or register the jacket together with the clothing under it as one outfit. See [Layer order](./usage/outfit-settings.mdx#layer-order) and [Layered clothes vanish or draw in the wrong order](./troubleshooting.mdx#layer-issues).
 :::
 
 ## Meshes

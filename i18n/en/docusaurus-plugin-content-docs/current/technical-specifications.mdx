@@ -76,10 +76,10 @@ The render queue is the number that sets the draw order. Lower values are drawn 
 
 | Original queue | Queue of the wet copy |
 | --- | --- |
-| 2500 or below (opaque, cutout and so on) | Between "the body or skin sweat queue + 1" and 2499 |
+| Opaque and cutout, and transparent at 2499 or below | Between "the body or skin sweat queue + 1" and 2499 |
 | 2501–2999 (transparent) | Moved later, only within the same range |
 | 3000–3099 (transparent) | Moved later, only within the same range |
-| Anything else (3100 or above and so on) | Unchanged |
+| Other transparent (2500, 3100 or above) | Unchanged |
 
 - For example, if RealSweatSystem 2.0.0's sweat is at 2350, the range is 2351–2499; with only a body at 2000, it is 2001–2499.
 - If the body's queue can't be read, RealWet uses 2460–2499 and tells you.

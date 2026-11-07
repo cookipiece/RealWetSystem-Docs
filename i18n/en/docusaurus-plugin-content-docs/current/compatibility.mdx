@@ -22,10 +22,14 @@ description: Supported Unity, SDK, NDMF and Modular Avatar versions, shaders (Po
 | Modular Avatar | 1.14.0 or later, below 2.0 |
 | VRCFury (if used) | 1.1436.0 or later. With 1.1258 or earlier, the build can show a `SweatAmount` error. |
 | Editor | The Unity Editor on Windows (purchase activation works only on Windows) |
-| Avatar | Humanoid avatars |
+| Avatar | Humanoid avatars (they don't need to be human-shaped) |
 | Platform | PC only (Direct3D 11). Quest and mobile are not supported. |
 
 - Pre-release versions of the next major version of a required package are not supported.
+- Any avatar whose rig is set to Humanoid works, even if it isn't human-shaped. Most furry and kemono avatars are Humanoid. The outfits need Poiyomi or lilToon materials, and it is PC only.
+- A non-Humanoid avatar can't get a new install. Set **Rig > Animation Type** to **Humanoid** in the model's import settings, then install.
+- The automatically placed wet start points and see-through protection regions may not fit some body shapes. [Wet spots or protection don't fit the avatar](./troubleshooting.mdx#placement-mismatch)
+- If there is no **CookiTools** menu or you see Missing Script after importing the package, see [Scripts look broken, or the CookiTools menu is missing](./troubleshooting.mdx#scripts-missing).
 - If you build the same avatar for Quest (Android), the in-game menu, synced parameters and FX layers are added, but the clothes don't get wet. The build doesn't stop. To save menu slots and parameters, please remove <ProductName /> from a separate copy of the avatar made for Quest.
 - If a version doesn't match, the setup window tells you which package is missing or needs an update. <ProductName /> does not update other packages automatically.
 

@@ -22,10 +22,14 @@ description: 지원하는 Unity·SDK·NDMF·Modular Avatar 버전, 셰이더(Poi
 | Modular Avatar | 1.14.0 이상, 2.0 미만 |
 | VRCFury (쓰는 경우) | 1.1436.0 이상. 1.1258 이하에서는 빌드할 때 `SweatAmount` 오류가 날 수 있습니다. |
 | 에디터 | Windows의 Unity 에디터(구매 인증이 Windows에서만 동작) |
-| 아바타 | Humanoid 아바타 |
+| 아바타 | Humanoid 아바타(사람 모양이 아니어도 됩니다) |
 | 플랫폼 | PC 전용(Direct3D 11). Quest·모바일은 지원하지 않습니다. |
 
 - 필수 패키지의 다음 메이저 버전 시험판은 지원 범위에 들어가지 않습니다.
+- Rig가 Humanoid로 설정된 아바타라면 사람 모양이 아니어도 씁니다. 퍼리·케모노 아바타도 대부분 Humanoid입니다. 의상은 Poiyomi나 lilToon 머티리얼이어야 하고, PC 전용입니다.
+- Humanoid가 아닌 아바타에는 새로 설치할 수 없습니다. 모델의 임포트 설정에서 **Rig > Animation Type**을 **Humanoid**로 바꾼 뒤 설치해 주십시오.
+- 자동으로 놓는 젖음 시작점과 비침 보호 영역은 몸 모양에 따라 맞지 않을 수 있습니다. [젖는 자리나 비침 보호 위치가 아바타와 맞지 않음](./troubleshooting.mdx#placement-mismatch)
+- 패키지를 가져온 뒤 **CookiTools** 메뉴가 없거나 Missing Script가 보이면 [스크립트가 깨져 보이거나 CookiTools 메뉴가 없음](./troubleshooting.mdx#scripts-missing)을 확인해 주십시오.
 - 같은 아바타를 Quest(Android)로 빌드하면 인게임 메뉴, 동기화 파라미터, FX 레이어는 들어가지만 옷은 젖지 않습니다. 빌드는 멈추지 않습니다. 메뉴와 파라미터를 아끼려면 Quest용으로 따로 만든 아바타 사본에서 <ProductName />을 제거해 주십시오.
 - 버전이 맞지 않으면 설치창이 어떤 패키지가 없거나 업데이트가 필요한지 알려 줍니다. <ProductName />이 다른 패키지를 자동으로 업데이트하지는 않습니다.
 

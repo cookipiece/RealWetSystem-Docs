@@ -13,8 +13,11 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 | Symptom | Where to look first |
 | --- | --- |
 | The **Install** button is gray and can't be clicked | [Install button is gray](#install-gray) |
+| There is no **CookiTools** in the Unity menu bar / components show Missing Script | [Scripts look broken, or the CookiTools menu is missing](#scripts-missing) |
 | One outfit doesn't get wet at all | [An outfit doesn't get wet](#outfit-dry) |
 | Only part of an outfit stays dry | [Only some parts don't get wet](#partly-dry) |
+| Clothes get wet in the wrong places (odd spots get wet, or sweaty spots stay dry) | [Wet spots or protection don't fit the avatar](#placement-mismatch) |
+| A see-through protection region is off from the chest or groin | [Wet spots or protection don't fit the avatar](#placement-mismatch) |
 | The uploaded avatar shows none of the <ProductName /> effects | [Uploaded without purchase activation](#not-activated) |
 | A warning starting with `RealWet:` appears in the NDMF results window | [NDMF warnings](#ndmf-warnings) |
 | The build shows an error that mentions `SweatAmount` | [VRCFury is too old](#vrcfury-old) |
@@ -34,7 +37,8 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 | 0 outfits registered after install | [0 outfits registered](#no-outfits) |
 | With RealSweat, the wetness amount snaps back when you change it | To adjust only the clothes, turn off **Link RealSweat**. [In-game menu](./usage/in-game-menu.mdx#items) |
 | Clothes still look wet after turning off RealSweat's **Sweat Display** | RealSweat's Sweat Display applies only to the sweat on the skin. Hide the clothes' wetness with **Show Clothing Wetness**. |
-| Underwear or decorations vanish at some angles | [Layer order](./usage/outfit-settings.mdx#layer-order) |
+| Underwear or decorations vanish at some angles | [Layered clothes vanish or draw in the wrong order](#layer-issues) |
+| Other clothes or decorations look wrong after you changed a render queue or the layer order | [Other clothes look wrong after changing the render queue](#layer-side-effects) |
 | Dark shading remains where clothes show through | Check that part's shading relief and the in-game **Soften Wet Shadows**. |
 | The body is missing where clothes show through | The outfit creator may have hidden the body with MA Shape Changer. [Advanced features](./advanced.mdx#ma-hidden-body) |
 | The chest or groin shows through | [See-through protection](./usage/see-through-protection.mdx#checking) |
@@ -52,6 +56,56 @@ In 1.0.0, the **Install** button turns gray in the cases below, and the window d
 | Unity is in Play mode. | Stop Play and try again. |
 
 If it is still gray, please send a screenshot of the whole Unity window, including the Hierarchy, through BOOTH messages.
+
+## Scripts look broken, or the CookiTools menu is missing {/* #scripts-missing */}
+
+If you imported the package but there is no **CookiTools** in the Unity menu bar, or the components on the `RealWet` object or your outfits show **Missing Script**, please check the following in order. Please don't delete the components that show Missing Script. They come back once the cause is fixed.
+
+### 1. A required package is missing or too old {/* #scripts-packages */}
+
+In VCC, open **Manage Project**, check these packages and update them to the latest version within the supported range.
+
+| Package | Supported |
+| --- | --- |
+| VRChat Avatars SDK | 3.10.0 or later, below 4.0 |
+| NDMF | 1.13.1 or later, below 2.0 |
+| Modular Avatar | 1.14.0 or later, below 2.0 |
+| VRCFury (if used) | 1.1436.0 or later |
+
+- If a new major version (for example 2.0) is out, please check [Compatibility](./compatibility.mdx#requirements) before you update. With a version outside the supported range, the main part of <ProductName /> does not load.
+- If VRChat Avatars SDK, NDMF or Modular Avatar is missing or outside the supported range, the **RealWet Dependencies** window opens once after you import the package or start Unity. It shows each package's state, such as **install required** or **update required**, and the supported range.
+- The window has three buttons. If you haven't chosen a display language yet, it shows in English.
+  - **Check Again**: checks again after you change packages.
+  - **Copy Issue for Support**: copies the Unity and package versions. Nothing is sent automatically.
+  - **VCC Help**: opens VRChat's VCC guide page.
+- In this state, **CookiTools > RealWetSystem > Setup／Uninstall** shows the **RealWet — Install Compatibility Check** message instead of the setup window. Your avatar is not changed.
+- If NDMF is not installed at all, the <ProductName /> components on the `RealWet` object and your outfits show Missing Script.
+- <ProductName /> does not update packages automatically.
+- This window does not check VRCFury. An old VRCFury causes an error when you build. [VRCFury is too old](#vrcfury-old)
+
+### 2. Another package has a red compile error {/* #scripts-compile-error */}
+
+If any package has even one red compile error, Unity can't load newly imported tools. Then neither the menu nor the components work, and the window above doesn't open either.
+
+1. Open **Window > General > Console**.
+2. Find the first red error at the top.
+3. Use the file path in the error to find which package it is, then update or remove that package.
+
+### 3. The project is not a Unity 2022.3 project for VRChat {/* #scripts-unity-version */}
+
+Please use it in a Unity 2022.3 avatar project for VRChat, made with VCC.
+
+### 4. Right after importing {/* #scripts-after-import */}
+
+If red errors remain in the Console right after importing, please restart Unity once. [Updating over an earlier version](#updating) says the same.
+
+### 5. Only part of the package was imported {/* #scripts-partial-import */}
+
+If you unchecked some files in the import window, it may not work. Please import the `.unitypackage` again and press **Import** with every item checked.
+
+Once it is fixed, **CookiTools** appears in the Unity menu bar. If this is the first time on this PC, please start with [Purchase activation](./license-activation.mdx).
+
+If it still doesn't work, please send us the whole first red error in the Console and the package list (names and versions) from VCC **Manage Project**. [Contact us](#support)
 
 ## An outfit doesn't get wet {/* #outfit-dry */}
 
@@ -78,6 +132,77 @@ On **No See-Through** outfits, it is normal that the body doesn't show through. 
 | An optimization tool merged or copied parts. | **RealWet: only some outfit parts remain dry** appears in the NDMF results window. See the table below. |
 | You moved one piece of the outfit out of the outfit root. | Move it back under the outfit root and it gets wet again. When you build, the Console shows the name of the moved piece. |
 
+## Wet spots or protection don't fit the avatar {/* #placement-mismatch */}
+
+<ProductName /> is made to work on many avatars, but depending on the avatar's body shape and bone positions, the spheres it places automatically may not fit. In that case, please adjust their position and range yourself.
+
+| Symptom | Fix |
+| --- | --- |
+| Odd spots get wet, or spots that should sweat stay dry. | Move the wet start point sphere near that spot in the Scene (W) and change its size (R). [Open the editor](./usage/wet-start-points.mdx#editor), [Common adjustments](./usage/wet-start-points.mdx#tips) |
+| A protection region is off from the chest or groin, or is too small or too big. | Move (W), rotate (E) and resize (R) the protection region in the Scene. [Edit protection regions](./usage/see-through-protection.mdx#editing) |
+| You want to fix the left and right sides together. | Both editors have **Symmetry**. Turn it on and edit one side only. |
+| You want to go back to the original layout. | For start points, use [Reset and re-layout](./usage/wet-start-points.mdx#reset). For protection regions, use [Reset buttons](./usage/see-through-protection.mdx#reset). |
+
+- After a change, please check the preview at 50% and 100%.
+- Please check protection from the front, side and back, as in [How to check](./usage/see-through-protection.mdx#checking).
+- When the wet start mode is **From Where It Touches the Body**, start points are not used, so moving a sphere doesn't change where clothes get wet. The same is true while the in-game **Whole Area** is on.
+
+## Layered clothes vanish or draw in the wrong order {/* #layer-issues */}
+
+See-through wet clothes look natural only when the body, underwear and outer clothes are drawn in the right order (render queue). <ProductName /> looks at how each outfit's parts overlap and sets the order automatically, but it can't detect every layer. Parts it misses can end up on the same queue or in reverse order, and then the inner clothes may seem to vanish when wet.
+
+First, open the outfit's **This Outfit's Settings > Outfit Parts > Outfit Render Queue**. [Layer order](./usage/outfit-settings.mdx#layer-order) explains how to use it. Then find the case below that matches.
+
+### Underwear in the same outfit vanishes at some angles {/* #layer-same-queue */}
+
+- **Cause:** Two parts that touch or overlap share one queue. Unity then picks which one draws first, so the inner one can vanish when wet. This happens when parts cross each other, sit too close, or there are so many parts that there isn't enough evidence to decide.
+- **How to tell:** The order list shows a **same queue** mark. After a build, **RealWet: check the clothing draw order** appears in the NDMF results window. If the layer wasn't detected, there may be no mark and no warning.
+- **Fix:** Drag one of the two parts in the list so the inner part is higher and the outer part is lower. Use the same fix even when there is no mark.
+- A material that draws the same mesh again, such as a hair shadow, is placed right after its base automatically. If the shadow is a separate object, drag it below its base in the list.
+
+### Inner clothes vanish under a jacket or hair registered as a separate outfit {/* #layer-other-outfit */}
+
+- **Cause:** Order is set for each outfit separately. Separate outfits are not ordered against each other, so a jacket registered on its own may be drawn before the clothes under it. The same applies to a jacket you turn on and off with a wardrobe if it is registered as another outfit.
+- **Fix:** Switch the jacket outfit's slots to **Manual: Set Draw Priority** and give them a high number (for example, 20), or register the jacket together with the clothes under it as one outfit.
+- Within one outfit, parts that are off at upload and turned on in game get the same order too.
+
+### It looks wrong only after a material swap or an optimizer {/* #layer-swapped */}
+
+- **Cause:** A material swapped by an animation, MA Material Setter or Material Swap keeps the original order when its render mode (opaque or cutout, or transparent) is the same as the original. If the render mode differs, it is placed at the start of its rendering band. When an optimizer changes a part so RealWet can't tell which original part it is, that part is also placed at the start. When parts with different orders are merged, the merged part uses the innermost of their positions.
+- **How to tell:** If an optimizer is the cause, after a build the NDMF results window or the Console shows lines with the part name, such as **its material now uses another rendering band**, **RealWet could not tell which original part this is** or **It uses the innermost of their positions**.
+- **Fix:** Please give the replacement material the same render mode as the original. Check the swapped state in Build & Test too, and if a warning says a part now shares a queue with another, drag it in the order list. If only the replacement material stays dry, see [Only some parts don't get wet](#partly-dry).
+
+### A slot uses Preserve Material Queue {/* #layer-preserve */}
+
+- **Cause:** **Preserve Material Queue** is an older setting. It doesn't calculate an order and uses the wet copy's base queue as it is. Opaque and cutout clothes all get the same queue (2460), so Unity decides the front-to-back order of overlapping parts. No build warning appears in this case.
+- **How to tell:** If every slot of the outfit uses this setting, the order list shows **Every slot of this outfit keeps its material queue (an older setting).**
+- **Fix:** Press **Use automatic order**, or switch the slot to **Automatic from Clothing Surfaces**. You can undo it with Ctrl+Z.
+
+### Different rendering bands can't be ordered {/* #layer-bands */}
+
+- **Cause:** Opaque or cutout clothes and transparent clothes are drawn in different bands. <ProductName /> does not move parts into another band. So if the inner clothes are transparent and the outer clothes are opaque, the inner clothes may be drawn later. When the body or skin sweat queue is close to 2499 and there is no room left for the clothes, the parts also keep their original queues.
+- **How to tell:** The NDMF results window shows **…'s rendering band draws later** or **There is no room after the body/sweat … so these parts kept their previous queues**.
+- **Fix:** <ProductName /> does not change your original materials or the body. Whether to match the two clothes' render modes is your choice. You can also use **Direct: Set Render Queue** on that slot, but a number in another band can change depth and shadows, so please check it in the preview.
+
+### Overlap with parts not registered in RealWet {/* #layer-unmanaged */}
+
+- **Cause:** <ProductName /> doesn't change the order of parts that aren't registered (stockings, lace and so on). If such a part's queue is below 2460, the wet clothes are drawn after it. The order list shows this as **(after …, which RealWet does not change)**. If it is 2460 or higher, the order is not matched, so the part may vanish under the wet clothes or show on top of them.
+- **Fix:** Register that part in the same outfit, and it gets ordered together. If you don't need its wet look, set **This Material's Wet Look (%)** on that slot to 0%.
+
+### Other clothes look wrong after changing the render queue {/* #layer-side-effects */}
+
+:::caution[Changing a render queue can change how other clothes look]
+The render queue is the drawing order for the whole avatar. When you change the numbers of one outfit, decorations, transparent effects and other outfits drawn before or after it can also layer differently.
+
+- <ProductName /> does not change the render queue of your original materials. It changes only the queue of the wet copies used for the preview and upload. But the game draws those copies, so the visible order does change.
+- An outfit whose creator relied on render queue numbers for its look (stencils, lace, transparent effects and so on) can look different when the order changes. The automatic order also sets new numbers for the wet copies.
+- When you set a manual or direct number, the automatic parts of the same outfit skip that number, so other parts' numbers can move too.
+- Manual numbers are counted on the same scale for outfits that use the same body. A high number draws after the parts of other outfits.
+- Dragging and **Direct: Set Render Queue** set fixed numbers. They don't follow later changes to the body or RealSweat.
+
+After a change, please check the front, side and back in the preview. Switch any slot you didn't want changed back to **Automatic from Clothing Surfaces**. You can reset a whole outfit at once with **Reset Clothing Order to Automatic**. For an outfit that must keep the order of its creator's numbers, turn off **Inside → outside detection first** on the same screen. Then the original material queue order comes first, and only equal queues are split by inside and outside. You can also use **Preserve Material Queue** on a single slot that must keep its creator's number, such as a transparent effect material. Please don't use it on opaque or cutout clothes.
+:::
+
 ## NDMF warnings {/* #ndmf-warnings */}
 
 <ProductName /> never stops a build. Only the parts it could not apply wetness to are uploaded with their original dry materials, and a warning is left in the NDMF results window. The full error is in the Unity Console. Your saved wet settings and original materials don't change, and RealWet tries again on the next build.
@@ -92,7 +217,7 @@ On **No See-Through** outfits, it is normal that the body doesn't show through. 
 | **RealWet: Poiyomi … has not been verified yet** | The structure of the installed Poiyomi differs from what <ProductName /> knows. Outfits using that shader are built dry. | You can use this build as it is. Wait for a <ProductName /> update, or use a verified Poiyomi version. |
 | **RealWet: Poiyomi with an added shader module ('…') is not supported yet** | A module turned on in Poiyomi's **Poi > Installed Modules** is included in the shader. Poiyomi outfits are built dry. | Turn that module off and build again. |
 | **RealWet: parts whose materials PCSS4VRC replaced are uploaded dry** | PCSS4VRC replaced lilToon materials with `_pcss` materials in the first build step. | See [PCSS4VRC replaced the materials](#pcss). |
-| **RealWet: check the clothing draw order** | Some layered parts have no set front-to-back order. The build did not stop. | In that outfit's **Planned order · inside → outside** list, drag one of the named parts. [Layer order](./usage/outfit-settings.mdx#layer-order) |
+| **RealWet: check the clothing draw order** | Some layered parts have no set front-to-back order. The build did not stop. | In that outfit's **Planned order · inside → outside** list, drag one of the named parts. [Layer order](./usage/outfit-settings.mdx#layer-order), [Layered clothes vanish or draw in the wrong order](#layer-issues) |
 | **RealWet: some renderers were kept out of AAO automatic mesh merging** | For information. RealWet left one of them out so that AAO doesn't merge parts it can't process together. | Nothing to fix. The mesh count may grow a little. |
 | **RealWet: d4rk Avatar Optimizer rewrote wet parts that RealWet could not put back** | A d4rk setting that rewrites shaders changed wet parts. | Turn off that d4rk setting or add the parts to d4rk's Exclusions, then upload again. |
 | **RealWet: rain wetness is off on some clothing** | RealRain's rain data couldn't be used on that slot. The regular wetness stays. | Follow the `[vertex order changed]`, `[no vertex index]` or `[not verified]` explanation in the warning. Usually, updating RealWet and RealRain to the latest versions fixes it. |

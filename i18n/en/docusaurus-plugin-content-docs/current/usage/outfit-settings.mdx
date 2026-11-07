@@ -106,6 +106,7 @@ Open **This Outfit's Settings > Outfit Parts > Outfit Render Queue**. RealWet ca
 - The top of the list is the inside (drawn first), and the bottom is the outside (drawn later).
 - A **same queue** mark means two parts touch or overlap but have no set front-to-back order. Please drag one of them to set the order.
 - You can undo or redo a drag with Ctrl+Z / Ctrl+Y. You can also press **Recalculate Clothing Order** to calculate it again.
+- Dragging switches the moved objects' slots to **Direct: Set Render Queue** and fixes them at those numbers. To go back to automatic, press **Reset Clothing Order to Automatic**. Saved manual numbers are kept.
 - The numbers in the list match the upload result. The numbers on your original materials do not change.
 
 **Order is calculated separately for each outfit.** RealWet does not order separate outfits against each other, so an outer layer or hair registered as its own outfit may be drawn before the clothes underneath. In that case, please use one of these:
@@ -117,10 +118,12 @@ Open **This Outfit's Settings > Outfit Parts > Outfit Render Queue**. RealWet ca
 | --- | --- |
 | **Automatic from Clothing Surfaces** | The default. Follows the actual inside and outside layering first. |
 | **Manual: Set Draw Priority** | Sets the order in the 0–39 range. Use low numbers for the inside and high numbers for the outside (for example, underwear 10, shirt 20). |
-| **Direct: Set Render Queue** | Enter an exact number. Please use this only when manual order doesn't solve the problem. |
-| **Preserve Material Queue** | An older setting. Keeps the order of the original material. |
+| **Direct: Set Render Queue** | Enter an exact number. Please use this only when manual order doesn't solve the problem. Changing the number can also change the order against other parts and outfits. [Other clothes look wrong after changing the render queue](../troubleshooting.mdx#layer-side-effects) |
+| **Preserve Material Queue** | An older setting. It doesn't calculate an order and uses the wet copy's base queue. Opaque and cutout clothes all get the same queue (2460), and Unity decides the front-to-back order of overlapping parts. |
 
 If **RealWet: check the clothing draw order** appears in the NDMF results window after a build, please drag the named parts in that outfit's order list. This message does not stop the build.
+
+Causes and fixes for each case are collected in [Layered clothes vanish or draw in the wrong order](../troubleshooting.mdx#layer-issues).
 
 :::tip[If the body is missing where the clothes show through]
 Before the draw order, please check whether the outfit creator hid the body with MA Shape Changer. Turn on **Restore MA-Hidden Body for This Outfit** on the outfit or part, and the body shows when the clothes turn see-through. It is off by default. When it's on, the body also stays while the clothes are dry, so it may poke out through the clothes. In Build & Test, please check both the dry state and the wet state.
