@@ -27,6 +27,14 @@ This page lists the main changes in each version of <ProductName />, newest firs
 - The menu files made for each avatar are in `Assets/CookiTools/Generated/RealWet`, outside the package folder, so overwriting the package doesn't delete them.
 - Updating doesn't need purchase activation. However, uploads from a PC that is not activated leave the effects out, so please complete [purchase activation](./license-activation.mdx) on the PC you upload from.
 
+## 1.0.1 — Install button reasons {/* #101 */}
+
+If you use 1.0.0, import the new package over it. Your saved settings, in-game menu and upload results do not change.
+
+- When **Install** or **Update** in the setup window can't be clicked, the reason is shown right above the button. Play mode, a prefab file from the Project window and a scene that isn't open each have their own message.
+- If you put a prefab file from the Project window into the **Avatar** field and the scene has exactly one copy of that avatar, the window switches to the copy in the scene and says so in one line. If the scene has none or several, it asks you to pick the avatar in the Hierarchy.
+- Avatars made by placing a model file such as an FBX straight into the scene and adding a VRC Avatar Descriptor can now be installed without Unpack. Outfits inside that model file can be made wet too. [Install button is gray](./troubleshooting.mdx#install-gray)
+
 ## 1.0.0 — First public release {/* #100 */}
 
 The first public release of <ProductName />.
