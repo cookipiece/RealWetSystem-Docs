@@ -23,6 +23,7 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 | The build shows an error that mentions `SweatAmount` | [VRCFury is too old](#vrcfury-old) |
 | Only outfits processed by an anti-ripping or polygon reduction tool stay dry | [Tools that change outfit meshes](#mesh-tools) |
 | Clothes look pink | [Pink materials](#pink) |
+| Clothes get wet in the preview, but not in the build, Play or upload | [Wet in the preview, dry in the build, Play or upload](#preview-ok-build-dry) |
 | Clothes get wet in the preview, but some lilToon outfits are dry in the upload | [PCSS4VRC replaced the materials](#pcss) |
 | Only Poiyomi outfits don't get wet | [Unsupported or unverified shaders](#shaders) |
 | The second avatar doesn't get wet | [Several avatars in one scene](#multiple-avatars) |
@@ -131,6 +132,28 @@ On **No See-Through** outfits, it is normal that the body doesn't show through. 
 | Only materials switched by a wardrobe animation stay dry. | Add that material to **This Outfit's Settings > Troubleshooting > Additional Replacement Materials**. |
 | An optimization tool merged or copied parts. | **RealWet: only some outfit parts remain dry** appears in the NDMF results window. See the table below. |
 | You moved one piece of the outfit out of the outfit root. | Move it back under the outfit root and it gets wet again. When you build, the Console shows the name of the moved piece. |
+
+## Wet in the preview, dry in the build, Play or upload {/* #preview-ok-build-dry */}
+
+If clothes get wet in the preview but not in Build & Test, Play or the upload, another tool or the environment usually changed the result during the build. Please look for the cause in this order.
+
+1. After the build or Play, look at the NDMF results window. If it is closed, open it with **Tools > NDM Framework > Show NDMF Console**. For each outfit or part that <ProductName /> left without wetness, a warning starting with `RealWet:` gives its name and the reason. The full error text is in the Console.
+2. Find the matching case in the table below and check the page on the right.
+
+| Where it stays dry | Common cause | Where to look |
+| --- | --- | --- |
+| Only the uploaded avatar has no effects at all. The preview and Play look fine | This PC isn't activated. There is no NDMF warning, only one line in the Console. | [Uploaded without purchase activation](#not-activated) |
+| Some outfits are dry only in Play | Some outfits aren't prepared yet, or the avatar was off when Play started. | [Some outfits don't get wet in Play](#play-not-ready) |
+| Some lilToon parts are dry only in the upload (with PCSS4VRC) | PCSS4VRC replaced the materials at the first build step. | [PCSS4VRC replaced the materials](#pcss) |
+| Only outfits processed by an anti-ripping or polygon reduction tool are dry | That tool changed the outfit mesh. | [Tools that change outfit meshes](#mesh-tools) |
+| Only parts that went through another tool are dry | Another tool created, copied, split or merged parts, or replaced or rewrote their materials, so <ProductName /> couldn't recognize them. | In [NDMF warnings](#ndmf-warnings): **RealWet: only some outfit parts remain dry**, **RealWet: a renderer was left without wetness because its outfit is unclear**, and the d4rk row |
+| The wet materials or menu values are different on the uploaded avatar | A tool that runs at the very end of the upload (for example, VRCFury Parameter Compressor) changed the result. | In [NDMF warnings](#ndmf-warnings): **RealWet: a later upload step changed RealWet's output** |
+| Only materials swapped by an animation, MA Material Setter or Material Swap are dry | That replacement material wasn't prepared. | **Additional Replacement Materials** in [Only some parts don't get wet](#partly-dry) |
+| Only outfits with a certain Poiyomi version are dry | That shader version isn't verified yet. | [Unsupported or unverified shaders](#shaders) |
+| The warning's reason says Unity was compiling or importing | When the build started, Unity was compiling scripts or importing assets, or another RealWet task was running. | Build again once it finishes. [NDMF warnings](#ndmf-warnings) |
+| Clothes don't get wet in a Quest (Android) build | <ProductName /> is PC only. | [Compatibility](./compatibility.mdx#requirements) |
+
+If nothing matches, please send the report copied with **Copy Diagnostic Report** together with the `RealWet:` lines from the NDMF results window. [Contact us](#support)
 
 ## Wet spots or protection don't fit the avatar {/* #placement-mismatch */}
 
