@@ -239,7 +239,7 @@ After a change, please check the front, side and back in the preview. Switch any
 | **RealWet: only some outfit parts remain dry** | Another tool created, copied, split or merged parts, or an animation switches to a material that doesn't get wet. Only that part (or that state) is dry. | Check the settings of the tool named in the warning. If an optimizer merged several outfits into one mesh, leave that mesh out of the merge or group them as one outfit. |
 | **RealWet: some parts may appear magenta (pink) to everyone** | Some parts can't be put back to their original materials. RealWet doesn't hide them; it leaves them as the build left them. | See [Pink materials](#pink). |
 | **RealWet: Poiyomi … has not been verified yet** | The structure of the installed Poiyomi differs from what <ProductName /> knows. Outfits using that shader are built dry. | You can use this build as it is. Wait for a <ProductName /> update, or use a verified Poiyomi version. |
-| **RealWet: Poiyomi with an added shader module ('…') is not supported yet** | A module turned on in Poiyomi's **Poi > Installed Modules** is included in the shader. Poiyomi outfits are built dry. | Turn that module off and build again. |
+| **RealWet: Poiyomi with an added shader module ('…') is not supported yet** | A module turned on in Poiyomi's **Poi > Installed Modules** is included in the shader. Poiyomi outfits are built dry. | Remove that module and build again. Removing works the same way as [undoing the internal module](#poi-internal-module). |
 | **RealWet: parts whose materials PCSS4VRC replaced are uploaded dry** | PCSS4VRC replaced lilToon materials with `_pcss` materials in the first build step. | See [PCSS4VRC replaced the materials](#pcss). |
 | **RealWet: check the clothing draw order** | Some layered parts have no set front-to-back order. The build did not stop. | In that outfit's **Planned order · inside → outside** list, drag one of the named parts. [Layer order](./usage/outfit-settings.mdx#layer-order), [Layered clothes vanish or draw in the wrong order](#layer-issues) |
 | **RealWet: some renderers were kept out of AAO automatic mesh merging** | For information. RealWet left one of them out so that AAO doesn't merge parts it can't process together. | Nothing to fix. The mesh count may grow a little. |
@@ -311,9 +311,27 @@ Tools that change the vertex order, the submeshes or the mesh structure of outfi
 | lilToon Refraction / RefractionBlur | Adds only the wet color and gloss. No extra see-through is added. |
 | A Poiyomi version that hasn't been verified yet | Only outfits that use that shader are built dry, and an NDMF warning appears. Please wait for a <ProductName /> update. |
 | Locked Poiyomi materials | They get wet if the original shader information can be found. If not, a notice appears. |
-| You turned on the <ProductName /> internal module in Poiyomi 11's **Poi > Installed Modules** | Don't turn it on. If you do, Poiyomi clothes don't get wet. |
+| You installed the <ProductName /> internal module from Poiyomi's **Third Party** list (**Poi > Installed Modules** in older Poiyomi 11) | Don't install it. If you do, Poiyomi clothes don't get wet. [How to undo it](#poi-internal-module) |
 
 The tested shader versions are listed in [Compatibility](./compatibility.mdx#shaders).
+
+## You installed the RealWet internal module in Poiyomi {/* #poi-internal-module */}
+
+The **Third Party** list in a Poiyomi material's inspector (**Poi > Installed Modules** in older Poiyomi 11) shows `RealWet internal, do not install`. <ProductName /> uses this module to make its wet shaders, so it appears in the list. This is normal. Don't install it. If you do, <ProductName /> code goes into Poiyomi's own shaders, and <ProductName /> builds the outfits on those shaders dry. The build doesn't stop.
+
+If you already installed it, undo it like this.
+
+- **Poiyomi with the Third Party list**
+  1. Select a Poiyomi material.
+  2. In the inspector, open the **⋮** menu on the right of the **Third Party** header.
+  3. Click every item that starts with **Remove RealWet**. Poiyomi rebuilds that shader.
+  4. For each other Poiyomi shader you use, select one material that uses it. Poiyomi rebuilds that shader too.
+- **Poiyomi with the Poi > Installed Modules menu**
+  1. Open **Poi > Installed Modules** from the top menu.
+  2. Untick `RealWet internal, do not install` (older name: `Cooki Clothing Wetness`).
+  3. Click **Apply & Rebuild Shaders**.
+
+Build again, and the Poiyomi outfits get wet again.
 
 ## Several avatars in one scene {/* #multiple-avatars */}
 

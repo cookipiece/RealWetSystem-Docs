@@ -48,7 +48,7 @@ You only need the shaders your outfits actually use. If you only use Poiyomi out
 
 - Outfits on Poiyomi 8.x and earlier don't get wet. The outfit screen shows their shader as unsupported.
 - <ProductName /> checks the shader's structure directly, not its version number. So versions not listed above still get wet if their structure is the same. If the installed version's structure differs from what <ProductName /> knows, the NDMF results window shows a warning such as **RealWet: Poiyomi Pro … has not been verified yet**, one for each version. Outfits that use that shader are built without wetness, and the build continues.
-- Don't turn on the <ProductName /> internal module listed in Poiyomi 11's **Poi > Installed Modules**. If you turn it on, Poiyomi clothes won't get wet.
+- Don't install `RealWet internal, do not install` from a Poiyomi material's **Third Party** list (**Poi > Installed Modules** in older Poiyomi 11). If you install it, Poiyomi clothes won't get wet. If you already did, follow [how to undo it](./troubleshooting.mdx#poi-internal-module).
 - When VRCFury copies materials during upload, it may lock unlocked Poiyomi materials in your project. This is VRCFury's behavior and doesn't affect wetness. To keep editing, unlock them in the Poiyomi Inspector.
 
 ### lilToon
