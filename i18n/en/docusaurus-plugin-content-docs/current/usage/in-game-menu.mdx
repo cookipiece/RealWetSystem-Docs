@@ -21,7 +21,7 @@ With the recommended set (new install), the menu looks like this. Buttons you di
 | --- | --- |
 | **Wet** (main page) | **Show Clothing Wetness**, **Wetness Amount** (with RealSweat: **Link RealSweat** and **Wetness Amount (Unlinked)**), **Whole Area**, **Fast Dry**, **Hold Current State (For Photos)**, **Only Visible to Me** (when used without RealSweatSystem), **See-Through Protection**, **Wet Tuning** |
 | **Wet > See-Through Protection** | **Private Area Protection**, **See-Through Protection Range (50% = Standard)**, **See-Through Protection Strength (100% = Full Block)** |
-| **Wet > Wet Tuning** | **Maximum Wet Range (%)**, **Wet Appearance (50% = Standard)**, **Wet Gloss (50% = Standard)**, **See-Through Strength (50% = Standard)**, **Wet See-Through Mode**, **Wet Edge: Sharp to Soft**, **Soften Wet Shadows**, **Spread Wetness Wider (Advanced)** |
+| **Wet > Wet Tuning** | **Maximum Wet Range (%)**, **Wet Appearance (Default 50%)**, **Wet Gloss (Default 50%)**, **See-Through Strength (Default 50%)**, **Wet See-Through Mode**, **Wet Edge: Sharp to Soft**, **Soften Wet Shadows**, **Spread Wetness Wider (Advanced)** |
 | **Wet > Outfit Visibility** | Toggles that hide the wet look for each outfit group (only if you made groups) |
 
 - The names and the order match RealSweatSystem's **Sweat** menu. The main page has **Show Clothing Wetness** and the wetness amount first, then the toggles, then the submenus.
@@ -71,13 +71,13 @@ The dials are listed in the order they appear in the menu. **Wet See-Through Mod
 | Dial | What it changes | Baseline |
 | --- | --- | --- |
 | **Maximum Wet Range (%)** | The maximum range wetness spreads to | The starting value is your Unity setting (40% in a new install). It is not a share of the whole clothing area. |
-| **Wet Appearance (50% = Standard)** | The strength of the wet color, saturation and see-through | 50% is the look as you set it. Gloss is adjusted separately. |
-| **Wet Gloss (50% = Standard)** | The wet reflection <ProductName /> adds | 0% adds no gloss, and 100% doubles it. The original material's reflection stays. |
-| **See-Through Strength (50% = Standard)** | Only the see-through added by wetness | 0% adds no see-through, and 100% makes it strong on purpose (less-wet areas and dark clothes show through sooner too). |
+| **Wet Appearance (Default 50%)** | The strength of the wet color, saturation and see-through | 50% is the look as you set it. Gloss is adjusted separately. |
+| **Wet Gloss (Default 50%)** | The wet reflection <ProductName /> adds | 0% adds no gloss, and 100% doubles it. The original material's reflection stays. |
+| **See-Through Strength (Default 50%)** | Only the see-through added by wetness | 0% adds no see-through, and 100% makes it strong on purpose (less-wet areas and dark clothes show through sooner too). |
 | **Wet Edge: Sharp to Soft** | The transition between dry and wet areas | 50% is the edge you set in Unity, 0% is much sharper, and 100% is wide and soft. It doesn't change the edges of protection regions. |
 | **Spread Wetness Wider (Advanced)** | How far light wetness spreads at the same wetness amount | 0% keeps your settings as they are, and 100% widens it the most. Areas that are already fully wet are not widened further. |
 
-**50% = Standard** does not mean the original material is shown at only 50%. 50% is the look you set in Unity.
+**Default 50%** does not mean the original material is shown at only 50%. 50% is the look you set in Unity.
 
 {/* SHOT R10: Wet Edge 0 / 100 % at wetness 50 % */}
 [![Wet Edge 0% vs 100% (Wetness Amount 50%). 0% gives sharp edges, 100% gives soft, blended edges.](/img/compare/R10-en.webp)](/img/compare/R10-en.webp)
