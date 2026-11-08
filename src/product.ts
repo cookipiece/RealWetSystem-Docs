@@ -13,8 +13,8 @@ const product: ProductData = {
   links: {
     quickStart: '/docs/quick-start',
     troubleshooting: '/docs/troubleshooting',
-    booth: '',
-    gumroad: '',
+    booth: 'https://cooki.booth.pm/items/9081073',
+    gumroad: 'https://cookipiece.gumroad.com/l/real-wet-system-vrchat',
     // Purchase activation summary; it links to the shared CookiTools guide.
     purchaseVerification: '/docs/license-activation',
   },
