@@ -26,6 +26,7 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 | Clothes get wet in the preview, but not in the build, Play or upload | [Wet in the preview, dry in the build, Play or upload](#preview-ok-build-dry) |
 | Wet in the preview, but one outfit is dry after upload | [Another tool changed the material during the build](#material-replaced) |
 | Clothes get wet in the preview, but some lilToon outfits are dry in the upload | [PCSS4VRC replaced the materials](#pcss) |
+| lilSSRT outfits stay dry, with **The installed lilSSRT has a different structure, so RealWet cannot make it wet** or a notice that lilSSRT is not in its own folder | [lilSSRT shaders left in an old folder](#lilssrt-old-folder) |
 | Only Poiyomi outfits don't get wet | [Unsupported or unverified shaders](#shaders) |
 | The second avatar doesn't get wet | [Several avatars in one scene](#multiple-avatars) |
 | **Save the scene and try again** appears when you install or preview | [A new, unsaved scene](#unsaved-scene) |
@@ -92,6 +93,18 @@ If any package has even one red compile error, Unity can't load newly imported t
 1. Open **Window > General > Console**.
 2. Find the first red error at the top.
 3. Use the file path in the error to find which package it is, then update or remove that package.
+
+The wording of the error hints at the cause. The error usually contains a name from that package; for example, `nadena.dev` is NDMF or Modular Avatar.
+
+| Error wording | Meaning | What to do |
+| --- | --- | --- |
+| `does not contain a definition for …` | A package is older than the tool expects. | Update that package. |
+| `The type or namespace name … could not be found` | A package that is needed is missing. | Install that package. |
+
+**Case:** The Unity menu bar had no **CookiTools** at all, so neither the setup window nor the purchase activation window could be opened. The Console had one red error: `'ObjectPathRemapper' does not contain a definition for 'GetAllPathsForObject'` (CS1061).
+
+- **Cause:** NDMF and Modular Avatar were old versions.
+- **Fix:** Close Unity. In VCC (or ALCOM), open **Manage Project**, update **Non-Destructive Modular Framework** and **Modular Avatar** to the latest versions, then open the project again.
 
 ### 3. The project is not a Unity 2022.3 project for VRChat {/* #scripts-unity-version */}
 
@@ -168,11 +181,19 @@ Find the cause like this.
    - `Final material 'Shirt_clone' cannot be traced to captured material 'Shirt'`: it's a copy made during the build, so <ProductName /> can't confirm that it belongs to the outfit.
 3. Compare that material name with the material on the part in the scene. If the name is different or has something added at the end (`_FSS`, `_clone`, ...), another tool changed the material during the build.
 
+From 1.0.2, the warning in the NDMF build results also says which check didn't match (the mesh changed, the number of slots changed, the material is not a copy made during the build, and so on).
+
 How to fix it:
 
 - Find the tool that made that material, and turn it off or exclude that outfit (part) from it. Build again, and the original material gets wet.
 - That tool's effect will no longer apply to that outfit. Choose which one you want.
 - If you can't tell which tool it is, send the report through [Contact us](#support).
+
+**Case: on an avatar that uses VRCFury, one whole outfit is dry after upload**
+
+- **Symptom:** The NDMF results window shows **RealWet: some clothing remains dry** (while uploading, **RealWet: some clothing is uploaded without wetness**), and the reason says `No compatible Wet slot remains after final material and animation checks`.
+- **Cause:** Read/Write was off on the outfit's FBX, so <ProductName /> couldn't record the outfit's slot layout. Because of that, it couldn't confirm that the material copy VRCFury made during the build belonged to that outfit. Avatar Compressor (LAC) was not the cause. LAC only renames the final material, so even if the name looks different in step 3, you don't need to turn LAC off.
+- **Fix:** From 1.0.2, the outfit gets wet even with Read/Write off on the FBX. On 1.0.1 or earlier, select the outfit's FBX, turn on Read/Write in the Model tab of the Inspector, and press Apply.
 
 ## Wet spots or protection don't fit the avatar {/* #placement-mismatch */}
 
@@ -304,6 +325,18 @@ On avatars that use PCSS4VRC, PCSS4VRC replaces lilToon materials with `_pcss` m
 - **Fix:** In **Advanced settings > Experimental** in the setup window, turn on **PCSS4VRC (lilToon)** support and press **Update**. PCSS outfits then get wet too. It is an experimental feature, so please read [Advanced features](./advanced.mdx#experimental) first.
 - Parts that use lilToon custom shaders, which PCSS4VRC doesn't replace, get wet in the upload too.
 - Even with the feature on, parts whose lilToon **Multi** or **MultiOutline** (and Tessellation or Lite) materials PCSS4VRC replaces stay dry, and an NDMF warning appears. In 1.0.0 the warning may tell you to turn the feature on; if it is already on, this family is the reason. Switch that material to a standard lilToon shader, or leave it out of PCSS4VRC's conversion.
+
+## lilSSRT shaders left in an old folder {/* #lilssrt-old-folder */}
+
+- **Symptom:** lilSSRT outfits stay dry even with the lilSSRT experimental feature on. In 1.0.1 and earlier, the **Experimental** card of the setup window or the notice above the preview says **The installed lilSSRT has a different structure, so RealWet cannot make it wet**. From 1.0.2, it says **lilSSRT was found in …, not in its own folder …**, with the folder it found and the steps to fix it. The build doesn't stop.
+- **Cause:** When a newer lilSSRT is imported over an older one, its shaders stay in the old folders (`Shaders/SSRTAO`, `Shaders/XeGTAO`) instead of their own folders.
+- **Fix:**
+  1. In the Project window, delete the folders `Assets/MeltzzZ/lilSSRT/Shaders/SSRTAO` and `Assets/MeltzzZ/lilSSRT/Shaders/XeGTAO` (whichever exist).
+  2. Import the lilSSRT 1.4.3 package again.
+  3. Right-click the `Assets/MeltzzZ/lilSSRT` folder and choose **Reimport**.
+  4. Build again.
+
+When PCSS4VRC (lilToon) is outside its own folder, 1.0.2 shows the folder it found and the steps to fix it in the same way.
 
 ## VRCFury is too old {/* #vrcfury-old */}
 

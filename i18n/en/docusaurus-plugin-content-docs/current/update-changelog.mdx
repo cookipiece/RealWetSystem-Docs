@@ -27,6 +27,41 @@ This page lists the main changes in each version of <ProductName />, newest firs
 - The menu files made for each avatar are in `Assets/CookiTools/Generated/RealWet`, outside the package folder, so overwriting the package doesn't delete them.
 - Updating doesn't need purchase activation. However, uploads from a PC that is not activated leave the effects out, so please complete [purchase activation](./license-activation.mdx) on the PC you upload from.
 
+## 1.0.2 — Outfits that stayed dry, and steps that looked frozen during setup {/* #102 */}
+
+If you use 1.0.1 or 1.0.0, import the new package over it. Your saved settings do not change. The in-game menu's parameters and sync bits stay the same too; only a few English, Japanese and Korean menu names change from your next upload.
+
+### Outfits that stayed dry
+
+- Fixed every uploaded outfit staying dry on avatars that use VRCFury 1.1258 or earlier. Please keep using VRCFury 1.1436.0 or later. [VRCFury is too old](./troubleshooting.mdx#vrcfury-old)
+- When an avatar linked with RealSweatSystem is uploaded and the RSS sweat input can't be used (RealSweatSystem is not activated on this PC, the sweat parameter's sync is off, and so on), the clothes no longer all stay dry. RealWet now builds as if **Link RealSweat** were off, using the in-game **Wetness Amount (Unlinked)** dial, and the NDMF build results say why and what to do.
+- Fixed a part slot's wet look and see-through settings resetting when you swapped its material for another one of the same family after installing (another color of the same outfit, for example). The settings now carry over.
+- Fixed overlapping parts in one outfit, such as a shirt over a bikini, not showing through at all with **Outerwear Only (Not Underwear) (Recommended)**. Now the outer part shows through, and the inner part under it doesn't. This applies only to outfits you register from now on.
+- Fixed some outfits that use the experimental lilSSRT or PCSS4VRC (lilToon) support staying dry in the build, and the draw order of semi-transparent lilSSRT outfits changing. Existing lilSSRT outfits are prepared again once after the update. [Advanced features](./advanced.mdx#experimental)
+- Fixed a whole outfit staying dry when its FBX has Read/Write turned off and VRCFury makes a copy of its materials during the build. It also gets wet with Avatar Compressor (LAC). RealWet doesn't change your FBX settings. [Another tool changed the material during the build](./troubleshooting.mdx#material-replaced)
+
+### Steps that looked frozen while installing or adding outfits
+
+- **Add Recommended** and **Add Selected Outfits** in the outfit chooser show each outfit's name on the progress bar. The body is read only once, however many outfits you add. The result is the same.
+- The progress bar keeps moving during the chest and groin protection step of **Install**.
+- If the scene has unsaved changes when you press **Install**, you are asked once: **Save and install** or **Install without saving**.
+- Shader preparation done while Unity is in the background now shows a **RealWet shader preparation (n/m)** progress bar. After each shader it checks whether you came back; if you did, it stops there and continues next time. It waits while less than 4 GB of memory is free.
+- The preview prepares wet shaders two at a time, as Play does. Shader compiling uses less memory, and the result is the same.
+- Removed needless work that the setup window and the preview did on every redraw.
+
+### Notices and wording
+
+- For avatars that use PCSS4VRC, the notice above the preview, the part slot, the **Experimental** card of the setup window and the NDMF build results now say that lilToon Multi, Tessellation and Lite parts stay dry in the upload even with the experimental feature on. [PCSS4VRC replaced the materials](./troubleshooting.mdx#pcss)
+- The first-install question about turning on lilSSRT or PCSS4VRC appears only when this avatar actually uses those shaders.
+- Poiyomi 8.x and earlier and PCSS4Poi parts now also say what makes them wet (Poiyomi 9 or later).
+- When a newer lilSSRT was imported over an older one and its shaders stayed in an old folder (for example `Shaders/SSRTAO`), RealWet names the folder it found and the steps to fix it. [lilSSRT shaders left in an old folder](./troubleshooting.mdx#lilssrt-old-folder)
+- The notice for the RealWet internal module installed in Poiyomi now also fits recent Poiyomi versions without the **Poi > Installed Modules** menu. Poiyomi with another author's shader module now also gets the steps to remove that module. [You installed the RealWet internal module in Poiyomi](./troubleshooting.mdx#poi-internal-module)
+- When a material copy that another tool made during the build leaves a part dry, the NDMF build results also say which check didn't match. [Another tool changed the material during the build](./troubleshooting.mdx#material-replaced)
+- The report from **Copy Diagnostic Report** lists each installed experimental shader (lilSSRT, PCSS4VRC (lilToon)): whether it is on, whether it can be used, where it was found and the checked version.
+- The yellow warning line that appeared in the Console on every upload is now a normal log line.
+- In-game menu names: in the English menu, the ends of **Wet Appearance**, **See-Through Strength** and **Wet Gloss** are shortened to `(Default 50%)` so they aren't cut off. The English word "Sweat" left in the Japanese and Korean windows and menus now uses each language's word (汗, 땀), and Japanese parentheses are full-width.
+- The missing parts of the Japanese recovery notice were filled in. The short reasons in the outfit chooser and the default wet start point names now appear in the window language you chose. Saved values and the Hierarchy marker names don't change.
+
 ## 1.0.1 — Install button reasons {/* #101 */}
 
 If you use 1.0.0, import the new package over it. Your saved settings, in-game menu and upload results do not change.

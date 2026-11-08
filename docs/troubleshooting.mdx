@@ -26,6 +26,7 @@ description: 증상에서 원인과 해결로 찾는 안내입니다. 안 젖는
 | 미리보기에서는 젖는데 빌드·재생·업로드에서 젖지 않음 | [미리보기에서는 젖는데 빌드·재생·업로드에서 안 젖음](#preview-ok-build-dry) |
 | 미리보기에서는 젖는데 업로드에서 특정 의상만 마름 | [다른 툴이 빌드 중에 머티리얼을 바꿈](#material-replaced) |
 | 미리보기에서는 젖는데 업로드에서 일부 lilToon 의상만 마름 | [PCSS4VRC가 머티리얼을 바꿈](#pcss) |
+| lilSSRT 의상이 젖지 않고 **설치된 lilSSRT의 구조가 달라 이 버전에서는 적실 수 없습니다**나 lilSSRT가 제 폴더에 없다는 안내가 나옴 | [lilSSRT 셰이더가 예전 폴더에 남음](#lilssrt-old-folder) |
 | Poiyomi 의상만 젖지 않음 | [지원하지 않거나 확인되지 않은 셰이더](#shaders) |
 | 두 번째 아바타가 젖지 않음 | [한 씬에 아바타가 여러 개](#multiple-avatars) |
 | 설치하거나 미리보기할 때 **씬을 저장한 뒤 다시 시도해 주십시오**가 나옴 | [저장하지 않은 새 씬](#unsaved-scene) |
@@ -92,6 +93,18 @@ VCC의 **Manage Project**에서 다음 패키지를 확인하고, 지원 범위 
 1. **Window > General > Console**을 엽니다.
 2. 맨 위의 첫 번째 빨간 오류를 찾습니다.
 3. 오류에 나온 파일 경로로 어느 패키지인지 확인하고, 그 패키지를 업데이트하거나 지웁니다.
+
+오류 문장으로 원인을 짐작할 수 있습니다. 오류에는 보통 그 패키지에서 온 이름이 들어 있습니다. 예를 들어 `nadena.dev`는 NDMF·Modular Avatar입니다.
+
+| 오류 문장 | 뜻 | 할 일 |
+| --- | --- | --- |
+| `does not contain a definition for …` | 어떤 패키지가 툴이 기대하는 것보다 오래되었습니다. | 그 패키지를 업데이트합니다. |
+| `The type or namespace name … could not be found` | 필요한 패키지가 없습니다. | 그 패키지를 설치합니다. |
+
+**사례:** Unity 메뉴줄에 **CookiTools**가 아예 없어 설치창도 구매 인증 창도 열 수 없었고, Console에는 `'ObjectPathRemapper' does not contain a definition for 'GetAllPathsForObject'`(CS1061) 빨간 오류가 하나 있었습니다.
+
+- **원인:** NDMF와 Modular Avatar가 오래된 판이었습니다.
+- **해결:** Unity를 닫고, VCC(또는 ALCOM)의 **Manage Project**에서 **Non-Destructive Modular Framework**와 **Modular Avatar**를 최신으로 업데이트한 뒤 프로젝트를 다시 엽니다.
 
 ### 3. VRChat용 Unity 2022.3 프로젝트가 아님 {/* #scripts-unity-version */}
 
@@ -168,11 +181,19 @@ VCC로 만든 VRChat용 Unity 2022.3 아바타 프로젝트에서 써 주십시�
    - `Final material 'Shirt_clone' cannot be traced to captured material 'Shirt'`: 빌드 중에 만든 복사본이라, 원래 의상의 머티리얼인지 확인할 수 없습니다.
 3. 그 줄의 머티리얼 이름을, 씬에서 그 파츠에 들어 있는 머티리얼 이름과 비교합니다. 이름이 다르거나 뒤에 글자가 붙어 있으면(`_FSS`, `_clone` 등), 빌드 중에 다른 툴이 머티리얼을 바꾼 것입니다.
 
+1.0.2부터는 NDMF 빌드 결과의 경고에도 어떤 확인이 맞지 않았는지(메쉬가 바뀜, 슬롯 수가 바뀜, 빌드 중에 만든 사본이 아님 등)가 함께 나옵니다.
+
 해결 방법:
 
 - 그 머티리얼을 만든 툴을 찾아 끄거나, 그 의상(파츠)을 그 툴의 대상에서 뺍니다. 다시 빌드하면 원래 머티리얼로 젖습니다.
 - 다만 그 툴의 효과는 그 의상에 들어가지 않습니다. 둘 중 무엇을 쓸지 정해 주십시오.
 - 어느 툴인지 모르겠으면, 보고서를 [문의하기](#support)로 보내 주십시오.
+
+**사례: VRCFury를 쓰는 아바타에서 업로드하면 의상 하나가 통째로 마름**
+
+- **증상:** NDMF 결과 창에 **RealWet: 일부 의상은 젖음 없이 빌드되었습니다**(업로드 중에는 **…업로드됩니다**)가 나오고, 이유에 `No compatible Wet slot remains after final material and animation checks`(최종 머티리얼·애니메이션 검사 뒤 젖을 수 있는 슬롯이 남지 않음)가 있습니다.
+- **원인:** 의상 FBX의 Read/Write가 꺼져 있어, <ProductName />이 그 의상의 슬롯 배치를 기록하지 못했습니다. 그래서 VRCFury가 빌드 중에 만든 머티리얼 사본이 그 의상의 것인지 확인하지 못했습니다. Avatar Compressor(LAC)는 원인이 아닙니다. LAC는 마지막 머티리얼의 이름만 바꾸므로, 위 3번에서 이름이 달라 보여도 LAC를 끌 필요는 없습니다.
+- **해결:** 1.0.2부터는 FBX의 Read/Write가 꺼져 있어도 젖습니다. 1.0.1 이하에서는 의상 FBX를 선택해 Inspector의 Model 탭에서 Read/Write를 켜고 Apply를 누르면 됩니다.
 
 ## 젖는 자리나 비침 보호 위치가 아바타와 맞지 않음 {/* #placement-mismatch */}
 
@@ -304,6 +325,18 @@ PCSS4VRC를 쓰는 아바타에서는 PCSS4VRC가 빌드 첫 단계에서 lilToo
 - **해결:** 설치창 **고급 설정 > 실험 기능**에서 **PCSS4VRC(lilToon)** 지원을 켜고 **업데이트하기**를 누릅니다. 그러면 PCSS 의상도 젖습니다. 실험 기능이므로 [고급 기능](./advanced.mdx#experimental)을 먼저 읽어 주십시오.
 - PCSS4VRC가 셰이더를 바꾸지 않는 lilToon 사용자 셰이더를 쓰는 파츠는 업로드에서도 젖습니다.
 - 실험 기능을 켜도 lilToon **Multi**·**MultiOutline**(그리고 Tessellation·Lite) 계열을 PCSS4VRC가 바꾼 파츠는 젖지 않고, NDMF 경고가 나옵니다. 1.0.0의 경고는 기능을 켜라고 안내할 수 있지만, 이미 켜져 있다면 이 계열 때문입니다. 그 머티리얼을 lilToon 표준 셰이더로 바꾸거나 PCSS4VRC의 변환 대상에서 빼 주십시오.
+
+## lilSSRT 셰이더가 예전 폴더에 남음 {/* #lilssrt-old-folder */}
+
+- **증상:** lilSSRT 실험 기능을 켜도 lilSSRT 의상이 젖지 않습니다. 1.0.1 이하에서는 설치창의 **실험 기능** 칸이나 미리보기 위에 **설치된 lilSSRT의 구조가 달라 이 버전에서는 적실 수 없습니다**가 나옵니다. 1.0.2부터는 **lilSSRT가 제 폴더(…)가 아닌 …에 있습니다**와 함께 찾은 폴더와 고치는 순서가 나옵니다. 빌드는 멈추지 않습니다.
+- **원인:** 예전 lilSSRT 위에 새 lilSSRT를 가져오면, 셰이더가 제 폴더가 아닌 예전 폴더(`Shaders/SSRTAO`, `Shaders/XeGTAO`)에 남습니다.
+- **해결:**
+  1. Project 창에서 `Assets/MeltzzZ/lilSSRT/Shaders/SSRTAO`와 `Assets/MeltzzZ/lilSSRT/Shaders/XeGTAO` 폴더를 지웁니다(있는 것만).
+  2. lilSSRT 1.4.3 패키지를 다시 가져옵니다.
+  3. `Assets/MeltzzZ/lilSSRT` 폴더를 오른쪽 클릭해 **Reimport**를 누릅니다.
+  4. 다시 빌드합니다.
+
+PCSS4VRC(lilToon)가 제 폴더가 아닌 곳에 있을 때도 1.0.2는 같은 방식으로 찾은 폴더와 고치는 순서를 안내합니다.
 
 ## VRCFury가 오래됨 {/* #vrcfury-old */}
 
