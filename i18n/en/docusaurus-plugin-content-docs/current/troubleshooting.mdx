@@ -27,11 +27,14 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 | Wet in the preview, but one outfit is dry after upload | [Another tool changed the material during the build](#material-replaced) |
 | Clothes get wet in the preview, but some lilToon outfits are dry in the upload | [PCSS4VRC replaced the materials](#pcss) |
 | lilSSRT outfits stay dry, with **The installed lilSSRT has a different structure, so RealWet cannot make it wet** or a notice that lilSSRT is not in its own folder | [lilSSRT shaders left in an old folder](#lilssrt-old-folder) |
+| Every lilToon outfit stays dry, with a notice that **lilToon's shader importer is turned off in this project** | [lilToon's shader importer is turned off](#liltoon-importer-off) |
+| Every lilToon outfit stays dry, and selecting one of <ProductName />'s `.lilcontainer` files shows `(Failed To Load Script Object)` in the Inspector | [lilToon outfits stay dry and (Failed To Load Script Object) appears](#liltoon-script-object) |
 | Only Poiyomi outfits don't get wet | [Unsupported or unverified shaders](#shaders) |
 | The second avatar doesn't get wet | [Several avatars in one scene](#multiple-avatars) |
 | **Save the scene and try again** appears when you install or preview | [A new, unsaved scene](#unsaved-scene) |
 | The first build takes a long time with no window and seems frozen | [The first build takes a long time](#long-first-build) |
 | The first upload takes a long time | [The first upload takes a long time](#first-upload) |
+| The first upload after an update takes a long time | [The first upload takes a long time](#first-upload) |
 | Unity shows a **Hold on** window | [The Hold on window](#hold-on) |
 | The menu or synced parameters go over the limit | [The menu or parameters go over the limit](#over-limit) |
 | The **Wet** menu is missing in game | [The menu is missing](#menu-missing) |
@@ -39,7 +42,7 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 | In the preview, only some materials keep their original look, with a texture limit message | [Texture limit](#texture-limit) |
 | 0 outfits registered after install | [0 outfits registered](#no-outfits) |
 | With RealSweat, the wetness amount snaps back when you change it | To adjust only the clothes, turn off **Link RealSweat**. [In-game menu](./usage/in-game-menu.mdx#items) |
-| Clothes still look wet after turning off RealSweat's **Sweat Display** | RealSweat's Sweat Display applies only to the sweat on the skin. Hide the clothes' wetness with **Show Clothing Wetness**. |
+| Clothes still look wet after turning off RealSweat's **Sweat Display** | RealSweat's Sweat Display applies only to the sweat on the skin. Hide the clothes' wetness with **Show Clothing Wetness**. To hide it only from other players, turn on [Wet Clothes Only Visible to Me](./usage/in-game-menu.mdx#linked-local-only). |
 | Underwear or decorations vanish at some angles | [Layered clothes vanish or draw in the wrong order](#layer-issues) |
 | Other clothes or decorations look wrong after you changed a render queue or the layer order | [Other clothes look wrong after changing the render queue](#layer-side-effects) |
 | Dark shading remains where clothes show through | Check that part's shading relief and the in-game **Soften Wet Shadows**. |
@@ -203,6 +206,8 @@ How to fix it:
 | --- | --- |
 | Odd spots get wet, or spots that should sweat stay dry. | Move the wet start point sphere near that spot in the Scene (W) and change its size (R). [Open the editor](./usage/wet-start-points.mdx#editor), [Common adjustments](./usage/wet-start-points.mdx#tips) |
 | A protection region is off from the chest or groin, or is too small or too big. | Move (W), rotate (E) and resize (R) the protection region in the Scene. [Edit protection regions](./usage/see-through-protection.mdx#editing) |
+| The wet start points around the chest or the chest protection regions are off from the chest (the wrong breast bones were found). | Drag this avatar's breast bones into the **Left breast anchor** and **Right breast anchor** fields of **1. Body meshes** in the setup window. On an avatar that is already installed, check **Move the chest start points and chest protection to the new bones** and press **Update**. [Body meshes](./tutorial.mdx#body) |
+| On an avatar shrunk or re-proportioned with bone scale, the chest start points or the chest protection regions are off (a layout placed with 1.0.2 or earlier). | 1.0.3 fixed where new ones are placed. Saved positions don't change when you update, so place them again with the reset steps in the last row below. |
 | You want to fix the left and right sides together. | Both editors have **Symmetry**. Turn it on and edit one side only. |
 | You want to go back to the original layout. | For start points, use [Reset and re-layout](./usage/wet-start-points.mdx#reset). For protection regions, use [Reset buttons](./usage/see-through-protection.mdx#reset). |
 
@@ -281,6 +286,7 @@ After a change, please check the front, side and back in the preview. Switch any
 | **RealWet: Poiyomi … has not been verified yet** | The structure of the installed Poiyomi differs from what <ProductName /> knows. Outfits using that shader are built dry. | You can use this build as it is. Wait for a <ProductName /> update, or use a verified Poiyomi version. |
 | **RealWet: Poiyomi with an added shader module ('…') is not supported yet** | A module turned on in Poiyomi's **Poi > Installed Modules** is included in the shader. Poiyomi outfits are built dry. | Remove that module and build again. Removing works the same way as [undoing the internal module](#poi-internal-module). |
 | **RealWet: parts whose materials PCSS4VRC replaced are uploaded dry** | PCSS4VRC replaced lilToon materials with `_pcss` materials in the first build step. | See [PCSS4VRC replaced the materials](#pcss). |
+| **RealWet: lilToon's shader importer is turned off in this project (LILTOON_DISABLE_ASSET_MODIFICATION)** | Because of a project setting, lilToon doesn't import <ProductName />'s lilToon shader files. lilToon outfits are built dry. | See [lilToon's shader importer is turned off](#liltoon-importer-off). |
 | **RealWet: check the clothing draw order** | Some layered parts have no set front-to-back order. The build did not stop. | In that outfit's **Planned order · inside → outside** list, drag one of the named parts. [Layer order](./usage/outfit-settings.mdx#layer-order), [Layered clothes vanish or draw in the wrong order](#layer-issues) |
 | **RealWet: some renderers were kept out of AAO automatic mesh merging** | For information. RealWet left one of them out so that AAO doesn't merge parts it can't process together. | Nothing to fix. The mesh count may grow a little. |
 | **RealWet: d4rk Avatar Optimizer rewrote wet parts that RealWet could not put back** | A d4rk setting that rewrites shaders changed wet parts. | Turn off that d4rk setting or add the parts to d4rk's Exclusions, then upload again. |
@@ -288,6 +294,7 @@ After a change, please check the front, side and back in the preview. Switch any
 | **RealWet: a wetness feature was turned off for some parts** | Just one feature, such as pose wetness, was turned off for this build. The regular wetness stays. | Follow the reason in the warning (for example, a blendshape was changed by another tool). |
 | **RealWet: a later upload step changed RealWet's output** | A tool that runs at the very end of the upload (for example, VRCFury Parameter Compressor) changed the wet materials or parameters. | Check in game, and if something looks wrong, copy the diagnostic report and contact us. |
 | **RealWet: a renderer was left without wetness because its outfit is unclear** | For information. The part was made by another tool, so RealWet couldn't tell which outfit it belongs to. | If the part should get wet, check the tool that made it. |
+| **RealWet: the menu is full, so this upload has no Wet Clothes Only Visible to Me** | The main page already has 8 items and there is no **See-Through Protection** page. Other players see this upload's clothing wetness as usual. | In **RealWet > In-Game Menu**, turn on **See-Through Protection Range** or **See-Through Protection Strength**, or turn off one item of the main page; then press **Apply / Update Runtime Menu** and upload again. [Wet Clothes Only Visible to Me](./usage/in-game-menu.mdx#linked-local-only) |
 | **RealWet: the last upload check could not run** / **RealWet: the final wetness coverage check could not finish** | The earlier checks passed, and the upload continues. Changes after that point could not be checked. | Check the outfits on the uploaded avatar. |
 | `Could not check the D3D11 texture limit` | The shader's texture count could not be checked. | See [Texture limit](#texture-limit). |
 
@@ -337,6 +344,27 @@ On avatars that use PCSS4VRC, PCSS4VRC replaces lilToon materials with `_pcss` m
   4. Build again.
 
 When PCSS4VRC (lilToon) is outside its own folder, 1.0.2 shows the folder it found and the steps to fix it in the same way.
+
+## lilToon's shader importer is turned off {/* #liltoon-importer-off */}
+
+- **Symptom:** Every lilToon outfit is built dry. Outfits that use other shaders get wet as usual, and the build doesn't stop. From 1.0.3, the NDMF build results show **RealWet: lilToon's shader importer is turned off in this project (LILTOON_DISABLE_ASSET_MODIFICATION)**, and the Inspector of the `RealWet` object, the outfit and the part shows a notice too. In 1.0.2 and earlier, the notice says the lilToon version **has not been verified yet**.
+- **Cause:** The project sets `LILTOON_DISABLE_ASSET_MODIFICATION` (in **Scripting Define Symbols** or **Additional Compiler Arguments** under **Project Settings > Player > Other Settings**, or in a `csc.rsp` file). With it, lilToon doesn't import `.lilcontainer` shader files, so <ProductName />'s lilToon shaders are not created.
+- **Fix:**
+  1. Press **Remove it from the settings and make lilToon clothing wet** on the notice in the Inspector. It shows where the define is set and what changes when it is removed, and asks you.
+  2. If you press **Remove**, only this define is removed from the places it found, and the scripts compile again. Other values and lines stay as they are, and `csc.rsp` is backed up to `Library/RealWet` before it is changed. **Keep as is** changes nothing.
+  3. After the scripts finish compiling, build again. If lilToon outfits still stay dry, right-click the <ProductName /> `LilToon` shader folder named in the notice in the Project window and choose **Reimport**.
+
+- You can also remove it yourself. Remove only `LILTOON_DISABLE_ASSET_MODIFICATION` from the places named in the notice and wait until the scripts finish compiling.
+- Removing it lets lilToon adjust its shader settings around builds again (that is what this define turns off). If you or another tool added this define on purpose, that tool may expect it.
+- <ProductName /> never asks or changes this setting by itself. It opens no window during a build, a preview or Play.
+
+## lilToon outfits stay dry and (Failed To Load Script Object) appears {/* #liltoon-script-object */}
+
+- **Symptom:** In 1.0.2 and earlier, every lilToon outfit is built dry and a notice says the lilToon version **has not been verified yet**. When you select one of <ProductName />'s lilToon shader files (`.lilcontainer`) in the Project window, the top of the Inspector shows `(Failed To Load Script Object)`. lilToon itself works as usual.
+- **Cause:** Another asset in the project owns the GUID of lilToon's importer script, so Unity gave lilToon's importer script a new GUID. Up to 1.0.2, <ProductName /> looked for the importer by that GUID only.
+- **Fix:** Please update <ProductName /> to 1.0.3 or later. From 1.0.3, lilToon outfits get wet in such a project too. You don't need to fix any file in the project, and <ProductName /> doesn't change your project's files either. If `(Failed To Load Script Object)` still shows in the Inspector, it doesn't affect the wetness.
+
+If lilToon outfits still stay dry after updating, please send the report copied with **Copy Diagnostic Report**. It says where lilToon's importer was found. [Contact us](#support)
 
 ## VRCFury is too old {/* #vrcfury-old */}
 
@@ -425,6 +453,7 @@ The first upload takes long because, on top of the same shader preparation as th
 - Each wet material includes wet shaders, so the upload file gets bigger and compression takes time too. See [Performance](./performance.mdx#upload-size).
 - The time Poiyomi takes to lock materials during upload is added too.
 - From the second upload with the same settings, it gets shorter.
+- The first upload after you update <ProductName /> can take a long time too. The first upload after updating to 1.0.3 compiles the wet shaders again once, so on an avatar with many outfits it can take about 20 minutes. Even if the progress display doesn't move, please don't close Unity while it is using the CPU.
 
 ## The Hold on window {/* #hold-on */}
 
@@ -441,7 +470,7 @@ If **Hold on** keeps appearing for a long time on the same action, please note t
 
 ## The menu or parameters go over the limit {/* #over-limit */}
 
-VRChat allows up to **256 bits** of synced parameters per avatar. The <ProductName /> recommended menu is 87 bits. If the total goes over the limit together with RealSweatSystem or other tools, the VRChat SDK blocks the upload.
+VRChat allows up to **256 bits** of synced parameters per avatar. The <ProductName /> recommended menu is 87 bits (88 bits on an avatar that also uses RealSweatSystem). If the total goes over the limit together with RealSweatSystem or other tools, the VRChat SDK blocks the upload.
 
 1. Check how much <ProductName /> uses in **Runtime Parameter Cost** in **RealWet > In-Game Menu**.
 2. Uncheck dials you don't use. Each dial is 8 bits, and each toggle is 1 bit. For example, removing **Spread Wetness Wider**, **Wet Edge** and **Wet Appearance** saves 24 bits.
@@ -449,7 +478,7 @@ VRChat allows up to **256 bits** of synced parameters per avatar. The <ProductNa
 
 - Features whose buttons you removed keep working with the values set in Unity.
 - One menu page has 8 slots. When there aren't enough slots, <ProductName /> creates a **Next** page and doesn't add to the main menu.
-- You can also use a parameter compression tool such as VRCFury Parameter Compressor. If the compression tool changes the wet parameters, the NDMF results window tells you.
+- If you run short, we recommend using the Parameter Compressor of VRCFury 1.1436.0 or later together with it. If the compression tool changes the wet parameters, the NDMF results window tells you.
 
 ## The menu is missing {/* #menu-missing */}
 
@@ -458,7 +487,7 @@ VRChat allows up to **256 bits** of synced parameters per avatar. The <ProductNa
 3. In **RealWet > In-Game Menu**, press **Apply / Update Runtime Menu**.
 4. Build again and check that avatar. If the build failed, you may be looking at the previous avatar.
 
-- If the menu files are gone, <ProductName /> recreates and reconnects them when you open a saved scene. The Console shows **RealWet's in-game menu file was missing, so RealWet made it again and linked it. Save the scene to keep it.**, so please save the scene.
+- If the menu files are gone, <ProductName /> recreates and reconnects them when you open a saved scene. A notice at the top of the `RealWet` object's Inspector says **RealWet's in-game menu file was missing, so RealWet made it again and linked it. Save the scene to keep it.**, and the Console shows the line `RealWet's in-game menu file was missing (…), so RealWet made it again and linked it. Save the scene to keep it.` Please save the scene.
 - If you moved the menu yourself or replaced it with another menu, <ProductName /> leaves that menu alone. To recreate it, delete the **MA Menu Installer** on the `RealWet` object, then please press **Repair Runtime Menu** in the **In-Game Menu** tab.
 - If the menu shows in another language, choose the language you want in Unity, update the menu, and please build again.
 - If the menu buttons are there but the icons are missing, please import the package's `Icons` folder again, then update the menu. The features still work.
@@ -480,6 +509,7 @@ On PC, Unity and VRChat can draw only up to 64 textures used by one shader pass.
 - Those slots are previewed with their original look instead of turning pink, and a message appears.
 - VRChat PC uploads lock the shader first, so these slots are usually uploaded wet.
 - If the final shader in the upload also goes over the limit, only that material goes back to its original dry material. The upload doesn't stop.
+- In 1.0.2 and earlier, on Poiyomi 10.0.20 and later and Poiyomi 11 parts that use both UV3 and UV4, a slot over the limit could not go back to its original material and could become invisible or pink. 1.0.3 fixed this.
 - To keep the wetness, please reduce the texture features that material doesn't use (MatCap, emission, decals and so on), then build again.
 
 ## 0 outfits registered {/* #no-outfits */}

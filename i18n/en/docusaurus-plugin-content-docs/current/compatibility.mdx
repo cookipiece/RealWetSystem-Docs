@@ -20,7 +20,7 @@ description: Supported Unity, SDK, NDMF and Modular Avatar versions, shaders (Po
 | VRChat Avatars SDK | 3.10.0 or later, below 4.0 |
 | NDMF | 1.13.1 or later, below 2.0 |
 | Modular Avatar | 1.14.0 or later, below 2.0 |
-| VRCFury (if used) | 1.1436.0 or later. With 1.1258 or earlier, the build can show a `SweatAmount` error. |
+| VRCFury (if used) | 1.1436.0 or later |
 | Editor | The Unity Editor on Windows (purchase activation works only on Windows) |
 | Avatar | Humanoid avatars (they don't need to be human-shaped) |
 | Platform | PC only (Direct3D 11). Quest and mobile are not supported. |
@@ -31,6 +31,7 @@ description: Supported Unity, SDK, NDMF and Modular Avatar versions, shaders (Po
 - The automatically placed wet start points and see-through protection regions may not fit some body shapes. [Wet spots or protection don't fit the avatar](./troubleshooting.mdx#placement-mismatch)
 - If there is no **CookiTools** menu or you see Missing Script after importing the package, see [Scripts look broken, or the CookiTools menu is missing](./troubleshooting.mdx#scripts-missing).
 - If you build the same avatar for Quest (Android), the in-game menu, synced parameters and FX layers are added, but the clothes don't get wet. The build doesn't stop. To save menu slots and parameters, please remove <ProductName /> from a separate copy of the avatar made for Quest.
+- If you run short of synced parameter space (256 bits), we recommend using the Parameter Compressor of VRCFury 1.1436.0 or later together with it. What <ProductName /> uses is listed in [Sync cost](./usage/in-game-menu.mdx#sync-cost).
 - If a version doesn't match, the setup window tells you which package is missing or needs an update. <ProductName /> does not update other packages automatically.
 
 ## Shaders {/* #shaders */}
@@ -42,7 +43,7 @@ You only need the shaders your outfits actually use. If you only use Poiyomi out
 | Item | Details |
 | --- | --- |
 | Supported variants | Standard, **Outline Early**, **Two Pass** and **Fade** modes |
-| Tested versions | Poiyomi 9.3, 10.0.9, 10.0.24, Pro 11.0.0, 11.0.18, 11.0.22, 11.0.24, 11.0.29, 11.0.32, 11.0.34, 11.0.35, 11.0.36, 11.0.38 |
+| Tested versions | Poiyomi 9.3, 10.0.9, 10.0.24, Pro 11.0.0, 11.0.18, 11.0.22, 11.0.24, 11.0.29, 11.0.32, 11.0.34, 11.0.35, 11.0.36, 11.0.38, 11.0.44 |
 | Locked materials | Get wet as long as RealWet can read the original shader information. The same goes for materials Thry locks during upload. |
 | Not supported | Poiyomi 8.x and earlier, Fur, Grab Pass, custom extensions that only have a similar name, shaders copied out of the package, Poiyomi with other shader modules added |
 
@@ -61,6 +62,8 @@ You only need the shaders your outfits actually use. If you only use Poiyomi out
 | Not supported | Fur, Gem, shaders modified by the user |
 
 Even on lilToon materials with Reflection and Metallic turned on, the wet gloss is not erased.
+
+If the project sets `LILTOON_DISABLE_ASSET_MODIFICATION`, lilToon doesn't import <ProductName />'s lilToon shader files (`.lilcontainer`), so every lilToon outfit is built dry. <ProductName /> tells you the cause and how to fix it. [lilToon's shader importer is turned off](./troubleshooting.mdx#liltoon-importer-off)
 
 ### Experimental: PCSS4VRC (lilToon) and lilSSRT {/* #experimental */}
 
@@ -93,7 +96,7 @@ The supported optimization tools are **AAO**, **d4rk Avatar Optimizer** and **Te
 | **TexTransTool (TTT)** | Poiyomi materials whose textures TTT changed also get wet in the upload. When **Atlas Texture** merges materials into one, the slots of the base material get wet, and only the slots merged into another material stay dry (the NDMF results window tells you). To make those slots wet too, leave that material out of the merge group. |
 | **d4rk Avatar Optimizer** | With the default settings (Basic), leave it as it is. If settings that rewrite shaders are on (**Write Properties as Static Values**, **Shader Toggles**, **Merge Different Property Materials**, **Merge Same Dimension Textures**), RealWet automatically excludes only the wet parts from d4rk when you upload. It doesn't change your saved settings. The setup window recommends turning these settings off. |
 | **Avatar Compressor (LAC)** | Tested with 0.8.0 and 0.9.0 built together with <ProductName /> 1.0.2; the wetness is kept. On 1.0.1 or earlier, if one whole outfit is dry when you also use VRCFury, see [Another tool changed the material during the build](./troubleshooting.mdx#material-replaced). |
-| **VRCFury** | Please use 1.1436.0 or later. With 1.1258 or earlier, the build can show a `SweatAmount` error. Toggles and material swaps work as usual. Materials set by toggles that start on and by **Apply During Upload** also get wet. If a swapped material doesn't get wet, a message appears in the NDMF results window. |
+| **VRCFury** | Please use 1.1436.0 or later. If you run short of synced parameter space (256 bits), we recommend using its Parameter Compressor together with it. Toggles and material swaps work as usual. Materials set by toggles that start on and by **Apply During Upload** also get wet. If a swapped material doesn't get wet, a message appears in the NDMF results window. |
 | **Tools that move bones** | Even if another tool moves bones during the build (for example NDExtensions Rebake Humanoid), the upload gets wet in the same places as the preview. |
 
 Setups that use animations to swap a Renderer's **mesh itself** are not supported. Remove the mesh-swap animation, or move the swapped mesh to a separate Renderer that is excluded from <ProductName />.
@@ -114,7 +117,7 @@ If the same avatar has RealSweatSystem, <ProductName /> detects it. A new instal
 
 - To change the initial value in Unity, choose **Link** or **Unlink** in the **Input Mode** row of **RealWet**.
 - Changing the link in <ProductName /> does not change the sweat level on the skin.
-- RealSweatSystem's **Sweat Display** and **Only Visible to Me** apply only to the sweat on the skin. Clothing wetness is hidden only with <ProductName />'s **Show Clothing Wetness** and Outfit Visibility.
+- RealSweatSystem's **Sweat Display** and **Only Visible to Me** apply only to the sweat on the skin. Clothing wetness is hidden with <ProductName />'s **Show Clothing Wetness** and Outfit Visibility. To hide it only from other players, turn on <ProductName />'s [Wet Clothes Only Visible to Me](./usage/in-game-menu.mdx#linked-local-only).
 - The **Wet** menu is installed on its own in the avatar's main menu, not inside the RSS menu.
 - The Late Queue sweat shaders of RealSweatSystem 2.0.0 are also treated as skin sweat, so wet clothes are drawn after the body and the sweat.
 - If the selected avatar has an old RealSweatSystem (1.x), the setup window shows a one-line update notice.

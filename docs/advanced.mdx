@@ -111,7 +111,7 @@ PCSS4VRC(lilToon)와 lilSSRT를 쓰는 의상도 실험 기능으로 적실 수 
 [![RealSweat 연동 시의 인게임 메뉴](/img/guide/M04-ko.png)](/img/guide/M04-ko.png)
 
 - Unity에서 처음 값을 바꾸려면 **RealWet**의 **입력 모드** 행에서 **연동하기** 또는 **연동 해제**를 고릅니다.
-- RealSweatSystem의 **땀 표시**와 **나에게만 보이기**는 피부 땀에만 적용됩니다. 의상 젖음은 **의상 젖음 표시**와 의상별 표시로만 숨깁니다.
+- RealSweatSystem의 **땀 표시**와 **나에게만 보이기**는 피부 땀에만 적용됩니다. 의상 젖음은 **의상 젖음 표시**와 의상별 표시로 숨깁니다. 다른 사람에게만 숨기려면 [젖은 옷 나에게만 보이기](./usage/in-game-menu.mdx#linked-local-only)를 켭니다.
 - **젖음** 메뉴는 RSS 메뉴 안이 아니라 아바타 메인 메뉴에 따로 들어갑니다.
 - RealSweatSystem 2.0.0의 땀 셰이더(Late Queue 포함)도 피부 땀으로 인식해, 젖은 옷을 바디와 땀 뒤에 그립니다.
 - 선택한 아바타의 RealSweatSystem이 1.x이면 설치창에 업데이트 안내가 한 줄 나옵니다.
@@ -143,7 +143,7 @@ AAO(Avatar Optimizer), TexTransTool, d4rk Avatar Optimizer, VRCFury와 함께 �
 ## 파라미터와 동기화 비트 {/* #parameters */}
 
 - 동기화 파라미터 이름은 `Cooki/ClothWet…`로 시작합니다. 고른 메뉴 항목만큼만 씁니다.
-- 다이얼은 하나에 8비트, 토글은 하나에 1비트입니다. 추천 메뉴는 87비트, 모든 항목은 94비트입니다(VRChat 한도 256비트).
+- 다이얼은 하나에 8비트, 토글은 하나에 1비트입니다. 추천 메뉴는 87비트, 모든 항목은 94비트입니다(VRChat 한도 256비트). RealSweatSystem과 함께 쓰는 아바타는 1비트씩 더 씁니다(88비트, 95비트).
 - 메뉴에 넣지 않은 기능은 Unity에서 정한 값으로 동작하고, 동기화 비트를 쓰지 않습니다.
 
 파라미터 목록은 [기술 사양](./technical-specifications.mdx#parameters)에 있습니다.

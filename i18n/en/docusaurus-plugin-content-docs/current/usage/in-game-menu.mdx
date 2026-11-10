@@ -20,7 +20,7 @@ With the recommended set (new install), the menu looks like this. Buttons you di
 | Location | What goes there |
 | --- | --- |
 | **Wet** (main page) | **Show Clothing Wetness**, **Wetness Amount** (with RealSweat: **Link RealSweat** and **Wetness Amount (Unlinked)**), **Whole Area**, **Fast Dry**, **Hold Current State (For Photos)**, **Only Visible to Me** (when used without RealSweatSystem), **See-Through Protection**, **Wet Tuning** |
-| **Wet > See-Through Protection** | **Private Area Protection**, **See-Through Protection Range (50% = Standard)**, **See-Through Protection Strength (100% = Full Block)** |
+| **Wet > See-Through Protection** | **Private Area Protection**, **See-Through Protection Range (50% = Standard)**, **See-Through Protection Strength (100% = Full Block)**, **Wet Clothes Only Visible to Me** (with RealSweatSystem) |
 | **Wet > Wet Tuning** | **Maximum Wet Range (%)**, **Wet Appearance (Default 50%)**, **Wet Gloss (Default 50%)**, **See-Through Strength (Default 50%)**, **Wet See-Through Mode**, **Wet Edge: Sharp to Soft**, **Soften Wet Shadows**, **Spread Wetness Wider (Advanced)** |
 | **Wet > Outfit Visibility** | Toggles that hide the wet look for each outfit group (only if you made groups) |
 
@@ -28,6 +28,7 @@ With the recommended set (new install), the menu looks like this. Buttons you di
 - One page has 8 slots. If **Wet Tuning** has 9 or more items, **Next** appears after 7 of them and the rest continue there. **Spread Wetness Wider (Advanced)** is always the last slot.
 - If the main page is full, **Whole Area** goes into the first slot of **Wet Tuning**.
 - If you don't add the see-through protection dials, the **Private Area Protection** toggle goes directly on the main page instead of the **See-Through Protection** page.
+- **Wet Clothes Only Visible to Me** goes at the bottom of the **See-Through Protection** page. Without that page, it goes on the main page after **Hold Current State (For Photos)**. It doesn't move any other item.
 
 {/* SHOT M02: Wet Tuning page */}
 [![The Wet Tuning page](/img/guide/M02-en.png)](/img/guide/M02-en.png)
@@ -62,7 +63,7 @@ Please turn off **Link RealSweat** and raise **Wetness Amount (Unlinked)**. Chan
 | **Hold Current State (For Photos)** | Freezes the current wet look as it is. | Off | Not saved |
 | **Only Visible to Me** | Appears when you use <ProductName /> alone. When it is on, only you can see the wet look on the clothes. | Off | Saved |
 
-RealSweatSystem's **Sweat Display** and **Only Visible to Me** apply only to the sweat on the skin. They don't hide clothing wetness, and others can see it. To hide clothing wetness, please turn off <ProductName />'s **Show Clothing Wetness** or the outfit visibility toggles.
+RealSweatSystem's **Sweat Display** and **Only Visible to Me** apply only to the sweat on the skin; they don't hide clothing wetness. To hide clothing wetness from everyone, please turn off <ProductName />'s **Show Clothing Wetness** or the outfit visibility toggles. To hide it only from other players, please turn on [Wet Clothes Only Visible to Me](#linked-local-only).
 
 ### Dials in Wet Tuning {/* #tuning */}
 
@@ -72,7 +73,7 @@ The dials are listed in the order they appear in the menu. **Wet See-Through Mod
 | --- | --- | --- |
 | **Maximum Wet Range (%)** | The maximum range wetness spreads to | The starting value is your Unity setting (40% in a new install). It is not a share of the whole clothing area. |
 | **Wet Appearance (Default 50%)** | The strength of the wet color, saturation and see-through | 50% is the look as you set it. Gloss is adjusted separately. |
-| **Wet Gloss (Default 50%)** | The wet reflection <ProductName /> adds | 0% adds no gloss, and 100% doubles it. The original material's reflection stays. |
+| **Wet Gloss (Default 50%)** | The wet reflection <ProductName /> adds | 0% adds no gloss, and 100% doubles it. The original material's reflection stays. On bright clothes, the broad watery gloss grows a lot above 50%, and at 100% the wet gloss is clearly visible even on white clothes ([Wet look](./wet-settings.mdx#look)). |
 | **See-Through Strength (Default 50%)** | Only the see-through added by wetness | 0% adds no see-through, and 100% makes it strong on purpose (less-wet areas and dark clothes show through sooner too). |
 | **Wet Edge: Sharp to Soft** | The transition between dry and wet areas | 50% is the edge you set in Unity, 0% is much sharper, and 100% is wide and soft. It doesn't change the edges of protection regions. |
 | **Spread Wetness Wider (Advanced)** | How far light wetness spreads at the same wetness amount | 0% keeps your settings as they are, and 100% widens it the most. Areas that are already fully wet are not widened further. |
@@ -110,8 +111,27 @@ Its old name was **SSAO Relief**. It is on by default. It uses the see-through s
 | **Private Area Protection** | Turns the see-through blocking of all enabled protection regions on and off at once. When it is off, those areas show through too. | The value of **Private Area Protection On from the Start in Game** (on in a new install) | Not saved |
 | **See-Through Protection Range (50% = Standard)** | How wide an area protection blocks. 0% blocks almost nothing, 50% is exactly the size you see in Unity, and 100% blocks a wide area. | 50% | Saved |
 | **See-Through Protection Strength (100% = Full Block)** | How strongly protection blocks. 100% blocks fully, 50% lets about one third of the unblocked see-through show, and 0% doesn't block. | 100% | Saved |
+| **Wet Clothes Only Visible to Me** | Appears when you also use RealSweatSystem. While it is on, other players see the clothes dry. See [Wet Clothes Only Visible to Me](#linked-local-only) below. | Off | Saved |
 
 For details, see [See-through protection](./see-through-protection.mdx#dials).
+
+### Wet Clothes Only Visible to Me {/* #linked-local-only */}
+
+A toggle on the **Wet > See-Through Protection** page of avatars that also use RealSweatSystem. On an avatar without the **See-Through Protection** page, it is on the main page after **Hold Current State (For Photos)**. An avatar that uses <ProductName /> alone has **Only Visible to Me** on the main page instead, which does the same job.
+
+| Toggle | You (also in mirrors and photos) | Other players |
+| --- | --- | --- |
+| Off (default) | See the wet clothes. | See the wet clothes. |
+| On | See the wet clothes. | See dry clothes (no wet color, gloss or see-through). |
+
+- The sweat on the skin follows RealSweatSystem's **Sweat Display** and **Only Visible to Me**, whatever this toggle is set to.
+- Getting wet and drying keep going while it is on. When you turn it off, other players see the current wet look right away.
+- Turning off **Show Clothing Wetness** or an outfit visibility toggle hides the wetness from you too.
+- The wet look from RealRain's rain is hidden from other players too.
+- Your choice is saved, and it uses 1 synced bit. It is part of the recommended set of a new install.
+- An avatar installed with 1.0.2 or earlier gets it when you press **Update** in the setup window, and it starts off. Until then the menu, the parameters and the sync bits don't change. You can also check it yourself in **RealWet > In-Game Menu** and press **Apply / Update Runtime Menu**.
+- If you don't want it, open **Linking & in-game menu** in the setup window, uncheck **Wet Clothes Only Visible to Me** in the **Wet > See-Through Protection** list, and then press **Update**.
+- If the main page already has 8 items and there is no **See-Through Protection** page, that upload leaves it out and the NDMF build results say so. It is added once you turn on **See-Through Protection Range (50% = Standard)** or **See-Through Protection Strength (100% = Full Block)**, or turn off one item of the main page.
 
 ## Whole Area {/* #whole-area */}
 
@@ -179,8 +199,9 @@ Please check the total for your current selection in the **Runtime Parameter Cos
 | Outfit visibility groups | 1 bit per group |
 | Private Area Protection | 1 bit (one toggle, even with several protection regions) |
 | Only Visible to Me | 1 bit if added when used without RealSweatSystem |
+| Wet Clothes Only Visible to Me | 1 bit if added when used with RealSweatSystem |
 
-The recommended menu of a new install is **87 bits**, both when linked to RSS and standalone. With every item, including 6 outfit visibility groups, it is 94 bits. VRChat's limit is 256 bits for the whole avatar. If you go over the limit together with other tools, please see [The menu or parameters go over the limit](../troubleshooting.mdx#over-limit).
+The recommended menu of a new install is **87 bits** with <ProductName /> alone and **88 bits** together with RealSweatSystem. With every item, including 6 outfit visibility groups, it is 94 bits and 95 bits. VRChat's limit is 256 bits for the whole avatar. If you run short, we recommend using the Parameter Compressor of VRCFury 1.1436.0 or later together with it. If you go over the limit together with other tools, please see [The menu or parameters go over the limit](../troubleshooting.mdx#over-limit).
 
 ## When Unity and the game look different
 

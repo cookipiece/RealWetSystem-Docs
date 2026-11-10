@@ -55,6 +55,7 @@ The chest protection regions find their spot in the following order. Each method
 
 {/* SHOT S05: flat-chest avatar, torso fallback placement */}
 
+- If the wrong breast bones were found, you can put the right ones into the **Left breast anchor** and **Right breast anchor** fields of **1. Body meshes** in the setup window. Even with a tip bone, RealWet looks for the front of the chest along that breast's whole bone chain. [Body meshes](../tutorial.mdx#body)
 - For a body mesh with no chest skin because the body under the clothes was deleted, the region goes midway between the torso layers (innermost and outermost) of the outfits being worn.
 - The less certain the method, the slightly larger the protection region.
 - The groin protection regions are fitted to the groin crease and crotch skin found from the body mesh's bone weights. If those can't be found, the regions are placed relative to the Hips bone.
@@ -189,6 +190,7 @@ Changes **how strongly** protection blocks.
 - Updating **keeps the position, size and shape of saved protection regions**. Values you changed yourself stay too.
 - To use the new version's recommended shape (small capsules facing forward), please select the recommended regions one at a time and press **Reset size**. To also move them to the new recommended spots, press **Position + size**. With symmetry on, the pair changes together.
 - Updating does not create new protection regions. If the in-game switch exists but there are no regions, please see [Recreate missing recommended regions](#add-missing) above.
+- To move the recommended chest protection regions to the new bones after you change the breast bones in the setup window, check **Move the chest start points and chest protection to the new bones** and press **Update**. Only the positions change; sizes and regions you made yourself stay as they are. If you leave it unchecked, the saved positions don't move.
 
 ## How to check {/* #checking */}
 

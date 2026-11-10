@@ -20,7 +20,7 @@ description: 지원하는 Unity·SDK·NDMF·Modular Avatar 버전, 셰이더(Poi
 | VRChat Avatars SDK | 3.10.0 이상, 4.0 미만 |
 | NDMF | 1.13.1 이상, 2.0 미만 |
 | Modular Avatar | 1.14.0 이상, 2.0 미만 |
-| VRCFury (쓰는 경우) | 1.1436.0 이상. 1.1258 이하에서는 빌드할 때 `SweatAmount` 오류가 날 수 있습니다. |
+| VRCFury (쓰는 경우) | 1.1436.0 이상 |
 | 에디터 | Windows의 Unity 에디터(구매 인증이 Windows에서만 동작) |
 | 아바타 | Humanoid 아바타(사람 모양이 아니어도 됩니다) |
 | 플랫폼 | PC 전용(Direct3D 11). Quest·모바일은 지원하지 않습니다. |
@@ -31,6 +31,7 @@ description: 지원하는 Unity·SDK·NDMF·Modular Avatar 버전, 셰이더(Poi
 - 자동으로 놓는 젖음 시작점과 비침 보호 영역은 몸 모양에 따라 맞지 않을 수 있습니다. [젖는 자리나 비침 보호 위치가 아바타와 맞지 않음](./troubleshooting.mdx#placement-mismatch)
 - 패키지를 가져온 뒤 **CookiTools** 메뉴가 없거나 Missing Script가 보이면 [스크립트가 깨져 보이거나 CookiTools 메뉴가 없음](./troubleshooting.mdx#scripts-missing)을 확인해 주십시오.
 - 같은 아바타를 Quest(Android)로 빌드하면 인게임 메뉴, 동기화 파라미터, FX 레이어는 들어가지만 옷은 젖지 않습니다. 빌드는 멈추지 않습니다. 메뉴와 파라미터를 아끼려면 Quest용으로 따로 만든 아바타 사본에서 <ProductName />을 제거해 주십시오.
+- 동기화 파라미터 용량(256비트)이 모자라면 VRCFury 1.1436.0 이상의 Parameter Compressor를 함께 쓰는 것을 권합니다. <ProductName />이 쓰는 양은 [동기화 용량](./usage/in-game-menu.mdx#sync-cost)에 있습니다.
 - 버전이 맞지 않으면 설치창이 어떤 패키지가 없거나 업데이트가 필요한지 알려 줍니다. <ProductName />이 다른 패키지를 자동으로 업데이트하지는 않습니다.
 
 ## 셰이더 {/* #shaders */}
@@ -42,7 +43,7 @@ description: 지원하는 Unity·SDK·NDMF·Modular Avatar 버전, 셰이더(Poi
 | 항목 | 내용 |
 | --- | --- |
 | 지원 변형 | 기본형, **Outline Early**, **Two Pass**, **Fade** 모드 |
-| 시험한 버전 | Poiyomi 9.3, 10.0.9, 10.0.24, Pro 11.0.0, 11.0.18, 11.0.22, 11.0.24, 11.0.29, 11.0.32, 11.0.34, 11.0.35, 11.0.36, 11.0.38 |
+| 시험한 버전 | Poiyomi 9.3, 10.0.9, 10.0.24, Pro 11.0.0, 11.0.18, 11.0.22, 11.0.24, 11.0.29, 11.0.32, 11.0.34, 11.0.35, 11.0.36, 11.0.38, 11.0.44 |
 | 잠긴 머티리얼 | 원본 셰이더 정보를 확인할 수 있으면 젖습니다. 업로드 때 Thry가 잠그는 경우도 같습니다. |
 | 지원하지 않는 것 | Poiyomi 8.x 이하, Fur, Grab Pass, 이름만 비슷한 커스텀 확장본, 패키지 밖으로 복사한 셰이더, 다른 셰이더 모듈을 넣은 Poiyomi |
 
@@ -61,6 +62,8 @@ description: 지원하는 Unity·SDK·NDMF·Modular Avatar 버전, 셰이더(Poi
 | 지원하지 않는 것 | Fur, Gem, 사용자가 수정한 셰이더 |
 
 lilToon에서 반사(Reflection)와 메탈릭을 켠 머티리얼도 젖은 광택이 지워지지 않습니다.
+
+프로젝트에 `LILTOON_DISABLE_ASSET_MODIFICATION`이 들어 있으면 lilToon이 <ProductName />의 lilToon 셰이더 파일(`.lilcontainer`)을 가져오지 않아, lilToon 의상이 모두 마른 채로 빌드됩니다. <ProductName />이 원인과 고치는 방법을 안내합니다. [lilToon 셰이더 임포터가 꺼져 있음](./troubleshooting.mdx#liltoon-importer-off)
 
 ### 실험 기능: PCSS4VRC(lilToon)·lilSSRT {/* #experimental */}
 
@@ -93,7 +96,7 @@ Sunao, UnityChanToon, UTS 같은 다른 계열 셰이더에는 젖음을 넣지 
 | **TexTransTool (TTT)** | TTT로 텍스처를 바꾼 Poiyomi 머티리얼도 업로드에서 젖습니다. **Atlas Texture**가 머티리얼을 하나로 합치면 기준 머티리얼의 슬롯은 젖고, 다른 머티리얼에 합쳐진 슬롯만 젖지 않습니다(NDMF 결과 창에 알립니다). 그 슬롯도 젖게 하려면 그 머티리얼을 병합 그룹에서 빼 주십시오. |
 | **d4rk Avatar Optimizer** | 기본 설정(Basic)이면 그대로 둡니다. 셰이더를 다시 쓰는 설정(**Write Properties as Static Values**, **Shader Toggles**, **Merge Different Property Materials**, **Merge Same Dimension Textures**)이 켜져 있으면, 업로드할 때 젖는 파츠만 d4rk에서 자동으로 뺍니다. 저장된 설정은 바꾸지 않습니다. 설치창은 이 설정을 끄는 것을 추천합니다. |
 | **Avatar Compressor (LAC)** | 0.8.0과 0.9.0을 <ProductName /> 1.0.2와 함께 빌드해, 젖음이 유지되는 것을 확인했습니다. 1.0.1 이하에서 VRCFury와 함께 쓸 때 의상 하나가 통째로 마르면 [다른 툴이 빌드 중에 머티리얼을 바꿔 젖지 않음](./troubleshooting.mdx#material-replaced)을 확인해 주십시오. |
-| **VRCFury** | 1.1436.0 이상을 써 주십시오. 1.1258 이하에서는 빌드할 때 `SweatAmount` 오류가 날 수 있습니다. 토글과 머티리얼 교체는 그대로 쓸 수 있습니다. 처음부터 켜진 토글과 **Apply During Upload**가 넣는 머티리얼도 젖습니다. 교체되는 머티리얼이 젖지 않는 경우 NDMF 결과 창에 안내가 나옵니다. |
+| **VRCFury** | 1.1436.0 이상을 써 주십시오. 동기화 파라미터 용량(256비트)이 모자라면 Parameter Compressor를 함께 쓰는 것을 권합니다. 토글과 머티리얼 교체는 그대로 쓸 수 있습니다. 처음부터 켜진 토글과 **Apply During Upload**가 넣는 머티리얼도 젖습니다. 교체되는 머티리얼이 젖지 않는 경우 NDMF 결과 창에 안내가 나옵니다. |
 | **본을 옮기는 도구** | 빌드 중에 다른 도구가 본을 옮겨도(예: NDExtensions Rebake Humanoid) 업로드에서 미리보기와 같은 자리에서 젖습니다. |
 
 애니메이션으로 Renderer의 **메쉬 자체**를 바꾸는 구성은 지원하지 않습니다. 메쉬 교체 애니메이션을 빼거나, 바뀌는 메쉬를 <ProductName />에서 제외한 별도 Renderer로 나눠 주십시오.
@@ -114,7 +117,7 @@ Sunao, UnityChanToon, UTS 같은 다른 계열 셰이더에는 젖음을 넣지 
 
 - Unity에서 초기값을 바꾸려면 **RealWet**의 **입력 모드** 행에서 **연동하기** 또는 **연동 해제**를 고릅니다.
 - <ProductName />에서 연동을 바꿔도 피부의 땀 수치는 바뀌지 않습니다.
-- RealSweatSystem의 **땀 표시**와 **나에게만 보이기**는 피부 땀에만 적용됩니다. 의상 젖음은 <ProductName />의 **의상 젖음 표시**와 의상별 표시로만 숨깁니다.
+- RealSweatSystem의 **땀 표시**와 **나에게만 보이기**는 피부 땀에만 적용됩니다. 의상 젖음은 <ProductName />의 **의상 젖음 표시**와 의상별 표시로 숨깁니다. 다른 사람에게만 숨기려면 <ProductName />의 [젖은 옷 나에게만 보이기](./usage/in-game-menu.mdx#linked-local-only)를 켭니다.
 - **젖음** 메뉴는 RSS 메뉴 안이 아니라 아바타 메인 메뉴에 따로 설치됩니다.
 - RealSweatSystem 2.0.0의 Late Queue 땀 셰이더도 피부 땀으로 인식해, 젖은 옷을 바디와 땀 뒤에 그립니다.
 - 선택한 아바타의 RealSweatSystem이 구버전(1.x)이면 설치창에 업데이트 안내가 한 줄 나옵니다.

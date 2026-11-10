@@ -7,7 +7,7 @@ import type {ProductData} from '@site/src/cookitools';
 const product: ProductData = {
   key: 'rws',
   name: 'RealWetSystem',
-  version: '1.0.2',
+  version: '1.0.3',
   // Store thumbnail (the BOOTH main image), square. The only place its path is written.
   image: '/img/home/thumbnail.webp',
   links: {

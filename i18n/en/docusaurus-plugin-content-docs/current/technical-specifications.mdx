@@ -1,12 +1,12 @@
 ---
 id: technical-specifications
 title: Technical specifications and known limitations
-description: Supported environment, synced parameters, render queues, mesh data, limits and known limitations of RealWetSystem v1.0.2.
+description: Supported environment, synced parameters, render queues, mesh data, limits and known limitations of RealWetSystem v1.0.3.
 ---
 
 # Technical specifications and known limitations
 
-This page sums up, in numbers, what <ProductName /> v1.0.2 adds to an avatar and how. You don't need to read it for everyday use.
+This page sums up, in numbers, what <ProductName /> v1.0.3 adds to an avatar and how. You don't need to read it for everyday use.
 
 ## Supported environment {/* #environment */}
 
@@ -45,6 +45,7 @@ Only the parameters of the menu items you choose are added to the avatar.
 | Private Area Protection | `Cooki/ClothWetProtect/All` | 1 bit | Not saved | Unity setting (on in a new install) |
 | See-Through Protection Range (50% = Standard) | `Cooki/ClothWetProtectRange` | 8 bits | Saved | 50% |
 | See-Through Protection Strength (100% = Full Block) | `Cooki/ClothWetProtectStrength` | 8 bits | Saved | 100% |
+| Wet Clothes Only Visible to Me (with RealSweatSystem) | `Cooki/ClothWetLocalOnly` | 1 bit | Saved | Off |
 | Maximum Wet Range (%) | `Cooki/ClothWetProgressLimit` | 8 bits | Saved | Unity setting |
 | Wet Appearance (Default 50%) | `Cooki/ClothWetAppearance` | 8 bits | Saved | 50% |
 | Wet Gloss (Default 50%) | `Cooki/ClothWetGloss` | 8 bits | Saved | 50% |
@@ -58,7 +59,8 @@ Only the parameters of the menu items you choose are added to the avatar.
 
 The table follows the order of the in-game menu (main page, **See-Through Protection**, **Wet Tuning**).
 
-- The recommended menu is 87 bits, and with every item, including 6 outfit visibility groups, it is 94 bits. VRChat's limit is 256 bits for the whole avatar.
+- The recommended menu is 87 bits, and with every item, including 6 outfit visibility groups, it is 94 bits. An avatar that also uses RealSweatSystem gets the **Wet Clothes Only Visible to Me** toggle and uses 1 bit more (88 bits, 95 bits). VRChat's limit is 256 bits for the whole avatar.
+- **Only Visible to Me** and **Wet Clothes Only Visible to Me** use the same parameter. An avatar without RealSweatSystem gets the first one, and an avatar with RealSweatSystem gets the second.
 - When linked to RealSweatSystem, RealWet only reads RSS's sweat parameters (`Cooki/SweatAmount` and so on). It doesn't change RSS's parameters.
 - Features not in the menu work with the values set in Unity and add no parameters.
 - One menu page has 8 slots. If **Wet Tuning** has 9 or more items, a **Next** page appears after 7 of them. **Spread Wetness Wider (Advanced)** is always the last slot.

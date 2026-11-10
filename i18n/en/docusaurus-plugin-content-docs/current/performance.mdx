@@ -58,6 +58,7 @@ The extra 31.9 MiB uncompressed breaks down like this:
 | The first build or the first preview | Takes a long time, because RealWet builds wet shaders and Unity compiles them. With many materials, it can take tens of minutes. |
 | Rebuilding with the same settings | Much shorter. RealWet reuses the shader cache from the first build, so almost all wet-shader compilation is skipped. |
 | After updating a shader (Poiyomi or lilToon) or <ProductName /> | Only the changed shaders are prepared again. The first time can take a long while again. |
+| The first upload after updating to <ProductName /> 1.0.3 | The wet shaders are compiled again once. On an avatar with many outfits it can take about 20 minutes. The first preview can also take a little longer than usual; from the second time on it is back to normal. |
 | After changing where clothes get wet, the regions, or the shape of an outfit | Only the changed outfits are calculated again. |
 
 The first build takes longer when your PC is busy, for example while streaming or recording. It's best to do the first build ahead of time, while your PC is idle.
@@ -95,7 +96,7 @@ If an outfit the avatar is wearing is not prepared yet when you press Play, <Pro
 ## In-game load
 
 - The shader draws wetness by reading data calculated ahead of time. Start points and protection regions are for editing in Unity only. They add no Colliders, PhysBones or Contacts in game.
-- The in-game menu uses synced parameters for each item you choose. The recommended menu of a new install uses 87 bits, and every item on uses 94 bits (VRChat allows 256). A dial uses 8 bits and a toggle uses 1 bit. The full table is in [In-game menu](./usage/in-game-menu.mdx#sync-cost).
+- The in-game menu uses synced parameters for each item you choose. The recommended menu of a new install uses 87 bits, and every item on uses 94 bits (VRChat allows 256). An avatar that also uses RealSweatSystem uses 1 bit more (88 bits, 95 bits). A dial uses 8 bits and a toggle uses 1 bit. The full table is in [In-game menu](./usage/in-game-menu.mdx#sync-cost).
 - If you turn on **Reduce Outfit Differences** and put the **Maximum Wet Range (%)** dial in the menu, the FX gets more precalculated correction clips. Synced bits and in-game calculation do not increase.
 
 ## How to reduce size and time

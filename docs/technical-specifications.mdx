@@ -1,12 +1,12 @@
 ---
 id: technical-specifications
 title: 기술 사양 및 알려진 제한사항
-description: RealWetSystem v1.0.2의 지원 환경, 동기화 파라미터, 렌더큐, 메쉬 데이터, 한도와 알려진 제한사항입니다.
+description: RealWetSystem v1.0.3의 지원 환경, 동기화 파라미터, 렌더큐, 메쉬 데이터, 한도와 알려진 제한사항입니다.
 ---
 
 # 기술 사양 및 알려진 제한사항
 
-이 페이지는 <ProductName /> v1.0.2이 아바타에 무엇을 어떻게 더하는지 숫자로 정리합니다. 일반 사용에는 읽지 않아도 됩니다.
+이 페이지는 <ProductName /> v1.0.3이 아바타에 무엇을 어떻게 더하는지 숫자로 정리합니다. 일반 사용에는 읽지 않아도 됩니다.
 
 ## 지원 환경 {/* #environment */}
 
@@ -45,6 +45,7 @@ description: RealWetSystem v1.0.2의 지원 환경, 동기화 파라미터, 렌�
 | 중요 부위 비침 보호 | `Cooki/ClothWetProtect/All` | 1비트 | 저장 안 함 | Unity 설정값(새 설치 켜짐) |
 | 비침 보호 범위 (50%=기본) | `Cooki/ClothWetProtectRange` | 8비트 | 저장 | 50% |
 | 비침 보호 강도 (100%=완전히 막음) | `Cooki/ClothWetProtectStrength` | 8비트 | 저장 | 100% |
+| 젖은 옷 나에게만 보이기 (RealSweatSystem과 함께 쓸 때) | `Cooki/ClothWetLocalOnly` | 1비트 | 저장 | 꺼짐 |
 | 최대 젖는 범위 (%) | `Cooki/ClothWetProgressLimit` | 8비트 | 저장 | Unity 설정값 |
 | 젖음 표현 (50%=기본) | `Cooki/ClothWetAppearance` | 8비트 | 저장 | 50% |
 | 젖은 광택 (50%=기본) | `Cooki/ClothWetGloss` | 8비트 | 저장 | 50% |
@@ -58,7 +59,8 @@ description: RealWetSystem v1.0.2의 지원 환경, 동기화 파라미터, 렌�
 
 표는 게임 안 메뉴의 순서(메인 페이지, **비침 보호**, **젖음 조절**)를 따릅니다.
 
-- 추천 메뉴는 87비트, 의상별 표시 그룹 6개까지 모두 넣으면 94비트입니다. VRChat 한도는 아바타 전체에서 256비트입니다.
+- 추천 메뉴는 87비트, 의상별 표시 그룹 6개까지 모두 넣으면 94비트입니다. RealSweatSystem과 함께 쓰는 아바타는 **젖은 옷 나에게만 보이기** 토글이 들어가 1비트씩 더 씁니다(88비트, 95비트). VRChat 한도는 아바타 전체에서 256비트입니다.
+- **나에게만 보이기**와 **젖은 옷 나에게만 보이기**는 같은 파라미터를 씁니다. RealSweatSystem 없이 쓰는 아바타에는 앞의 것이, 함께 쓰는 아바타에는 뒤의 것이 들어갑니다.
 - RealSweatSystem과 연동할 때는 RSS의 땀 파라미터(`Cooki/SweatAmount` 등)를 읽기만 합니다. RSS의 파라미터를 바꾸지 않습니다.
 - 메뉴에 넣지 않은 기능은 Unity에서 정한 값으로 동작하고, 파라미터를 더하지 않습니다.
 - 메뉴 한 페이지는 8칸입니다. **젖음 조절**에 9개 이상이 들어가면 7개 뒤에 **다음** 페이지가 생깁니다. <strong>젖는 범위만 넓히기 (고급)</strong>은 늘 마지막 칸입니다.

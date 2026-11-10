@@ -74,7 +74,7 @@ From the top, the Install tab has four cards, **1. Body meshes**, **2. How far s
 
 ### 3.1 Body meshes {/* #body */}
 
-Sets the **skin meshes** used to calculate wetness. They are used to work out how close the clothes are to the skin and in what order to draw layered clothes.
+Sets the **skin meshes** and the **breast bones** used to calculate wetness. The skin meshes are used to work out how close the clothes are to the skin and in what order to draw layered clothes. The breast bones are used to place the wet start points around the chest and the recommended chest protection regions.
 
 {/* SHOT U04: card 1. Body meshes */}
 [![Card 1, body registration](/img/guide/U04-en.png)](/img/guide/U04-en.png)
@@ -86,10 +86,15 @@ Sets the **skin meshes** used to calculate wetness. They are used to work out ho
 | **Additional skin meshes (0)** | On avatars whose torso, hands and feet are separate meshes, add the other skin meshes here. If there is only one body, leave it empty. | Empty |
 | **Add mesh** | Adds one more additional skin mesh field. | — |
 | **Import from RealSweat** | Brings in the skin candidates registered in RealSweatSystem. Please check that they are skin you actually use. | — |
+| **Left breast anchor**, **Right breast anchor** | This avatar's left and right breast bones. The fields hold the bones found automatically. If they are wrong, drag the avatar's breast bones into the fields. | The bones found automatically |
+| **Auto Find Breast Bones** | Clears the bones you chose and finds both breast bones again. | — |
 
 - Don't add outfits, hair, or meshes made for showing sweat.
 - Meshes you add yourself are used in the calculation even when they are turned off. Don't add spare bodies you don't use.
 - After installing, you can edit the same list in **RealWet > Wetness Settings > Body Meshes**.
+- One line under the breast bone fields shows their current state (for example, **Breast bones: found automatically**). On an avatar without breast bones, leave the fields empty and the torso is used as the reference.
+- If you choose a bone that the body mesh has no skin weights on (an outfit's bone, for example), a notice appears under the fields. Please choose the avatar's own breast bones, not an outfit's bones.
+- When you change the breast bones on an avatar that is already installed, the **Move the chest start points and chest protection to the new bones** checkbox appears (off by default). If you check it and press **Update**, only the positions of the wet start points around the chest and of the recommended chest protection regions move to the new bones. Sizes, other start points and regions you made yourself stay as they are. If you leave it unchecked, only the bone choice is saved and the saved positions don't move.
 
 ### 3.2 How far should it get wet? {/* #range */}
 
@@ -121,7 +126,7 @@ Press one of the three large buttons, each with a description.
 | **Both** | Wetness starts at the sweat points and spreads along the areas that touch the body. | You want to combine both methods |
 
 - The new install default is **From Sweat Spots (Recommended)**.
-- Below the buttons, the breast reference bones are shown on one line (for example, **Breast bones: found automatically**). Press **Change** to choose them yourself. On avatars without breast bones, the torso is used as the reference.
+- The breast bones are not chosen on this card. They are in the **1. Body meshes** card; see [3.1 Body meshes](#body).
 - To make the whole garment wet evenly, as if in the rain, don't choose it here: turn on **Whole Area** in the in-game menu. See [Whole Area](./usage/in-game-menu.mdx#whole-area).
 - You can move the start points after installing, in [Wet start points](./usage/wet-start-points.mdx).
 
@@ -165,15 +170,16 @@ The grey line at the top (for example, **[9 bit] Show Clothing Wetness · Wetnes
 | **Whole Area** | A toggle that makes the whole garment wet evenly when on. | Checked | 1 bit |
 | **Fast Dry** | A toggle that, while on, takes no new sweat and makes the clothes almost dry in about 4 seconds. | Checked | 1 bit |
 | **Hold Current State (For Photos)** | A toggle that freezes the current wet look. | Checked | 1 bit |
-| **Only Visible to Me** | A toggle that, when on, makes the wet look of the clothes visible only to you. It is added only when you use it without RealSweatSystem. | Checked | 1 bit |
+| **Only Visible to Me** | A toggle that, when on, makes the wet look of the clothes visible only to you. It is listed only when you use RealWet without RealSweatSystem. | Checked | 1 bit |
 
 **Wet > See-Through Protection**
 
 | Item | Meaning | New install default | Sync cost |
 | --- | --- | --- | --- |
-| **Private Area Protection** | A switch that turns the protection regions' see-through blocking on and off. If you turn off **Add Chest & Groin See-Through Protection Regions**, the three items on this page stay locked off. | Checked | 1 bit |
+| **Private Area Protection** | A switch that turns the protection regions' see-through blocking on and off. If you turn off **Add Chest & Groin See-Through Protection Regions**, this switch and the two dials below it stay locked off. | Checked | 1 bit |
 | **See-Through Protection Range (50% = Standard)** | A dial that changes how wide an area the protection regions block. | Checked | 8 bits |
 | **See-Through Protection Strength (100% = Full Block)** | A dial that changes how strongly the protection regions block. | Checked | 8 bits |
+| **Wet Clothes Only Visible to Me** | A toggle that, while on, makes other players see the clothes dry. It is listed only when you also use RealSweatSystem. If the menu has no **See-Through Protection** page, it goes on the main page. | Checked | 1 bit |
 
 **Wet > Wet Tuning**
 
@@ -190,7 +196,7 @@ The grey line at the top (for example, **[9 bit] Show Clothing Wetness · Wetnes
 | **Spread Wetness Wider (Advanced)** | A dial that spreads light wetness farther at the same wetness amount. | Checked | 8 bits |
 
 - The menu checks **add buttons**. That is not the same as whether the feature is on from the start. For example, the **Reduce Outfit Differences** feature itself is on, but its in-game button is not added by default.
-- Check the total in the **Runtime Parameter Cost** line below the list. Press the line to open the cost of each item. Before you install, no outfit has been added yet, so **Wet See-Through Mode** (8 bits) is not in the total, and it shows 79 bits. After the outfits are added, the recommended set is **87 bits**, and with every item including the outfit visibility groups, it is 94 bits. VRChat's limit is 256 bits for the whole avatar.
+- Check the total in the **Runtime Parameter Cost** line below the list. Press the line to open the cost of each item. Before you install, no outfit has been added yet, so **Wet See-Through Mode** (8 bits) is not in the total, and it shows 79 bits. After the outfits are added, the recommended set is **87 bits**, and with every item including the outfit visibility groups, it is 94 bits. An avatar that also uses RealSweatSystem uses 1 bit more for **Wet Clothes Only Visible to Me** (80 bits, **88 bits**, 95 bits). VRChat's limit is 256 bits for the whole avatar.
 - The **Wet** menu goes into the avatar's main menu, separate from the RealSweatSystem menu. After installing, you can change its location in the **MA Menu Installer** on the `RealWet` object.
 - You can also change the menu layout after installing, in **RealWet > In-Game Menu**. [In-game menu](./usage/in-game-menu.mdx) explains what each button does.
 
@@ -342,6 +348,7 @@ The button order is the same as in RealSweatSystem's **Sweat** menu. **Show Clot
 | **Private Area Protection** | Turns the see-through blocking of protection regions, such as the chest and groin, on and off at once. When it is off, those areas show through too. It isn't saved, so it goes back to its starting value when the avatar reloads. | On |
 | **See-Through Protection Range (50% = Standard)** | How wide an area protection blocks. 50% is exactly the size you see in Unity, 0% blocks almost nothing, and 100% blocks a wider area. | 50% |
 | **See-Through Protection Strength (100% = Full Block)** | How strongly protection blocks. 100% blocks fully, at 50% about one third of the unblocked see-through shows, and 0% doesn't block. | 100% |
+| **Wet Clothes Only Visible to Me** | Appears when you also use RealSweatSystem. While it is on, other players see the clothes dry, and you still see them wet, also in mirrors and photos. | Off |
 
 - Most dials and toggles are saved, so the last value you chose is used the next time you join. **Fast Dry**, **Hold Current State (For Photos)** and **Private Area Protection** are not saved; they go back to their starting values every time the avatar loads.
 - Button names use the <ProductName /> language (English / 한국어 / 日本語) set when the menu was created. VRChat's language setting doesn't change them.

@@ -27,6 +27,55 @@ This page lists the main changes in each version of <ProductName />, newest firs
 - The menu files made for each avatar are in `Assets/CookiTools/Generated/RealWet`, outside the package folder, so overwriting the package doesn't delete them.
 - Updating doesn't need purchase activation. However, uploads from a PC that is not activated leave the effects out, so please complete [purchase activation](./license-activation.mdx) on the PC you upload from.
 
+## 1.0.3 — Outfits that stayed dry, breast bone fields, Wet Clothes Only Visible to Me {/* #103 */}
+
+If you use 1.0.2 or earlier, import the new package over it. Your saved settings and the positions of your wet start points and protection regions do not change. On an avatar that is already installed, the in-game menu, its parameters and its sync bits also stay the same until you press **Update**.
+
+:::note[The first upload after updating takes long once]
+The first upload after updating compiles the wet shaders again once. On an avatar with many outfits it can take about 20 minutes. Even if the progress display doesn't move, please don't close Unity while it is using the CPU. The first preview can also take a little longer than usual; from the second time on it is back to normal.
+:::
+
+### Breast bone fields in the setup window
+
+- **1. Body meshes** in the setup window now always shows the **Left breast anchor** and **Right breast anchor** fields under the body mesh. The fields hold the bones found automatically; if they are wrong, drag the avatar's breast bones into them. **Auto Find Breast Bones** clears the bones you chose and finds them again. The breast bone **Change** line that was under card 3 is gone. [Body meshes](./tutorial.mdx#body)
+- If you choose a bone that the body mesh has no skin weights on (an outfit's bone, for example), a notice appears under the fields.
+- When you change the breast bones on an avatar that is already installed, the **Move the chest start points and chest protection to the new bones** checkbox appears (off by default). If you check it and press **Update**, only the positions of the wet start points around the chest and of the recommended chest protection regions move to the new bones. Sizes, other start points and regions you made yourself stay as they are. If you leave it unchecked, only the bone choice is saved and the saved positions don't move.
+
+### Avatars shrunk or re-proportioned with bone scale
+
+- Fixed the chest start points and the recommended chest protection regions landing in a different place on avatars shrunk with bone scale (Hips, Armature and so on) than before shrinking. The same body now gets the same placement when it is shrunk.
+- On avatars shrunk with bone scale, the size and the search range of the wet start points now fit the shrunken body.
+- Fixed the chest protection regions landing inside the body on avatars whose torso alone was shortened with bone scale, and the armpit start points landing on top of the shoulders on avatars whose upper arms were shrunk with bone scale.
+- Even if you put a tip bone into a breast bone field, the recommended chest protection region looks for the front of the chest along that breast's whole bone chain.
+- These fixes apply only to start points and protection regions made from now on (a new install, a reset, or the checkbox above). Saved positions don't change. The placement on avatars that are not shrunk with bone scale doesn't change either.
+
+### Outfits that stayed dry or looked broken
+
+- Fixed Poiyomi Toon and Pro parts that use material-swap animations with **Apply Wet to Animated Material Swaps** turned off not getting wet properly. With Poiyomi 10.0.20 and later and Poiyomi 11, parts with overlapping UV0 (mirrored left and right, for example) were uploaded dry. With earlier Poiyomi versions, parts whose materials don't use an outline failed a check at upload and got a warning.
+- Fixed a slot becoming invisible or pink on Poiyomi 10.0.20 and later and Poiyomi 11 parts that use both UV3 and UV4 when the wet material went over the texture limit (64). Now only that slot goes back to its original material, as on other parts. [Texture limit](./troubleshooting.mdx#texture-limit)
+- When the project sets `LILTOON_DISABLE_ASSET_MODIFICATION` and every lilToon outfit is built dry, RealWet now says that this setting is the cause, where it is set and how to fix it. Up to 1.0.2 the notice said the lilToon version **has not been verified yet**. The notice has a **Remove it from the settings and make lilToon clothing wet** button. [lilToon's shader importer is turned off](./troubleshooting.mdx#liltoon-importer-off)
+- Fixed every lilToon outfit being built dry in projects where another asset owns the GUID of lilToon's importer script. In such a project, selecting one of <ProductName />'s lilToon shader files (`.lilcontainer`) shows `(Failed To Load Script Object)` at the top of the Inspector. <ProductName /> doesn't change any file in your project. [lilToon outfits stay dry and (Failed To Load Script Object) appears](./troubleshooting.mdx#liltoon-script-object)
+- The report from **Copy Diagnostic Report** now says where lilToon's importer was found and whether <ProductName />'s lilToon shader files are imported as shaders.
+
+### Wet look
+
+- Fixed white and bright clothes looking almost the same when you raised the in-game **Wet Gloss (Default 50%)** above 50%. On outfits with **Even Wet Look for Every Outfit (New Look)** on (the default), bright clothes with the **Cotton · Knit · Denim (Recommended)** or **In Between** fabric now get much more of the broad watery gloss above 50%, and at 100% the wet gloss is clearly visible even on white clothes. As before, the gloss never gets brighter than the white of that scene.
+- At 50% or below, on mid-tone and dark clothes, with other fabrics and on outfits with the new look off, nothing changes. Saved settings don't change. On an avatar that used Wet Gloss above 50%, bright clothes shine more than before once you upload again after updating.
+
+### In-game menu
+
+- Added **Wet Clothes Only Visible to Me** (Korean **젖은 옷 나에게만 보이기**, Japanese **濡れた衣装を自分にだけ表示**) to the **Wet** menu of avatars that also use RealSweatSystem. While it is on, other players see your outfits dry (no wet color, gloss or see-through), and you still see them wet, also in mirrors and photos. It is one saved, synced toggle (+1 bit) and it starts off. [Wet Clothes Only Visible to Me](./usage/in-game-menu.mdx#linked-local-only)
+- It goes at the bottom of the **See-Through Protection** page. On an avatar without that page it goes on the main page after **Hold Current State (For Photos)**. No other menu item moves. If neither place has a free slot, that upload leaves it out and the NDMF build results say so. The build continues.
+- An avatar that is already installed gets it when you press **Update** in the setup window (it starts off). Until then its menu, parameters and sync bits stay the same. Other saved settings and in-game values don't change either.
+- **Only Visible to Me** on avatars without RealSweatSystem works as before. The two toggles use the same parameter (`Cooki/ClothWetLocalOnly`).
+- The wet look from RealRain's rain is hidden from other players too.
+- On an avatar that gets this toggle (one that also uses RealSweatSystem), the recommended menu is 88 bits, and 95 bits with every item. Without RealSweatSystem it stays 87 bits and 94 bits. [Sync cost](./usage/in-game-menu.mdx#sync-cost)
+
+### Notices and wording
+
+- If you use VRCFury, please use 1.1436.0 or later. If you run short of synced parameter space (256 bits), we recommend using the Parameter Compressor of VRCFury 1.1436.0 or later together with it. [Compatibility](./compatibility.mdx#requirements)
+- Added 11.0.44 to the tested Poiyomi versions. [Compatibility](./compatibility.mdx#shaders)
+
 ## 1.0.2 — Outfits that stayed dry, and steps that looked frozen during setup {/* #102 */}
 
 If you use 1.0.1 or 1.0.0, import the new package over it. Your saved settings do not change. The in-game menu's parameters and sync bits stay the same too; only a few English, Japanese and Korean menu names change from your next upload.

@@ -27,11 +27,14 @@ description: 증상에서 원인과 해결로 찾는 안내입니다. 안 젖는
 | 미리보기에서는 젖는데 업로드에서 특정 의상만 마름 | [다른 툴이 빌드 중에 머티리얼을 바꿈](#material-replaced) |
 | 미리보기에서는 젖는데 업로드에서 일부 lilToon 의상만 마름 | [PCSS4VRC가 머티리얼을 바꿈](#pcss) |
 | lilSSRT 의상이 젖지 않고 **설치된 lilSSRT의 구조가 달라 이 버전에서는 적실 수 없습니다**나 lilSSRT가 제 폴더에 없다는 안내가 나옴 | [lilSSRT 셰이더가 예전 폴더에 남음](#lilssrt-old-folder) |
+| lilToon 의상이 모두 마르고 **이 프로젝트에서 lilToon 셰이더 임포터가 꺼져 있습니다** 안내가 나옴 | [lilToon 셰이더 임포터가 꺼져 있음](#liltoon-importer-off) |
+| lilToon 의상이 모두 마르고, <ProductName />의 `.lilcontainer` 파일을 선택하면 Inspector에 `(Failed To Load Script Object)`가 보임 | [lilToon 의상이 마르고 (Failed To Load Script Object)가 보임](#liltoon-script-object) |
 | Poiyomi 의상만 젖지 않음 | [지원하지 않거나 확인되지 않은 셰이더](#shaders) |
 | 두 번째 아바타가 젖지 않음 | [한 씬에 아바타가 여러 개](#multiple-avatars) |
 | 설치하거나 미리보기할 때 **씬을 저장한 뒤 다시 시도해 주십시오**가 나옴 | [저장하지 않은 새 씬](#unsaved-scene) |
 | 첫 빌드가 창도 없이 오래 걸리고 멈춘 것 같음 | [첫 빌드가 오래 걸림](#long-first-build) |
 | 첫 업로드가 오래 걸림 | [첫 업로드가 오래 걸림](#first-upload) |
+| 업데이트한 뒤 첫 업로드가 오래 걸림 | [첫 업로드가 오래 걸림](#first-upload) |
 | Unity가 **Hold on** 창을 띄움 | [Hold on 창](#hold-on) |
 | 메뉴나 동기화 파라미터가 한도를 넘음 | [메뉴·파라미터가 한도를 넘음](#over-limit) |
 | 인게임에서 **젖음** 메뉴가 안 보임 | [메뉴가 안 보임](#menu-missing) |
@@ -39,7 +42,7 @@ description: 증상에서 원인과 해결로 찾는 안내입니다. 안 젖는
 | 미리보기에서 일부 머티리얼만 원래 모습 + 텍스처 한도 안내 | [텍스처 한도](#texture-limit) |
 | 설치했는데 등록된 의상이 0개 | [등록된 의상이 0개](#no-outfits) |
 | RealSweat이 있을 때 젖음 양을 바꿔도 돌아옴 | 옷만 따로 조절하려면 **RealSweat 연동**을 끕니다. [인게임 메뉴](./usage/in-game-menu.mdx#items) |
-| RealSweat의 **땀 표시**를 꺼도 옷이 젖어 보임 | RealSweat의 땀 표시는 피부 땀에만 적용됩니다. 옷은 **의상 젖음 표시**로 숨깁니다. |
+| RealSweat의 **땀 표시**를 꺼도 옷이 젖어 보임 | RealSweat의 땀 표시는 피부 땀에만 적용됩니다. 옷은 **의상 젖음 표시**로 숨깁니다. 다른 사람에게만 숨기려면 [젖은 옷 나에게만 보이기](./usage/in-game-menu.mdx#linked-local-only)를 켭니다. |
 | 속옷이나 장식이 각도에 따라 사라짐 | [겹옷이 사라지거나 순서가 이상함](#layer-issues) |
 | 렌더큐나 겹옷 순서를 바꾼 뒤 다른 옷·장식이 이상하게 보임 | [렌더큐를 바꾼 뒤 다른 옷이 이상해짐](#layer-side-effects) |
 | 비친 곳에 검은 음영이 남음 | 그 파츠의 음영 완화와 인게임 **젖은 옷 그림자 완화**를 확인합니다. |
@@ -203,6 +206,8 @@ VCC로 만든 VRChat용 Unity 2022.3 아바타 프로젝트에서 써 주십시�
 | --- | --- |
 | 엉뚱한 곳이 젖거나, 땀이 날 곳이 젖지 않습니다. | 그 근처의 젖음 시작점 공을 Scene에서 옮기고(W), 크기를 바꿉니다(R). [편집기 열기](./usage/wet-start-points.mdx#editor), [자주 하는 조절](./usage/wet-start-points.mdx#tips) |
 | 비침 보호 영역이 가슴·사타구니에서 어긋나 있거나, 너무 작거나 큽니다. | 보호 영역을 Scene에서 옮기고(W), 돌리고(E), 크기를 바꿉니다(R). [보호 영역 편집하기](./usage/see-through-protection.mdx#editing) |
+| 가슴 둘레의 젖음 시작점이나 가슴 보호 영역이 가슴과 어긋나 있습니다(가슴 본이 다르게 잡힘). | 설치창 **1. 신체 등록**의 **왼쪽 가슴 기준 본**·**오른쪽 가슴 기준 본** 칸에 이 아바타의 가슴 본을 끌어다 놓습니다. 이미 설치한 아바타는 **가슴 시작점·보호 영역을 새 본에 맞춰 다시 놓기**를 체크하고 **업데이트하기**를 누릅니다. [신체 등록](./tutorial.mdx#body) |
+| 본 스케일로 줄이거나 비율을 바꾼 아바타에서 가슴 시작점이나 가슴 보호 영역이 어긋나 있습니다(1.0.2 이하에서 놓은 배치). | 1.0.3에서 새로 놓는 자리를 고쳤습니다. 저장된 위치는 업데이트해도 바뀌지 않으므로, 아래의 처음 배치로 되돌리는 방법으로 다시 놓습니다. |
 | 왼쪽과 오른쪽을 함께 고치고 싶습니다. | 두 편집기 모두 **좌우 대칭**이 있습니다. 켜고 한쪽만 고칩니다. |
 | 처음 배치로 되돌리고 싶습니다. | 시작점은 [되돌리기와 다시 배치하기](./usage/wet-start-points.mdx#reset), 보호 영역은 [초기화 버튼](./usage/see-through-protection.mdx#reset)을 씁니다. |
 
@@ -281,6 +286,7 @@ VCC로 만든 VRChat용 Unity 2022.3 아바타 프로젝트에서 써 주십시�
 | **RealWet: 아직 확인되지 않은 Poiyomi 버전(…)입니다** | 설치된 Poiyomi의 구조가 <ProductName />이 아는 것과 다릅니다. 그 셰이더를 쓰는 의상은 마른 채로 빌드됩니다. | 이 빌드는 그대로 써도 됩니다. <ProductName /> 업데이트를 기다리거나, 확인된 Poiyomi 버전을 씁니다. |
 | **RealWet: 셰이더 모듈('…')이 추가된 Poiyomi 구성은 아직 지원하지 않습니다** | Poiyomi의 **Poi > Installed Modules**에서 켠 모듈이 셰이더에 들어가 있습니다. Poiyomi 의상이 마른 채로 빌드됩니다. | 그 모듈을 빼고 다시 빌드합니다. 빼는 방법은 [내부 모듈 되돌리기](#poi-internal-module)와 같습니다. |
 | **RealWet: PCSS4VRC가 바꾼 머티리얼의 파츠는 젖지 않고 업로드됩니다** | PCSS4VRC가 빌드 첫 단계에서 lilToon 머티리얼을 `_pcss` 머티리얼로 바꿨습니다. | [PCSS4VRC가 머티리얼을 바꿈](#pcss)을 확인해 주십시오. |
+| **RealWet: 이 프로젝트에서 lilToon 셰이더 임포터가 꺼져 있습니다 (LILTOON_DISABLE_ASSET_MODIFICATION)** | 프로젝트 설정 때문에 lilToon이 <ProductName />의 lilToon 셰이더 파일을 가져오지 않습니다. lilToon 의상이 마른 채로 빌드됩니다. | [lilToon 셰이더 임포터가 꺼져 있음](#liltoon-importer-off)을 확인해 주십시오. |
 | **RealWet: 겹옷 그리기 순서를 확인해 주십시오** | 앞뒤가 정해지지 않은 겹옷 파츠가 있습니다. 빌드는 멈추지 않았습니다. | 그 의상의 **계산된 순서 · 안쪽 → 바깥쪽** 목록에서 이름이 나온 파츠 하나를 드래그합니다. [겹옷 순서](./usage/outfit-settings.mdx#layer-order), [겹옷이 사라지거나 순서가 이상함](#layer-issues) |
 | **RealWet: 일부 파츠를 AAO 자동 메쉬 병합에서 뺐습니다** | 정보입니다. AAO가 함께 처리할 수 없는 파츠끼리 합치지 않도록 한쪽을 뺐습니다. | 고칠 것은 없습니다. 메쉬 수가 조금 늘 수 있습니다. |
 | **RealWet: d4rk Avatar Optimizer가 다시 쓴 젖는 파츠를 되돌리지 못했습니다** | d4rk의 셰이더를 다시 쓰는 설정이 젖는 파츠를 바꿨습니다. | 그 d4rk 설정을 끄거나 파츠를 d4rk Exclusions에 넣고 다시 업로드합니다. |
@@ -288,6 +294,7 @@ VCC로 만든 VRChat용 Unity 2022.3 아바타 프로젝트에서 써 주십시�
 | **RealWet: 일부 파츠의 젖음 기능 하나를 껐습니다** | 포즈 젖음 같은 기능 하나만 이번 빌드에서 껐습니다. 일반 젖음은 그대로입니다. | 경고의 이유를 따릅니다(예: 블렌드셰이프가 다른 툴에서 바뀜). |
 | **RealWet: 업로드 마지막 단계에서 RealWet 결과가 바뀌었습니다** | 업로드 맨 끝에 도는 툴(예: VRCFury Parameter Compressor)이 젖음 머티리얼이나 파라미터를 바꿨습니다. | 게임 안에서 확인하고, 이상하면 진단 보고서를 복사해 문의합니다. |
 | **RealWet: 어느 의상인지 알 수 없어 젖음 없이 둔 파츠가 있습니다** | 정보입니다. 다른 툴이 만든 파츠라 어느 의상인지 판단하지 못했습니다. | 젖어야 하는 파츠라면 그 파츠를 만든 툴을 확인합니다. |
+| **RealWet: 메뉴에 빈칸이 없어 이번 업로드에 '젖은 옷 나에게만 보이기'를 넣지 않았습니다** | 메인 페이지에 이미 8개가 있고 **비침 보호** 페이지도 없습니다. 이번 업로드의 의상 젖음은 평소처럼 다른 사람에게도 보입니다. | **RealWet > 인게임 메뉴**에서 **비침 보호 범위**나 **비침 보호 강도**를 켜거나 메인 페이지 항목 하나를 끈 뒤, **인게임 메뉴 적용 / 갱신**을 누르고 다시 업로드합니다. [젖은 옷 나에게만 보이기](./usage/in-game-menu.mdx#linked-local-only) |
 | **RealWet: 업로드 마지막 점검을 하지 못했습니다** / **RealWet: 마지막 젖음 누락 점검을 끝내지 못했습니다** | 앞선 점검은 통과했고 업로드는 계속됩니다. 그 뒤의 변경은 확인하지 못했습니다. | 업로드한 아바타에서 의상을 확인합니다. |
 | `Could not check the D3D11 texture limit` | 셰이더의 텍스처 수를 확인하지 못했습니다. | [텍스처 한도](#texture-limit)를 확인해 주십시오. |
 
@@ -337,6 +344,27 @@ PCSS4VRC를 쓰는 아바타에서는 PCSS4VRC가 빌드 첫 단계에서 lilToo
   4. 다시 빌드합니다.
 
 PCSS4VRC(lilToon)가 제 폴더가 아닌 곳에 있을 때도 1.0.2는 같은 방식으로 찾은 폴더와 고치는 순서를 안내합니다.
+
+## lilToon 셰이더 임포터가 꺼져 있음 {/* #liltoon-importer-off */}
+
+- **증상:** lilToon 의상이 모두 마른 채로 빌드됩니다. 다른 셰이더를 쓰는 의상은 평소대로 젖고, 빌드는 멈추지 않습니다. 1.0.3부터는 NDMF 빌드 결과에 <strong>RealWet: 이 프로젝트에서 lilToon 셰이더 임포터가 꺼져 있습니다 (LILTOON_DISABLE_ASSET_MODIFICATION)</strong>가 나오고, `RealWet` 오브젝트·의상·파츠의 Inspector에도 안내가 나옵니다. 1.0.2 이하에서는 **아직 확인되지 않은 lilToon 버전**이라고 나옵니다.
+- **원인:** 프로젝트에 `LILTOON_DISABLE_ASSET_MODIFICATION`이 들어 있습니다(**Project Settings > Player > Other Settings**의 **Scripting Define Symbols**나 **Additional Compiler Arguments**, 또는 `csc.rsp` 파일). 이 값이 있으면 lilToon이 `.lilcontainer` 셰이더 파일을 가져오지 않으므로, <ProductName />의 lilToon 셰이더가 만들어지지 않습니다.
+- **해결:**
+  1. Inspector의 안내에 있는 **설정에서 지우고 lilToon 의상 젖게 하기**를 누릅니다. 이 값이 들어 있는 곳과 지웠을 때 달라지는 점을 보여 주고 묻습니다.
+  2. **지우기**를 누르면 찾은 곳에서 이 값만 지우고 스크립트를 다시 컴파일합니다. 다른 값과 줄은 그대로 두고, `csc.rsp`는 고치기 전에 `Library/RealWet`에 백업합니다. **그대로 두기**는 아무것도 바꾸지 않습니다.
+  3. 스크립트 컴파일이 끝난 뒤 다시 빌드합니다. 그래도 마르면 Project 창에서 안내에 나온 <ProductName />의 `LilToon` 셰이더 폴더를 오른쪽 클릭해 **Reimport**를 누릅니다.
+
+- 직접 지워도 됩니다. 안내에 나온 위치에서 `LILTOON_DISABLE_ASSET_MODIFICATION`만 지우고, 스크립트 컴파일이 끝날 때까지 기다려 주십시오.
+- 이 값을 지우면 lilToon이 다시 빌드 전후에 셰이더 설정을 조정합니다(이 값이 끄는 기능입니다). 사용자나 다른 툴이 일부러 넣은 값이라면, 그 툴은 이 값이 있다고 보고 동작할 수 있습니다.
+- <ProductName />이 스스로 묻거나 이 설정을 바꾸는 일은 없습니다. 빌드·미리보기·재생 중에는 창을 열지 않습니다.
+
+## lilToon 의상이 마르고 (Failed To Load Script Object)가 보임 {/* #liltoon-script-object */}
+
+- **증상:** 1.0.2 이하에서 lilToon 의상이 모두 마른 채로 빌드되고 **아직 확인되지 않은 lilToon 버전** 안내가 나옵니다. Project 창에서 <ProductName />의 lilToon 셰이더 파일(`.lilcontainer`)을 선택하면 Inspector 위쪽에 `(Failed To Load Script Object)`가 보입니다. lilToon 자체는 그대로 동작합니다.
+- **원인:** 프로젝트의 다른 에셋이 lilToon 임포터 스크립트의 GUID를 가지고 있어서, Unity가 lilToon의 임포터 스크립트에 새 GUID를 준 경우입니다. 1.0.2까지는 <ProductName />이 그 GUID로만 임포터를 찾았습니다.
+- **해결:** <ProductName />을 1.0.3 이상으로 업데이트해 주십시오. 1.0.3부터는 이런 프로젝트에서도 lilToon 의상이 젖습니다. 프로젝트의 파일을 고칠 필요는 없고, <ProductName />도 프로젝트의 파일을 바꾸지 않습니다. Inspector의 `(Failed To Load Script Object)` 표시가 남아 있어도 젖는 데는 영향이 없습니다.
+
+업데이트한 뒤에도 lilToon 의상이 마르면 **진단 보고서 복사**로 복사한 보고서를 보내 주십시오. lilToon 임포터를 어디서 찾았는지가 보고서에 들어 있습니다. [문의하기](#support)
 
 ## VRCFury가 오래됨 {/* #vrcfury-old */}
 
@@ -425,6 +453,7 @@ Poiyomi 머티리얼 인스펙터의 **Third Party** 목록(예전 Poiyomi 11은
 - 젖는 머티리얼마다 젖음 셰이더가 들어가므로, 업로드 파일이 커지고 압축에도 시간이 걸립니다. [성능](./performance.mdx#upload-size)을 확인해 주십시오.
 - 업로드할 때 Poiyomi가 머티리얼을 잠그는 시간도 더해집니다.
 - 같은 설정으로 두 번째 업로드부터는 짧아집니다.
+- <ProductName />을 업데이트한 뒤의 첫 업로드도 오래 걸릴 수 있습니다. 1.0.3으로 업데이트한 뒤 첫 업로드는 젖음 셰이더를 한 번 다시 컴파일하므로, 의상이 많은 아바타는 20분쯤 걸릴 수 있습니다. 진행 표시가 그대로여도 Unity가 CPU를 쓰고 있으면 끄지 말고 기다려 주십시오.
 
 ## Hold on 창 {/* #hold-on */}
 
@@ -441,7 +470,7 @@ Unity의 **Hold on** 창은 Unity가 작업을 끝낼 때까지 기다리라는 
 
 ## 메뉴·파라미터가 한도를 넘음 {/* #over-limit */}
 
-VRChat은 아바타 하나의 동기화 파라미터를 **256비트**까지 쓸 수 있습니다. <ProductName />의 추천 메뉴는 87비트입니다. RealSweatSystem이나 다른 도구와 합쳐 한도를 넘으면 VRChat SDK가 업로드를 막습니다.
+VRChat은 아바타 하나의 동기화 파라미터를 **256비트**까지 쓸 수 있습니다. <ProductName />의 추천 메뉴는 87비트(RealSweatSystem과 함께 쓰는 아바타는 88비트)입니다. RealSweatSystem이나 다른 도구와 합쳐 한도를 넘으면 VRChat SDK가 업로드를 막습니다.
 
 1. **RealWet > 인게임 메뉴**의 **최종 동기화 비용**에서 <ProductName />이 쓰는 양을 확인합니다.
 2. 쓰지 않는 다이얼의 체크를 끕니다. 다이얼은 하나에 8비트, 토글은 1비트입니다. 예를 들어 **젖는 범위만 넓히기**, **젖음 경계**, **젖음 표현**을 빼면 24비트가 줄어듭니다.
@@ -449,7 +478,7 @@ VRChat은 아바타 하나의 동기화 파라미터를 **256비트**까지 쓸 
 
 - 버튼을 뺀 기능은 Unity에서 정한 값으로 계속 동작합니다.
 - 메뉴 한 페이지는 8칸입니다. <ProductName />은 칸이 모자라면 **다음** 페이지를 만들고, 메인 메뉴는 늘리지 않습니다.
-- VRCFury Parameter Compressor 같은 파라미터 압축 툴을 쓸 수도 있습니다. 압축 툴이 젖음 파라미터를 바꾸면 NDMF 결과 창에 알립니다.
+- 용량이 모자라면 VRCFury 1.1436.0 이상의 Parameter Compressor를 함께 쓰는 것을 권합니다. 압축 툴이 젖음 파라미터를 바꾸면 NDMF 결과 창에 알립니다.
 
 ## 메뉴가 안 보임 {/* #menu-missing */}
 
@@ -458,7 +487,7 @@ VRChat은 아바타 하나의 동기화 파라미터를 **256비트**까지 쓸 
 3. **RealWet > 인게임 메뉴**에서 **인게임 메뉴 적용 / 갱신**을 누릅니다.
 4. 다시 빌드하고 그 아바타를 확인합니다. 빌드가 실패했다면 이전 아바타를 보고 있을 수 있습니다.
 
-- 메뉴 파일이 없어졌다면 저장된 씬을 열 때 <ProductName />이 다시 만들고 연결합니다. 콘솔에 <strong>RealWet 인게임 메뉴 파일이 없어서 RealWet이 다시 만들고 연결했습니다. 씬을 저장해 주십시오.</strong>가 남으니 씬을 저장해 주십시오.
+- 메뉴 파일이 없어졌다면 저장된 씬을 열 때 <ProductName />이 다시 만들고 연결합니다. `RealWet` 오브젝트의 Inspector 위쪽에 <strong>RealWet 인게임 메뉴 파일이 없어서 RealWet이 다시 만들고 연결했습니다. 씬을 저장해 주십시오.</strong> 알림이 나오고, Console에는 영어로 `RealWet's in-game menu file was missing (…), so RealWet made it again and linked it. Save the scene to keep it.`가 남습니다. 씬을 저장해 주십시오.
 - 메뉴를 직접 옮기거나 다른 메뉴로 바꿨다면 <ProductName />은 그 메뉴를 그대로 둡니다. 다시 만들려면 `RealWet` 오브젝트의 **MA Menu Installer**를 지운 뒤 **인게임 메뉴** 탭의 **인게임 메뉴 고치기**를 눌러 주십시오.
 - 메뉴가 다른 언어로 보이면, Unity에서 원하는 언어를 고른 뒤 메뉴를 갱신하고 다시 빌드해 주십시오.
 - 메뉴 버튼은 있는데 아이콘만 없다면, 패키지의 `Icons` 폴더를 다시 가져온 뒤 메뉴를 갱신해 주십시오. 기능은 그대로 쓸 수 있습니다.
@@ -480,6 +509,7 @@ PC용 Unity와 VRChat은 셰이더 한 패스가 쓰는 텍스처를 64개까지
 - 그런 슬롯은 분홍색 대신 원래 모습으로 미리보기하고 안내를 띄웁니다.
 - VRChat PC 업로드는 셰이더를 먼저 잠그므로, 이 슬롯은 대개 젖은 채로 올라갑니다.
 - 업로드의 최종 셰이더도 한도를 넘으면 그 머티리얼만 원래 마른 머티리얼로 돌아갑니다. 업로드는 멈추지 않습니다.
+- 1.0.2 이하에서는 UV3와 UV4를 모두 쓰는 Poiyomi 10.0.20 이후·Poiyomi 11 파츠에서, 한도를 넘은 칸이 원래 머티리얼로 돌아가지 못해 보이지 않거나 분홍색으로 보일 수 있었습니다. 1.0.3에서 고쳤습니다.
 - 젖음을 유지하려면 그 머티리얼에서 쓰지 않는 텍스처 기능(MatCap, 발광, 데칼 등)을 줄인 뒤 다시 빌드해 주십시오.
 
 ## 등록된 의상이 0개 {/* #no-outfits */}

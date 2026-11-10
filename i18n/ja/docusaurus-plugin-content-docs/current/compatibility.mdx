@@ -20,7 +20,7 @@ description: 対応するUnity・SDK・NDMF・Modular Avatarのバージョン�
 | VRChat Avatars SDK | 3.10.0以上、4.0未満 |
 | NDMF | 1.13.1以上、2.0未満 |
 | Modular Avatar | 1.14.0以上、2.0未満 |
-| VRCFury（使う場合） | 1.1436.0以上。1.1258以下では、ビルドのときに`SweatAmount`のエラーが出ることがあります。 |
+| VRCFury（使う場合） | 1.1436.0以上 |
 | エディター | WindowsのUnityエディター（購入認証がWindowsでしか動かないため） |
 | アバター | Humanoidのアバター（人の形でなくてもかまいません） |
 | プラットフォーム | PC専用（Direct3D 11）。Quest・モバイルには対応していません。 |
@@ -31,6 +31,7 @@ description: 対応するUnity・SDK・NDMF・Modular Avatarのバージョン�
 - 自動で置く濡れ開始点と透け保護の範囲は、体の形によっては合わないことがあります。[濡れる場所や透け保護の位置がアバターに合わない](./troubleshooting.mdx#placement-mismatch)
 - パッケージをインポートした後に**CookiTools**メニューがない場合や、Missing Scriptが表示される場合は、[スクリプトが壊れて見える、またはCookiToolsメニューがない](./troubleshooting.mdx#scripts-missing)を確認してください。
 - 同じアバターをQuest（Android）向けにビルドすると、ゲーム内メニュー、同期パラメーター、FXレイヤーは入りますが、服は濡れません。ビルドは止まりません。メニューとパラメーターを節約するには、Quest用に別に作ったアバターのコピーから<ProductName />を削除してください。
+- 同期パラメーターの容量（256ビット）が足りない場合は、VRCFury 1.1436.0以上のParameter Compressorを一緒に使うことをおすすめします。<ProductName />が使う量は、[同期容量](./usage/in-game-menu.mdx#sync-cost)にあります。
 - バージョンが合わない場合は、どのパッケージがないか、または更新が必要かを、インストール画面が知らせます。<ProductName />が他のパッケージを自動で更新することはありません。
 
 ## シェーダー {/* #shaders */}
@@ -42,7 +43,7 @@ description: 対応するUnity・SDK・NDMF・Modular Avatarのバージョン�
 | 項目 | 内容 |
 | --- | --- |
 | 対応するバリエーション | 基本形、**Outline Early**、**Two Pass**、**Fade**モード |
-| 試験したバージョン | Poiyomi 9.3、10.0.9、10.0.24、Pro 11.0.0、11.0.18、11.0.22、11.0.24、11.0.29、11.0.32、11.0.34、11.0.35、11.0.36、11.0.38 |
+| 試験したバージョン | Poiyomi 9.3、10.0.9、10.0.24、Pro 11.0.0、11.0.18、11.0.22、11.0.24、11.0.29、11.0.32、11.0.34、11.0.35、11.0.36、11.0.38、11.0.44 |
 | ロックされたマテリアル | 元のシェーダーの情報を確認できれば濡れます。アップロード時にThryがロックする場合も同じです。 |
 | 対応していないもの | Poiyomi 8.x以下、Fur、Grab Pass、名前だけ似ているカスタム拡張版、パッケージの外にコピーしたシェーダー、別のシェーダーモジュールを入れたPoiyomi |
 
@@ -61,6 +62,8 @@ description: 対応するUnity・SDK・NDMF・Modular Avatarのバージョン�
 | 対応していないもの | Fur、Gem、ユーザーが改変したシェーダー |
 
 lilToonで反射（Reflection）とメタリックをオンにしたマテリアルでも、濡れた光沢は消えません。
+
+プロジェクトに`LILTOON_DISABLE_ASSET_MODIFICATION`が設定されていると、lilToonが<ProductName />のlilToonシェーダーファイル（`.lilcontainer`）をインポートしないため、lilToonの衣装がすべて乾いたままビルドされます。<ProductName />が、原因と直す方法を案内します。[lilToonのシェーダーインポーターがオフになっている](./troubleshooting.mdx#liltoon-importer-off)
 
 ### 実験機能：PCSS4VRC（lilToon）・lilSSRT {/* #experimental */}
 
@@ -93,7 +96,7 @@ Sunao、UnityChanToon、UTSなど、別系統のシェーダーには濡れを�
 | **TexTransTool (TTT)** | TTTでテクスチャを変えたPoiyomiマテリアルも、アップロードで濡れます。**Atlas Texture**がマテリアルを1つにまとめると、基準になるマテリアルのスロットは濡れ、別のマテリアルにまとめられたスロットだけが濡れません（NDMFの結果ウィンドウでお知らせします）。そのスロットも濡らすには、そのマテリアルを結合グループから外してください。 |
 | **d4rk Avatar Optimizer** | 基本設定（Basic）なら、そのままにします。シェーダーを書き換える設定（**Write Properties as Static Values**、**Shader Toggles**、**Merge Different Property Materials**、**Merge Same Dimension Textures**）がオンの場合は、アップロード時に、濡れるパーツだけをd4rkから自動で外します。保存された設定は変更しません。インストール画面では、これらの設定をオフにすることをおすすめしています。 |
 | **Avatar Compressor (LAC)** | 0.8.0と0.9.0を<ProductName /> 1.0.2と一緒にビルドして、濡れが残ることを確認しました。1.0.1以下でVRCFuryと一緒に使うときに、衣装が1つまるごと乾いている場合は、[ほかのツールがビルド中にマテリアルを変えて濡れない](./troubleshooting.mdx#material-replaced)を確認してください。 |
-| **VRCFury** | 1.1436.0以上を使ってください。1.1258以下では、ビルドのときに`SweatAmount`のエラーが出ることがあります。トグルとマテリアルの切り替えは、そのまま使えます。最初からオンのトグルと**Apply During Upload**が入れるマテリアルも濡れます。切り替わるマテリアルが濡れない場合は、NDMFの結果ウィンドウに案内が出ます。 |
+| **VRCFury** | 1.1436.0以上を使ってください。同期パラメーターの容量（256ビット）が足りない場合は、Parameter Compressorを一緒に使うことをおすすめします。トグルとマテリアルの切り替えは、そのまま使えます。最初からオンのトグルと**Apply During Upload**が入れるマテリアルも濡れます。切り替わるマテリアルが濡れない場合は、NDMFの結果ウィンドウに案内が出ます。 |
 | **ボーンを動かすツール** | ビルド中に別のツールがボーンを動かしても（例：NDExtensionsのRebake Humanoid）、アップロードでプレビューと同じ位置が濡れます。 |
 
 アニメーションでRendererの**メッシュそのもの**を切り替える構成には、対応していません。メッシュを切り替えるアニメーションを外すか、切り替わるメッシュを、<ProductName />から除外した別のRendererに分けてください。
@@ -114,7 +117,7 @@ Sunao、UnityChanToon、UTSなど、別系統のシェーダーには濡れを�
 
 - Unityで初期値を変えるには、**RealWet**の**入力モード**の行で、**連動する**または**連動解除**を選びます。
 - <ProductName />で連動を切り替えても、肌の汗の量は変わりません。
-- RealSweatSystemの**汗の表示**と**自分にだけ表示**は、肌の汗にだけ適用されます。衣装の濡れは、<ProductName />の<strong>衣装の濡れを表示</strong>と衣装別表示でだけ隠します。
+- RealSweatSystemの**汗の表示**と**自分にだけ表示**は、肌の汗にだけ適用されます。衣装の濡れは、<ProductName />の<strong>衣装の濡れを表示</strong>と衣装別表示で隠します。ほかの人にだけ隠すには、<ProductName />の[濡れた衣装を自分にだけ表示](./usage/in-game-menu.mdx#linked-local-only)をオンにします。
 - **濡れ**メニューは、RSSのメニューの中ではなく、アバターのメインメニューに独立して追加されます。
 - RealSweatSystem 2.0.0のLate Queueの汗シェーダーも肌の汗として認識し、濡れた服をボディと汗の後に描きます。
 - 選んだアバターのRealSweatSystemが旧バージョン（1.x）の場合は、インストール画面に更新の案内が1行出ます。

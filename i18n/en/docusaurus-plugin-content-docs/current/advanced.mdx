@@ -111,7 +111,7 @@ If the same avatar has RealSweatSystem, <ProductName /> detects it. A new instal
 [![In-game menu with RealSweat linked](/img/guide/M04-en.png)](/img/guide/M04-en.png)
 
 - To change the starting value in Unity, choose **Link** or **Unlink** in the **Input Mode** row of **RealWet**.
-- RealSweatSystem's **Sweat Display** and **Only Visible to Me** apply only to the sweat on the skin. Clothing wetness is hidden only with **Show Clothing Wetness** and the outfit visibility toggles.
+- RealSweatSystem's **Sweat Display** and **Only Visible to Me** apply only to the sweat on the skin. Clothing wetness is hidden with **Show Clothing Wetness** and the outfit visibility toggles. To hide it only from other players, turn on [Wet Clothes Only Visible to Me](./usage/in-game-menu.mdx#linked-local-only).
 - The **Wet** menu goes into the avatar's main menu on its own, not inside the RSS menu.
 - The sweat shaders of RealSweatSystem 2.0.0 (Late Queue included) are recognized as skin sweat too, and wet clothes are drawn after the body and the sweat.
 - If the selected avatar's RealSweatSystem is 1.x, the setup window shows a one-line update notice.
@@ -143,7 +143,7 @@ For how each tool behaves, see [Compatibility](./compatibility.mdx#optimizers).
 ## Parameters and sync bits {/* #parameters */}
 
 - Synced parameter names start with `Cooki/ClothWet…`. Only the menu items you choose use them.
-- Each dial uses 8 bits, and each toggle uses 1 bit. The recommended menu is 87 bits, and every item together is 94 bits (VRChat's limit is 256 bits).
+- Each dial uses 8 bits, and each toggle uses 1 bit. The recommended menu is 87 bits, and every item together is 94 bits (VRChat's limit is 256 bits). An avatar that also uses RealSweatSystem uses 1 bit more (88 bits, 95 bits).
 - Features not in the menu work with the values set in Unity and use no sync bits.
 
 The parameter list is in [Technical specifications](./technical-specifications.mdx#parameters).
