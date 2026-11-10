@@ -20,7 +20,7 @@ Please start by finding your symptom in the table below. If a problem keeps comi
 | A see-through protection region is off from the chest or groin | [Wet spots or protection don't fit the avatar](#placement-mismatch) |
 | The uploaded avatar shows none of the <ProductName /> effects | [Uploaded without purchase activation](#not-activated) |
 | A warning starting with `RealWet:` appears in the NDMF results window | [NDMF warnings](#ndmf-warnings) |
-| The build shows an error that mentions `SweatAmount` | [VRCFury is too old](#vrcfury-old) |
+| On 1.0.1 or earlier, the build shows an error that mentions `SweatAmount` | [VRCFury is too old](#vrcfury-old) |
 | Only outfits processed by an anti-ripping or polygon reduction tool stay dry | [Tools that change outfit meshes](#mesh-tools) |
 | Clothes look pink | [Pink materials](#pink) |
 | Clothes get wet in the preview, but not in the build, Play or upload | [Wet in the preview, dry in the build, Play or upload](#preview-ok-build-dry) |
@@ -87,7 +87,7 @@ In VCC, open **Manage Project**, check these packages and update them to the lat
 - In this state, **CookiTools > RealWetSystem > Setup／Uninstall** shows the **RealWet — Install Compatibility Check** message instead of the setup window. Your avatar is not changed.
 - If NDMF is not installed at all, the <ProductName /> components on the `RealWet` object and your outfits show Missing Script.
 - <ProductName /> does not update packages automatically.
-- This window does not check VRCFury. An old VRCFury causes an error when you build. [VRCFury is too old](#vrcfury-old)
+- This window does not check VRCFury. If you use VRCFury, please use 1.1436.0 or later. [VRCFury is too old](#vrcfury-old)
 
 ### 2. Another package has a red compile error {/* #scripts-compile-error */}
 
@@ -368,9 +368,9 @@ If lilToon outfits still stay dry after updating, please send the report copied 
 
 ## VRCFury is too old {/* #vrcfury-old */}
 
-If an avatar that uses VRCFury shows an error that mentions `SweatAmount` during the build, VRCFury may be an old version. This error has been seen with VRCFury 1.1258 and earlier.
+In <ProductName /> 1.0.1 and earlier, on avatars that use VRCFury 1.1258 or earlier, every uploaded outfit stayed dry and the build showed an error that mentions `SweatAmount`. 1.0.2 fixed this.
 
-**Fix:** Please update VRCFury to **1.1436.0 or later** in VCC, then build again. Avatars without VRCFury are not affected.
+**Fix:** Please update <ProductName /> to 1.0.2 or later. If you use VRCFury, please use **1.1436.0 or later**. Avatars without VRCFury are not affected.
 
 ## Tools that change outfit meshes {/* #mesh-tools */}
 
@@ -537,7 +537,7 @@ On PC, Unity and VRChat can draw only up to 64 textures used by one shader pass.
 1. Please back up your project before updating.
 2. Don't delete the `Assets/CookiTools/RealWetSystem` folder; please import the new package right over it. You don't need to uninstall first.
 3. If red errors remain in the Console right after importing, please restart Unity once.
-4. In the setup window, press **Update** for each avatar.
+4. Upload again. To add a new in-game menu item, first press **Update** once for each avatar in the setup window.
 5. The first preview or build prepares the wet shaders again, so it takes long once.
 
 - Your saved settings, start points and protection regions stay as they are.

@@ -14,13 +14,16 @@ This page lists the main changes in each version of <ProductName />, newest firs
 2. Don't delete the `Assets/CookiTools/RealWetSystem` folder. Please import the new package right over it. You don't need to uninstall first.
 3. When you import, <ProductName /> moves files that only existed in older versions to the system trash and reports it on one line in the Console. It doesn't touch files you added yourself or files the new package uses.
 4. If red errors remain in the Console right after importing, please restart Unity once.
-5. In **CookiTools > RealWetSystem > Setup／Uninstall**, press **Update** for each avatar. If the saved start point layout differs from the new recommended layout, the **Update RealWetSystem** window asks you to choose **Reset Wet Start Points**, **Keep Current Settings** or **Cancel**. If you're not sure, please choose **Keep Current Settings**. A progress bar appears while it updates.
+5. The fixes of a new version apply once you import it and upload again. To add a new in-game menu item, press **Update** once for each avatar in **CookiTools > RealWetSystem > Setup／Uninstall**.
+   - In 1.0.3, an avatar that also uses RealSweatSystem gets **Wet Clothes Only Visible to Me** and uses 1 more sync bit.
+   - If the saved start point layout differs from the new recommended layout, the **Update RealWetSystem** window asks you to choose **Reset Wet Start Points**, **Keep Current Settings** or **Cancel**. If you're not sure, please choose **Keep Current Settings**. A progress bar appears while it updates.
 
 {/* SHOT U13: update dialog Reset Wet Start Points / Keep Current Settings */}
 [![Update dialog asking to reset the wet start points](/img/guide/U13-en.png)](/img/guide/U13-en.png)
 
 6. The first preview or build after an update takes longer once, because the wet shaders are prepared again.
-7. If a version changes the in-game menu's names or items, press **Update** or **Apply / Update Runtime Menu**, then please build again. An avatar you already uploaded gets the new version only after you upload it again.
+7. An avatar you already uploaded gets the new version only after you upload it again.
+   - To use a new in-game menu item, press **Update** before you upload again. You can also check the item in **RealWet > In-Game Menu** and press **Apply / Update Runtime Menu**.
 
 - Your saved settings, start points and protection regions stay as they are. To use the new recommended protection shape, see [Protection regions after an update](./usage/see-through-protection.mdx#after-update).
 - Only old default looks you never touched switch once to the new default look. When that happens, a notice and **Revert...** appear in **RealWet > Outfit Management**. If you update with **Switch it to the new default while updating** turned off in the setup window, nothing is switched.
@@ -150,7 +153,7 @@ The first public release of <ProductName />.
 - Semi-transparent hair copies whose shader SeeThroughHair changes during the build don't get wet. The rest of the hair gets wet.
 - Setups that swap a renderer's mesh itself with an animation are not supported.
 - Tools that change the vertex order, the submeshes or the mesh structure of outfit meshes during the upload (anti-ripping tools, polygon reduction tools and so on) may not be compatible. Outfits or parts that no longer match go up dry, and the NDMF build results window shows the reason. [Tools that change outfit meshes](./troubleshooting.mdx#mesh-tools)
-- With VRCFury 1.1258 or earlier, the build can show a `SweatAmount` error. Please use VRCFury 1.1436.0 or later.
+- If you use VRCFury, please use 1.1436.0 or later. Outfits staying dry with 1.1258 or earlier was fixed in 1.0.2.
 - Poiyomi 8.x and earlier are not supported.
 
 Other limitations are listed in [Technical specifications](./technical-specifications.mdx#known-limits).

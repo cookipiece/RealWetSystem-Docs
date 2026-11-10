@@ -3,7 +3,7 @@
 Documentation website source for **RealWetSystem**, a tool that adds a wet look (deeper colour, gloss and see-through) to clothing on VRChat PC avatars.
 
 - Languages: Korean (default), Japanese, English
-- Current product release: v1.0.0
+- Current product release: v1.0.3
 - Theme: the shared CookiTools docs theme (see `src/css/custom.css`; the only per-site style value is `src/css/product.css`)
 
 This repository contains documentation and website assets only. It does not contain the product package, shaders, scripts or reusable product data.
