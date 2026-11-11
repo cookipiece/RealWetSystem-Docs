@@ -30,6 +30,16 @@ This page lists the main changes in each version of <ProductName />, newest firs
 - The menu files made for each avatar are in `Assets/CookiTools/Generated/RealWet`, outside the package folder, so overwriting the package doesn't delete them.
 - Updating doesn't need purchase activation. However, uploads from a PC that is not activated leave the effects out, so please complete [purchase activation](./license-activation.mdx) on the PC you upload from.
 
+## 1.0.4 — Outfits that stayed dry with Avatar Optimizer {/* #104 */}
+
+If you use 1.0.3 or earlier, import the new package over it and upload again. Your saved settings and the positions of your wet start points and protection regions do not change. The in-game menu, its parameters and its sync bits stay the same too. 1.0.4 adds no new in-game menu item, so you don't need to press **Update** in the setup window.
+
+- Avatar Optimizer (AAO) **Trace and Optimize** merges material slots that use the same material. If those slots had different wetness settings (see-through, for example), versions up to 1.0.3 uploaded the whole outfit dry although it was wet in the preview. This can happen when an outfit that uses one material in two or more slots of one mesh is registered with **Outerwear Only (Not Underwear) (Recommended)**. From 1.0.4, each of those slots gets wet with the same setting as in the preview. <ProductName /> changes only the upload copy. The original materials and your saved settings do not change.
+- If another tool then merges those slots back into one material (a texture atlas that merges materials, for example), the merged slot gets wet with one setting. <ProductName /> picks a setting that is never more see-through than any of the parts was set to, and the NDMF build results show **RealWet: merged material slots use one wetness setting**. Other parts of the same outfit get wet as usual.
+- A slot that you turned off for wetness and that shares its material with a wet slot now stays dry, as in the preview. Up to 1.0.3, AAO merged the two slots and the turned-off slot got wet too.
+- <ProductName /> now follows AAO's automatic mesh merging on AAO 1.9.0 or later. Up to 1.0.3 it followed it only on AAO 1.9.15 or later, so with an older AAO the automatically merged parts were uploaded dry. With AAO older than 1.9.0, only those parts stay dry, as before, and the dry-part notice in the NDMF build results names the cause and the AAO version you need. [Compatibility](./compatibility.mdx#optimizers)
+- Outfits that none of the cases above apply to build the same as before.
+
 ## 1.0.3 — Outfits that stayed dry, breast bone fields, Wet Clothes Only Visible to Me {/* #103 */}
 
 If you use 1.0.2 or earlier, import the new package over it. Your saved settings and the positions of your wet start points and protection regions do not change. On an avatar that is already installed, the in-game menu, its parameters and its sync bits also stay the same until you press **Update**.
