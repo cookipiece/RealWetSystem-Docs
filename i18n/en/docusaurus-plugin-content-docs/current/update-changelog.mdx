@@ -32,13 +32,13 @@ This page lists the main changes in each version of <ProductName />, newest firs
 
 ## 1.1.0 — Natural Sweat, a new sweat point layout {/* #110 */}
 
-If you use 1.0.4 or earlier, import the new package over it and upload again. Your saved settings and the positions of your wet start points and protection regions do not change. An avatar that is already installed keeps its current sweat point layout (Classic), and outfits you already registered keep their wet look. The in-game menu, its parameters and its sync bits stay the same too. 1.1.0 adds no new in-game menu item, so you don't need to press **Update** in the setup window.
+If you use 1.0.4 or earlier, import the new package over it and upload again. Your saved settings and the positions of your wet start points and protection regions do not change. The one exception: a Classic armpit strength still at the old default (140%) becomes 100% (see **Classic armpits** below). An avatar that is already installed keeps its current sweat point layout (Classic), and outfits you already registered keep their wet look, apart from the armpits. The in-game menu, its parameters and its sync bits stay the same too. 1.1.0 adds no new in-game menu item, so you don't need to press **Update** in the setup window.
 
 ### Choose a sweat point layout
 
 - There are now two sweat point layouts.
   - **Natural Sweat (Recommended)**: sweat seeps out in many small places and joins up. Many small spots and pale zones get wet, so with little sweat some areas stay less wet, and as sweat rises the wet areas join up. It has 63 sweat points (61 on a body without cleavage).
-  - **Classic (Layout up to 1.0.4)**: spreads widely from 42 broad sweat points. It is the layout used up to 1.0.4, unchanged.
+  - **Classic (Layout up to 1.0.4)**: spreads widely from 42 broad sweat points. The positions and sizes of its sweat points are the layout used up to 1.0.4, unchanged; only the armpit strength changed (see **Classic armpits** below).
 - **Natural Sweat** differs from Classic in these places. The arms and legs are the same as in Classic.
   - Back: small spots along the spine and pale zones get wet. Even with a lot of sweat, the whole back doesn't get soaked at once.
   - Chest: small spots sit on the front of the chest, sized to the width of the chest. The armpits and the crease under the chest spread only a little.
@@ -49,6 +49,12 @@ If you use 1.0.4 or earlier, import the new package over it and upload again. Yo
 - The old **Natural sweat layout…** button became this menu.
 - The layout is calculated once when an outfit is prepared. The in-game menu, parameters, sync bits and in-game cost are the same with either layout.
 - An avatar can now hold up to 128 avatar-wide start points (64 up to 1.0.4). Outfit-only start points stay limited to 32 per outfit.
+
+### Classic armpits
+
+- Fixed the armpits in the Classic layout becoming far more see-through than other wet areas when the arms are raised. The Classic layout made only its two armpit start points 140% strong, so the cloth around the armpits got fully wet over a wide area. They are now 100%, like every other start point. How far the wetness spreads down the sides and when it starts are unchanged, so the armpits still get wet first.
+- On avatars that are already installed, a Classic armpit strength still at the old default (140%) changes to 100% once, when you open the scene after updating. Preview and upload use 100% as well, and saving the scene keeps it.
+- Nothing changes if you set the armpit's **Strength (%)** (**Customize this point's wetting**) to a value other than 140%, if **Customize this point's wetting** is off, for the **Natural Sweat** armpits (100%), or for start points you made yourself. If you raise it back to 140% after the change, that value is kept. [Wet start points](./usage/wet-start-points.mdx)
 
 ### Wet edge of new outfits
 
