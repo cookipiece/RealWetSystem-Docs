@@ -16,7 +16,7 @@ This page lists the main changes in each version of <ProductName />, newest firs
 4. If red errors remain in the Console right after importing, please restart Unity once.
 5. The fixes of a new version apply once you import it and upload again. To add a new in-game menu item, press **Update** once for each avatar in **CookiTools > RealWetSystem > Setup／Uninstall**.
    - In 1.0.3, an avatar that also uses RealSweatSystem gets **Wet Clothes Only Visible to Me** and uses 1 more sync bit.
-   - If the saved start point layout differs from the new recommended layout, the **Update RealWetSystem** window asks you to choose **Reset Wet Start Points**, **Keep Current Settings** or **Cancel**. If you're not sure, please choose **Keep Current Settings**. A progress bar appears while it updates.
+   - If the saved start points differ from a freshly made copy of the sweat point layout in use, the **Update RealWetSystem** window asks you to choose **Reset Wet Start Points**, **Keep Current Settings** or **Cancel**. Reset makes the layout in use again; it doesn't switch to the other layout. If you're not sure, please choose **Keep Current Settings**. A progress bar appears while it updates.
 
 {/* SHOT U13: update dialog Reset Wet Start Points / Keep Current Settings */}
 [![Update dialog asking to reset the wet start points](/img/guide/U13-en.png)](/img/guide/U13-en.png)
@@ -25,10 +25,52 @@ This page lists the main changes in each version of <ProductName />, newest firs
 7. An avatar you already uploaded gets the new version only after you upload it again.
    - To use a new in-game menu item, press **Update** before you upload again. You can also check the item in **RealWet > In-Game Menu** and press **Apply / Update Runtime Menu**.
 
-- Your saved settings, start points and protection regions stay as they are. To use the new recommended protection shape, see [Protection regions after an update](./usage/see-through-protection.mdx#after-update).
+- Your saved settings, start points, protection regions and sweat point layout stay as they are. To use the other sweat point layout, please use **Preset ▼** in [Reset and re-layout](./usage/wet-start-points.mdx#reset). To use the new recommended protection shape, see [Protection regions after an update](./usage/see-through-protection.mdx#after-update).
 - Only old default looks you never touched switch once to the new default look. When that happens, a notice and **Revert...** appear in **RealWet > Outfit Management**. If you update with **Switch it to the new default while updating** turned off in the setup window, nothing is switched.
 - The menu files made for each avatar are in `Assets/CookiTools/Generated/RealWet`, outside the package folder, so overwriting the package doesn't delete them.
 - Updating doesn't need purchase activation. However, uploads from a PC that is not activated leave the effects out, so please complete [purchase activation](./license-activation.mdx) on the PC you upload from.
+
+## 1.1.0 — Natural Sweat, a new sweat point layout {/* #110 */}
+
+If you use 1.0.4 or earlier, import the new package over it and upload again. Your saved settings and the positions of your wet start points and protection regions do not change. An avatar that is already installed keeps its current sweat point layout (Classic), and outfits you already registered keep their wet look. The in-game menu, its parameters and its sync bits stay the same too. 1.1.0 adds no new in-game menu item, so you don't need to press **Update** in the setup window.
+
+### Choose a sweat point layout
+
+- There are now two sweat point layouts.
+  - **Natural Sweat (Recommended)**: sweat seeps out in many small places and joins up. Many small spots and pale zones get wet, so with little sweat some areas stay less wet, and as sweat rises the wet areas join up. It has 63 sweat points.
+  - **Classic (Layout up to 1.0.4)**: spreads widely from 42 broad sweat points. It is the layout used up to 1.0.4, unchanged.
+- **Natural Sweat** differs from Classic in these places. The arms and legs are the same as in Classic.
+  - Back: small spots along the spine and pale zones get wet. Even with a lot of sweat, the whole back doesn't get soaked at once.
+  - Chest: small spots sit on the front of the chest, sized to the width of the chest. The armpits and the crease under the chest spread only a little.
+  - Belly: one spot in the middle and a pale zone are added.
+  - Buttocks: they get wet more slowly than in Classic, so even with a lot of sweat the outer parts stay less wet.
+- New installs start with **Natural Sweat**. In the setup window, if you choose **From Sweat Spots (Recommended)** or **Both** in **3. Where should wetness start?**, two **Sweat point layout** cards appear below them, and you can switch to **Classic** there. [3.3 Where should wetness start?](./tutorial.mdx#start-mode)
+- Updating alone doesn't change the sweat points of an avatar that is already installed. To use the new layout, open **Edit wet / protection regions…** in **RealWet > Wetness Settings**, and in the **Wet start points** tab choose **Natural Sweat (Recommended)** from **Preset ▼** beside **Reset all start points**. It replaces the position, size and per-sphere properties of the saved avatar-wide start points, so a confirmation dialog appears, and Ctrl+Z undoes it. Choosing **Classic** in the same menu goes back to the layout used up to 1.0.4. The name of the layout in use shows beside the button. [Reset and re-layout](./usage/wet-start-points.mdx#reset)
+- The old **Natural sweat layout…** button became this menu.
+- The layout is calculated once when an outfit is prepared. The in-game menu, parameters, sync bits and in-game cost are the same with either layout.
+- An avatar can now hold up to 128 avatar-wide start points (64 up to 1.0.4). Outfit-only start points stay limited to 32 per outfit.
+
+### Wet edge of new outfits
+
+- Newly registered outfits start with **Wet Edge Softness (%)** at 60% (25% up to 1.0.4). The border between wet and dry areas blends more softly.
+- The values of outfits you already registered don't change. An avatar whose **New Outfits' Wet Look** you changed yourself keeps the value you chose; on an avatar where you never changed it, outfits you register from now on use 60%.
+- To make an outfit you already registered look the same, please raise **Wet Edge Softness (%)** to 60% in that outfit's **Advanced Look Settings**. [Wet look](./usage/wet-settings.mdx#look)
+
+### Chest and groin see-through protection regions
+
+- Fixed preparation stopping with `Sensitive-area protection 3 is invalid` right after installing with the recommended protection regions, which left the outfits dry in the upload. It happened on avatars whose skin weighted to the hip bone reaches far behind the body, such as a long tail: the recommended region behind the groin was made larger than the allowed size (1 m per side).
+- Recommended regions are now made within the allowed size. Regions that are already saved are calculated within the allowed size without being made again. The saved values don't change.
+- A value the region's shape doesn't use (such as a box size saved with a capsule region) no longer makes the whole region unusable.
+- Regions that really can't be used, such as a region that follows another avatar's bone, are reported as an error, as before. The error now includes the name of that region.
+
+### Notice for materials locked with Poiyomi
+
+- If the original shader of a material locked with Poiyomi isn't in the project (it was locked with a version or edition that the installed Poiyomi doesn't have), that part stays dry, as before. Instead of the `No com.poiyomi.pro manifest…` line shown until now, <ProductName /> tells you in Korean, Japanese or English what the material is locked with, what is installed now and what to do. [Unsupported or unverified shaders](./troubleshooting.mdx#shaders)
+
+### Purchase activation
+
+- Fixed the cause of purchase activation failing in Linux and macOS editors: the activation data was stored only in a Windows-only way. Nothing changes on Windows, and a PC that is already activated doesn't need to activate again.
+- <ProductName /> is tested on Windows. It has not been tested yet in Linux and macOS editors.
 
 ## 1.0.4 — Outfits that stayed dry with Avatar Optimizer {/* #104 */}
 
