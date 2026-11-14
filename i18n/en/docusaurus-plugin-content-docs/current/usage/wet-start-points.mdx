@@ -39,16 +39,15 @@ Start points are also not used while the in-game **Whole Area** is on. The whole
 
 ## Sweat point layouts {/* #layouts */}
 
-There are two layouts for placing the sweat points (wet start points). A new install starts with **Natural Sweat (Recommended)**.
+There are two layouts for placing the sweat points (wet start points). A new install always starts with **Natural Sweat**; you don't choose the layout in the setup window.
 
 | Layout | How clothes get wet |
 | --- | --- |
 | **Natural Sweat (Recommended)** | Sweat seeps out in many small places and joins up. Small spots and pale zones get wet, so with little sweat some areas stay less wet, and as sweat rises the wet areas join up. |
 | **Classic (Layout up to 1.0.4)** | Spreads widely from 42 broad sweat points. This is the layout used up to 1.0.4. |
 
-- On a new install, you choose it with the **Sweat point layout** cards in the setup window. [3.3 Where should wetness start?](../tutorial.mdx#start-mode)
-- After installing, you change it with **Preset ▼** in the editor. [Reset and re-layout](#reset)
-- Updating alone doesn't change the start points of an avatar that is already installed.
+- An avatar installed with 1.0.4 or earlier uses **Classic**, and importing the package alone doesn't change that. When you press **Update** in the setup window on an avatar that uses the Classic layout, a window titled **The sweat point layout has changed** appears, and **Switch to the new layout** changes it to **Natural Sweat**. [3.3 Where should wetness start?](../tutorial.mdx#start-mode)
+- After installing, you can also change it with **Preset ▼** in the editor. **Classic (Layout up to 1.0.4)** in that menu is only for going back to the earlier layout. [Reset and re-layout](#reset)
 - The layout is calculated once when an outfit is prepared. The in-game menu, synced parameters and in-game cost are the same with either layout.
 
 ## Automatic layout {/* #auto-layout */}
@@ -62,7 +61,7 @@ On a new install, <ProductName /> places start points fitted to this avatar's bo
 - The spheres around the chest are placed from the breast bones. If the wrong breast bones were found, put this avatar's breast bones into the **Left breast anchor** and **Right breast anchor** fields of **1. Body meshes** in the setup window. [Body meshes](../tutorial.mdx#body)
 - On an avatar shrunk with bone scale (Hips, Armature and so on), the size and the search range of the spheres fit the shrunken body. The spheres around the chest land in the same place on the same body when it is shrunk.
 - Chibi bodies whose arm bones sit inside the torso, and bodies with sparse meshes, also get their armpit and side points on the skin.
-- These rules apply only to a new install, to choosing a layout with **Preset ▼**, and to resets. Saved start points do not change.
+- These rules apply only to a new install, to choosing a layout with **Preset ▼** or with **Switch to the new layout** when you update, and to resets. Saved start points do not change.
 - Parts that couldn't be confirmed from the weights, parts found on only one side, and parts that fall on an edge where the body was deleted under the clothes are placed with the older bone-based layout, for those parts only. Start points that need a check are named in the install results.
 - For kitbashed bodies merged with MA Merge Armature, RealWet links the bones by name to judge them.
 - Bones such as fingers or a jaw scaled to 0 to hide them don't block the layout. If the bone a sphere would attach to, or its parent, has a scale of 0, RealWet names that bone and does not create that sphere.
@@ -163,11 +162,11 @@ Adding, duplicating and deleting can all be undone with Ctrl+Z.
 | **Save current position as default…** | Makes the current position and size this sphere's defaults. Resetting later returns it here. |
 | **Reset wetting properties** | Resets wetting properties such as strength, spread and pattern. |
 | **Reset all start points** | A menu that resets the position, size and properties of all spheres at once (**All positions…**, **All sizes…**, **All positions + sizes…**, **Reset wetting properties for all points…**). |
-| **Preset ▼** | Sits beside **Reset all start points**. Choose **Natural Sweat (Recommended)** or **Classic (Layout up to 1.0.4)**, and after a confirmation dialog the position, size and per-sphere properties of all avatar-wide start points are replaced with that layout. The layout in use has a check mark, and its name shows beside the button, for example **Current: Natural Sweat**. Spheres you edited yourself change too, so please read the confirmation dialog before you press **Apply**. Protection regions and materials stay as they are. It appears only on Humanoid avatars. |
+| **Preset ▼** | Sits beside **Reset all start points**. Choose **Natural Sweat (Recommended)** or **Classic (Layout up to 1.0.4)**, and after a confirmation dialog the position, size and per-sphere properties of all avatar-wide start points are replaced with that layout. New installs always start with **Natural Sweat**; **Classic** is only for going back to the layout used up to 1.0.4. The layout in use has a check mark, and its name shows beside the button, for example **Current: Natural Sweat**. Spheres you edited yourself change too, so please read the confirmation dialog before you press **Apply**. Protection regions and materials stay as they are. It appears only on Humanoid avatars. |
 | **Add Missing Sweat Points** | Keeps the current spheres and adds only the spheres of the layout in use that are missing. It appears only when spheres are missing. |
 
 - All of these can be undone with Ctrl+Z.
-- Spheres that are saved or that you moved yourself don't move just because you update, and the sweat point layout doesn't change either. If, when you update, the saved start points differ from a freshly made copy of the layout in use, the setup window asks you to choose **Reset Wet Start Points** or **Keep Current Settings**. Reset makes the layout in use again; it doesn't switch to the other layout. To use the other layout, please use **Preset ▼**.
+- Spheres that are saved or that you moved yourself don't move just because you update. On an avatar that uses the Classic layout, pressing **Update** opens a window titled **The sweat point layout has changed**, and if you choose **Switch to the new layout**, spheres you moved yourself change to **Natural Sweat** too. Outfit-only start points stay as they are. If that window doesn't appear and, when you update, the saved start points differ from a freshly made copy of the layout in use, the setup window asks you to choose **Reset Wet Start Points** or **Keep Current Settings**. Reset makes the layout in use again; it doesn't switch to the other layout. To use the other layout, please use **Preset ▼**.
 
 ## Common adjustments {/* #tips */}
 
