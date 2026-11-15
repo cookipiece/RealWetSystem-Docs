@@ -59,6 +59,13 @@ If you use 1.0.4 or earlier, import the new package over it and upload again. Yo
 - On avatars that are already installed, these sweat points change to 100% once, when you open the scene after updating, if their strength is still the old default. Preview and upload use 100% as well, and saving the scene keeps it.
 - Nothing changes for sweat points whose **Strength (%)** (**Customize this point's wetting**) you set to a value other than the default, for sweat points with **Customize this point's wetting** off, or for start points you made yourself. If you raise one back to its old value after the change, that value is kept. [Wet start points](./usage/wet-start-points.mdx)
 
+### Setup window
+
+- The setup window has fewer grey help lines. Every field, button, card and fold-out stays where it was.
+  - The help lines of card **2. How far should it get wet?** (**Maximum Wet Range (%)**, **Reduce Outfit Differences**, **Add Chest & Groin See-Through Protection Regions**, and **Turn Sensitive-Area See-Through Protection On from the Start** when updating) now appear when you rest the pointer on each option's name. The wording is unchanged.
+  - In **1. Body meshes**, the line **Breast bones: found automatically** is hidden when both breast bones were found automatically and nothing needs a look. It still appears when a bone was chosen by hand, was not found, or needs checking.
+- Fixed: with the setup window open, settings changed on the RealWet object (in-game menu items, wetness settings, breast bones and so on) were set back to the values the window read when it opened as soon as you pressed **Update**. Settings you didn't change in the setup window are now read again from RealWet when you press **Update**; settings you changed in the window are applied as you chose them.
+
 ### Wet edge of new outfits
 
 - Newly registered outfits start with **Wet Edge Softness (%)** at 60% (25% up to 1.0.4). The border between wet and dry areas blends more softly.
@@ -75,6 +82,7 @@ If you use 1.0.4 or earlier, import the new package over it and upload again. Yo
 ### Notice for materials locked with Poiyomi
 
 - If the original shader of a material locked with Poiyomi isn't in the project (it was locked with a version or edition that the installed Poiyomi doesn't have), that part stays dry, as before. Instead of the `No com.poiyomi.pro manifest…` line shown until now, <ProductName /> tells you in Korean, Japanese or English what the material is locked with, what is installed now and what to do. [Unsupported or unverified shaders](./troubleshooting.mdx#shaders)
+- A material that Thry locked during the build from an unsupported shader (such as a modified Poiyomi) still stays dry, as before. Its dry reason no longer says `unrecognised lock id`: it names the shader the material was locked from and says that <ProductName /> supports only the official lilToon and Poiyomi shaders.
 
 ### Purchase activation
 
