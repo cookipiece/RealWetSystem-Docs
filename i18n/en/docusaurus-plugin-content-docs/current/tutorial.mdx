@@ -92,7 +92,7 @@ Sets the **skin meshes** and the **breast bones** used to calculate wetness. The
 - Don't add outfits, hair, or meshes made for showing sweat.
 - Meshes you add yourself are used in the calculation even when they are turned off. Don't add spare bodies you don't use.
 - After installing, you can edit the same list in **RealWet > Wetness Settings > Body Meshes**.
-- One line under the breast bone fields shows their current state (for example, **Breast bones: found automatically**). On an avatar without breast bones, leave the fields empty and the torso is used as the reference.
+- When the breast bones were chosen by hand, were not found, or need a check, one line under the fields says so (for example, **Breast bones: chosen by you**). When both were found automatically, this line is not shown. On an avatar without breast bones, leave the fields empty and the torso is used as the reference.
 - If you choose a bone that the body mesh has no skin weights on (an outfit's bone, for example), a notice appears under the fields. Please choose the avatar's own breast bones, not an outfit's bones.
 - When you change the breast bones on an avatar that is already installed, the **Move the chest start points and chest protection to the new bones** checkbox appears (off by default). If you check it and press **Update**, only the positions of the wet start points around the chest and of the recommended chest protection regions move to the new bones. Sizes, other start points and regions you made yourself stay as they are. If you leave it unchecked, only the bone choice is saved and the saved positions don't move.
 
@@ -111,6 +111,7 @@ Sets the **skin meshes** and the **breast bones** used to calculate wetness. The
 - Levels such as **Narrow**, **Standard**, **Wide** and **Maximum** are chosen after installing, in **RealWet > Wetness Settings > Wetness Preset**.
 - If you turn off **Add Chest & Groin See-Through Protection Regions**, neither the protection regions nor the in-game toggle are added. Synced parameters drop by 1 bit and the shaders get a little lighter. If you wear see-through clothes, we recommend keeping it on. For details, see [See-through protection](./usage/see-through-protection.mdx).
 - When you update an avatar that is already installed, **Turn Sensitive-Area See-Through Protection On from the Start** appears here instead. When it is checked, protection starts on in game. Updating does not create or change protection regions.
+- Rest the pointer on an option's name to see a short explanation.
 
 ### 3.3 Where should wetness start? {/* #start-mode */}
 
