@@ -52,6 +52,12 @@ If you use 1.0.4 or earlier, import the new package over it and upload again. Yo
 - The layout is calculated once when an outfit is prepared. The in-game menu, parameters, sync bits and in-game cost are the same with either layout.
 - An avatar can now hold up to 128 avatar-wide start points (64 up to 1.0.4). Outfit-only start points stay limited to 32 per outfit.
 
+### Default of the in-game Wet Edge dial
+
+- The default of the in-game dial **Wet Edge: Sharp to Soft** changed from 50% to 75%. The edge between dry and wet areas now blends wider and softer. 50% is still the edge you set in Unity.
+- Newly installed avatars start at 75%. Avatars that are already installed switch to 75% when you press **Update** in the setup window; until then they keep their old value. If you have moved this dial in VRChat, the value VRChat remembers is used first.
+- Avatars without this dial in their in-game menu also get wet with the 75% look.
+
 ### Classic points above 100%
 
 - Fixed the armpits in the Classic layout becoming far more see-through than other wet areas when the arms are raised. The Classic layout made its two armpit start points 140% strong, so the cloth around the armpits got fully wet over a wide area. They are now 100%. How far the wetness spreads down the sides and when it starts are unchanged, so the armpits still get wet first.

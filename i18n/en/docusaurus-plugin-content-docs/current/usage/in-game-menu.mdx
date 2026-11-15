@@ -75,7 +75,7 @@ The dials are listed in the order they appear in the menu. **Wet See-Through Mod
 | **Wet Appearance (Default 50%)** | The strength of the wet color, saturation and see-through | 50% is the look as you set it. Gloss is adjusted separately. |
 | **Wet Gloss (Default 50%)** | The wet reflection <ProductName /> adds | 0% adds no gloss, and 100% doubles it. The original material's reflection stays. On bright clothes, the broad watery gloss grows a lot above 50%, and at 100% the wet gloss is clearly visible even on white clothes ([Wet look](./wet-settings.mdx#look)). |
 | **See-Through Strength (Default 50%)** | Only the see-through added by wetness | 0% adds no see-through, and 100% makes it strong on purpose (less-wet areas and dark clothes show through sooner too). |
-| **Wet Edge: Sharp to Soft** | The transition between dry and wet areas | 50% is the edge you set in Unity, 0% is much sharper, and 100% is wide and soft. It doesn't change the edges of protection regions. |
+| **Wet Edge: Sharp to Soft** | The transition between dry and wet areas | The default is 75%. 50% is the edge you set in Unity, 0% is much sharper, and 100% is wide and soft. It doesn't change the edges of protection regions. |
 | **Spread Wetness Wider (Advanced)** | How far light wetness spreads at the same wetness amount | 0% keeps your settings as they are, and 100% widens it the most. Areas that are already fully wet are not widened further. |
 
 **Default 50%** does not mean the original material is shown at only 50%. 50% is the look you set in Unity.
@@ -213,6 +213,6 @@ The recommended menu of a new install is **87 bits** with <ProductName /> alone 
 
 - The Unity preview uses the defaults from your wetness settings. VRChat may reuse menu values saved earlier.
 - When you compare, please match not only the wetness amount but also the link, Whole Area, maximum wet range, Reduce Outfit Differences, wider spread, edge, see-through mode and strength, see-through protection range and strength, appearance, gloss, Fast Dry and hold state.
-- The starting values are 0% for wider spread; 50% for edge, wet appearance, wet gloss, see-through strength and see-through protection range; 100% for see-through protection strength; and **As Configured** for the see-through mode.
+- The starting values are 0% for wider spread; 50% for wet appearance, wet gloss, see-through strength and see-through protection range; 75% for edge; 100% for see-through protection strength; and **As Configured** for the see-through mode.
 - If you changed the menu layout or language, please press **Apply / Update Runtime Menu** and rebuild. Moving a dial that's already in the menu in game doesn't need a rebuild.
 - There is no menu to turn individual start point spheres on or off in game. You edit start points in Unity.
