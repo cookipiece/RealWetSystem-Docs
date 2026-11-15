@@ -33,7 +33,7 @@ This page lists the main changes in each version of <ProductName />, newest firs
 
 ## 1.1.0 — Natural Sweat, a new sweat point layout {/* #110 */}
 
-If you use 1.0.4 or earlier, import the new package over it and upload again. Your saved settings and the positions of your wet start points and protection regions do not change. The one exception: Classic sweat points that were stronger than 100% (armpit 140%, side of the breast and inner upper arm 105%, inner thigh 110%) become 100% if they are still at the old default (see **Classic points above 100%** below). With the import alone, an avatar that is already installed keeps its current sweat point layout (Classic), and outfits you already registered keep their wet look, apart from these sweat points. When you press **Update** in the setup window, you are asked whether to switch to the new layout, **Natural Sweat** (see below). The in-game menu, its parameters and its sync bits stay the same too. 1.1.0 adds no new in-game menu item, so for an avatar that keeps the Classic layout you don't need to press **Update** in the setup window.
+If you use 1.0.4 or earlier, import the new package over it and upload again. Your saved settings and the positions of your wet start points and protection regions do not change. There are two exceptions: Classic sweat points that were stronger than 100% (armpit 140%, side of the breast and inner upper arm 105%, inner thigh 110%) become 100% if they are still at the old default (see **Classic points above 100%** below), and the in-game **Wet Edge** dial starts at 75% from the next upload (see **Default of the in-game Wet Edge dial** below). With the import alone, an avatar that is already installed keeps its current sweat point layout (Classic), and outfits you already registered keep their wet look, apart from these two exceptions. When you press **Update** in the setup window, you are asked whether to switch to the new layout, **Natural Sweat** (see below). The in-game menu items, their parameter names and their sync bits stay the same too. 1.1.0 adds no new in-game menu item, so for an avatar that keeps the Classic layout you don't need to press **Update** in the setup window.
 
 ### Choose a sweat point layout
 
@@ -55,8 +55,8 @@ If you use 1.0.4 or earlier, import the new package over it and upload again. Yo
 ### Default of the in-game Wet Edge dial
 
 - The default of the in-game dial **Wet Edge: Sharp to Soft** changed from 50% to 75%. The edge between dry and wet areas now blends wider and softer. 50% is still the edge you set in Unity.
-- Newly installed avatars start at 75%. Avatars that are already installed switch to 75% when you press **Update** in the setup window; until then they keep their old value. If you have moved this dial in VRChat, the value VRChat remembers is used first.
-- Avatars without this dial in their in-game menu also get wet with the 75% look.
+- Newly installed avatars start at 75%. Avatars that are already installed also start at 75% from their next upload, and pressing **Update** in the setup window changes the menu saved in the scene to 75% too. If you have moved this dial in VRChat, the value VRChat remembers is used first.
+- Avatars that had this dial removed from their in-game menu keep getting wet with the edge set in Unity (50%), as before.
 
 ### Classic points above 100%
 
